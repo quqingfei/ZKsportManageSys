@@ -1,0 +1,206 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style type="text/css">
+
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-bullhorn"></i><a href="action1.html">活动管理</a>
+                </div>
+            </li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">用户分布</li>
+			</ul>
+			<div>
+ 				<div id="mainMap" style="height:500px;padding:10px;"></div>
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/echarts-plain-map.js"></script>
+<script src="js/header.js"></script>
+<script src="js/accordion.js"></script>	
+<script>
+    $.getJSON('userAction!areaShare.zk',{},function(data){
+	    var myChart2 = echarts.init(document.getElementById('mainMap'));
+	    myChart2.setOption({
+	        title : {
+	            text: '智能健康踏步机销量',
+	            x:'center'
+	        },
+	        tooltip : {
+	            trigger: 'item'
+	        },
+	        legend: {
+	            orient: 'vertical',
+	            x:'left',
+	            data:['智能健康踏步机']
+	        },
+	        dataRange: {
+	            min: 0,
+	            //max: 1000,
+	            max: data.max ,
+	            x: 'left',
+	            y: 'bottom',
+	            text:['高','低'],           // 文本，默认为数值文本
+	            calculable : true
+	        },
+	        toolbox: {
+	            show: true,
+	            orient : 'vertical',
+	            x: 'right',
+	            y: 'center',
+	            feature : {
+	                mark : {show: false},
+	                dataView : {show: false, readOnly: false},
+	                restore : {show: true},
+	                saveAsImage : {show: true}
+	            }
+	        },
+	        roamController: {
+	            show: false,
+	            x: 'right',
+	            mapTypeControl: {
+	                'china': true
+	            }
+	        },
+	        series : [
+	            {
+	                name: '智能健康踏步机',
+	                type: 'map',
+	                mapType: 'china',
+	                roam: false,
+	                itemStyle:{
+	                    normal:{label:{show:true}},
+	                    emphasis:{label:{show:true}}
+	                },
+	                data:data.datas
+	            }
+	     
+	        ]
+	    });
+    	
+    });
+    </script>
+</body>
+</html>

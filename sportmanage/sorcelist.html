@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; text-align: right;} .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+.typeadd{
+	margin-left:88px;margin-top:10px;
+}
+.typeadd td{
+	line-height: 20px;
+	text-align: center;
+}
+.typeadd th{
+	text-align: center;
+}
+.typeadd td a{
+	color: #FE5F5F;
+}
+.typeadd td a:hover{
+	color: #666;
+}
+.datagrid-sort-icon{
+	display: none;
+}
+.orderdetial li{
+	line-height: 24px;
+}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">积分商城订单管理</li>
+			</ul>
+			<div>
+							<table id="dg" style="height: 560px;" data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'ScoreMallAction!showOrders.zk?orderByDesc=gmtCreate',method:'get',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th	data-options="field:'id',align:'center',width:$(this).width()*0.09">订单号</th>
+										<th	data-options="field:'name',align:'center',width:$(this).width()*0.05">商品名称</th>
+										<th	data-options="field:'type',align:'center',width:$(this).width()*0.04">类型</th>
+										<th	data-options="field:'cover',align:'center',formatter:formatCover">图片</th>
+										<th data-options="field:'count',align:'center'">数量</th>
+										<th data-options="field:'price',align:'center',formatter:formatPrice">消费积分</th>
+										<!-- <th data-options="field:'normalFreight',align:'center'">运费</th> -->
+										<th data-options="field:'receiverName',align:'center',width:$(this).width()*0.05">收货人</th>
+										<th data-options="field:'receiverPhone',align:'center'">电话</th>
+										<th data-options="field:'receiverAddress',align:'center',width:$(this).width()*0.15">地址</th>
+										<th data-options="field:'delivery',align:'center',width:$(this).width()*0.06,formatter:formatDelivery">状态</th>
+										<th data-options="field:'isDeleted',align:'center',formatter:formatDel">商品失效</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="detial()">详情</a></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="updateaddretitle()">地址修改</a></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="unealorder()">已发货</a></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="ealorder()">未发货</a></td>
+											<td><input id="txt_keyword"	style="padding-left:5px;width:400px;  border: 1px solid #95b8e7;  border-radius: 3px;  line-height: 22px;outline:none" placeholder="请输入订单号"/></td>	
+											<td><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchBox()">搜索</a></td>			
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+	<div id="dlg" class="easyui-dialog"	style="width: 450px; height: 650px; padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+		<div class="orderdetial">
+			<ul>
+				<li><label>订单号：</label><label id="a"></label></li>
+				<li><label>用户ID：</label><label id="b"></label></li>
+				<li><label>商品ID：</label><label id="c"></label></li>
+				<li><label>供货商：</label><label id="d"></label></li>
+				<li><label>商品图片：</label><label id="e"></label></li>
+				<li><label>商品名称：</label><label id="f"></label></li>
+				<li><label>商品型号：</label><label id="g"></label></li>
+				<li><label>商品数量：</label><label id="h"></label></li>
+				<li><label>消费积分：</label><label id="i"></label></li>
+				<li><label>收件人姓名：</label><label id="j"></label></li>
+				<li><label>收件人电话：</label><label id="k"></label></li>
+				<li><label>收件人地址：</label><label id="l"></label></li>
+				<li><label>发货状态：</label><label id="m"></label></li>
+				<li><label>是否删除：</label><label id="n"></label></li>
+				<li><label>创建时间：</label><label id="o"></label></li>
+				<li><label>修改时间：</label><label id="p"></label></li>
+			</ul>
+		</div>
+	</div>
+	<div id="dl" class="easyui-dialog"	style="width: 450px; height: 200px; padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+		<div class="orderdetial">
+			<ul>
+				<li><label>编辑地址：</label><input type="text" style="width:400px;  border: 1px solid #95b8e7;  border-radius: 3px;  line-height: 26px;" id="q" /></li>
+				<input type="hidden" id="newid" />
+			</ul>
+			<div id="dlg-buttons">
+				<a href="javascript:void(0)" class="easyui-linkbutton c6" id="saveOrUpdateBtn" iconCls="icon-ok" onclick="updateaddresssubmit()" style="width: 90px">保存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cencleBox()"	style="width: 90px">取消</a>
+			</div>			
+		</div>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+	});
+	
+	function detial(){
+		var row = $('#dg').datagrid('getSelected');
+		var imgURL = "../file/FileCenter!showImage2.zk?name=";
+		if(row){
+			$('#dlg').dialog('open').dialog('setTitle','订单详情');
+			$('#a').html(row.id);
+			$('#b').html(row.userId);
+			$('#c').html(row.productId);
+			$('#d').html(row.producter);
+			$('#e').html('<img style="display:block;width:100px;height:60px;" src='+imgURL+row.cover+'></img>');			
+			$('#f').html(row.name);
+			$('#g').html(row.type);
+			$('#h').html(row.count);
+			$('#i').html(row.price*row.count);
+			$('#j').html(row.receiverName);
+			$('#k').html(row.receiverPhone);
+			$('#l').html(row.receiverAddress);
+			$('#m').html(row.delivery=='n'? "未发货":"已发货");
+			$('#n').html(row.isDeleted=='n'? "未删除":"已删除");
+			$('#o').html(formatDate(row.gmtCreate));
+			$('#p').html(formatDate(row.gmtModify));
+		}else{
+			$.messager.alert('错误','请先选择要查看的条目!','error');
+		}
+	}
+	function updateaddretitle(){
+		var row = $('#dg').datagrid('getSelected');
+		if(row){			
+			$('#dl').dialog('open').dialog('setTitle','修改地址');
+			$('#q').val(row.receiverAddress);
+			$('#newid').val(row.id);
+		}else{
+			$.messager.alert('错误','请先选择要编辑的条目!','error');
+		}
+	}
+    function formatType(productType){
+    	var obj = JSON.parse(productType);
+    	var names = "";
+    	$.each(obj,function(index,item){
+    		names = names+item.name+",";
+    	})
+    	return names;
+    }
+    function updateaddresssubmit(){
+    	var newaddress = $('#q').val();
+    	var newid = $('#newid').val();
+    	if(newaddress.trim().length<=0){
+    		$.messager.alert('错误','地址不能为空!');
+    		return false;
+    	}else if(newid.trim().length<=0){
+    		$.messager.alert('错误','商品ID不能为空!');
+    		return false;
+    	}
+    		$.ajax({
+    			type: 'post',
+    			data: {id:newid,receiverAddress:newaddress},
+    			url: '../manage/ScoreMallAction!updateAddress.zk',
+    			dataType: 'json',
+    			success: function(res){
+    				if (res.STATUS) {
+    					$('#dg').datagrid('reload');
+    					$('#dl').dialog('close');
+    				};
+    			},
+    			error: function(err){
+    				$.messager.alert('错误','地址修改失败!',err);
+    			}
+    		})
+    }
+    function del(){
+    	var row = $('#dg').datagrid('getSelected');
+    	if (row){
+			$.messager.confirm('删除订单', '确定删除该订单吗?', function(r){
+	            if (r){
+	    			$.ajax({
+		    			type: 'post',
+		    			data: {id:row.id},
+		    			url: '../manage/ScoreMallAction!deleteOrder.zk',
+		    			dataType: 'json',
+		    			success: function(res){
+		    				if(res.STATUS){    					
+		    					$.messager.alert('提示','商品删除成功!');
+		    					$('#dg').datagrid('reload');
+		    				}
+		    			},
+		    			error: function(err){
+		    				$.messager.alert('错误','删除失败!',err);
+		    			}
+		    		})
+	            }
+	        });
+		}else{
+			$.messager.alert('错误','请先选择订单!','error');
+		}
+    }
+   function searchBox(){
+    	$("#dg").datagrid('load',{id:$('#txt_keyword').val()});
+    }
+    function cencleBox(){
+    	$('#dl').dialog('close');
+    }
+   
+    //格式化是否
+    function formatYN(isExchangeable){
+    	if(isExchangeable=='n'){
+    		return '不可兑换';
+    	}else{
+    		return '可兑换';
+    	}
+    	return ''
+    }
+    function formatDel(isDeleted) {
+    	if(isDeleted=='n'){
+    		return '未失效';
+    	}else{
+    		return '已失效';
+    	}
+    }
+    //格式化封面
+    function formatCover(cover){
+        //var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">点击查看</a>";
+        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\"><img src=\"../file/FileCenter!showImage2.zk?name="+cover+"\" style=\"width:40px;height:28px;display:block;margin:0 auto;\" title=\"点击查看大图\"></a>";
+        return result;
+    }
+    function formatPrice(index,item){
+    	return item.count*item.price;
+    }
+    function ealorder(){
+    	$("#dg").datagrid('load',{delivery:'n'});
+    }
+    function unealorder(){
+    	$("#dg").datagrid('load',{delivery:'y'});
+    }
+    function changeDelivery(e){
+    	var row = $('#dg').datagrid('getSelected');
+    	var delivery = e.val();
+    	var data = {
+    		id:row.id,
+    		delivery:delivery
+    	}
+    	if(row){
+    		$.ajax({
+    			type:'post',
+    			dataType: 'json',
+    			data:{id:row.id,delivery:delivery},
+    			url: '../manage/ScoreMallAction!updateDelivery.zk',
+    			success: function(res){
+    				if(res.STATUS){
+
+    				}
+    			},
+    			error: function(err){
+    				$.messager.alert('错误','状态修改失败!',err);
+    			}
+    		})
+    	}
+    }
+    function formatDelivery(delivery,item){
+    	if(delivery=='n'){    		
+    		return "<select class='deliveryser' onchange='changeDelivery($(this))'><option selected='selected' value='n'>未发货</option><option value='y'>已发货</option></select>"
+    	}else{
+    		return "<select class='deliveryser' onchange='changeDelivery($(this))'><option value='n'>未发货</option><option selected='selected' value='y'>已发货</option></select>"
+    	}
+    }
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/flowplayer-3.2.6.min.js"></script>
+<script src="js/jquery.easyui.patch.js"></script>
+<script src="js/jquery.datagridtip.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/msgbox/msgbox.js"></script>
+<link rel="stylesheet" href="js/msgbox/msgbox.css"></link>
+ <style type="text/css">
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+        }
+        .fitem input{
+            width:160px;
+        }
+		.pugong{position: relative; width:60px; height:40px; display:block; float:left; margin-left:5px; margin-bottom:5px; margin-top:4px; border:1px solid #f1f1f1;}
+		.divX
+		{
+   			 z-index:100;
+    		border-style:solid;
+    		border-width:1px;
+    		border-color:#d8d8d8;
+    		background-color:#ffffff;
+    		line-height:12px;
+    		text-align:center;
+    		font-weight:bold;
+    		width:10px;
+    		cursor:pointer;
+    		font-size:5px;
+    		color:#666;
+    		display: none;
+		}
+		.putong_app{width:60px; height:40px;}
+
+        
+    </style>
+</head>
+<body>
+
+<div style="width: 100%; height: 100%;">
+		<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+			<div class="main_go">
+				<div class="main_sty">宅客网络后台管理系统</div>
+				<div class="main_mov">
+					当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+						style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+						href="javascript:void(0)" onclick="logout()">退出</a>]
+				</div>
+			</div>
+		</div>
+		<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+			<div class="main_tabim" id="timenow"></div>
+		</div>
+		<div style="width: 100%; height: 100%; min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left; min-width: 210px;">
+				<div class="main_jian">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_poy"></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<!--  
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='area.html'">发货中心<em
+							class="main_xuan_18"></em></a>
+					</div>
+					-->
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='coach.html'">教练管理<em
+							class="main_xuan_20"></em></a>
+					</div>
+				</div>
+			</div>
+
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_opt">后台管理 &gt; 教练管理 </div>
+					<div class="main_kpy"style="height:15px"></div>
+					<div
+						style="width: 100%; height: 80%; min-width: 750px;">
+					<div class="boyd">
+    	<table id="dg" class="easyui-tooltip"
+			style="height: 105%; margin: 0; padding: 0; display: block; overflow: hidden;"
+            data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'CoachAction!list.zk',method:'post',toolbar:'#toolbar'">
+        <!--  data-options="url:'CoachAction!list.zk',method:'post'" -->
+        <thead>
+            <tr>
+                <th data-options="field:'coachPhone',align:'center',width:$(this).width()*0.8 * 0.1">教练电话</th>
+                <th data-options="field:'coachName',align:'center',width:$(this).width()*0.8* 0.1">教练名称</th>
+                <th data-options="field:'coachType',align:'center',width:$(this).width()*0.8* 0.08">类别</th>
+                <!--  <th data-options="field:'coachPassword',formatter:formatPassword,align:'center',width:$(this).width()*0.8 * 0.1">教练密码</th>-->
+                <th data-options="field:'coachSchool',align:'center',width:$(this).width()*0.8 * 0.1">毕业学校</th>
+                <th data-options="field:'coachExperience',align:'center',width:$(this).width() *0.8* 0.1">个人经历</th>
+                <th data-options="field:'coachSpecialty',align:'center',width:$(this).width()*0.8 * 0.1">个人特长</th>
+                <th data-options="field:'coachCertificate',formatter:formatCoachCertificate,align:'center',width:$(this).width()*0.8 * 0.2">所获证书</th>
+                <th data-options="field:'coachSex',formatter:formatCoachSex,align:'center',width:$(this).width()*0.8 * 0.03">性别</th>
+                <th data-options="field:'description',align:'center',width:$(this).width()*0.8 * 0.05">个人简介</th>
+                <th data-options="field:'evaluate',formatter:formatEvaluate,align:'center',width:$(this).width()*0.8 * 0.07">教练星级</th>
+                 <!-- <th data-options="field:'headIcon',align:'center',width:200">客服头像</th> -->
+                <th data-options="field:'coachAvatar',formatter:formatCoachAvatar,align:'center',width:$(this).width()*0.8 * 0.07">教练头像</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
+    </div>
+    
+    <div id="dlg" class="easyui-dialog" style="width:400px;height:540px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+        <div class="ftitle">教练信息</div>
+        <form id="fm" method="post" novalidate>
+        	<div class="fitem">
+                <label>教练电话</label>
+                <input name="coachPhone" id = "coachPhone" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>教练名称:</label>
+                <input name="coachName" id = "coachName" class="easyui-textbox" required="true">
+            </div>
+             <div class="fitem">
+                <label>教练类别:</label>
+               <!--   <input name="userType" id = "servicetype" class="easyui-textbox" required="true">-->
+               <select name="coachType" id="coachType" class="easyui-combobox" required="true" data-options="editable:false"
+						style="width: 150px;">
+							<option value="国际私人教练" selected="selected">国际私人教练</option>
+				</select>
+            </div>
+             <div class="fitem">
+                <label>教练密码:</label>
+                <input name="coachPassword" type="password" id = "coachPassword" class="easyui-textbox" required="true">
+            </div>
+             <div class="fitem">
+                <label>毕业学校:</label>
+                <input name="coachSchool" id = "coachSchool" class="easyui-textbox">
+            </div>
+             <div class="fitem">
+                <label>个人经历:</label>
+                <input name="coachExperience" id = "coachExperience" data-options="multiline:true" class="easyui-textbox" style="height:45px;">
+            </div>
+             <div class="fitem">
+                <label>个人特长:</label>
+                <input name="coachSpecialty" id = "coachSpecialty" class="easyui-textbox" >
+            </div>
+             <div class="fitem">
+                <label >所获证书:</label>
+                <span class="icon-add"></span>
+                <input name="coachCertificate" id = "coachCertificate" class=""><!-- type="" -->
+                <div style="width:230px;height:104px;margin-left:85px; margin-top: 1px;">
+                	<div  id="image_container" style="float:left;width:210px;height:104px;border:1px solid red;" >
+						<!-- 放置上传的图片 -->		
+					</div>
+					<div style="float:right;width:16px;height:16px;cursor: pointer;background:url(images/edit_add.png) no-repeat;" onclick="chooseImage1('image_file')">
+					</div>
+				</div>
+            </div>
+            <div class="fitem">
+                <label>教练性别:</label>
+               <!--   <input name="userType" id = "servicetype" class="easyui-textbox" required="true">-->
+               <select name="coachSex" id="coachSex" class="easyui-combobox" required="true" data-options="editable:false"
+						style="width: 150px;">
+							<option value="M" selected="selected">男</option>
+							<option value="F" >女</option>
+				</select>
+            </div>
+            <div class="fitem">
+                <label>教练星级:</label>
+               <!--   <input name="userType" id = "servicetype" class="easyui-textbox" required="true">-->
+               <select name="evaluate" id="evaluate" class="easyui-combobox" required="true" data-options="editable:false"
+						style="width: 150px;">
+							<option value="3" selected="selected">三星</option>
+							<option value="4" >四星</option>
+							<option value="5" >五星</option>
+				</select>
+            </div>
+            <div class="fitem">
+                <label>个人简介:</label>
+                <input name="description" id = "description" data-options="multiline:true"class="easyui-textbox"style="height:45px;">
+            </div>
+            <div class="fitem">
+                <label>教练头像:</label>
+                    <input name="coachAvatar" id = "coachAvatar"  type="hidden"> <!-- class="easyui-textbox" -->
+               <!-- -->                     
+            </div>
+        </form>
+        	<form id="title_img_form" method="post"  enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="file_title_img"
+                                        name="name" onchange="uploadImage()" accept="image/*" />
+                </form>
+            <form id="image_form" method="post" enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="image_file" name="name" onchange="uploadCertificate()" accept="image/*" />
+				</form>
+				                           
+                   <div style="width: 150px; height: 50px; margin-left:115px; margin-top: -30px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+					<img id="imghead" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                </div>  
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+
+
+ 
+<script type="text/javascript">
+
+$(function(){
+	$('#dg').datagrid({
+		
+		onLoadSuccess: function(data){
+			if (data.total == 0 && data.ERROR == 'No Login!') {
+				$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+				relogin();
+			}
+			$('#dg').datagrid('doCellTip', {
+                onlyShowInterrupt: false,     //是否只有在文字被截断时才显示tip，默认值为false             
+                position: 'bottom',   //tip的位置，可以为top,botom,right,left
+                cls: { 'background-color': '#FFF' },  //tip的样式D1EEEE
+                delay: 100   //tip 响应时间
+	        });
+			
+			//图片弹出层
+			 $("a.popImage").fancybox({
+		            openEffect  : 'elastic',
+		            closeEffect: 'elastic'    
+		     });
+		},
+		onLoadError : function() {
+			alert('出错啦');
+		},
+		onHeaderContextMenu: function(e, field){
+			e.preventDefault();
+			if (!cmenu){
+				createColumnMenu();
+			}
+			cmenu.menu('show', {
+				left:e.pageX,
+				top:e.pageY
+			});
+	}
+	});
+	
+});
+		var uploadImages = [];
+		var certificate;//证书字符串
+        var url;
+        var coachID=null;//标记客服是否存在
+       	var certificateName=[];
+        function newUser(){
+        	coachID = null;
+        	 var div = document.getElementById("image_container");
+     		 while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+    		 {
+         		div.removeChild(div.firstChild);
+    		 }
+        	 $("#imghead").attr("src", 'images/yun.png');
+        	 //$("#coachCertificate").show();
+        	 $('#fm').form('clear');
+        	 $("#image_container").empty();
+             $('#dlg').dialog('open').dialog('setTitle','编辑教练信息');
+             url = 'CoachAction!createOrUpdate.zk';
+        }
+        
+        function editUser(){
+        	//$("#imghead").attr("src", 'images/yun.png');
+        	 //$("#image_container").empty();
+        	 
+			 var div = document.getElementById("image_container");
+    		 while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+   			 {
+        		div.removeChild(div.firstChild);
+   			 }
+    		 
+        	 var row = $('#dg').datagrid('getSelected');
+             if (row){
+            	 coachID = row.id;
+                 $('#dlg').dialog('open').dialog('setTitle','编辑教练信息');
+                 //$("#coachCertificate").hide();
+                 
+                 $('#fm').form('load',row);
+                 $("#coachCertificate").val("");
+                 url = 'CoachAction!createOrUpdate.zk?id='+row.id;
+                 //row.coachSex
+                 //加载证书
+                 //var spanId = "zk"+ new Date().getTime();
+                 certificate = eval('('+row.coachCertificate+')');
+                 for (var i=0;i<certificate.length;i++){
+              	   uploadImages[i] = certificate[i].name;
+              	   certificateName[i] = certificate[i].type;//获取证书名称
+                 }
+          	   	 for(var i = 0 ; i < uploadImages.length ;i++){
+          		   var imgURL = "../file/FileCenter!showImage2.zk?name=" + uploadImages[i];
+                   var id = uploadImages[i].split(".")[0];
+                   var spanId = "zk"+ new Date().getTime()+"-"+i;
+                   //alert(id);
+                   //uploadImages.push(certificate[i].name);
+                  
+                   var html = "<span class=\"pugong\" id=\""+spanId+"\"></span>";
+                   $("#image_container span#"+spanId).empty();//清除上传提示
+                   $("#image_container").append(html);
+                   html = "<img id=\""+id+"IMG\" alt=\""+id+"\""+
+                                           "src=\""+imgURL+"\"  class=\"putong_app\""+
+                                           " onmouseover=\"showDeleteDiv('"+id+"')\""+
+                                           " onmouseout=\"hideDeleteDiv('"+id+"')\"/>";
+                   $("#image_container span#"+spanId).append(html);
+                   //alert($("#image_container span#"+spanId).append("haha"));
+                   
+                   var $image1 = $("#"+id+"IMG");
+                   var divObj=$("<div onclick=removeImage('"+$image1.attr('alt')+"')  onmouseover=\"showDeleteDiv('"+id+"')\""+" onmouseout=\"hideDeleteDiv('"+id+"')\">×</div>");
+                   divObj.addClass("divX");
+                   divObj.attr("id",$image1.attr("alt")+"DIV");
+                   divObj.attr("title","删除图片"+$image1.attr('alt'));
+                   //alert($("#"+id+"IMG").position().left);
+                   divObj.css({position:"absolute",cursor:"pointer", border:"1px solid #c1c1c1", width:"12px", height:"12px",  left: $image1.position().left+48, top:$image1.position().top+0});
+                   $image1.parent().append(divObj);
+          		   
+          		   } 
+                 var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.coachAvatar;
+                 $("#imghead").attr("src", imgURL);
+             }else{
+            	 $.messager.alert('警告','请先选择要编辑的教练!');
+             }
+        }
+        
+        
+        function chooseImage1(id) {
+        	var type = $.trim($("#coachCertificate").val());
+            if(type==''){
+                alert('证书名称为空！');
+                $("#coachCertificate").focus();
+                return ;
+            }
+            document.getElementById(id).click();
+       }
+        function chooseImage(id) {
+            document.getElementById(id).click();
+       }
+      //显示删除图标
+        function showDeleteDiv(id){
+            $("#"+id+"DIV").css("display","block");
+        }
+
+        function hideDeleteDiv(resourceCode){
+            $("#"+resourceCode+"DIV").css("display","none");  
+        }
+
+       
+        //上传证书
+        function uploadCertificate(){
+        	
+            if(uploadImages.length > 5 ){
+                alert('最多只能上传6张图片!');
+                $("#image_form").resetForm();
+                return ;
+            }
+            var txt = $.trim($("#coachCertificate").val());
+            var viewFiles = document.getElementById("image_file");
+            //是否为图片类型            
+            if(/image\/\w+/.test(viewFiles.files[0].type)){
+                //最大图片文件大小 500KB
+                var imgSizeLimit = 500 * 1024;
+                if(viewFiles.files[0].size<=imgSizeLimit){
+                	var spanId = "zk"+ new Date().getTime();
+                    var display = $("#image_container").css("display");
+                    if(display != 'block'){
+                        $("#image_container").css("display","block")
+                    }
+                    $("#image_form").ajaxSubmit({
+                           type : 'post',
+                           url : '../file/FileCenter!uploadImage2.zk',
+                           success : function(data) {
+                               data = eval("(" + data + ")");
+                               if (data.name) {
+                                   var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                                   var id = data.name.split(".")[0];
+                                   uploadImages.push(data.name);
+                                   certificateName.push(txt);//获取证书名称
+                                   $("#coachCertificate").val('');//清楚表框
+                                   $("#image_container span#"+spanId).empty();//清除上传提示
+                                   var html = "<img id=\""+id+"IMG\" alt=\""+id+"\""+
+                                           "src=\""+imgURL+"\"  class=\"putong_app\""+
+                                           " onmouseover=\"showDeleteDiv('"+id+"')\""+
+                                           " onmouseout=\"hideDeleteDiv('"+id+"')\"/>";
+                                   $("#image_container span#"+spanId).append(html);
+                                   var $image = $("#"+id+"IMG");
+                                   var divObj=$("<div onclick=removeImage('"+$image.attr('alt')+"')  onmouseover=\"showDeleteDiv('"+id+"')\""+" onmouseout=\"hideDeleteDiv('"+id+"')\">×</div>");
+                                   divObj.addClass("divX");
+                                   divObj.attr("id",$image.attr("alt")+"DIV");
+                                   divObj.attr("title","删除图片"+$image.attr('alt'));
+                                   //alert($image.position());
+                                   divObj.css({position:"absolute",cursor:"pointer", border:"1px solid #c1c1c1", width:"12px", height:"12px",  left: $image.position().left+48, top:$image.position().top+0});
+                                   $image.parent().append(divObj);
+                               } else {
+                                   alert("上传图片出错！");
+                               }
+                               $("#image_form").resetForm();
+                           },
+                           error : function(XmlHttpRequest, textStatus, errorThrown) {
+                               alert("error");
+                           },
+                           beforeSubmit : function(){
+                               var html = "<span class=\"pugong\" id=\""+spanId+"\">图片上传中...</span>";
+                               $("#image_container").append(html);
+                           }
+                       });
+                  }else{
+                      alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+                  }
+              }else{
+                  alert('请选择图片类型的文件!');
+              } 
+        }
+        //移除图片
+        function removeImage(id) {
+            $("#"+id+"IMG").parent().detach();
+            var temp = [];
+            var name = [];
+            //alert( "删除前："+uploadImages.length);
+            for(var i = 0 ;i < uploadImages.length ; i++){
+                var s = uploadImages[i] ;
+                //alert("s"+s);
+                if(s.indexOf(id) != 0){
+                    temp.push(uploadImages[i]);
+                    name.push(certificateName[i]);
+                }
+            }
+            uploadImages = temp ;
+            certificateName = name;
+            //alert("删除后："+ uploadImages.length);
+        }
+
+       //上传文章图片
+       function uploadImage(){
+       	//alert('upload');
+           var viewFiles = document.getElementById("file_title_img");
+           //是否为图片类型            
+           if(/image\/\w+/.test(viewFiles.files[0].type)){
+               //最大图片文件大小 500KB
+               var imgSizeLimit = 500 * 1024;
+               if(viewFiles.files[0].size<=imgSizeLimit){
+                   //上传图片
+                    $("#title_img_form").ajaxSubmit({
+                        type : 'post',
+                        url : '../file/FileCenter!uploadImage2.zk',
+                        success : function(data) {
+                            data = $.parseJSON(data);
+                            if (data.name) {
+                               // alert(data.name);
+                            	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                               $("#imghead").attr("src", imgURL);
+                               $("#coachAvatar").val(data.name);
+                               
+                            } else {
+                                alert("上传图片出错！");
+                            }
+                            $("#title_img_form").resetForm();
+                        },
+                        error : function(XmlHttpRequest, textStatus, errorThrown) {
+                            alert("error");
+                        }
+                    });
+               }else{
+                   alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+               }
+           }else{
+               alert('请选择图片类型的文件!');
+           } 
+       }
+       
+      //密码隐藏
+      function formatPassword(value){
+    	  return "*******";
+      }
+     //性别转换
+       function formatCoachSex(value){
+       	switch (value) {
+   		case 'M': return '男' ;
+   		case 'F': return '女' ;
+   		default:return '';
+   		}
+       }
+        //头像转换
+       function formatCoachAvatar(coachAvatar){
+           var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+coachAvatar+"\">点击查看</a>";
+       	return result;
+       }
+       function formatCoachCertificate(coachCertificate){
+    	  	if(coachCertificate==""){
+    	  		//uploadImages = [];
+    	  		return '';
+    	  		}
+    	   coachCertificate = eval('('+coachCertificate+')');
+    	   /*
+    	   alert("更新时"+uploadImages.length);
+    	   //alert(coachCertificate[0].name);
+    	   */
+    	   var result="";
+    	   
+    	   for(var i = 0 ; i < coachCertificate.length ;i++){
+    		   result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+coachCertificate[i].name+"\">"+"证书"+(i+1)+" "+"</a>"+result;
+           } 
+    	   return result;
+       }
+        
+        function formatEvaluate(value){
+        	switch (value) {
+       		case 3: return '三星' ;
+       		case 4: return '四星' ;
+       		case 5: return '五星' ;
+       		default:return '';
+       		}
+        	
+        	
+        }
+     
+      //check form
+    	function checkForm(){
+    		var name = $.trim($("#coachPhone").val());
+    		if(name==''){
+    			$.messager.alert('警告','教练手机不能为空!');
+    			$("#coachPhone").focus();
+    			return false;
+    		}
+    		var price = $.trim($("#coachName").val());
+    		if(price==''){
+    			$.messager.alert('警告','教练名称不能为空!');
+    			$("#coachName").focus();
+    			return false;
+    		}
+    		var coachPassword = $.trim($("#coachPassword").val());
+    		if(coachPassword==''){
+    			$.messager.alert('警告','教练密码不能为空!');
+    			$("#coachPassword").focus();
+    			return false;
+    		}
+    		return true;
+    	}
+        
+        
+        
+        function saveUser(){
+        	//uploadImage();
+        	if(checkForm()){
+        		var coachPhone = $.trim($("#coachPhone").val());
+        		$.getJSON('CoachAction!checkCoach.zk',{coachPhone:coachPhone},function(data){
+            		
+    				if(data.STATUS && data.id!=coachID){
+    					$.messager.alert('警告','教练已经存在!');
+    					
+    				}else {
+    					//将证书名称保存到数据库
+    					  var formImages = "";
+    				      var imgObjArr = [];
+    				      if(uploadImages.length  > 0 ){
+    				           for(var i = 0 ; i < uploadImages.length ;i++){
+    				               var imgObj = {"name":certificateName[i],"image":uploadImages[i]};
+    				               imgObjArr.push(imgObj);
+    				           }
+    				           
+    				           formImages = JSON.stringify(imgObjArr);
+    				       }
+    				      $("#coachCertificate").attr("value","");
+    				     $("#coachCertificate").val(formImages);
+    				     //alert(uploadImages.length+"----formImages"+formImages);
+    					 $('#fm').form('submit',{
+    		                 url: url,
+    		                 onSubmit: function(){
+    		                     return checkForm();
+    		                 },
+    		                 success: function(result){
+    		                     var result = eval('('+result+')');
+    		                     if (result.STATUS){
+    		                         $('#dlg').dialog('close');        // close the dialog
+    		                         $('#dg').datagrid('reload');    // reload the user data
+    		                     } else {
+    		                         $.messager.show({
+    		                             title: '错误',
+    		                             msg: '系统繁忙！'
+    		                         });
+    		                     }
+    		                 }
+    		             });
+    					 
+    					 $("#image_container").empty();
+    		        	 $("#imghead").attr("src", 'images/yun.png');
+    				}
+            		
+    			});
+        		
+        		
+        	}
+        	/*
+        	 $('#fm').form('submit',{
+                 url: url,
+                 onSubmit: function(){
+                     return checkForm();
+                 },
+                 success: function(result){
+                     var result = eval('('+result+')');
+                     if (result.STATUS){
+                         $('#dlg').dialog('close');        // close the dialog
+                         $('#dg').datagrid('reload');    // reload the user data
+                     } else {
+                         $.messager.show({
+                             title: '错误',
+                             msg: '系统繁忙！'
+                         });
+                     }
+                 }
+             });
+        	 $("#imghead").attr("src", 'images/yun.png');*/
+        }
+        
+        
+        
+        
+        function destroyUser(){
+        	var row = $('#dg').datagrid('getSelected');
+    		if(row){
+    			if(confirm("确定删除该教练信息?")){
+    				$.getJSON('CoachAction!delete.zk',{id:row.id},function(data){
+    					if(data.STATUS){
+    						$('#dg').datagrid('reload');
+    						showTip("删除成功!");
+    					}else {
+    						showTip("删除失败!");
+    					}
+    				});
+    			}
+    		}else{
+           	 	$.messager.alert('警告','请先选择教练!');
+            }
+        }
+    </script>
+
+
+
+
+</body>
+</html>

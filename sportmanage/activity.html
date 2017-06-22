@@ -1,0 +1,371 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-bullhorn"></i><a href="action1.html">活动管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">版本管理</li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>		
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">活动管理</li>
+			</ul>
+			<div>
+							<table id="dg"
+								style="height: 560px;"
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'ActivityAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th
+											data-options="field:'name',align:'center',width:$(this).width() * 0.2">名称</th>
+										<th
+											data-options="field:'image',formatter:formatCover,align:'center',width:$(this).width() * 0.2">图片</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:$(this).width() * 0.2">创建时间</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter:formatDate,width:$(this).width() * 0.2">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+								<div id="dlg" class="easyui-dialog"
+		style="width: 450px; height: 650px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		    <div class="fitem">
+                <label>名称</label>
+                <input name="name" id = "name" class="easyui-textbox">
+            </div>
+		    <div class="fitem">
+                <label>链接</label>
+                <input name="url" id = "url" class="easyui-textbox">
+            </div>
+			<div class="fitem">
+				<input id="id" type="hidden"/>
+				<input name="cover" id="cover" type="hidden"/> 
+				<form id="title_img_form" method="post"  enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="file_title_img"
+                                        name="name" onchange="uploadImage()" accept="image/*" />
+                </form>
+                <div style="width: 80%; height: 80%; cursor: pointer;  margin: 0 auto;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+					<img id="imghead" src="images/add_bootimg.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                </div>
+			</div>
+		
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+	<div id="dlg-video" class="easyui-dialog"
+		style="width: 550px; height: 400px; padding:10px" closed="true" modal="true">
+		<div id="player2" style="width:520px; height:330px"></div>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+	});
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		if(row){
+			if(confirm("确定删除?")){
+				$.getJSON('ActivityAction!delete.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					}else {
+						showTip("删除失败!");
+					}
+				});
+			}
+		}else{
+       	 	$.messager.alert('警告','请先选择!');
+        }
+	}
+	function clearForm(){
+		$("#cover").val('');
+		$("#id").val('');
+		$("#name").textbox('setValue','');
+		$("#url").textbox('setValue','');
+        $("#imghead").attr("src", 'images/add_bootimg.png');
+	}
+	//新增产品信息
+	function newProduct(){
+	   clearForm();
+       $('#dlg').dialog('open').dialog('setTitle','新增');
+	}
+	//更新产品信息
+	function editProduct(){
+		 var row = $('#dg').datagrid('getSelected');
+         if (row){
+        	$("#id").val(row.id);
+    		$("#cover").val(row.image);
+    		$("#name").textbox('setValue',row.name);
+    		$("#url").textbox('setValue',row.url);
+            $('#dlg').dialog('open').dialog('setTitle','编辑');
+    		var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.image;
+            $("#imghead").attr("src", imgURL);
+         }else{
+        	 $.messager.alert('错误','请先选择要编辑条目!','error');
+         }
+	}
+	//check form
+	function checkForm(){
+		var cover = $("#cover").val();
+		if(!cover){
+			$.messager.alert('警告','请上传图片!');
+			return false;
+		}
+
+		return true;
+	}
+	function saveProduct(){
+		if(checkForm()){
+			var cover = $("#cover").val();
+			var id = $("#id").val();
+			var name = $("#name").textbox('getValue');
+			var url = $("#url").textbox('getValue');
+			
+			$.post('ActivityAction!createOrUpdate.zk',{id:id,image:cover,name:name,url:url},function(data){
+				 if (data.STATUS){
+	                    $('#dlg').dialog('close');
+	                    $('#dg').datagrid('reload');
+	             } else {
+	                    $.messager.alert('信息提示', '系统繁忙!', 'error');
+	             }
+			},'json');
+		}
+		
+    }
+
+	function chooseImage(id) {
+         document.getElementById(id).click();
+    }
+	
+    //上传文章图片
+    function uploadImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 5000 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                //上传图片
+                 $("#title_img_form").ajaxSubmit({
+                     type : 'post',
+                     url : '../file/FileCenter!uploadImage2.zk',
+                     success : function(data) {
+                         data = $.parseJSON(data);
+                         if (data.name) {
+                            // alert(data.name);
+                         	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                            $("#imghead").attr("src", imgURL);
+                            $("#cover").val(data.name);
+                         } else {
+                             alert("上传图片出错！");
+                         }
+                         $("#title_img_form").resetForm();
+                     },
+                     error : function(XmlHttpRequest, textStatus, errorThrown) {
+                         alert("error");
+                     }
+                 });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    
+    //格式化封面
+    function formatCover(cover){
+        //var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">点击查看</a>";
+        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\"><img src=\"../file/FileCenter!showImage2.zk?name="+cover+"\" style=\"height:60px;\" title=\"点击查看大图\"></a>";
+        return result;
+    }
+
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

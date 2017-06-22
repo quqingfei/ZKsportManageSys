@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main.css"/>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/Chart.js"></script>
+</head>
+<body>
+	<div class="main_pp">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style=" color:yellow;"></span> ,  <span style="margin-right:10px;">欢迎使用宅客管理系统</span>  [<a href="javascript:void(0)"
+                    onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge">
+		<div class="main_tabim" id="timenow"></div>
+	</div>
+	<div class="main_guli">
+		<div class="main_qqian">
+			<div class="main_poy"></div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='main.html'">用户管理 <em
+					class="main_xuan_1"></em></a>
+			</div>
+			<div class="main_pie" style="background:#d8d8d8;">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='data.html'">用户健康数据分析 <em
+					class="main_xuan_2"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='order.html'">订单管理<em
+					class="main_xuan_8"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='product.html'">产品管理<em
+					class="main_xuan_9"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='release.html'">文章发布<em
+					class="main_xuan_3"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='feedback.html'">用户反馈<em
+					class="main_xuan_4"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='app.html'">app版本管理<em
+					class="main_xuan_5"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='community.html'">社区管理<em
+					class="main_xuan_7"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='account.html'">安全管理<em
+					class="main_xuan_6"></em></a>
+			</div>
+<!-- 			<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div> -->
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+					onclick="window.parent.location='userMap.html'">销售分布<em
+					class="main_xuan_15"></em></a>
+			</div>
+			<div class="main_pie">
+				<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+			</div>
+			<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+			</div>
+			<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+		</div>
+		<div class="main_wen">
+			<div class="main_opt">后台管理 &gt; 用户健康数据分析</div>
+
+			<div class="qin">
+
+				<div class="qin_shu">
+					<div class="qin_ju">总用户数：</div>
+					<div class="qin_fen">
+						<span style="color: red;" id="total">0</span> <span
+							style="color: #666;">人</span>
+					</div>
+				</div>
+
+				<div class="goad_ha">
+					<div class="goad_kun">男性总用户：</div>
+					<div class="goad_zhu">
+						<span style="color: red;" id="male">0</span> <span
+							style="color: #666;">人</span>
+					</div>
+				</div>
+
+				<div class="goad">
+					<table class="goad_pad">
+						<tbody class="goad_kap">
+							<tr>
+								<td width="120">当前在线人数</td>
+								<td width="100">平均年龄</td>
+								<td width="120">平均体重</td>
+								<td width="100">平均身高</td>
+								<td width="120">平均运动时长</td>
+								<td width="120">数据分析</td>
+							</tr>
+						</tbody>
+						<tr>
+							<td><span id="m_online">0</span><span>人</span></td>
+							<td><span id="m_avg_age">0</span><span>岁</span></td>
+							<td><span id="m_avg_weight">0</span><span>kg</span></td>
+							<td><span id="m_avg_height">0</span><span>cm</span></td>
+							<td><span id="m_avg_used_time">0</span><span>'分钟</span></td>
+							<td><a id="pox" href="javascript:void(0)"
+								onclick="weekData('M');" style="color:#666; text-decoration:none;">即时数据</a> <a id="jox"
+								onclick="monthData('M');" style="margin-left: 20px; color:#666; text-decoration:none;"
+								href="javascript:void(0)">当月数据</a></td>
+						</tr>
+						<tr style="width: 780px; height: 200px; display: none;" id="poxxx">
+							<td class="tab" colspan="6">
+								<div class="tong_fla">
+									<canvas id="Mcanvas" height="170" width="670"></canvas>
+									<div class="tong_xia">
+										<div class="tong_tuan"></div>
+										<div class="tong_lpan">体重增减幅度（kg）</div>
+										<div class="tong_ply"></div>
+										<div class="tong_jian"></div>
+										<div class="tong_ju">运动时长幅度（'分）</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="goad_ha">
+					<div class="goad_kun">女性总用户：</div>
+					<div class="goad_zhu">
+						<span style="color: red;" id="female">0</span> <span
+							style="color: #666;">人</span>
+					</div>
+				</div>
+
+				<div class="goad">
+					<table class="goad_pad">
+						<tbody class="goad_kap">
+							<tr>
+								<td width="120">当前在线人数</td>
+								<td width="100">平均年龄</td>
+								<td width="120">平均体重</td>
+								<td width="100">平均身高</td>
+								<td width="120">平均运动时长</td>
+								<td width="120">数据分析</td>
+							</tr>
+						</tbody>
+						<tr>
+							<td><span id="f_online">0</span><span>人</span></td>
+							<td><span id="f_avg_age">0</span><span>岁</span></td>
+							<td><span id="f_avg_weight">0</span><span>kg</span></td>
+							<td><span id="f_avg_height">0</span><span>cm</span></td>
+							<td><span id="f_avg_used_time">0</span><span>'分钟</span></td>
+							<td><a id="aox" href="javascript:void(0)"
+								onclick="weekData('F')" style="color:#666; text-decoration:none;">即时数据</a> <a id="kox"
+								onclick="monthData('F');" style="margin-left: 20px; color:#666; text-decoration:none;" href="javascript:void(0)">当月数据</a></td>
+						</tr>
+						<tr style="width: 780px; height: 200px; display: none;" id="toxxx">
+							<td class="tab" colspan="6">
+								<div class="tong_fla">
+									<canvas id="Fcanvas" height="170" width="670"></canvas>
+									<div class="tong_xia">
+										<div class="tong_tuan"></div>
+										<div class="tong_lpan">体重增减幅度（kg）</div>
+										<div class="tong_ply"></div>
+										<div class="tong_jian"></div>
+										<div class="tong_ju">运动时长幅度（'分）</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<script>
+function formatWeek(i){
+	return '星期'+'日一二三四五六'.charAt(i-1);
+}
+
+function weekData(sex){
+	var obj = null;
+    if(sex=='M'){
+        obj = $("#poxxx");//m
+    }else if(sex=='F'){
+        obj = $("#toxxx");//f
+    }
+    var labels = new Array();
+    var weights = new Array();
+    var times = new Array();
+    $.post("userAction!getWeekAvgData.zk",{sex:sex},function(data) {
+    	checkLogin(data);
+           var len = data.datas.length;
+           if(len > 0){
+	           for(var i=0;i<len;i++){
+	               var entry = data.datas[i];
+	               if(entry.avgUsedTime){
+		               times.push(entry.avgUsedTime);
+	               }else{
+	            	   times.push(0);
+	               }
+	               if(entry.avgWeight){
+	            	   weights.push(entry.avgWeight);
+	               }else{
+	            	   weights.push(0);
+	               }
+	               if(entry.weeknow){
+	            	   //1:周日 ，2周一
+	            	   labels.push(formatWeek(entry.weeknow));
+	               }else{
+	            	   labels.push(0);
+	               }
+	           }
+	           var lineChartData = {
+	                    labels :labels,
+	                    datasets : [
+	                        {
+	                           fillColor : "rgba(151,187,205,0.5)",
+	                           strokeColor : "rgba(151,187,205,1)",
+	                           pointColor : "rgba(151,187,205,1)",
+	                           pointStrokeColor : "#fff",
+	                           data : weights
+	                        },
+	                        {
+	                           fillColor : "rgba(220,220,220,0.5)",
+	                           strokeColor : "rgba(220,220,220,1)",
+	                           pointColor : "rgba(220,220,220,1)",
+	                           pointStrokeColor : "#fff",
+	                           data :times 
+	                        }
+	                    ]
+	                    
+	                }
+	            var myLine = new Chart(document.getElementById(sex + "canvas").getContext("2d")).Line(lineChartData);
+	            obj.addClass("Show");
+	            obj.fadeIn("slow");
+           }else{
+        	   //没有查询到数据
+               var canvas = document.getElementById(sex + "canvas");
+               var ctx = canvas.getContext("2d");
+               ctx.clearRect(0,0,canvas.width,canvas.height);
+               ctx.fillStyle = '#00f';
+               ctx.fillText('暂无数据',canvas.width/2,canvas.height/2);
+               obj.addClass("Show");
+               obj.fadeIn("slow");
+           }
+            
+    },'json'); 
+}
+//检验是否登录
+function checkLogin(data){
+    if(data.ERROR&&data.ERROR=='No Login!'){
+        alert('登陆超时，请重新登录!');
+        location.replace('index.jsp');
+    }
+}
+
+function monthData(sex){
+	   var obj = null;
+	    if(sex=='M'){
+	        obj = $("#poxxx");//m
+	    }else if(sex=='F'){
+	        obj = $("#toxxx");//f
+	    }
+	    var labels = new Array();
+	    var weights = new Array();
+	    var times = new Array();
+	    $.post("userAction!getMonthAvgData.zk",{sex:sex},function(data) {
+	    	  checkLogin(data);
+	           var len = data.datas.length;
+	           if(len > 0){
+		           for(var i=0;i<len;i++){
+		               var entry = data.datas[i];
+		               if(entry.avgUsedTime){
+			               times.push(entry.avgUsedTime);
+		               }else{
+		            	   times.push(0);
+		               }
+		               if(entry.avgWeight){
+		            	   weights.push(entry.avgWeight);
+		               }else{
+		            	   weights.push(0);
+		               }
+		               if(entry.datenow){
+		            	   labels.push(entry.datenow);
+		               }else{
+		            	   labels.push(0);
+		               }
+		           }
+		           var lineChartData = {
+		                    labels :labels,
+		                    datasets : [
+		                        {
+		                           fillColor : "rgba(151,187,205,0.5)",
+		                           strokeColor : "rgba(151,187,205,1)",
+		                           pointColor : "rgba(151,187,205,1)",
+		                           pointStrokeColor : "#fff",
+		                           data : weights
+		                        },
+		                        {
+		                           fillColor : "rgba(220,220,220,0.5)",
+		                           strokeColor : "rgba(220,220,220,1)",
+		                           pointColor : "rgba(220,220,220,1)",
+		                           pointStrokeColor : "#fff",
+		                           data :times 
+		                        }
+		                    ]
+		                    
+		                }
+		            var myLine = new Chart(document.getElementById(sex + "canvas").getContext("2d")).Line(lineChartData);
+		            obj.addClass("Show");
+		            obj.fadeIn("slow");
+	           }else{
+	        	   //没有查询到数据
+	               var canvas = document.getElementById(sex + "canvas");
+	               var ctx = canvas.getContext("2d");
+	               ctx.clearRect(0,0,canvas.width,canvas.height);
+	               ctx.fillStyle = '#00f';
+	               ctx.fillText('暂无数据',canvas.width/2,canvas.height/2);
+	               obj.addClass("Show");
+                   obj.fadeIn("slow");
+	           }
+	    },'json'); 
+}
+</script>
+<script>
+function init(){
+	$.getJSON("userAction!getDataAnalysis.zk", function(data) {
+       if(data.STATUS){
+    	   if(data.ERROR&&data.ERROR=='No Login!'){
+    		   alert('登陆超时，请重新登录!');
+               location.replace('index.jsp');
+    	   }else{
+    		   $("#total").text(data.total);
+               $("#male").text(data.male);
+               $("#m_online").text(data.male);
+               $("#female").text(data.female);
+               $("#f_online").text(data.female);
+               var dataList = data.avgDataList;
+               for(var i =0 ;i<dataList.length;i++){
+                   var avgData = dataList[i];
+                   if(avgData.sex == 'M'){
+                       $("#m_avg_age").text(avgData.avg_age);
+                       $("#m_avg_weight").text(avgData.avg_weight);
+                       $("#m_avg_height").text(avgData.avg_height);
+                       $("#m_avg_used_time").text(avgData.avg_used_time);
+                   }else if(avgData.sex == 'F'){
+                        $("#f_avg_age").text(avgData.avg_age);
+                        $("#f_avg_weight").text(avgData.avg_weight);
+                        $("#f_avg_height").text(avgData.avg_height);
+                        $("#f_avg_used_time").text(avgData.avg_used_time);
+                   }
+               }
+    	   }
+       }else{
+    	   alert("页面初始化异常:"+data.INFO);
+       }
+    })
+}
+$(function(){
+	init();
+});
+</script>
+</body>
+</html>

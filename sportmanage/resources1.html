@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+#fm { margin: 0; padding: 10px} .ftitle { font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li class="open">资源管理</li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>			
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">资源管理</li>
+			</ul>
+			<div>
+							<table id="dt" style="height:560px; "
+								 data-options="
+                url: 'ResourcesAction!list.zk',
+                rownumbers: true,
+                pagination: true,
+                toolbar:'#toolbar',
+                pageSize: 30,
+                pageList: [30],
+                idField: 'id',
+                treeField: 'name',
+                onBeforeLoad: function(row,param){
+                    if (!row) {    // load top level rows
+                        param.id = 0;    // set id=0, indicate to load new page rows
+                    }
+                }
+            ">
+								<thead>
+									<tr>
+										<th data-options="field:'name',width:$(this).width() * 0.2">资源名称</th>
+										<th data-options="field:'descrition',width:$(this).width() * 0.2">资源描述</th>
+										<th data-options="field:'url',width:$(this).width() * 0.2">资源路径</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:$(this).width() * 0.1">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter: formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add"
+											plain="true" onclick="toAdd()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit"
+											plain="true" onclick="toUpdate()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove"
+											plain="true" onclick="toDel()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+									</tr>
+								</table>
+							</div>
+							<!-- dialogs -->
+							<!-- New Resource -->
+	<div id="addRSdlg" class="easyui-dialog"
+		style="width: 500px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">资源信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>上级目录:</label>
+				<input class="easyui-combotree" id="parentId" style="width:230px;" data-options="url:'',method:'post'" />
+			</div>
+			<div class="fitem">
+				<label>名称:</label> <input style="width:230px;"  name="name" id="name"
+					class="easyui-textbox"  />
+					 <input name="id" type="hidden"/>
+			</div>
+			<div class="fitem">
+				<label>资源地址:</label> <input name="url" id="url"
+					 style="width:230px;"  class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>描述:</label> <input name="descrition" id="descrition"
+					data-options="multiline:true" style="width:230px;height:50px" class="easyui-textbox"/>
+			</div>
+		</form>
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveRS()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#addRSdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>	
+<!-- update Resource -->
+	<div id="updateRSdlg" class="easyui-dialog"
+		style="width: 500px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#updlg-buttons">
+		<div class="ftitle">资源信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>上级目录:</label>
+				<input class="easyui-combotree" id="up_parentId" style="width:230px;" data-options="url:'ResourcesAction!tree.zk',method:'post'" />
+			</div>
+			<div class="fitem">
+				<label>名称:</label> <input style="width:230px;"  name="name" id="up_name"
+					class="easyui-textbox"  />
+					 <input name="up_id" id="up_id" type="hidden"/>
+			</div>
+			<div class="fitem">
+				<label>资源地址:</label> <input name="url" id="up_url"
+					 style="width:230px;"  class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>描述:</label> <input name="descrition" id="up_descrition"
+					data-options="multiline:true" style="width:230px;height:50px" class="easyui-textbox"/>
+			</div>
+		</form>
+		<div id="updlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="updateRS()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#updateRSdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>		
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<!-- <script src="js/datagrid.common.js"></script> -->
+<!-- <script src="js/biz/zk_main.js"></script> -->
+<script src="js/format.utils.js"></script>
+<script>
+$(function() {
+	$('#dt').treegrid({
+		onLoadSuccess : function(row,data) {
+			if (data.total == 0 && data.ERROR == 'No Login!') {
+				$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+				relogin();
+			}
+		},
+		onLoadError : function() {
+			alert('出错啦');
+		}
+	});
+});
+//搜索
+function searchUser(v){
+	alert('敬请期待');
+	//$("#dt").datagrid('load',{userName:v});
+}
+//打开对话框
+function openDlg(id,title){
+	var docHeight = $(document).height();
+	$('#'+id).dialog('open').dialog('setTitle',title);
+    $(".window-mask").css({ height: docHeight});//patch dialog bug
+}
+//获取Easyui表单组件值
+function getFormVal(id){
+	return $("#"+id).textbox("getValue"); 
+}
+//设置Easyui表单组件值
+function setFormVal(id ,value){
+	$("#"+id).textbox("setValue",value); 
+}
+//显示错误信息
+function showError(msg){
+	$.messager.alert('错误',msg,'error');
+}
+//显示消息提示
+function showTip(msg) {
+	$.messager.show({title : "消息",timeout:2000,msg : msg});
+}
+//刷新表格
+function reloadData(){
+	$('#dt').treegrid('reload');
+}
+//新增资源
+function toAdd(){
+	openDlg('addRSdlg','新增资源');
+	$('#fm').form('clear');
+	$('#parentId').combotree({url:'ResourcesAction!tree.zk'});
+}
+//保存资源
+function saveRS(){
+	var name = getFormVal('name');
+	var url = getFormVal('url');
+	var descrition = getFormVal('descrition');
+	var parentId= getFormVal('parentId');
+	$.post('ResourcesAction!save.zk',{name : name ,url : url,descrition : descrition,parentId :parentId},function(data){
+		if(data.STATUS){
+			$('#addRSdlg').dialog('close');
+			reloadData();
+			showTip('操作成功!');
+		}else{
+			showError(data.INFO);
+		}
+	},'json');
+}
+//修改资源
+function toUpdate(){
+	var row = $('#dt').treegrid('getSelected');
+	if (row){
+		openDlg('updateRSdlg','修改资源');
+		$('#up_id').val(row.id);
+		setFormVal('up_name' ,row.name);
+		setFormVal('up_url',row.url);
+		setFormVal('up_descrition',row.descrition);
+		$('#up_parentId').combotree('setValue', row.parentId);
+		//$('#fm-uo').form('reset');
+		//$('#uoplatform').combobox({url:'PlatformAction!getAll1.zk?item='+row.platform});
+		//$('#uoDeliveryRegion').combobox({url:'productAction!getRegions.zk?selected='+row.region});
+	}else{
+		showError('请先选择需要修改的资源');
+	}
+}
+//保存资源
+function updateRS(){
+	var name = getFormVal('up_name');
+	var url = getFormVal('up_url');
+	var descrition = getFormVal('up_descrition');
+	var parentId= getFormVal('up_parentId');
+	var id = $('#up_id').val();
+	//alert('id：'+id);
+	//return;
+	$.post('ResourcesAction!update.zk',{id:id,name : name ,url : url,descrition : descrition,parentId :parentId},function(data){
+		if(data.STATUS){
+			$('#updateRSdlg').dialog('close');
+			reloadData();
+			showTip('操作成功!');
+		}else{
+			showError(data.INFO);
+		}
+	},'json');
+}
+//删除资源
+function toDel(){
+	var row = $('#dt').treegrid('getSelected');
+	if (row){
+		$.messager.confirm('删除资源', '确定删除该资源吗?', function(r){
+            if (r){
+            	$.post('ResourcesAction!delete.zk',{id:row.id},function(data){
+            		if(data.STATUS){
+            			reloadData();
+            			showTip('操作成功!');
+            		}else{
+            			showError(data.INFO);
+            		}
+            	},'json');
+            }
+		});
+	}else{
+		showError('请先选择需要删除的资源');
+	}
+}
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

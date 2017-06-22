@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link type="text/css" href="css/main.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/header.js"></script>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+	function init() {
+		$.post("accountAction!getAccount.zk", {}, function(data) {
+			if (data.userName) {
+				$("#sp_userid").text(data.userName);
+			}
+		}, "json");
+	}
+	$(function() {
+		init();
+	});
+
+	function onSubmit() {
+		var userName = $("#sp_userid").text();
+		var oldpwd = $.trim($("#oldpwd").val());
+		var pwd = $.trim($("#pwd").val());
+		var repwd = $.trim($("#repwd").val());
+		if (oldpwd == '') {
+			alert("原密码不能为空!");
+			$("#oldpwd").focus();
+			return;
+		}
+		if (pwd == '') {
+			alert("新密码不能为空!");
+			$("#pwd").focus();
+			return;
+		}
+		if (pwd.length<6 || pwd.length>16) {
+			alert("密码只能使用6-16个字符!");
+			$("#pwd").focus();
+			return;
+		}
+		if (repwd != pwd) {
+			alert("新密码确认不正确!");
+			$("#repwd").focus();
+			return;
+		}
+		var postData = {
+			userName : userName,
+			oldpwd : oldpwd,
+			pwd : pwd,
+			repwd : repwd
+		};
+		$.post('accountAction!newAccountOrUpdate.zk', postData, function(data) {
+			if (data.STATUS) {
+				if (data.ERROR && data.ERROR == 'No Login!') {
+					alert('登陆超时，请重新登录!');
+					location.replace('index.jsp');
+				} else {
+					alert("密码修改成功!");
+					location.replace("main.html");
+				}
+			} else {
+				alert("修改密码失败");
+			}
+		}, 'json');
+	}
+	
+	function showError(msg){
+		$.messager.alert('错误', msg, 'error');
+	}
+	
+	function showTip(msg) {
+		$.messager.show({ title : "消息", timeout:2000, msg : msg });
+	}
+	
+	function submitForm(){
+		$('#ff').form('submit',{
+			url : 'accountAction!updatePwd.zk',
+			onSubmit:function(){
+				return $(this).form('enableValidation').form('validate');
+			},
+		    success:function(data){
+		        var data = $.parseJSON(data);
+		        if(data.STATUS){
+					showTip('成功修改密码！');
+					clearForm();
+		        }else{
+					if (data.total == 0 && data.ERROR == 'No Login!') {
+						showError('登录超时,请重新登录!');
+						relogin();
+					}else{
+			        	showError(data.INFO);
+					}
+		        }
+		    }
+		});
+		//$('#ff').submit();
+	}
+	function clearForm(){
+		$('#ff').form('clear');
+	}
+	
+	$.extend($.fn.validatebox.defaults.rules, {
+        compare: {
+            validator: function(value, param){
+                return $('#'+param[0]).textbox('getValue') == $('#'+param[1]).textbox('getValue');
+            },
+            message: '与新密码不匹配.'
+        }
+
+});
+</script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+		<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+			<div class="main_go">
+				<div class="main_sty">宅客网络后台管理系统</div>
+				<div class="main_mov">
+					当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+						style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+						href="javascript:void(0)" onclick="logout()">退出</a>]
+				</div>
+			</div>
+		</div>
+		<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+			<div class="main_tabim" id="timenow"></div>
+		</div>
+		<div style="width: 100%; height: 100%; min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left; min-width: 210px;">
+				<div class="main_jian">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_poy"></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<!-- 				<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div> -->
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_opt">
+						后台管理 &gt; <a href="account.html"
+							style="color: #000; text-decoration: none;">安全管理</a> &gt; 修改密码
+					</div>
+					<div class="ttp" style="margin: 20px auto;">
+						<div style="margin: 20px 0;"></div>
+						<div class="easyui-panel" title="修改密码"
+							style="width: 750px; margin: 0 auto;">
+							<div style="padding: 10px 60px 20px 60px">
+								<form id="ff" class="easyui-form" method="post"
+									data-options="novalidate:true">
+									<table cellpadding="5">
+										<tr>
+											<td>原密码:</td>
+											<td><input class="easyui-textbox" type="password"
+												name="oldPwd" data-options="required:true"></input></td>
+										</tr>
+										<tr>
+											<td>新密码:</td>
+											<td><input class="easyui-textbox" type="password"
+												name="newPwd" id="newPwd" data-options="required:true"></input></td>
+										</tr>
+										<tr>
+											<td>新密码确认:</td>
+											<td><input class="easyui-textbox" type="password"
+												name="newPwd1" id="newPwd1" data-options="required:true,validType:'compare[\'newPwd\',\'newPwd1\']'"></input></td>
+										</tr>
+									</table>
+								</form>
+								<div style="text-align: center; padding: 5px">
+
+									<a href="javascript:void(0)" class="easyui-linkbutton c6"
+										iconCls="icon-save" onclick="submitForm()"
+										style="width: 90px">保存</a> <a href="javascript:void(0)"
+										class="easyui-linkbutton" iconCls="icon-cancel"
+										onclick="clearForm()"
+										style="width: 90px">重填</a>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/themes/default/default.css" />
+<link rel="stylesheet" href="js/msgbox/msgbox.css"></link>
+<style>
+#fm { margin: 0; padding: 10px 30px; } 
+.ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } 
+.fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.datagrid-sort-icon{display: none;}
+.ke-icon-example1 {
+    background-image: url(js/themes/default/default.png);
+    background-position: 0px -496px;
+    width: 16px;
+    height: 16px;
+}
+</style> 
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">协会比赛</li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">版本管理</li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">协会管理 <span class="divider">/</span></li>
+				<li class="active">协会比赛</li>
+			</ul>
+			<div>
+							<table id="dg" style="max-height:560px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'AssociationAction!listMatch.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th	data-options="field:'name',width:'10%'">赛事名称</th>
+										<th data-options="field:'cover',width:'10%',align:'center',formatter:formatCover">赛事封面</th>
+										<th data-options="field:'price',width:'10%',align:'center'">活动价格(￥)</th>
+										<th data-options="field:'address',width:'10%',align:'center'">活动地点</th>
+										<th data-options="field:'type',width:'10%',align:'center'">活动类型</th>
+										<th data-options="field:'weight',width:'10%',align:'center'">排序等级</th>
+										<th data-options="field:'isHot',width:'10%',align:'center',formatter:formatNY">是否热门</th>
+										<th data-options="field:'totalUser',width:'10%',align:'center'">总参与人数</th>
+										<th data-options="field:'isShowApp',width:'10%',align:'center',formatter:formatNY">是否在app展示</th>
+										<th	data-options="field:'time',align:'center',formatter: formatDate,width:'10%'">活动时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input type="hidden" id="orderStatus" value="0" /></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-new" plain="true"
+											id="expCurLink" onclick="newAppVersion()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											id="expCurLink" onclick="initUpdate()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-garbage" plain="true"
+											id="expCurLink" onclick="del()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+														<td><input id="txt_keyword"	style="padding-left:5px;width:400px;  border: 1px solid #95b8e7;  border-radius: 3px;  line-height: 22px;outline:none" placeholder="请输入活动名称"/></td>	
+											<td><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchBox()">搜索</a></td>
+											<td><div class="datagrid-btn-separator"></div></td>		
+											<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-search" plain="true"
+											onclick="showuser()">参加学员</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>										
+										<td><a href="javascript:$('#file_title').trigger('click');" class="easyui-linkbutton" iconCls="icon-download" plain="true">导入EXCEL</a></td>
+										<form id="file_form" style="display:none;" method="post" enctype="multipart/form-data">
+						                    <input type="file" style="display:none" id="file_title" name="fileList" accept="file" onchange="uploadExl()">
+						                </form>
+						                <td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-export" plain="true" onclick="outto()">导出EXCEL</a></td>
+									</tr>
+								</table>
+							</div>
+							
+							<!-- dialogs -->
+		<div id="dlg" class="easyui-dialog"
+		style="width: 760px; height: 600px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">活动详情</div>
+		<input type="hidden" id="idedit"/>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">赛事名称:</label> 
+			<input type="text" style="height: 20px;" id="zk_sname" />
+		</div>
+		<div class="fitem">
+			<label>活动封面:</label>
+			<input name="cover" id = "zk_simages"  type="hidden">							
+		</div>
+		<form id="title_img_form" method="post"  enctype="multipart/form-data">
+			<input type="file" style="display: none;" id="file_title_img"
+				   name="name" onchange="uploadImage()" accept="image/*" />
+		</form>
+		<div style="width: 197px; height: 67px; margin-left:86px; margin-top: -30px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+			<img id="imghead" src="images/yun.png" alt="" style="height:67px;width:197px;" />
+			<img id="imghidehead" src="" alt="" style="display:none;" />
+		</div>
+<!-- 		<div style="margin-left: 115px;color:red;">图片规格：宽640*高276</div> -->
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">活动价格:</label> 
+			<input type="text" style="height: 20px;" id="zk_smoney" placeholder="请输入数字"/>
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">活动地点:</label> 
+			<input type="text" style="height: 20px;" id="zk_saddress" />
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">活动类型:</label> 
+			<input type="text" style="height: 20px;" id="zk_stype" />
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">活动时间:</label> 
+			<input name="startTime" id="zk_stime" class="easyui-datetimebox"  editable="false">
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">权重等级:</label> 
+			<input name="startTime" type="text" id="zk_slevel" placeholder="请输入正整数">
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">总参与人数:</label> 
+			<input name="startTime" type="text" id="zk_speople" placeholder="请输入正整数">
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">主办方:</label> 
+			<input name="startTime" type="text" id="zk_stop">
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">是否热门:</label> 
+			<select id="zk_shot" style="margin: 0; height: 24px;">
+				<option value="y">是</option>
+				<option value="n">否</option>
+			</select>
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">app展示:</label> 
+			<select id="zk_sshow" style="margin: 0; height: 24px;">
+				<option value="y">是</option>
+				<option value="n">否</option>
+			</select>
+		</div>		
+		<div class="fitem" style="">
+			<div style="float: left; width: 86px;">赛事介绍:</div>
+		<!-- 	<textarea name="textfield" rows="6" cols="18"
+				style="float: left; width: 290px; height: 120px;" id="tf_note"></textarea> -->
+				<textarea id="editor_id" name="content" style="float: left; width: 290px; height: 120px;"></textarea>
+                <form style="display:none;">
+                    <p>
+                        <input type="button" name="getHtml" value="取得HTML" />
+                        <input type="button" name="isEmpty" value="判断是否为空" />
+                        <input type="button" name="getText" value="取得文本(包含img,embed)" />
+                        <input type="button" name="selectedHtml" value="取得选中HTML" />
+                        <br />
+                        <br />
+                        <input type="button" name="setHtml" value="设置HTML" />
+                        <input type="button" name="setText" value="设置文本" />
+                        <input type="button" name="insertHtml" value="插入HTML" />
+                        <input type="button" name="appendHtml" value="添加HTML" />
+                        <input type="button" name="clear" value="清空内容" />
+                        <input type="reset" name="reset" value="Reset" />
+                    </p>
+                </form>
+		</div>
+		<form id="title_img_form2" method="post" enctype="multipart/form-data">
+            <input type="file" class="owntext" style="display:none;" id="file_title_img2" name="name" onchange="uploadImage2()" accept="image/*" />
+        </form>
+        <div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+			iconCls="icon-ok" onclick="saveArticle()" style="width: 90px">保存</a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+			style="width: 90px">取消</a>
+		</div>
+	</div>
+	
+							<!--  -->
+			</div>
+		</div>
+	</div>
+	<div id="dlgame" class="easyui-dialog"
+		style="width: 460px; height: auto; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons-submit">
+		<input type="radio" name="status" value="0"><label>审核中</label>
+		<input type="radio" name="status" value="1"><label>已审核</label>
+		<input type="radio" name="status" value="2"><label>审核失败</label>
+		<input type="radio" name="status" value=""><label>全部</label>
+	</div>
+	<div id="dlg-buttons-submit">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6"
+		iconCls="icon-ok" onclick="outtosubmit()" style="width: 90px">保存</a>
+	</div>
+	<div id="dluser" class="easyui-dialog"
+		style="width: 860px; height: 500px; padding: 10px 20px" closed="true">
+		<div id="toolbaruser">
+			<table>
+				<tr>
+					<td>审核状态:<select class="easyui-combobox" id="userStatus" data-options="editable:false">
+	                    <option value="" checked="true">全部</option>
+	                    <option value="0">审核中</option>
+	                    <option value="1">已审核</option>
+	                    <option value="2">审核失败</option>
+	                	</select>
+	                </td>
+					<td><div class="datagrid-btn-separator"></div></td>
+						<td><input id="userkeyword"	style="padding-left:5px;width:120px;  border: 1px solid #95b8e7;  border-radius: 3px;  line-height: 22px;outline:none" placeholder="请输入名称或电话"/></td>	
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchUser()">搜索</a></td>
+				</tr>
+			</table>
+		</div>
+		<table id="dguser" style="max-height:560px; "
+			data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30', method:'post',toolbar:'#toolbaruser'">
+			<thead>
+				<tr>
+					<th	data-options="field:'name',width:'10%'">名称</th>
+					<th data-options="field:'sex',width:'10%',align:'center',formatter:formatSex">性别</th>
+					<th data-options="field:'age',width:'10%',align:'center'">年龄</th>
+					<th data-options="field:'idCard',width:'10%',align:'center'">身份证</th>
+					<th data-options="field:'phone',width:'10%',align:'center'">电话</th>
+					<th data-options="field:'checkStatus',width:'10%',align:'center',formatter:formatStatus">审核状态</th>
+					<th data-options="field:'paymentStatus',width:'10%',align:'center',formatter:formatPay">支付状态</th>
+				</tr>				
+			</thead>
+		</table>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/kindeditor-all-min.js"></script>
+<script src="js/societyGame.js"></script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

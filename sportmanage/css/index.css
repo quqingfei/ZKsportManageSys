@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: "微软雅黑",;
+    color: #646d9f;
+    background: #e7ebef;
+}
+
+.head {
+    width: 100%;
+    height: 38px;
+    background: url(../images/1.jpg) repeat-x;
+    margin: 0;
+}
+
+.head_po {
+    width: 800px;
+    height: 400px;
+    margin-top: 100px;
+    position: relative;
+    margin: 100px auto 0;
+    background: url(../images/denglu.jpg) no-repeat;
+}
+
+.head_fop {
+    width: 250px;
+    height: 180px;
+    position: absolute;
+    top: 175px;
+    left: 470px;
+}
+
+.head_sail {
+    width: 250px;
+    height: 30px;
+    margin: 0;
+}
+
+.head_ppy {
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+    float: left;
+}
+
+.head_max {
+    width: 170px;
+    height: 30px;
+    margin-left: 10px;
+    line-height: 30px;
+    float: left;
+}
+
+.head_fly {
+    border: 1px solid #aaaaaa;
+    margin-top: 4px;
+    width: 130px;
+    height: 18px;
+}
+
+.head_xun {
+    width: 180px;
+    height: 30px;
+    margin: 20px 0 0 40px;
+}
+
+.head_yi {
+    width: 80px;
+    height: 30px;
+    margin-left: 10px;
+    line-height: 30px;
+    text-align: right;
+    float: left;
+}
+
+.head_keyi {
+    width: 80px;
+    height: 22px;
+    line-height: 25px;
+}
+
+.head_tian {
+    width: 80px;
+    height: 30px;
+    margin-left: 10px;
+    line-height: 30px;
+    float: left;
+}

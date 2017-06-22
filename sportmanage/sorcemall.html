@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; text-align: right;} .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+.typeadd{
+	margin-left:88px;margin-top:10px;
+}
+.typeadd td{
+	line-height: 20px;
+	text-align: center;
+}
+.typeadd th{
+	text-align: center;
+}
+.typeadd td a{
+	color: #FE5F5F;
+}
+.typeadd td a:hover{
+	color: #666;
+}
+.datagrid-sort-icon{
+	display: none;
+}
+.bannerlist{margin-left: 88px;}
+.bannerlist li{
+	float: left;
+	display: block;;
+	width: 60px;
+	height: 60px;
+	margin-right: 1px;
+	margin-bottom: 1px;
+	border:1px solid #ccc;
+	box-sizing:border-box;
+	position: relative;
+}
+.bannerlist li img{display: block;float: left;width: 100%;height: 100%;}
+.bannerdel{background-color: rgba(0,0,0,0.8);width:14px;height:14px;text-align: center; font-size: 14px;opacity: 0;color: white; transition: 0.6s all;position: absolute;right: 0;cursor: pointer;}
+.bannerlist li:hover .bannerdel{opacity: 1;}
+.bannerdel:hover{opacity: 1;color: red;}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">积分商城管理</li>
+			</ul>
+			<div>
+							<table id="dg" style="height: 560px;" data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'ScoreMallAction!showGoods.zk',method:'get',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th	data-options="field:'name',align:'center'">名称</th>
+										<th	data-options="field:'price',align:'center'">燃脂币价格</th>
+										<th	data-options="field:'rmbPrice',align:'center'">人民币价格</th>
+										<th data-options="field:'cover',align:'center',formatter:formatCover">封面</th>
+										<th data-options="field:'rmbPrice',align:'center'">实付金额</th>
+										<th data-options="field:'isExchangeable',align:'center',formatter:formatYN">可否兑换</th>
+										<!-- <th data-options="field:'normalFreight',align:'center'">运费</th> -->
+										<th data-options="field:'productType',align:'center',formatter:formatType">型号</th>
+										<th data-options="field:'cashedCount',align:'center'">已兑换(件)</th>
+										<th data-options="field:'count',align:'center'">总量(件)</th>
+										<th data-options="field:'producter',align:'center'">供货商</th>
+										<th data-options="field:'isDeleted',align:'center',formatter:formatDel">商品失效</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+											<td><a href="sorcelist.html" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-coin" plain="true">积分订单管理</a></td>
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+	<div id="dlg" class="easyui-dialog"	style="width: 450px; height: 650px; padding: 10px 20px" closed="true" buttons="#dlg-buttons">
+	    <div class="fitem">
+            <label><span style="color:red">*</span>商品名称:</label>
+            <input name="name" id="spname" class="easyui-textbox">
+        </div>
+        <div class="fitem">
+            <label>商品价格:</label>
+            <input name="name" id = "RMB" class="easyui-textbox">
+            <span>元</span>
+        </div>
+	    <div class="fitem">
+            <label><span style="color:red">*</span>最多抵扣:</label>
+            <input name="url" id = "spprice" class="easyui-textbox">
+            <span>燃脂币</span>
+            <span style="color:red;margin-left:88px;">100燃脂币=1元</span>
+        </div>
+		<div class="fitem">
+			<label><span style="color:red">*</span>商品封面:</label>
+			<input id="id" type="hidden"/>
+			<input name="cover" id="cover" type="hidden"/> 
+			<form id="title_img_form" method="post"  enctype="multipart/form-data">
+				<input type="file" style="display: none;" id="file_title_img" name="name" onchange="uploadImage()" accept="image/*" />
+            </form>
+            <div style="width: 176px; cursor: pointer; margin-left: 88px;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+				<img id="imghead" src="images/yun.png" alt="" style="width:176px;height:60px;" />
+				<img id="imgheadhide" src="" alt="" style="display:none" />
+            </div>
+            <span style="color:red;margin-left:88px;">封面、型号图片规格：640(宽)x276(高)</span>
+		</div>
+		<div class="fitem">
+			<label>商品广告图片:</label>
+			<form id="banner_img_form" method="post"  enctype="multipart/form-data">
+				<input type="file" style="display: none;" id="file_banner_img" name="name" onchange="uploadBannerImage()" accept="image/*" />
+            </form>
+            <div class="bannerlist">
+            	<ul id="bannerimglist">
+            		
+            	</ul>
+            	<ul><li><div style="cursor: pointer;" onclick="chooseImage('file_banner_img')" title="点击选择图片">
+				<img id="imgbanner" src="images/yun.png" alt="" style="width:60px;height:60px;" />
+            </div></li></ul>
+            </div>
+            
+            <div style="color:red;margin-left:88px;clear:both;">图片规格：正方形</div>
+		</div>
+		<div style="clear:both;"></div>
+		<div class="fitem">
+			<label><span style="color:red">*</span>可否兑换:</label>
+			<select id="status" name="status" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+				<option value="0">请选择</option>
+				<option value="y">是</option>
+				<option value="n">否</option>
+			</select>
+		</div>
+		<div class="fitem">
+			<input name="cover" id="typeimg" type="hidden"/> 
+				<form id="type_img_form" method="post"  enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="file_type_img" name="name" onchange="uploadTypeImage()" accept="image/*" />
+	            </form>
+			<label><span style="color:red">*</span>商品型号:</label>			
+			<div style="display:inline-block;">
+				<a href="javascript:;" class="easyui-linkbutton" title="选择商品种类图片" plain="true" iconCls="icon-image" onclick="chooseImage('file_type_img')"></a>
+				<span><img style="width:12px; display: inline-block;  border: none;" id="typeoney" src=""><img id="typeoneyhide" style="display:none;" src=""></span>
+				<input id = "typename" class="easyui-textbox" style="width:80px" data-options="prompt:'&nbsp;&nbsp;类型名称'">
+				<input id = "typeprice" class="easyui-textbox" style="width:80px" data-options="prompt:'&nbsp;&nbsp;人民币价格'">
+				<a href="javascript:;" class="easyui-linkbutton"  plain="true" iconCls="icon-add" onclick="addtype()">添加此项</a>
+			</div>
+			<div class="typeadd">
+				<table width="90%" border="1" bordercolor="#a0c6e5" style="border-collapse:collapse;"></table>
+			</div>
+		</div>
+		<div class="fitem">
+            <label>商品描述:</label>
+            <input name="name" id = "description" class="easyui-textbox">
+        </div>
+        
+        <div class="fitem">
+			<label>商品图文详情:</label>
+			<input name="cover" id="detialcover" type="hidden"/> 
+			<form id="detial_img_form" method="post"  enctype="multipart/form-data">
+				<input type="file" style="display: none;" id="file_detial_img" name="name" onchange="uploadDetialImage()" accept="image/*" />
+            </form>
+            <div style="width: 176px; cursor: pointer; margin-left: 88px;" onclick="chooseImage('file_detial_img')" title="点击选择图片">
+				<img id="imgdetial" src="images/yun.png" alt="" style="width:176px;height:60px;" />
+            </div>
+            <span style="color:red;margin-left:88px;">图片规格：无限制</span>
+		</div>
+		<div class="fitem">
+            <label>供货商:</label>
+            <input name="name" id = "gonghus" class="easyui-textbox">
+        </div>
+        <div class="fitem">
+            <label>商品总数:</label>
+            <input name="name" id = "count" class="easyui-textbox">
+            <span>件</span>
+        </div>
+        <div class="fitem">
+            <label>已兑换数量:</label>
+            <input name="name" id = "yicount" class="easyui-textbox">
+            <span>件</span>
+        </div>
+         <div class="fitem">
+            <label>配送方式:</label>
+            <input type="checkbox" class="kuaidi" style="width:14px;" /><span>快递配送</span>
+            <input type="checkbox" class="mendian" style="width:14px;" /><span>门店自提</span>
+        </div>
+        <div class="fitem" id="zito" style="display:none">
+            <label>自提地址:</label>
+            <input name="name" style="width:280px" id = "zitiaddress" class="easyui-textbox">
+        </div>
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6" id="saveOrUpdateBtn" iconCls="icon-ok" onclick="saveProduct($(this))" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cencleBox()"	style="width: 90px">取消</a>
+		</div>
+	</div>
+	<div id="dlg-video" class="easyui-dialog" style="width: 550px; height: 400px; padding:10px" closed="true" modal="true">
+		<div id="player2" style="width:520px; height:330px"></div>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+		$('#peisong').combobox('setValue','1')
+	});
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		if(row){
+			if(confirm("确定删除?")){
+				$.getJSON('../manage/ScoreMallAction!deleteGood.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					}else {
+						showTip("删除失败!");
+					}
+				});
+			}
+		}else{
+       	 	$.messager.alert('警告','请先选择!');
+        }
+	}
+	$('.mendian').click(function(){
+		$(".mendian").is(':checked')?$('#zito').show():$('#zito').hide();
+	})
+	var type = [];
+	function clearForm(){
+		bannercover = [];
+    	index = 0;
+		$("#id").val('');
+    	$("#spname").textbox('setValue','');
+    	$("#spprice").textbox('setValue','');
+    	$("#cover").val('');
+    	$("#imghead").attr('src','images/yun.png');
+    	$("#status").combobox('setValue',0);
+    	$('#bannerimglist').find('li').remove();
+    	type = [];
+    	$(".typeadd table").find("tr").remove();
+    	$("#typeimg").val("");
+    	$("#typeoney").attr('src','');
+    	$('#typename').textbox('setValue','');
+    	$('#typeprice').textbox('setValue','');
+    	$('#description').textbox('setValue','');
+    	$('#RMB').textbox('setValue','');
+    	$('#typeprice').textbox('setValue','');
+    	$('#detialcover').val('');
+    	$("#imgdetial").attr('src','images/yun.png');
+    	$('#gonghus').textbox('setValue','');
+    	$('#count').textbox('setValue','');
+    	$('#yicount').textbox('setValue','');
+    	$('.kuaidi').attr('checked',false);
+    	$('.mendian').attr('checked',false);
+    	$('#zitiaddress').textbox('setValue','');
+	}
+	function cencleBox(){
+		clearForm()
+		$('#dlg').dialog('close');
+	}
+	 $('#dlg').dialog({ onClose:function(){
+	 	clearForm();
+	 } });
+	//新增产品信息
+	function newProduct(){
+	   clearForm();
+	   $('#saveOrUpdateBtn').attr('data-val','add');
+       $('#dlg').dialog('open').dialog('setTitle','新增');
+	}
+	function replacePos(strObj, pos, replacetext)
+	{
+	var str = strObj.substr(0, pos-1) + replacetext + strObj.substring(pos, strObj.length);
+	return str;
+	}
+	//更新产品信息
+	function editProduct(){
+		 var row = $('#dg').datagrid('getSelected');
+		 var imgURL = "../file/FileCenter!showImage2.zk?name=";
+         if (row){
+         	$('#saveOrUpdateBtn').attr('data-val','edit');
+        	$("#id").val(row.id);
+        	$("#spname").textbox('setValue',row.name);
+        	$("#spprice").textbox('setValue',row.price);
+        	$("#cover").val(row.cover);
+        	if(row.cover==""){
+        		$("#imghead").attr('src','images/yun.png');
+        	}else{        		
+        		$("#imghead").attr('src',imgURL+row.cover);
+        	}
+        	console.log(row.adList.substr(row.adList.length-2,1))
+        	var rowsleng = row.adList.length;
+        	if(row.adList.substr(row.adList.length-2,1)==","){
+        		row.adList = replacePos(row.adList, rowsleng-1, "");
+        	}
+        	var adli = JSON.parse(row.adList);
+        	bannercover=[];
+        	$.each(adli, function(index,item){
+        		bannercover.push(item);
+        		$("#bannerimglist").append('<li del='+index+'><img src='+imgURL+item+'><span class="bannerdel" onclick="bannerDel('+index+')" title="删除此图">×</span></li>');        		
+        	})
+        	
+        	$("#status").combobox('setValue',row.isExchangeable);
+        	var obj = JSON.parse(row.productType);
+        	$.each(obj, function(index,item){
+        		type.push(item);
+        		$(".typeadd table").append('<tr><td><img style="width:12px" src=../file/FileCenter!showImage2.zk?name='+item.images+'></td><td>'+item.name+'</td><td>'+item.crashPrice+'元</td><td><a href="javascript:;" onclick="removeType('+index+',$(this))">删除</a></td></tr>');
+        	})
+        	$('#description').textbox('setValue',row.describe);
+        	$('#RMB').textbox('setValue',row.rmbPrice);
+        	$('#detialcover').val(row.productInfo);
+        	if(row.productInfo==''){
+        		$('#imgdetial').attr('src','images/yun.png');
+        	}else{
+        		$('#imgdetial').attr('src',imgURL+row.productInfo);
+        	}
+        	$("#gonghus").textbox('setValue',row.producter);
+        	$("#count").textbox('setValue',row.count);
+        	$("#yicount").textbox('setValue',row.cashedCount);
+        	$('.kuaidi').prop('checked',row.isPost=='y'?true:false);
+        	if(row.isTake=='y'){        		
+		    	$('.mendian').prop('checked',true);
+		    	$('#zito').show();
+		    	$('#zitiaddress').textbox('setValue',row.takeAddress);
+        	}else{
+        		$('#zito').hide();
+        		$('.mendian').prop('checked',false);
+        	}
+            $('#dlg').dialog('open').dialog('setTitle','编辑');
+         }else{
+        	 $.messager.alert('错误','请先选择要编辑条目!','error');
+         }
+	}
+	
+	var reg = /^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/;
+	function addtype(){
+		var ele = $('.typeadd table'),
+			typeimg = $('#typeimg').val(),
+			typename = $('#typename').val(),
+			typeprice = $('#typeprice').val();
+			
+		if(typeprice==0 || !reg.test(typeprice)){
+			$.messager.alert('警告','商品价格为 正实数 最多 两位小数 且不为空!');
+			return false;
+		}	
+		if(typeimg.trim().length>0 && $('#typename').val().trim().length>0 && $('#typeprice').val().trim().length>0){
+			ele.append('<tr><td><img style="width:12px" src=../file/FileCenter!showImage2.zk?name='+typeimg+'></td><td>'+typename+'</td><td>'+typeprice+'元</td><td><a href="javascript:;" onclick="removeType('+ele.find('tr').length+',$(this))">删除</a></td></tr>');
+			type.push({images:typeimg,name:typename,price:0,crashPrice:typeprice});
+			$('#typeimg').val('');
+			$('#typename').textbox('setValue','');
+			$('#typeprice').textbox('setValue','');
+			$('#typeoney').attr('src','');
+		}else{
+			$.messager.alert('警告','商品型号信息不全!请选择图片，填写名称和价格！');
+			return false;
+		}
+	}
+	//check form
+	function checkForm(){
+		var cover = $("#cover").val();
+		if(!cover){
+			$.messager.alert('警告','请上传图片!');
+			return false;
+		}
+
+		return true;
+	}
+	function removeType(index,ele){
+		type.splice(index,1);
+		ele.parent().parent().remove();
+	}
+	function saveProduct(ele){
+		var spname = $('#spname').val(),
+			id = $('#id').val(),
+			spprice = $('#spprice').val(),
+			cover = $('#cover').val(),
+			description = $('#description').val(),
+			RMB = $('#RMB').val(),
+			detialcover = $('#detialcover').val(),
+			gonghus = $('#gonghus').val(),
+			count = $('#count').val(),
+			yicount = $('#yicount').val(),
+			status = $('#status').combobox('getValue');
+		if(spname.trim().length<=0){
+			$.messager.alert('警告','请填写商品名称!');
+			return false;
+		}else if(spprice.trim().length<=0){
+			$.messager.alert('警告','请填写商品价格!');
+			return false;
+		}else if(!reg.test(spprice) || spprice==0){
+			$.messager.alert('警告','商品价格为非零正数!');
+			return false;
+		}else if(cover.trim().length<=0){
+			$.messager.alert('警告','请选择封面!');
+			return false;
+		}else if(status==0){
+			$.messager.alert('警告','请选择‘可否兑换’!');
+			return false;
+		}else if($('.typeadd table tr').length<=0){
+			$.messager.alert('警告','请填写‘商品型号’!');
+			return false;
+		}
+		if(RMB.trim().length>0){
+			if(!reg.test(RMB) || RMB==0){
+				$.messager.alert('警告','‘商品价格’为非零正数!');
+				return false;
+			}
+		}
+		if(count.trim().length>0){
+			if(!reg.test(count) || count==0){
+				$.messager.alert('警告','‘商品总数’为非零正数!');
+				return false;
+			}
+		}
+		if(yicount.trim().length>0){
+			if(!reg.test(yicount) || yicount<0){
+				$.messager.alert('警告','‘已兑换数量’为非零正数!');
+				return false;
+			}
+		}
+		if(count.trim().length>0 && yicount.trim().length>0){
+			if(parseInt(count)<parseInt(yicount)){
+				$.messager.alert('警告','‘已兑换数量’必须小于‘商品总数’');
+				return false;
+			}
+		}
+		var arrType = JSON.stringify(type);
+		var adlistjson = JSON.stringify(bannercover).replace(/null\,?/g, '');
+		var datas = {
+			id: id,
+			name:spname,
+			price:spprice,
+			cover:cover,
+			isExchangeable: status,
+			productType: arrType,
+			adList: adlistjson,
+			cashPrice: RMB,
+			//上为必要字段，下为非必要字段
+			describe: description,
+			rmbPrice:RMB,
+			normalFreight:'',
+			specialFreignt:'',
+			productInfo: detialcover,
+			producter:gonghus,
+			count:count,
+			isPost:$(".kuaidi").is(':checked')?'y':'n',
+			isTake:$(".mendian").is(':checked')?'y':'n',
+			takeAddress:$("#zitiaddress").val(),
+			cashedCount:yicount
+		}
+		if(ele.attr('data-val') == 'add'){			
+			$.ajax({
+				type:'post',
+				url: '../manage/ScoreMallAction!addGood.zk',
+				data: datas,
+				dataType:'json',
+				success: function(res){
+					if(res.STATUS){
+						$("#dg").datagrid("reload",{});
+						$('#dlg').dialog('close');
+					}else{
+						alert(res.INFO);
+					}
+				},
+				err: function(err){
+					console.log(err);
+				}
+			})
+		}else if(ele.attr('data-val') == 'edit'){
+			$.ajax({
+				type:'post',
+				url: '../manage/ScoreMallAction!updateGood.zk',
+				data: datas,
+				dataType:'json',
+				success: function(res){
+					if(res.STATUS){
+						$("#dg").datagrid("reload",{});
+						$('#dlg').dialog('close');
+					}else{
+						alert(res.INFO);
+					}
+				},
+				err: function(err){
+					console.log(err);
+				}
+			})
+		}
+    }
+
+	function chooseImage(id) {
+         document.getElementById(id).click();
+    }
+	
+    //上传封面图片
+    function uploadImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 5000 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+            		//上传图片
+					$("#title_img_form").ajaxSubmit({
+						type : 'post',
+						url : '../file/FileCenter!uploadImage2.zk',
+						beforeSubmit: function(){
+							$('#imghead').attr('src','images/loading.gif');
+						},
+						cache: false,
+						success : function(data) {
+							var data = $.parseJSON(data);
+							if (data.name) {								
+							    // alert(data.name);
+							 	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;						 	
+							 	$("#imgheadhide").attr("src", imgURL);
+
+							 	$("#imgheadhide").one('load',function(){	 		
+								 	if($("#imgheadhide").width()==640 && $("#imgheadhide").height()<=286){
+									    $("#imghead").attr("src", imgURL);
+									    $("#cover").val(data.name);
+									    $("#imgheadhide").attr("src", '');					 		
+								 	}else{
+								 		console.log($("#imgheadhide").attr("src"));
+								 		$.messager.alert('注意','图片规格为：宽640*高276');
+								 		$("#imghead").attr('src','images/yun.png');
+										return false;
+								 	}
+							 	}).each(function(){
+							 		if(this.complete) $(this).load();
+							 	})
+							} else {
+						    	alert("上传图片出错！");
+							}
+							$("#title_img_form").resetForm();
+						},
+						error : function(XmlHttpRequest, textStatus, errorThrown) {
+							alert("error");
+						}
+					});                
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    //上传类型图片
+    function uploadTypeImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_type_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 5000 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+            		//上传图片
+					$("#type_img_form").ajaxSubmit({
+						type : 'post',
+						url : '../file/FileCenter!uploadImage2.zk',
+						beforeSubmit: function(){
+							$('#typeoney').attr('src','images/loading.gif');
+						},
+						success : function(data) {
+							data = $.parseJSON(data);
+							if (data.name) {
+						    // alert(data.name);
+						 	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;						 	
+						 		$('#typeoneyhide').attr('src',imgURL);
+						 		$("#typeoneyhide").one('load',function(){				 			
+							 		if($("#typeoneyhide").width()==640 && $("#typeoneyhide").height()<=286){						 			
+								 		$('#typeoney').attr('src',imgURL);
+									    $("#typeimg").val(data.name);
+									    $('#typeoneyhide').attr('src','');
+							 		}else{
+							 			$.messager.alert('注意','图片规格为：宽640*高276');
+							 			$("#typeoney").attr('src','images/yun.png');
+										// return false;
+							 		}
+						 		}).each(function(){
+							 		if(this.complete) $(this).load();
+							 	})
+							} else {
+						    	alert("上传图片出错！");
+							}
+							$("#type_img_form").resetForm();
+						},
+						error : function(XmlHttpRequest, textStatus, errorThrown) {
+							alert("error");
+						}
+					});                
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    //上传图片
+    function uploadDetialImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_detial_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 5000 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+            		//上传图片
+					$("#detial_img_form").ajaxSubmit({
+						type : 'post',
+						url : '../file/FileCenter!uploadImage2.zk',
+						beforeSubmit:function(){
+							$('#imgdetial').attr('src','images/loading.gif');
+						},
+						success : function(data) {
+							data = $.parseJSON(data);
+							if (data.name) {
+						    // alert(data.name);
+						 	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+						 		$("#imgdetial").attr("src", imgURL);
+							    $("#detialcover").val(data.name);
+							} else {
+						    	alert("上传图片出错！");
+							}
+							$("#detial_img_form").resetForm();
+						},
+						error : function(XmlHttpRequest, textStatus, errorThrown) {
+							alert("error");
+						}
+					});                
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }var bannercover = [];
+    var index = 0;
+    function uploadBannerImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_banner_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 5000 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+            		//上传图片
+					$("#banner_img_form").ajaxSubmit({
+						type : 'post',
+						url : '../file/FileCenter!uploadImage2.zk',
+						beforeSubmit:function(){
+							$('#imgbanner').attr('src','images/loading.gif');
+						},
+						success : function(data) {
+							data = $.parseJSON(data);
+							if (data.name) {
+						    // alert(data.name);
+						 	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;						 		
+						 		bannercover.push(data.name);	
+						 		var k = index++;						    
+							    $('#bannerimglist').append('<li del='+k+'><img src='+imgURL+'><span class="bannerdel" onclick="bannerDel('+k+')" title="删除此图">×</span></li>');
+							    $('#imgbanner').attr('src','images/yun.png');
+							} else {
+						    	alert("上传图片出错！");
+							}
+							$("#banner_img_form").resetForm();
+						},
+						error : function(XmlHttpRequest, textStatus, errorThrown) {
+							alert("error");
+						}
+					});                
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    function bannerDel(index){
+    	delete bannercover[index];
+    	$('#bannerimglist li').each(function(i,item){
+    		if($(this).attr('del') == index){
+    			$(this).remove();
+    		}
+    	})
+    }
+    function formatType(productType){
+    	var obj = JSON.parse(productType);
+    	var names = "";
+    	$.each(obj,function(index,item){
+    		names = names+item.name+",";
+    	})
+    	return names;
+    }
+    //格式化是否
+    function formatYN(isExchangeable){
+    	if(isExchangeable=='n'){
+    		return '不可兑换';
+    	}else{
+    		return '可兑换';
+    	}
+    }
+    function formatDel(isDeleted) {
+    	if(isDeleted=='n'){
+    		return '未删除';
+    	}else{
+    		return '已删除';
+    	}
+    }
+    //格式化封面
+    function formatCover(cover){
+        //var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">点击查看</a>";
+        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\"><img src=\"../file/FileCenter!showImage2.zk?name="+cover+"\" style=\"width:100px;height:60px;display:block;margin:0 auto;\" title=\"点击查看大图\"></a>";
+        return result;
+    }
+
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

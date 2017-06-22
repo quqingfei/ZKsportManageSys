@@ -1,0 +1,1225 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.citem{
+	float:left;
+	margin:8px 10px;
+}
+.citem label{
+	text-align:right;
+}
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+#userDlg .datagrid-wrap{
+	border:0;
+}
+
+.delMusic{
+  display: inline-block;
+  margin: -10px 0 10px 10px;
+  vertical-align: middle;
+}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>	
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">课程管理</li>
+			</ul>
+			<div>
+					<table id="dg"
+								style="height:560px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'CourseAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'name',align:'center'" width="9%">名称</th>
+										<th data-options="field:'description',align:'center'" width="9%">简介</th>
+										<!-- <th data-options="field:'description',align:'center',width:$(this).width() * 0.02">图片</th> -->
+										<th data-options="field:'type',formatter:formatType,align:'center'" width="7%">类型</th>
+										<th data-options="field:'coachNames',align:'center',formatter:formatCoachs" width="7%">教练</th>
+										<th data-options="field:'tools',align:'center'" width="7%">器械</th>
+										<th data-options="field:'effect',align:'center'"  width="7%">功效</th>
+										<th data-options="field:'effectPlace',align:'center'" width="7%">锻炼部位</th>
+										<th data-options="field:'calorie',align:'center'" width="4%">卡路里</th>
+										<th data-options="field:'cycle',align:'center'" width="4%">周期</th>
+										<th data-options="field:'price',align:'center'" width="4%">价格</th>
+										<th data-options="field:'totalUser',align:'center'" width="4%">总用户</th>
+										<th data-options="field:'state',align:'center'" width="4%">状态</th>
+										<th data-options="field:'gymName',align:'center'" width="5%">健身房</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="11%">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="11%">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td>健身房：
+											<select id="searchGym" class="easyui-combobox" data-options="url:'GymAction!listAll.zk',method:'post',valueField:'id',textField:'gymName',editable:false"
+												style="width: 100px;">
+										</select></td>
+										<!-- <td><div class="datagrid-btn-separator"></div></td> -->
+										<td><input id="searchKey" class="easyui-textbox"
+											style="width: 280px"
+											data-options="prompt:'课程名称'" />
+										</td>
+										<td>
+									        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchUser()">搜索</a>
+										</td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+										<!-- <td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="note()">评论</a></td> -->											
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_person" plain="true"
+											onclick="listUser()">查看用户</a></td>											
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+	<div id="dlg" class="easyui-dialog"
+		style="width: 65%; height: 600px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#dlg-course-btn">
+		<!-- <form id="fm" method="post"> -->
+			<div id="courseStep1" style="/* display:none; */">
+				<div class="ftitle">健身课程信息</div>
+				<input id="id" type="hidden"/>
+				<div class="fitem citem">
+					<label>类型:</label> <select id="type" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option value="1">线上</option>
+													<option value="2">线下</option>
+							</select>
+				</div>
+				<div class="fitem citem">
+					<label>器械:</label> <select id="tools" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>无器械</option>
+													<option>小器械</option>
+													<option>健身房器械</option>
+							</select>
+				</div>				
+				<div class="fitem citem">
+					<label>功效:</label> <select id="effect" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>增肌</option>
+													<option>减脂</option>
+													<option>塑性</option>
+													<option>拉伸</option>
+					</select>
+				</div>				
+				<div class="fitem citem">
+					<label>锻炼部位:</label> <select id="effectPlace" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>全身</option>
+													<option>胸部</option>
+													<option>肩部</option>
+													<option>背部</option>
+													<option>手臂</option>
+													<option>颈部</option>
+													<option>腿部</option>
+													<option>臀部</option>
+													<option>腹部</option>
+													<option>腰部</option>
+							</select>
+				</div>	
+				<div class="fitem citem">
+					<label>名称:</label> <input name="name"
+						id="name" class="easyui-textbox"/>
+				</div>
+				<div class="fitem citem" id="cycleDiv">
+					<label>周期:</label>
+					<input name="cycle" id="cycle" class="easyui-numberbox"/>
+				</div>			
+				<div class="fitem citem">
+					<label>价格:</label>
+					<input name="price" id="price" class="easyui-numberbox" data-options="precision:2"/>
+				</div>
+				<div class="fitem citem">
+					<label>适用人群:</label>
+					<input name="targetUser" id="targetUser" class="easyui-textbox" />
+				</div>	
+				<div class="fitem citem">
+					<label>卡路里:</label>
+					<input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/>
+				</div>
+				<div class="fitem citem">
+					<label>健身房:</label>
+					<!-- <input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/> -->
+					<select id="gymId" name="gymId" data-options="valueField:'id',textField:'gymName',url:''" style="">
+					</select>
+				</div>	
+				<div style="clear:both;"></div>		
+				<div class="fitem citem" id="coachURLDiv">
+					<label>教练:</label>
+					<a id="coachBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">选择</a>
+					<ul id="products" style="margin-left: 100px;"></ul>
+				</div>	
+				<div style="clear:both;"></div>					
+				<div class="fitem citem">
+					<label>简介:</label>
+					<input name="description" id="description"
+						data-options="multiline:true"
+						style="height:80px;width:450px;"  class="easyui-textbox"/>
+				</div>	
+				<div style="clear:both;"></div>			
+				<div class="fitem citem">
+					<label>封面:</label> 
+					<input name="cover" id="cover" type="hidden"/> 
+					<form id="title_img_form" method="post"  enctype="multipart/form-data">
+						<input type="file" style="display: none;" id="file_title_img"
+	                                        name="name" onchange="uploadImage()" accept="image/*" />
+	                </form>
+	                <div style="width: 197px; height: 67px; margin-left:88px; margin-top: -12px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+						<img id="imghead" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+	                </div>
+				</div>
+				
+				<div style="clear:both;"></div>			
+				<div class="fitem citem">
+					<label>背景音乐:</label>
+					<div style="  margin-left: 88px;  margin-top: -15px;">
+	          <!--      	 	<div>
+							<audio src="http://zkimages.oss-cn-hangzhou.aliyuncs.com/1450925295973353001/x1.mp3" controls="controls"></audio>
+							<a href="#">删除</a>
+	               	 	</div>
+	               	 	<div>
+							<audio src="http://zkimages.oss-cn-hangzhou.aliyuncs.com/1450925295973353001/x1.mp3" controls="controls"></audio>
+							<a href="#">删除</a>
+	               	 	</div> -->
+	               	 	<div id="musicPriew">
+	               	 	</div>
+						<div style="width: 197px; height: 67px; margin-top: -12px;cursor: pointer;" title="点击选择音乐">
+							<img id="upmusicbtn" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+	               	 	</div>
+	               	 	<div id="upmusicstatus"></div>
+	               	 	<div style="display: none;" id="upmusiccontainer"></div>
+					</div>
+					<!-- <input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/> -->
+				</div>
+			</div>
+			<!-- 课程详情 -->
+			<div id="courseStep2" style="display:none;">
+				<div class="ftitle">健身课程信息</div>
+
+                <div id="sectionWrap">
+                </div>
+				<!--<div id="sectionWrap"></div>-->
+			</div>
+			<div id="dlg-course-btn">
+				<a id="coursePrev" href="javascript:void(0)" onclick="couseDetailUI()" class="easyui-linkbutton" data-options="iconCls:'icon-next',plain:true">下一步</a>
+				<a id="courseNext" href="javascript:void(0)" onclick="couseUI()" class="easyui-linkbutton" data-options="iconCls:'icon-prev',plain:true">上一步</a>
+				<a id="courseSave" href="javascript:void(0)" onclick="saveCourse(this)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">保存</a>
+			</div>
+	</div>
+	<div id="dlg-video" class="easyui-dialog"
+		style="width: 550px; height: 400px; padding:10px" closed="true" modal="true">
+		<div id="player2" style="width:520px; height:330px"></div>
+	</div>
+	
+	<!-- Coach list -->
+	<div id="productlstDlg" class="easyui-dialog"
+		style="width: 650px; height: 500px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#select-product-buttons">
+							<table id="productDg"
+								style="margin: 0; padding: 0;height: 400px;"
+								data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'CoachAction!list.zk',method:'post'">
+								<thead>
+									<tr>
+										<th data-options="field:'id',checkbox:true"></th>
+										<th data-options="field:'coachName',align:'center',width:150">姓名</th>
+										<th data-options="field:'coachSpecialty',align:'center',width:150">专长</th>
+										<th data-options="field:'coachSchool',align:'center',width:150">毕业院校</th>
+										
+									</tr>
+								</thead>
+							</table>
+							<div id="select-product-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="selectProducts()" style="width: 90px">选好了</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#productlstDlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+							<!--  -->
+
+
+		<!-- user list -->
+					<div id="userDlg" class="easyui-dialog"
+						style="width:60%; height: 550px; padding: 0" closed="true" modal="true"
+						buttons="#user-buttons">
+											<table id="userDg"
+												style="height: 500px;"
+												data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'',method:'post'">
+												<thead>
+													<tr>
+														<th data-options="field:'userName',align:'center'" width="14%">昵称</th>
+														<th data-options="field:'sex',align:'center',formatter:formatSex" width="14%">性别</th>
+														<th data-options="field:'age',align:'center'" width="14%">年龄</th>
+														<th data-options="field:'height',align:'center'" width="14%">身高</th>
+														<th data-options="field:'weight',align:'center'" width="14%">体重</th>
+														<th data-options="field:'bmi',align:'center'" width="14%">BMI</th>
+														<th data-options="field:'address',align:'center'" width="14%">地址</th>
+														
+													</tr>
+												</thead>
+											</table>
+					</div>
+							<!--  -->
+							<!-- upload dlg -->
+								<div id="uploaddlg" class="easyui-dialog"
+									style="width: 40%; height: 500px; padding: 10px 20px" closed="true" modal="true"
+									buttons="#upvideo-buttons">
+									<!-- <form id="fm" method="post"> -->
+										<div style="/* display:none; */">
+											<div class="fitem">
+												<label>类型:</label> 
+												<select class="easyui-combobox" id="uptype" style=" width: 160px; " data-options="editable:false,onChange: function (n,o) {
+	if(n == 1){
+		updlgVideoUI();
+	}else {
+		updlgImageUI();
+	}
+}">
+																				<option value="1">健身视频</option>
+																				<option value="2">间歇图片</option>
+												</select>
+											</div>
+											<div class="fitem" id="updlg_filename">
+												<label>名称:</label> <input id="upname" class="easyui-textbox"/>
+											</div>
+											<div class="fitem" id="updlg_calorie">
+												<label>卡路里:</label> <input id="upcalorie" class="easyui-numberbox"/>
+											</div>
+											<div class="fitem" id="cycleDiv">
+												<label>时间:</label>
+												<input id="uptime" class="easyui-numberbox"/>
+												<input id="upfile" type="hidden"/>
+												<input id="upfilesize" type="hidden"/>
+												<input id="upperCalorie" type="hidden"/>
+												<input id="upsection" type="hidden"/>
+											</div>
+                                            <div class="fitem" id="updlg_repeatTimes">
+                                                <label>次数:</label> <input id="uprepeatTimes" class="easyui-numberbox"/>
+                                            </div>
+                                            <div class="fitem" >
+                                                <label>素材库:</label>                         <select class="easyui-combobox" id="upfiles" style=" width: 160px; " data-options="valueField:'id',textField:'text',url:'js/upvideos.json',editable:false,onChange: function (n,o) {
+       chooseFromVideos(n);
+}"></select>
+                                            </div>
+
+											<div class="fitem">
+												<label>文件:</label>
+												<!-- <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a> -->
+												<!-- <button id="selectfiles">选择文件</button> -->
+												<!-- <button id="postfiles">开始上传</button> -->
+												<div id="poststatus" style="margin:5px 5px 5px 80px;"></div>
+												<div id="upcontainer" style="display: none;">
+												</div>
+												<div id="uppriew" style="cursor: pointer;margin-left:80px;" title="点击上传文件">
+													<img id="" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+												</div>
+											</div>
+										</div>
+										<div id="upvideo-buttons">
+											<a href="javascript:void(0)" class="easyui-linkbutton c6"
+												iconCls="icon-ok" onclick="saveUpinfo()" style="width: 90px">保存</a>
+											<a href="javascript:void(0)" class="easyui-linkbutton"
+												iconCls="icon-cancel" onclick="javascript:$('#uploaddlg').dialog('close')"
+												style="width: 90px">取消</a>
+										</div>
+								</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/easyui-common.js"></script>
+
+<script src="js/flowplayer-3.2.6.min.js"></script>
+
+
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script src="js/oss.uploader.js"></script>
+<script src="js/accordion.js"></script>	
+
+<script id="courseStep2Tmpl" type="text/x-jquery-tmpl">
+
+				<div style="padding:10px 0;margin:5px auto" id="section_${sectionId}">
+					<div class="fitem">
+						<label>阶段:</label> 
+						 <input id="ipt_section_0" class="easyui-textbox"/>
+							 <button onclick="addSetion()">添加</button>
+							  <button onclick="delSetion(${sectionId})">删除</button>
+					</div>
+					<div class="fitem">
+						<label style="float:left;">步骤:</label>
+						
+ 
+						<div style="margin-left: 65px; display: inline-block;width:760px;">
+
+                            {{each(i,step) steps}}
+
+                                {{if step.type == 1}}
+                                    <div id="${step.stepId}" style="float:left;text-align: center;margin-left: 20px;width:320px;height:260px;">
+                                        <video width=320 height=240 controls="controls">
+                                            <source src="${step.file}" type="video/mp4">
+                                        </video>
+                                        <div>${step.stepName}  ${time}秒  <a onclick="delStep('${step.stepId}')">删除</a></div>
+                                    </div>
+                                {{/if}}
+
+                                {{if step.type == 2}}
+                                    <div id="${step.stepId}" style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;">
+                                        <img style=" height:240px; width: 320px;" src="${step.file}">
+                                        <div>${time}秒 <a onclick="delStep('${step.stepId}')">删除</a></div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+
+                             <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(${sectionId})" id="addVideoBtn${sectionId}">
+                                <img style=" height:240px;width:320px;" src="images/add_rec.png">
+                             </div>
+                             <div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+</script>
+<script id="sectionTmpl" type="text/x-jquery-tmpl">
+				<div style="padding:10px 0;margin:5px auto" id="section_${section}">
+					<div class="fitem">
+						<label>阶段:</label> 
+						 <input id="ipt_section_0" class="easyui-textbox"/>
+							 <button onclick="addSetion()">添加</button>
+							 <button onclick="delSetion(${section})">删除</button>
+					</div>
+					<div class="fitem">
+						<label>步骤:</label> 
+						<div style="margin-left: 65px;">
+							 <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(${section})" id="addVideoBtn${section}">
+							 	<img style=" height:240px;width:320px;" src="images/add_rec.png">
+							 </div>
+							 <div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+</script>
+ <script id="musicTmpl" type="text/x-jquery-tmpl">
+    <div id="upmusicwrap_${stepId}" style="margin: 0 0 10px 0;">
+            <audio id="upmusic_${stepId}" src="${file}" controls="controls"></audio>
+            <a class="delMusic" href="javascript:void(0)" onclick="delMusic('${stepId}')">删除</a>
+    </div>
+</script>
+
+<!-- 新增课程模板 -->
+<script id="courseDetailTmpl" type="text/x-jquery-tmpl">
+    <div style="padding:10px 0;margin:5px auto" id="section_0">
+            <div class="fitem">
+            <label>阶段:</label>
+    <input id="ipt_section_0" class="easyui-textbox"/>
+            <button onclick="addSetion()">添加</button>
+    <button onclick="delSetion(0)">删除</button>
+    </div>
+    <div class="fitem" id="step_0_0">
+            <label>步骤:</label>
+    <div style="margin-left: 65px;">
+            <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(0)" id="addVideoBtn0">
+            <img style=" height:240px;width:320px;" src="images/add_rec.png">
+            </div>
+    <div style="clear: both;"></div>
+    </div>
+    </div>
+    </div>
+</script>
+<script>
+var courseVidoes = [{"calorie":"2.5","name":"坐姿复合推举","size":"5064449","time":"15","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%9D%90%E5%A7%BF%E5%A4%8D%E5%90%88%E6%8E%A8%E4%B8%BE.mov"},{"calorie":"0.5","name":"双手背扣挺身","size":"3704044","time":"14","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8F%8C%E6%89%8B%E8%83%8C%E6%89%A3%E6%8C%BA%E8%BA%AB.mov"},{"calorie":"0.5","name":"坐姿拉伸_右侧","size":"4794732","time":"14","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%9D%90%E5%A7%BF%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.5","name":"坐姿拉伸_左侧","size":"4761599","time":"14","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%9D%90%E5%A7%BF%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.8","name":"哑铃前平举","size":"3133737","time":"12","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E5%89%8D%E5%B9%B3%E4%B8%BE.mov"},{"calorie":"2","name":"平板支撑抬腿","size":"3959769","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91%E6%8A%AC%E8%85%BF.mov"},{"calorie":"0.3","name":"扶肘体侧拉伸_右侧","size":"2540029","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%B6%E8%82%98%E4%BD%93%E4%BE%A7%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"扶肘体侧拉伸_左侧","size":"2506835","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%B6%E8%82%98%E4%BD%93%E4%BE%A7%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2.5","name":"哑铃俯身飞鸟","size":"3054061","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BF%AF%E8%BA%AB%E9%A3%9E%E9%B8%9F.mov"},{"calorie":"1.8","name":"哑铃俯身直臂后伸_右侧","size":"2866282","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BF%AF%E8%BA%AB%E7%9B%B4%E8%87%82%E5%90%8E%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.8","name":"哑铃俯身直臂后伸_左侧","size":"2818065","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BF%AF%E8%BA%AB%E7%9B%B4%E8%87%82%E5%90%8E%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1","name":"哑铃直腿硬拉","size":"3444913","time":"10","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E7%9B%B4%E8%85%BF%E7%A1%AC%E6%8B%89.mov"},{"calorie":"2","name":"站姿哑铃推举","size":"2608445","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E5%93%91%E9%93%83%E6%8E%A8%E4%B8%BE.mov"},{"calorie":"0.3","name":"头部绕环","size":"2267141","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%A4%B4%E9%83%A8%E7%BB%95%E7%8E%AF.mov"},{"calorie":"1.8","name":"哑铃仰卧推举","size":"3240745","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BB%B0%E5%8D%A7%E6%8E%A8%E4%B8%BE.mov"},{"calorie":"0.9","name":"TW伸展","size":"3304324","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/TW%E4%BC%B8%E5%B1%95.mov"},{"calorie":"0.2","name":"盘腿拉伸","size":"2815842","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%9B%98%E8%85%BF%E6%8B%89%E4%BC%B8.mov"},{"calorie":"1.8","name":"俯身开肘划船_右侧","size":"2596285","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%AF%E8%BA%AB%E5%BC%80%E8%82%98%E5%88%92%E8%88%B9_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.8","name":"俯身开肘划船_左侧","size":"2550156","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%AF%E8%BA%AB%E5%BC%80%E8%82%98%E5%88%92%E8%88%B9_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.8","name":"哑铃仰卧上举","size":"3236471","time":"9","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BB%B0%E5%8D%A7%E4%B8%8A%E4%B8%BE.mov"},{"calorie":"1","name":"哑铃负重肩部绕环","size":"2245261","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E8%B4%9F%E9%87%8D%E8%82%A9%E9%83%A8%E7%BB%95%E7%8E%AF.mov"},{"calorie":"1","name":"负重提踵","size":"2323354","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B4%9F%E9%87%8D%E6%8F%90%E8%B8%B5.mov"},{"calorie":"1.8","name":"保加利亚深蹲_右侧","size":"2644683","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%9D%E5%8A%A0%E5%88%A9%E4%BA%9A%E6%B7%B1%E8%B9%B2_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.8","name":"保加利亚深蹲_左侧","size":"2675568","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%9D%E5%8A%A0%E5%88%A9%E4%BA%9A%E6%B7%B1%E8%B9%B2_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.3","name":"哑铃负重耸肩","size":"2195899","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E8%B4%9F%E9%87%8D%E8%80%B8%E8%82%A9.mov"},{"calorie":"0.3","name":"双手头顶背扣牵拉","size":"2054783","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8F%8C%E6%89%8B%E5%A4%B4%E9%A1%B6%E8%83%8C%E6%89%A3%E7%89%B5%E6%8B%89.mov"},{"calorie":"1.3","name":"侧卧举腿_右侧","size":"2998976","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E4%B8%BE%E8%85%BF_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.3","name":"侧卧举腿_左侧","size":"2982928","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E4%B8%BE%E8%85%BF_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1","name":"平板支撑","size":"2636390","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91.mov"},{"calorie":"1.6","name":"仰卧举腿","size":"2897903","time":"8","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E4%B8%BE%E8%85%BF.mov"},{"calorie":"2","name":"对角提膝","size":"3009877","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%AF%B9%E8%A7%92%E6%8F%90%E8%86%9D.mov"},{"calorie":"1.8","name":"简易仰卧对角提膝","size":"3046936","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AE%80%E6%98%93%E4%BB%B0%E5%8D%A7%E5%AF%B9%E8%A7%92%E6%8F%90%E8%86%9D.mov"},{"calorie":"2","name":"仰卧对角提膝","size":"3009877","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E5%AF%B9%E8%A7%92%E6%8F%90%E8%86%9D.mov"},{"calorie":"1.8","name":"俯身单臂划船_右侧","size":"2220796","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%AF%E8%BA%AB%E5%8D%95%E8%87%82%E5%88%92%E8%88%B9_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.8","name":"俯身单臂划船_左侧","size":"2180060","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%AF%E8%BA%AB%E5%8D%95%E8%87%82%E5%88%92%E8%88%B9_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2","name":"哑铃侧平举","size":"2382293","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BE%A7%E5%B9%B3%E4%B8%BE.mov"},{"calorie":"2","name":"哑铃俯身划船","size":"2550206","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BF%AF%E8%BA%AB%E5%88%92%E8%88%B9.mov"},{"calorie":"1.6","name":"仰卧交替摆腿","size":"3001334","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E4%BA%A4%E6%9B%BF%E6%91%86%E8%85%BF.mov"},{"calorie":"2.5","name":"波比","size":"2200618","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%B3%A2%E6%AF%94.mov"},{"calorie":"1.9","name":"负重箭步蹲_右侧","size":"2250036","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B4%9F%E9%87%8D%E7%AE%AD%E6%AD%A5%E8%B9%B2_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.9","name":"负重箭步蹲_左侧","size":"2281490","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B4%9F%E9%87%8D%E7%AE%AD%E6%AD%A5%E8%B9%B2_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.9","name":"上斜窄距俯卧撑","size":"2381795","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%8A%E6%96%9C%E7%AA%84%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1","name":"后抬腿_右侧","size":"2189675","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%90%8E%E6%8A%AC%E8%85%BF_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1","name":"后抬腿_左侧","size":"2151134","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%90%8E%E6%8A%AC%E8%85%BF_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1","name":"哑铃颈后臂屈伸_右侧","size":"1908791","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E9%A2%88%E5%90%8E%E8%87%82%E5%B1%88%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1","name":"哑铃颈后臂屈伸_左侧","size":"1942485","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E9%A2%88%E5%90%8E%E8%87%82%E5%B1%88%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.3","name":"哑铃仰卧飞鸟","size":"2836662","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%93%91%E9%93%83%E4%BB%B0%E5%8D%A7%E9%A3%9E%E9%B8%9F.mov"},{"calorie":"1.2","name":"侧支撑抬腿_右侧","size":"2862475","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E6%94%AF%E6%92%91%E6%8A%AC%E8%85%BF_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.2","name":"侧支撑抬腿_左侧","size":"2859263","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E6%94%AF%E6%92%91%E6%8A%AC%E8%85%BF_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2.3","name":"深蹲跳2","size":"2677210","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%B7%B1%E8%B9%B2%E8%B7%B32.mov"},{"calorie":"1.9","name":"左右起伏俯卧撑","size":"2837070","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%B7%A6%E5%8F%B3%E8%B5%B7%E4%BC%8F%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"2","name":"上斜中距俯卧撑","size":"2253252","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%8A%E6%96%9C%E4%B8%AD%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1.9","name":"中距俯卧撑","size":"2617092","time":"7","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%AD%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"2","name":"侧屈抬手_右侧","size":"2661582","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%B1%88%E6%8A%AC%E6%89%8B_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"2","name":"侧屈抬手_左侧","size":"2654994","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%B1%88%E6%8A%AC%E6%89%8B_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2","name":"左右移动俯卧撑","size":"2626844","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1.5","name":"背撑","size":"1864678","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%83%8C%E6%92%91.mov"},{"calorie":"2.3","name":"深蹲跳","size":"2178027","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%B7%B1%E8%B9%B2%E8%B7%B3.mov"},{"calorie":"1.6","name":"燕式伸展","size":"2325565","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%87%95%E5%BC%8F%E4%BC%B8%E5%B1%95.mov"},{"calorie":"0.3","name":"弓步拉伸_右侧","size":"1699292","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%BC%93%E6%AD%A5%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"弓步拉伸_左侧","size":"1722965","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%BC%93%E6%AD%A5%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2.1","name":"卷腹转体","size":"2501195","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8D%B7%E8%85%B9%E8%BD%AC%E4%BD%93.mov"},{"calorie":"1.3","name":"站姿哑铃弯举","size":"2054755","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E5%93%91%E9%93%83%E5%BC%AF%E4%B8%BE.mov"},{"calorie":"1.3","name":"负重体侧屈_右侧","size":"2068082","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B4%9F%E9%87%8D%E4%BD%93%E4%BE%A7%E5%B1%88_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.3","name":"负重体侧屈_左侧","size":"2083375","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B4%9F%E9%87%8D%E4%BD%93%E4%BE%A7%E5%B1%88_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.9","name":"窄距俯卧撑","size":"2415965","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AA%84%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1.3","name":"下斜仰卧飞鸟","size":"2411666","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%8B%E6%96%9C%E4%BB%B0%E5%8D%A7%E9%A3%9E%E9%B8%9F.mov"},{"calorie":"0.3","name":"扶肘转体背部拉伸_右侧","size":"1534048","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%B6%E8%82%98%E8%BD%AC%E4%BD%93%E8%83%8C%E9%83%A8%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"扶肘转体背部拉伸_左侧","size":"1514970","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%B6%E8%82%98%E8%BD%AC%E4%BD%93%E8%83%8C%E9%83%A8%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.8","name":"俯卧两头起","size":"2348513","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BF%AF%E5%8D%A7%E4%B8%A4%E5%A4%B4%E8%B5%B7.mov"},{"calorie":"1","name":"仰卧拉伸卷腹_右侧","size":"2250982","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E6%8B%89%E4%BC%B8%E5%8D%B7%E8%85%B9_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1","name":"仰卧拉伸卷腹_左侧","size":"2257871","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E6%8B%89%E4%BC%B8%E5%8D%B7%E8%85%B9_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.5","name":"坐姿反撑","size":"2001048","time":"6","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%9D%90%E5%A7%BF%E5%8F%8D%E6%92%91.mov"},{"calorie":"0.8","name":"拱桥","size":"1867107","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%8B%B1%E6%A1%A5.mov"},{"calorie":"0.8","name":"仰卧卷腹","size":"2187029","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E5%8D%B7%E8%85%B9.mov"},{"calorie":"0.8","name":"仰卧卷腹1","size":"2164122","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E5%8D%B7%E8%85%B91.mov"},{"calorie":"0.6","name":"平衡蹲起","size":"1753292","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%B9%B3%E8%A1%A1%E8%B9%B2%E8%B5%B7.mov"},{"calorie":"0.6","name":"侧卧卷腹_右侧","size":"2150142","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E5%8D%B7%E8%85%B9_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.6","name":"侧卧卷腹_左侧","size":"2154633","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E5%8D%B7%E8%85%B9_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1","name":"后蹬腿_右侧","size":"2083473","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%90%8E%E8%B9%AC%E8%85%BF_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1","name":"后蹬腿_左侧","size":"2054751","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%90%8E%E8%B9%AC%E8%85%BF_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.5","name":"下斜俯卧撑","size":"2009045","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%8B%E6%96%9C%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1.5","name":"仰卧直腿触足","size":"1925134","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E7%9B%B4%E8%85%BF%E8%A7%A6%E8%B6%B3.mov"},{"calorie":"1.5","name":"钻石俯卧撑","size":"2077926","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%92%BB%E7%9F%B3%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1","name":"坐姿提膝","size":"2088837","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%9D%90%E5%A7%BF%E6%8F%90%E8%86%9D.mov"},{"calorie":"1.3","name":"简易窄距俯卧撑","size":"1946822","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AE%80%E6%98%93%E7%AA%84%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1.9","name":"靠墙静蹲","size":"1457380","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%9D%A0%E5%A2%99%E9%9D%99%E8%B9%B2.mov"},{"calorie":"1.9","name":"宽距俯卧撑","size":"2028067","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%AE%BD%E8%B7%9D%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"0.2","name":"手掌牵扯拉伸_右侧","size":"1323408","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%8B%E6%8E%8C%E7%89%B5%E6%89%AF%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.2","name":"手掌牵扯拉伸_左侧","size":"1314263","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E6%89%8B%E6%8E%8C%E7%89%B5%E6%89%AF%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"0.6","name":"侧卧举腿卷腹_右侧","size":"2032537","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E4%B8%BE%E8%85%BF%E5%8D%B7%E8%85%B9_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.6","name":"侧卧举腿卷腹_左侧","size":"2016892","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BE%A7%E5%8D%A7%E4%B8%BE%E8%85%BF%E5%8D%B7%E8%85%B9_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.3","name":"动态侧平板支撑_右侧","size":"1995379","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8A%A8%E6%80%81%E4%BE%A7%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.3","name":"动态侧平板支撑_左侧","size":"2001981","time":"5","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8A%A8%E6%80%81%E4%BE%A7%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.9","name":"单腿靠墙静蹲_右侧","size":"1654987","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8D%95%E8%85%BF%E9%9D%A0%E5%A2%99%E9%9D%99%E8%B9%B2_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"1.9","name":"单腿靠墙静蹲_左侧","size":"1644505","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%8D%95%E8%85%BF%E9%9D%A0%E5%A2%99%E9%9D%99%E8%B9%B2_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"0.3","name":"站姿屈体拉伸_右侧","size":"1213163","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E5%B1%88%E4%BD%93%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"站姿屈体拉伸_左侧","size":"1195052","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E5%B1%88%E4%BD%93%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"0.7","name":"仰卧抬臀","size":"1611816","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E6%8A%AC%E8%87%80.mov"},{"calorie":"1.1","name":"简易钻石俯卧撑","size":"1636844","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AE%80%E6%98%93%E9%92%BB%E7%9F%B3%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"0.3","name":"仰卧抱腿牵拉_右侧","size":"1454610","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E6%8A%B1%E8%85%BF%E7%89%B5%E6%8B%89_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"仰卧抱腿牵拉_左侧","size":"1443199","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E6%8A%B1%E8%85%BF%E7%89%B5%E6%8B%89_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1","name":"下斜仰卧推举","size":"1559689","time":"4","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%B8%8B%E6%96%9C%E4%BB%B0%E5%8D%A7%E6%8E%A8%E4%B8%BE.mov"},{"calorie":"0.6","name":"简易仰卧卷腹","size":"1509966","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AE%80%E6%98%93%E4%BB%B0%E5%8D%A7%E5%8D%B7%E8%85%B9.mov"},{"calorie":"0.5","name":"静态侧平板支撑_右侧","size":"1400661","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%9D%99%E6%80%81%E4%BE%A7%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.5","name":"静态侧平板支撑_左侧","size":"1405076","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%9D%99%E6%80%81%E4%BE%A7%E5%B9%B3%E6%9D%BF%E6%94%AF%E6%92%91_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"2","name":"高阶仰卧对角提膝","size":"1504074","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%AB%98%E9%98%B6%E4%BB%B0%E5%8D%A7%E5%AF%B9%E8%A7%92%E6%8F%90%E8%86%9D.mov"},{"calorie":"0.2","name":"跪姿拉伸_右侧","size":"1078635","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B7%AA%E5%A7%BF%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.2","name":"跪姿拉伸_左侧","size":"1082997","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E8%B7%AA%E5%A7%BF%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.2","name":"高阶仰卧触膝卷腹","size":"1387382","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%AB%98%E9%98%B6%E4%BB%B0%E5%8D%A7%E8%A7%A6%E8%86%9D%E5%8D%B7%E8%85%B9.mov"},{"calorie":"0.3","name":"站姿腿前侧拉伸_右侧","size":"862565","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E8%85%BF%E5%89%8D%E4%BE%A7%E6%8B%89%E4%BC%B8_%E5%8F%B3%E4%BE%A7.mov"},{"calorie":"0.3","name":"站姿腿前侧拉伸_左侧","size":"868609","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%AB%99%E5%A7%BF%E8%85%BF%E5%89%8D%E4%BE%A7%E6%8B%89%E4%BC%B8_%E5%B7%A6%E4%BE%A7.mov"},{"calorie":"1.5","name":"仰卧交替脚跟接触","size":"1328750","time":"3","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E4%BB%B0%E5%8D%A7%E4%BA%A4%E6%9B%BF%E8%84%9A%E8%B7%9F%E6%8E%A5%E8%A7%A6.mov"},{"calorie":"2.5","name":"击掌俯卧撑","size":"1028895","time":"2","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%87%BB%E6%8E%8C%E4%BF%AF%E5%8D%A7%E6%92%91.mov"},{"calorie":"1","name":"开合跳","size":"775415","time":"2","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%BC%80%E5%90%88%E8%B7%B3.mov"},{"calorie":"1.5","name":"登山","size":"685652","time":"1","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E7%99%BB%E5%B1%B1.mov"},{"calorie":"1.3","name":"高抬腿","size":"548593","time":"1","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E9%AB%98%E6%8A%AC%E8%85%BF.mov"},{"calorie":"1","name":"后踢腿","size":"546404","time":"1","url":"http://zkimages.oss-cn-hangzhou.aliyuncs.com/public/%E5%90%8E%E8%B8%A2%E8%85%BF.mov"}]
+        ;
+
+function chooseFromVideos(n){
+    var video = courseVidoes[n];
+    //alert('upload finish');
+    var src = video.url ;
+    var type = $('#uptype').combobox('getValue');
+    var tpl = '';
+    //视频
+    if(type == 1){
+        tpl = '<video width="320" height="240" controls="controls"><source src="'+src+'" type="video/mp4"></video>';
+        //图片
+    }else if(type == 2){
+        tpl = '<img src="'+src+'" style="width: 320px;height: 240px;" />';
+    }
+
+    $('#upname').textbox('setValue',video.name);
+    //$('#upcalorie').numberbox('setValue',video.calorie);
+    $('#uptime').textbox('setValue', video.time);
+
+    $('#uppriew').html(tpl);
+    $('#upfile').val(src);
+    $('#upperCalorie').val(video.calorie);
+    $('#upfilesize').val(video.size);
+}
+
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+		
+		//choose coach
+		$('#coachBtn').click(function(){
+			$('#productDg').datagrid();
+			openDlg('productlstDlg', '选择教练');
+		});
+	});
+	
+	function openDlg(id,title){
+		var docHeight = $(document).height();
+		$('#'+id).dialog('open').dialog('setTitle',title);
+	    $(".window-mask").css({ height: docHeight});//patch dialog bug
+	}
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+	function note(){
+		var row = $('#dg').datagrid('getSelected');
+		
+		if(!row){
+       	 	$.messager.alert('错误','请先选择!');
+       	 	return;
+		}
+		location.href = 'courseNote.html?courseId='+row.id;
+	}
+	
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		
+		if(!row){
+       	 	$.messager.alert('错误','请先选择!');
+       	 	return;
+		}
+		if(row.totalUser > 0){
+       	 	$.messager.alert('错误','正在进行的课程无法删除!');
+       	 	return;
+        }
+		if(confirm("确定删除该产品?")){
+			$.getJSON('CourseAction!delete.zk',{id:row.id},function(data){
+				if(data.STATUS){
+					$('#dg').datagrid('reload');
+					showTip("删除成功!");
+				}else {
+					showTip("删除失败!");
+				}
+			});
+		}
+	}
+	function clearForm(){
+		$("#title").textbox('setValue','');
+		$("#description").textbox('setValue','');
+		//$("#videoUrl").textbox('setValue','');
+		$("#cover").val('');
+		$("#id").val('');
+        $("#imghead").attr("src", 'images/add.png');
+	}
+	//新增
+	function newProduct(){
+	   //clearForm();
+        couseUI();
+/* 	   $('#type').combobox({
+		   disabled:false ,
+		   onChange: function (n,o) {
+				//真人
+				if(n == 2){
+					//$('#coachURLDiv').show();
+					//$('#cycleDiv').show();
+				}else if(n ==1){
+					//$('#videoURLDiv').show();
+					//$('#coachURLDiv').hide();
+					//$('#cycleDiv').hide();
+				}
+			}
+		}); */
+        $('#musicPriew').empty();//清空容器
+        //$('#editDetailWrap').empty();
+	    $('#type').combobox('setValue',1).combobox('enable');
+	    $('#gymId').combobox({
+	    	url : 'GymAction!getOfficalGym.zk'
+	    });
+		selectCoachIds = [];
+		$("#id").val('');
+	  	$('#coachBtn').linkbutton('enable');
+	    $("#name").textbox('setValue','');
+	    $("#targetUser").textbox('setValue','');
+		$("#price").numberbox('setValue','');
+		$("#cycle").numberbox('setValue','');
+		$('#products').html('');
+		$("#cover").val('');
+		//$("#title").textbox('setValue','');
+		$("#description").textbox('setValue','');
+		//$("#videoUrl").textbox('setValue','');
+        $("#imghead").attr("src", 'images/add.png');
+/*    	$('#coursePrev').linkbutton('enable');
+    	$('#courseNext').linkbutton('disable');
+    	$('#courseSave').linkbutton('disable');
+    	$('#courseStep2').hide();
+    	$('#courseStep1').show();*/
+       	//$('#dlg').dialog('open').dialog('setTitle','编辑');
+        steps = [];
+        newSection = [];
+        $('#sectionWrap').empty();
+        steps.push([0,0]);
+        newSection.push(0);
+       	$.tmpl($("#courseDetailTmpl").html(), steps ).appendTo("#sectionWrap");
+		$.parser.parse('#sectionWrap');
+       	openDialog('dlg', '编辑');
+	}
+	//更新产品信息
+	function editProduct(){
+		upsteps = [];
+        upmusics = [];
+
+        couseUI();
+        $('#coachBtn').linkbutton('disable');
+        var row = $('#dg').datagrid('getSelected');
+         if (!row){
+        	 $.messager.alert('错误','请先选择要编辑的健身课程!','error');
+        	 return;
+         }
+
+        //TODO set value
+        $('#gymId').combobox({
+            url : 'GymAction!getOfficalGym.zk' ,
+            onLoadSuccess : function(){
+                $("#gymId").combobox('setValue',row.gymId);
+            }
+        });
+	   	$('#type').combobox({disabled:true});
+		$("#type").combobox('setValue',row.type);
+	    $("#name").textbox('setValue',row.name);
+	    $("#targetUser").textbox('setValue',row.targetUser);
+		$("#price").numberbox('setValue',row.price);
+		$("#cycle").numberbox('setValue',row.cycle);
+		$("#calorie").numberbox('setValue',row.calorie);
+		$("#tools").combobox('setValue',row.tools);
+		$("#effect").combobox('setValue',row.effect);
+		$("#effectPlace").combobox('setValue',row.effectPlace);
+
+
+		var lis = [];
+		selectCoachIds = [];
+		$.post('CourseAction!getCourseCoachByCourseId.zk',{courseId:row.id},function(data){
+			var ccs = data.courseCoachs;
+	    	for(var i = 0 ;i<ccs.length;i++){
+	    		var row = ccs[i];
+	    		var ptName = row.coachName ;
+	    		var ptId = row.coachId;
+	    		var li = '<li>' + ptName + '</li>';
+	    		lis.push(li);
+	    		//console.log(li);
+	    		selectCoachIds.push(ptId);
+	    	}
+		},'json').complete(function(){
+			console.log(selectCoachIds);
+	    	$('#products').html(lis);
+		});
+		
+		//获取课程安排
+		$.post('CourseAction!getCourseDetails.zk',{courseId:row.id},function(data){
+			//var ccs = data.courseCoachs;
+			var details = data.details ;
+			for(var i = 0; i<details.length;i++){
+				var steps = details[i].steps;
+				for(var j = 0 ;j<steps.length;j++){
+					var step = steps[j];
+					step.stepId = 'v' + step.stepId ;
+					step.name = step.stepName ;
+					upsteps.push(step);
+				}
+			}
+			console.log('details:'+data.details);
+			//var details = $.parseJSON(data.details);
+			/* for(var i = 0 ;i<details.length;i++ ){
+				var detail = details[i];
+				var sectionId = detail.sectionId;
+			} */
+			//courseStep2
+			$('#sectionWrap').empty();
+			$.tmpl($("#courseStep2Tmpl").html(), details ).appendTo("#sectionWrap");
+            $.parser.parse('#sectionWrap');
+
+            var musics =  data.musics ;
+            upmusics = musics ;
+            $('#musicPriew').empty();//清空容器
+            $.tmpl($("#musicTmpl").html(), musics ).appendTo("#musicPriew");
+		},'json').complete(function(){
+			//console.log(selectCoachIds);
+	    	//$('#products').html(lis);
+		});
+	     	 
+     	$("#id").val(row.id);
+ 		$("#cover").val(row.cover);
+        //$('#dlg').dialog('open').dialog('setTitle','编辑');
+        openDialog('dlg', '编辑');
+      	$("#title").textbox('setValue',row.title);
+ 		$("#description").textbox('setValue',row.description);
+ 		//$("#videoUrl").textbox('setValue',row.videoUrl);
+ 		var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.cover;
+         $("#imghead").attr("src", imgURL);
+
+	}
+	//check form
+	function checkForm(){
+		var name = $.trim($("#title").val());
+		if(name==''){
+			$.messager.alert('警告','标题不能为空!');
+			$("#title").focus();
+			return false;
+		}
+		var cover = $("#cover").val();
+		if(!cover){
+			$.messager.alert('警告','请上传封面!');
+			return false;
+		}
+		
+		return true;
+	}
+/*	function saveProduct(){
+		//if(checkForm()){
+			var name = $("#name").textbox('getValue');
+			var type = $("#type").combobox('getValue');
+			var description = $("#description").textbox('getValue');
+			var price = $("#price").numberbox('getValue');
+			var cycle = $("#cycle").numberbox('getValue');
+			//var videoUrl = $("#videoUrl").textbox('getValue');
+			var cover = $("#cover").val();
+			var coachIds = selectCoachIds.join(',');
+			var id = $("#id").val();
+			
+			var postData = {
+								id:id,
+								type:type,
+								name:name,
+								description:description,
+								cover:cover ,
+								price : price ,
+								cycle : cycle ,
+								coachIds : coachIds
+							};
+			console.log(postData);
+			//return ;
+			$.post('CourseAction!createOrUpdate.zk',postData,function(data){
+				 if (data.STATUS){
+	                    $('#dlg').dialog('close');
+	                    $('#dg').datagrid('reload');
+	             } else {
+	                    $.messager.alert('信息提示', '系统繁忙!', 'error');
+	             }
+			},'json');
+		//}
+		
+    }*/
+
+	function search(value){
+		$("#dg").datagrid('load',{title:value});
+	}
+	
+	function chooseImage(id) {
+         document.getElementById(id).click();
+    }
+	
+    //上传文章图片
+    function uploadImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 500 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                //上传图片
+                 $("#title_img_form").ajaxSubmit({
+                     type : 'post',
+                     url : '../file/FileCenter!uploadImage2.zk',
+                     success : function(data) {
+                         data = $.parseJSON(data);
+                         if (data.name) {
+                            // alert(data.name);
+                         	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                            $("#imghead").attr("src", imgURL);
+                            $("#cover").val(data.name);
+                         } else {
+                             alert("上传图片出错！");
+                         }
+                         $("#title_img_form").resetForm();
+                     },
+                     error : function(XmlHttpRequest, textStatus, errorThrown) {
+                         alert("error");
+                     }
+                 });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    
+    //格式化封面
+/*    function formatCover(cover){
+        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">点击查看</a>";
+    	return result;
+    }*/
+    //格式化URL
+ /*   function formatVideoURL(url){
+        var result = "<a href=\"javascript:void(0)\" onClick=\"playVideo('"+url+"')\" >点击播放</a>";
+    	return result;
+    }*/
+    
+/*    function playVideo(url){
+    	$('#dlg-video').dialog('open').dialog('setTitle','播放视频');
+    	flowplayer("player2", 
+    			"js/flowplayer-3.2.7.swf",{
+    				clip: {
+    				 url: url,
+    			     autoPlay: true, 
+    			     autoBuffering: true 
+    		       }
+    			}
+    			
+    	);
+    }*/
+    
+    
+    function formatType(v){
+    	switch (v) {
+			case 1:return '线上';
+			case 2:return '线下';
+			default: return '';
+		}
+    }
+    
+    var selectCoachIds = [];
+    function selectProducts(){
+    	var rows = $('#productDg').datagrid('getSelections');
+    	var lis = [];
+    	for(var i = 0 ;i<rows.length;i++){
+    		var row = rows[i];
+    		var ptName = row.coachName ;
+    		var ptId = row.id;
+    		var li = '<li>' + ptName + '</li>';
+    		lis.push(li);
+    		selectCoachIds.push(ptId);
+    	}
+    	$('#products').html(lis);
+    	$('#productlstDlg').dialog('close');
+    }
+    
+    function listUser(){
+    	var row = $('#dg').datagrid('getSelected');
+    	if(!row){
+    		showError('先选择课程');
+    		return ;
+    	}
+    	var courseId = row.id ;
+    	$('#userDg').datagrid({
+    		url : 'CourseAction!listUser.zk',
+    		queryParams : {
+    			courseId : courseId
+    		}
+    	});
+    	$('#userDlg').dialog('open').dialog('setTitle','购买课程的用户');
+    }
+    
+    var sectionData = [];
+    
+    var section = 0 ;
+    var newSection = [0];
+    //增加阶段
+    function addSetion(){
+    	section ++ ;
+    	var data = [{"section":section,"step":0}];
+    	$.tmpl($("#sectionTmpl").html(), data ).appendTo("#sectionWrap");
+		$.parser.parse('#sectionWrap');
+		newSection.push(section);
+		steps.push([section,0]);
+		console.log('add section:'+newSection)
+    }
+    
+    function delSetion(section){
+    	//console.log('len:'+newSection.length);
+    	var tmp = [];
+    	for(var i = 0 ;i<upsteps.length;i++){
+    		var step = upsteps[i];
+    		if(step.sectionId != section){
+    			tmp.push(step);
+    		}
+    	}
+    	upsteps = tmp ;
+    	
+    	if(newSection.length > 1){
+	    	$('#section_'+section).remove();
+	    	var tmpSetions = [];
+	    	for(var i = 0 ;i<newSection.length;i++){
+	    		if(section != newSection[i]){
+	    			tmpSetions.push(newSection[i]);
+	    		}
+	    	}
+	    	newSection = tmpSetions ;
+    	}
+
+    	//console.log('del section:'+newSection)
+    	//console.log('移除Section:'+newSection);
+    }
+    
+    var steps = [[0,0]];
+    var step = 0 ;
+    
+    function updlgVideoUI(){
+        $('#updlg_filename').show();
+        $('#updlg_calorie').show();
+        $('#updlg_repeatTimes').show();
+    }
+
+    function updlgImageUI(){
+        $('#updlg_filename').hide();
+        $('#updlg_calorie').hide();
+        $('#updlg_repeatTimes').hide();
+    }
+
+    //增加阶段
+    function addStep(section){
+/*        $('#uptype').combobox({
+            onChange: function (n,o) {
+                //alert('n:'+n);
+                if(n == 1){
+                    updlgVideoUI();
+                }else {
+                    updlgImageUI();
+                }
+            }
+        });*/
+    	$('#upsection').val(section);
+    	$('#uptype').combobox('setValue',1); updlgVideoUI();
+    	$('#upname').textbox('setValue','');
+    	$('#upcalorie').numberbox('setValue','');
+    	$('#uptime').textbox('setValue','');
+    	$('#upfile').val('');
+    	$('#upfilesize').val('');
+    	$('#poststatus').html('');
+    	$('#uppriew').html('<img id="" src="images/add_rec.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto">');
+    	
+    	$('#uploaddlg').dialog('open').dialog('setTitle','上传素材');
+    	step ++ ;
+    	var data = [{"section":section,"step":step}];
+    	//var stepWrap = '#stepWrap_' + section ;
+    	//$.tmpl($("#stepTmpl").html(), data ).appendTo(stepWrap);
+		//$.parser.parse(stepWrap);
+		steps.push([section,step]);
+		console.log('添加Step:'+steps);
+    }
+    
+    //保存课程信息
+    function saveCourse(){
+    	//console.log(JSON.stringify(upmusics)); return;
+		var name = $("#name").textbox('getValue');
+		var targetUser = $("#targetUser").textbox('getValue');
+		var type = $("#type").combobox('getValue');
+		var description = $("#description").textbox('getValue');
+		var price = $("#price").numberbox('getValue');
+		var cycle = $("#cycle").numberbox('getValue');
+		var cover = $("#cover").val();
+		var coachIds = selectCoachIds.join(',');
+		var id = $("#id").val();
+		var tools = $("#tools").combobox('getValue');
+		var effect = $("#effect").combobox('getValue');
+		var effectPlace = $("#effectPlace").combobox('getValue');
+		var calorie = $("#calorie").numberbox('getValue');
+		var gymId = $("#gymId").combobox('getValue');
+		var gymName = $("#gymId").combobox('getText');
+		
+		var postData = {
+							id : id,
+							type : type,
+							name : name,
+                            targetUser : targetUser ,
+							description : description,
+							cover : cover ,
+							price : price ,
+							cycle : cycle ,
+							coachIds : coachIds ,
+							tools : tools,
+							effect : effect ,
+							effectPlace : effectPlace,
+							calorie : calorie ,
+							data : JSON.stringify(upsteps),
+							gymId : gymId ,
+							gymName : gymName ,
+							musicData : JSON.stringify(upmusics)
+						};
+		console.log(postData);
+    	//return ;
+    	//console.log(JSON.stringify(sps));return;
+     	$.post('CourseAction!createOrUpdate.zk',postData,function(data){
+    		if(data.STATUS){
+    			//alert('ok');
+    			$('#dlg').dialog('close');
+    			$('#dg').datagrid('reload');
+    		}else{
+    			alert(data.INFO);
+    		}
+    	},'json').complete(function(){
+    		//alert('保存完成,初始化界面');
+    		
+    	});
+    }
+
+    /**
+     *显示课程编辑
+     */
+    function couseUI(){
+    	$('#courseNext').linkbutton('disable');
+    	$('#courseSave').linkbutton('disable');
+    	$('#coursePrev').linkbutton('enable');
+    	$('#courseStep2').hide();
+    	$('#courseStep1').show();
+    }
+
+    /**
+     * 显示课程编排
+     */
+    function couseDetailUI(){
+    	$('#coursePrev').linkbutton('disable');
+    	$('#courseNext').linkbutton('enable');
+    	$('#courseSave').linkbutton('enable');
+    	$('#courseStep1').hide();
+    	$('#courseStep2').show();
+    }
+    
+    var upfilesize = 1 ;
+    var upsteps = [];
+    //保存上传素材信息
+    function saveUpinfo(){
+    	var type = $('#uptype').combobox('getValue');
+    	var name =  $('#upname').textbox('getValue');
+        var time = $('#uptime').textbox('getValue');
+        var file = $('#upfile').val();
+        var filesize = $('#upfilesize').val();
+        var sectionId = $('#upsection').val();
+
+
+        //console.log(type+','+name+','+time+','+file);
+        //var calorie =  $('#upcalorie').numberbox('getValue');
+        var perCalorie =  $('#upperCalorie').val();
+        var repeatTimes =  $('#uprepeatTimes').numberbox('getValue');
+
+        var calorie = perCalorie * repeatTimes ;
+
+    	var tpl = '';
+    	var stepId = 'v' + $.now();
+    	//视频
+    	if(type == 1){
+    		tpl = '<div id="'+ stepId +'" style="float:left;text-align: center;margin-left: 20px;width:320px;height:260px;"><video width=320 height=240 controls="controls"><source src="'+file+'" type="video/mp4"></video><div>'+name+'  '+time+'秒  <a onclick="delStep(\''+ stepId +'\')">删除</a></div></div>';
+    	//图片
+    	}else if(type == 2){
+    		tpl = '<div id="'+ stepId +'" style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"><img style="width:320px; height:240px;" src="'+file+'"><div>'+time+'秒 <a onclick="delStep(\''+ stepId +'\')">删除</a></div></div>';
+    		name = '间歇';
+    		calorie = 0 ;
+    	}
+    	
+    	var upstep = {
+    			"stepId" : stepId ,
+    			"sectionId" : sectionId ,
+    			"name" : name ,
+    			"time" : time ,
+    			"file" : file ,
+    			"fileSize" : filesize ,
+    			"calorie" : calorie ,
+    			"type" : type ,
+                "repeatTimes" : repeatTimes
+    	};
+    	upsteps.push(upstep);
+    	//console.log('upstep:'+upstep);
+    	
+    	$('#addVideoBtn' + sectionId).before(tpl);
+    	upfilesize ++ ;
+    	
+    	$('#uploaddlg').dialog('close');
+    }
+    
+    function delStep(id){
+    	//alert(id);
+    	//console.log('remove step id:'+id);
+    	var tmp = [];
+    	for(var i = 0 ;i<upsteps.length;i++){
+    		var step = upsteps[i];
+    		if(id != step.stepId){
+    			tmp.push(step);
+    		}
+    	}
+    	upsteps = tmp ;
+    	$('#'+id).remove();
+    }
+    
+    function searchUser(){
+    	//alert('search');
+    	var searchKey = $('#searchKey').textbox('getValue');
+    	var searchGym = $('#searchGym').combobox('getValue');
+    	$("#dg").datagrid('load',{keyword:searchKey,searchGym:searchGym});
+    }
+</script>
+</body>
+</html>

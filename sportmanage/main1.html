@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>燃脂部落后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<style type="text/css">
+#gymDlg .datagrid-wrap{ border:0;}
+</style>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				 <!-- <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">用户管理</li>
+			</ul>
+			
+
+	<div style="padding-left: 4px;">
+			用户总数：<span class="main_color" id="total">0</span> 人 
+			男性用户： <span class="main_color" id="male">0</span> 人 
+			女性用户： <span	class="main_color" id="female">0</span> 人 
+			平均年龄：<span class="main_color" id="age">0</span>岁 
+			日活跃用户：<span class="main_color" id="dayUsers">0</span>人 
+			月活跃用户：<span class="main_color" id="monthUsers">0</span>人
+			日增长用户：<span class="main_color" id="dayNewUsers">0</span>人 
+			月增长用户：<span class="main_color" id="monthNewUsers">0</span>人
+	</div>
+					<!-- <div style="width: 100%; height: 10px;"></div> -->
+		<table id="dg" style="max-height:533px; "
+		data-options="rownumbers:true,sortName:'gmtModify',sortOrder:'desc',singleSelect:true,pagination:true,pageSize:'30',url:'userAction!getUsers.zk',method:'post',toolbar:'#toolbar'">
+		<thead>
+			<tr>
+				<th data-options="field:'userName',width:$(this).width() * 0.07">用户名</th>
+				<th data-options="field:'phone',width:$(this).width() * 0.06">手机号</th>
+				<th data-options="field:'sex',align:'center',formatter: formatSex,width:$(this).width() * 0.03">性别</th>
+				<th data-options="field:'age',align:'center',sortable:true,width:$(this).width() * 0.03">年龄</th>
+				<th data-options="field:'height',align:'center',sortable:true,width:$(this).width() * 0.04">身高(cm)</th>
+				<th data-options="field:'initWeight',align:'center',width:$(this).width() * 0.05">原体重(kg)</th>
+				<th data-options="field:'weight',align:'center',sortable:true,width:$(this).width() * 0.05">现体重(kg)</th>
+				<!-- <th data-options="field:'bmi',walign:'center',sortable:true">BMI</th> -->
+				<th data-options="field:'level',align:'center',sortable:true,width:$(this).width() * 0.03">等级</th>
+				<th data-options="field:'isLock',align:'center',formatter: formatLock,sortable:true,width:$(this).width() * 0.04">状态</th>
+				<th data-options="field:'totalSteps',align:'center',sortable:true,width:$(this).width() * 0.04">踏步数</th>
+				<th data-options="field:'noteCount',align:'center',sortable:true,width:$(this).width() * 0.05">帖子总数</th>
+				<!-- <th
+					data-options="field:'totalCalorie',align:'center',sortable:true">卡路里</th> -->
+				<th
+					data-options="field:'totalUsedTime',align:'center',sortable:true,width:$(this).width() * 0.07">使用时长(分钟)</th>
+				<th data-options="field:'address',align:'center',width:$(this).width() * 0.07">地址</th>
+				<th
+					data-options="field:'gmtCreate',align:'center',formatter: formatDate,sortable:true,width:$(this).width() * 0.09">注册时间</th>
+				<th data-options="field:'gmtModify',align:'center',formatter: formatDate,sortable:true,width:$(this).width() * 0.09">修改时间</th>
+				<th data-options="field:'appversion',align:'center',width:$(this).width() * 0.07">App版本</th>
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar">
+		<table>
+			<tr>
+				<td><input id="txt_word" class="easyui-searchbox"
+					style="width: 250px"
+					data-options="prompt:'用户名、手机号',searcher:searchUser" /></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon-piechart"
+					plain="true" onclick="appSummary()">App份额统计</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon-barchart"
+					plain="true" onclick="show()">用户数据分析</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="javascript:void(0)"
+					class="easyui-linkbutton" iconCls="icon_broadcast"
+					plain="true" onclick="initBroadcast()">系统通知</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="userMap1.html" iconCls="icon-group"
+					class="easyui-linkbutton" 
+					plain="true">用户分布</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="javascript:void(0)" iconCls="icon-group" onclick="toGymDlg()"
+					class="easyui-linkbutton" 
+					plain="true">健身房</a></td>
+				<td><a href="javascript:void(0)" iconCls="icon_import" onclick="addScore()"
+					class="easyui-linkbutton" 
+					plain="true">添加积分</a></td>
+				<td><div class="datagrid-btn-separator"></div></td>
+				<td><a href="javascript:void(0)" iconCls="icon-group" onclick="toUnlock()"
+					class="easyui-linkbutton" 
+					plain="true">解除锁定</a></td>
+			</tr>
+		</table>
+	</div>
+					
+				
+		<div id="appdlg" class="easyui-dialog"
+			style="width: 650px; height: 550px; padding: 10px 20px" closed="true"
+			data-options="iconCls:'icon-stat'">
+			<div id="appChart"
+				style="height: 450px; border: 1px solid #ccc; padding: 10px;"></div>
+		</div>
+		
+		<div id="usrdlg" class="easyui-dialog"
+			style="width: 700px; height: 500px; padding: 10px 20px" closed="true"
+			data-options="iconCls:'icon-stat'">
+			<div id="main"
+				style="height: 350px; border: 1px solid #ccc; padding: 10px;"></div>
+			<div style="width: 600px; height: 35px; margin: 25px auto 0;">
+				<a href="javascript:void(0)" class="button" style="float: left;"
+					onclick="prevWeek()">上一周</a> <a href="javascript:void(0)"
+					class="button" style="float: right;" onclick="nextWeek()">下一周</a>
+			</div>
+		</div>
+	
+		<div id="bcmsgDlg" class="easyui-dialog"
+			data-options="iconCls:'icon-save'"
+			style="width: 400px; height: 280px; padding: 10px 10px" closed="true" modal="true"
+			buttons="#bcdlg-buttons">
+			<div class="ftitle">通知内容</div>
+			<form id="fm" method="post">
+				<textarea name="textfield" id="bcimMsg" rows="6" cols="20"
+						style="width: 350px; height: 100px; margin-top: 5px; color: #666; font-size: 12px;"></textarea>
+						<label>链接地址</label><input type="text" id="url" name="url">	
+			</form>
+			<div id="bcdlg-buttons">
+				<a href="javascript:void(0)" class="easyui-linkbutton c6"
+					iconCls="icon-ok" onclick="broadcast()" style="width: 90px">保存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-cancel" onclick="javascript:$('#bcmsgDlg').dialog('close')"
+					style="width: 90px">取消</a>
+			</div>
+		</div>
+		
+		<!-- 健身房相关信息 -->
+		<div id="gymDlg" class="easyui-dialog"
+			style="width:70%; height: 550px; padding: 0" closed="true" modal="true">
+								<table id="gymDg"
+									style="height: 500px;"
+									data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'',method:'post'">
+									<thead>
+										<tr>
+											<th data-options="field:'gymName',align:'center'" width="14%">健身房</th>
+											<th data-options="field:'cardName',align:'center'" width="14%">会员卡</th>
+											<th data-options="field:'cardType',align:'center',formatter:formatCard" width="14%">卡类型</th>
+											<th data-options="field:'cardPrice',align:'center'" width="14%">卡价格</th>
+											<th data-options="field:'gmtEnd',align:'center',formatter:cardTime" width="14%">有效期</th>
+											<th data-options="field:'isLike',align:'center',formatter: formatLike" width="14%">关注</th>
+											<th data-options="field:'gmtCreate',align:'center',formatter: formatDate" width="14%">时间</th>
+											
+										</tr>
+									</thead>
+								</table>
+		</div>
+		<div id="gymDlgl" class="easyui-dialog"
+			style="width:70%; height: 550px; padding: 0" closed="true" modal="true">
+			<div style="margin-left:20px;">
+				用户名：<span class="yonghu"></span><br>
+				添加积分：<span class="jifeng"></span>
+				<input type="text" id="scores" placeholder="请输入添加的积分数量"/>
+				<button onclick="addTrue()">确定添加</button>
+			</div>
+		</div>
+
+		</div>
+	</div>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/header.js"></script>
+	<script src="js/accordion.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/biz/zk_main.js"></script>
+<script src="js/echarts-plain.js"></script>
+</body>
+</html>

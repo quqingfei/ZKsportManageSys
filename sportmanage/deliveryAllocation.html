@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<style>
+#fm { margin: 0; padding: 10px} .ftitle { font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+</head>
+<body>
+	
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+					<div class="main_opt">后台管理 &gt; 配送管理</div>
+					<div style="height: 15px;"></div>
+					<div style="width: 100%; height: 80%;  min-width: 750px;">
+
+						<div class="boyd">
+							<table id="dg"
+								style="height: 100%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'DeliveryAllocationAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'productName',width:$(this).width() * 0.2">产品名称</th>
+										<th data-options="field:'regionName',width:$(this).width() * 0.15">库存点</th>
+										<th data-options="field:'destinationId',formatter: formatDestination,width:$(this).width() * 0.15">目的地</th>
+										<th data-options="field:'deliveryFee',width:$(this).width() * 0.04">运费</th>
+										<th data-options="field:'state',formatter: formatState,width:$(this).width() * 0.03">状态</th>
+										<th data-options="field:'priority',formatter: formatPriority,width:$(this).width() * 0.03">优先级</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:$(this).width() * 0.1">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter: formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td>产品:
+										<input class="easyui-combobox" id="rqtProduct"
+            			data-options="url:'productAction!getProducts.zk',valueField:'id',textField:'productName',editable:false" />
+										</td>
+										<td><!-- <div class="datagrid-btn-separator"></div> --></td>
+										<td>仓库:
+											<select id="rqtStock" class="easyui-combobox" data-options="url:'productAction!getRootRegions1.zk',method:'post',valueField:'id',textField:'text',editable:false"
+												style="width: 100px;">
+										</select></td>
+										<td><!-- <div class="datagrid-btn-separator"></div> --></td>
+										<td>目的地:
+										<select id="rqtDestinationId" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="all" selected>全部</option>
+							<option value="2">北京</option>
+							<option value="3">天津</option>
+							<option value="4">河北</option>
+							<option value="5">山西</option>
+							<option value="6">内蒙古</option>
+							<option value="7">辽宁</option>
+							<option value="8">吉林</option>
+							<option value="9">黑龙江</option>
+							<option value="10">上海</option>
+							<option value="11">江苏</option>
+							<option value="12">浙江</option>
+							<option value="13">安徽</option>
+							<option value="14">福建</option>
+							<option value="15">江西</option>
+							<option value="16">山东</option>
+							<option value="17">河南</option>
+							<option value="18">湖北</option>
+							<option value="19">湖南</option>
+							<option value="20">广东</option>
+							<option value="21">广西</option>
+							<option value="22">海南</option>
+							<option value="23">重庆</option>
+							<option value="24">四川</option>
+							<option value="25">贵州</option>
+							<option value="26">云南</option>
+							<option value="27">西藏</option>
+							<option value="28">陕西</option>
+							<option value="29">甘肃</option>
+							<option value="30">青海</option>
+							<option value="31">宁夏</option>
+							<option value="32">新疆</option>
+				</select></td>
+										<td><!-- <div class="datagrid-btn-separator"></div> --></td>
+										<td><a href="javascript:void(0)" onclick="reloadData()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px">搜索</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add"
+											plain="true" onclick="toAddRole()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit"
+											plain="true" onclick="toUpdateRole()">修改</a></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- New Account -->
+	<div id="accountdlg" class="easyui-dialog"
+		style="width: 500px; height: 450px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#add-account-dlg-buttons">
+		<div class="ftitle">发货分配信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>产品:</label> 
+            	 <a href="javascript:void(0)" onclick="toProductListDlg()" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px">选择产品</a>
+            	 <ul id="products" style="margin-left: 80px;"></ul>
+			</div>		
+			<div class="fitem">
+				<label>库存点:</label>
+				<select id="regionbox" style="width:150px;" class="easyui-combobox" data-options="url:'',method:'post',valueField:'id',textField:'text',editable:false">
+			</select>
+				
+			</div>		
+			<div class="fitem">
+				<label>目的地:</label>
+				<select id="destinationId" style="width:150px;" class="easyui-combobox" data-options="editable:false,multiple:true">
+							<option value="2" selected>北京</option>
+							<option value="3">天津</option>
+							<option value="4">河北</option>
+							<option value="5">山西</option>
+							<option value="6">内蒙古</option>
+							<option value="7">辽宁</option>
+							<option value="8">吉林</option>
+							<option value="9">黑龙江</option>
+							<option value="10">上海</option>
+							<option value="11">江苏</option>
+							<option value="12">浙江</option>
+							<option value="13">安徽</option>
+							<option value="14">福建</option>
+							<option value="15">江西</option>
+							<option value="16">山东</option>
+							<option value="17">河南</option>
+							<option value="18">湖北</option>
+							<option value="19">湖南</option>
+							<option value="20">广东</option>
+							<option value="21">广西</option>
+							<option value="22">海南</option>
+							<option value="23">重庆</option>
+							<option value="24">四川</option>
+							<option value="25">贵州</option>
+							<option value="26">云南</option>
+							<option value="27">西藏</option>
+							<option value="28">陕西</option>
+							<option value="29">甘肃</option>
+							<option value="30">青海</option>
+							<option value="31">宁夏</option>
+							<option value="32">新疆</option>
+				</select>
+			</div>
+
+			<div class="fitem">
+				<label>区域:</label>
+					<input style="width:150px;"  name="subDestination" id="subDestination"
+					class="easyui-textbox"  />
+				</select>
+			</div>				
+			
+			<div class="fitem">
+				<label>运费:</label>
+					<input style="width:150px;"  name="deliveryFee" id="deliveryFee"
+					class="easyui-numberbox" precision="2" />
+				</select>
+			</div>	
+								
+			<!-- <div class="fitem">
+				<label>状态:</label>
+					<select id="state" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="1" selected>启用</option>
+							<option value="0">禁用</option>
+				</select>
+			</div>		 -->	
+
+		</form>
+		<div id="add-account-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveAllocation()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#accountdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>	
+	<!-- Update Account -->
+	<div id="upaccountdlg" class="easyui-dialog"
+		style="width: 500px; height: 450px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#up-dlg-buttons">
+		<div class="ftitle">发货分配信息</div>
+			<div class="fitem">
+				<label>产品:</label> 
+            	<input style="width:150px;" id="up_products"
+					class="easyui-textbox" disabled="disabled"/>
+				<input type="hidden" id="up_rowId"/>
+			</div>		
+			<div class="fitem">
+				<label>库存点:</label>
+				<input style="width:150px;" id="up_regionbox"
+					class="easyui-textbox" disabled="disabled"/>
+			</div>		
+			<div class="fitem">
+				<label>目的地:</label>
+				<input style="width:150px;" id="up_destination"
+					class="easyui-textbox" disabled="disabled"/>
+			</div>
+			
+			<div class="fitem">
+				<label>运费:</label>
+					<input style="width:150px;" id="up_deliveryFee"
+					class="easyui-numberbox" precision="2" />
+			</div>	
+								
+			<div class="fitem">
+				<label>状态:</label>
+					<select id="up_state" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="1" selected>启用</option>
+							<option value="0">禁用</option>
+				</select>
+			</div>	
+			
+			<div class="fitem">
+				<label>优先级:</label>
+					<select id="up_priority" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="1" selected>高</option>
+							<option value="0">低</option>
+				</select>
+			</div>
+
+		<div id="up-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="updateAllocation()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#upaccountdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>	
+	
+		<!-- product list -->
+	<div id="productlstDlg" class="easyui-dialog"
+		style="width: 650px; height: 550px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#select-product-buttons">
+							<table id="productDg"
+								style="margin: 0; padding: 0;"
+								data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'productAction!list.zk',method:'post'">
+								<thead>
+									<tr>
+										<th data-options="field:'id',checkbox:true"></th>
+										<th
+											data-options="field:'productName',align:'center',width:250">产品名称</th>
+										<th
+											data-options="field:'productDesc',align:'center',width:250">产品规格</th>
+										
+									</tr>
+								</thead>
+							</table>
+							<div id="select-product-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="selectProducts()" style="width: 90px">选好了</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#productlstDlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/json2.min.js"></script>
+<script type="text/javascript">
+function openDlg(id,title){
+	var docHeight = $(document).height();
+	$('#'+id).dialog('open').dialog('setTitle',title);
+    $(".window-mask").css({ height: docHeight});//patch dialog bug
+}
+//显示错误信息
+function showError(msg){
+	$.messager.alert('错误',msg,'error');
+}
+//显示消息提示
+function showTip(msg) {
+	$.messager.show({title : "消息",timeout:2000,msg : msg});
+}
+//获取Easyui表单组件值
+function getFormVal(id){
+	return $("#"+id).textbox("getValue"); 
+}
+//设置Easyui表单组件值
+function setFormVal(id ,value){
+	$("#"+id).textbox("setValue",value); 
+}
+
+
+function toAddRole(){
+	$('#fm').form('clear');
+	openDlg('accountdlg','新增');
+	
+	var $destination = $('#destinationId');
+	var destinationData = $destination.combobox('getData');
+    if (destinationData.length > 0) {
+        $destination.combobox('select', destinationData[0].value);
+    }
+        
+	$('#regionbox').combobox({
+		url:'productAction!getRootRegions.zk',
+		onChange:function(n,o){
+			//var productId = $('#es-products').combobox('getValue');
+			//getOldStock(n ,productId);
+		}	
+	});
+	$('#roleOptions').combobox({url:'RoleAction!comboboxData.zk'});
+}
+
+//
+function toUpdateRole(){
+	 var row = $('#dg').datagrid('getSelected');
+     if (row){
+    	 openDlg('upaccountdlg','更新信息');
+    	$('#up_rowId').val(row.id);
+    	setFormVal('up_products',row.productName);
+    	setFormVal('up_regionbox',row.regionName);
+    	setFormVal('up_destination',formatDestination(row.destinationId, row));
+    	setFormVal('up_subregion',row.bingdingPhone);
+    	$('#up_deliveryFee').numberbox('setValue',row.deliveryFee);
+    	$('#up_state').combobox('setValue',row.state);
+    	$('#up_priority').combobox('setValue',row.priority);
+    	//$('#upid').val(row.id);
+    	//$('#uproleOptions').combobox({url:'RoleAction!comboboxData1.zk?roleId='+row.roleId});
+     }else{
+    	 showError('请先选择要编辑的信息!');
+     }
+}
+
+var productData = [];
+function saveAllocation(){
+	
+	var productDatas = JSON.stringify(productData);
+	var regionId = $('#regionbox').combobox('getValue');
+	var regionName = $('#regionbox').combobox('getText');
+	console.log(productDatas);
+	console.log(regionId);
+	console.log(regionName);
+	
+	var deliveryFee = $('#deliveryFee').numberbox('getValue');
+	var destinationId = $('#destinationId').combobox('getValues');
+	var subDestination = $('#subDestination').textbox('getValue');
+	
+	var postData = {
+			productData : productDatas ,
+			regionId : regionId ,
+			regionName : regionName ,
+			deliveryFee : deliveryFee ,
+			destinationId : destinationId.join(',') ,
+			subDestination : subDestination
+	};
+	$.post('DeliveryAllocationAction!save.zk',postData,function(data){
+        if (data.STATUS){
+            $('#accountdlg').dialog('close');
+            $('#dg').datagrid('reload');
+            showTip('保存成功!');
+            productData = [];
+        } else {
+           showError(data.INFO);
+        }
+	},'json');
+	
+}
+
+function toProductListDlg(){
+	$('#productDg').datagrid();
+	openDlg('productlstDlg', '选择产品');
+	
+}
+function selectProducts(){
+	var rows = $('#productDg').datagrid('getSelections');
+	
+	//var productIds = [];
+	var lis = [];
+	for(var i = 0 ;i<rows.length;i++){
+		var row = rows[i];
+		var ptName = row.productName + '-' + row.productDesc;
+		var ptId = row.id;
+		var li = '<li>' + ptName + '</li>';
+		lis.push(li);
+		//productIds.push(row.id);
+		
+		var pt = {
+				"id" : ptId,
+				"name" : ptName
+		};
+		productData.push(pt);
+	}
+	$('#products').html(lis);
+	$('#productlstDlg').dialog('close');
+}
+
+function formatState(v){
+	if(v){
+		return '启用';
+	}else{
+		return '禁用';
+	}
+}
+
+function getDestination(id){
+	switch (id) {
+		 case '2' : return '北京';
+		 case '3' : return '天津';
+		 case '4' : return '河北';
+		 case '5' : return '山西';
+		 case '6' : return '内蒙古';
+		 case '7' : return '辽宁';
+		 case '8' : return '吉林';
+		 case '9' : return '黑龙江';
+		 case '10' : return '上海';
+		 case '11' : return '江苏';
+		 case '12' : return '浙江';
+		 case '13' : return '安徽';
+		 case '14' : return '福建';
+		 case '15' : return '江西';
+		 case '16' : return '山东';
+		 case '17' : return '河南';
+		 case '18' : return '湖北';
+		 case '19' : return '湖南';
+		 case '20' : return '广东';
+		 case '21' : return '广西';
+		 case '22' : return '海南';
+		 case '23' : return '重庆';
+		 case '24' : return '四川';
+		 case '25' : return '贵州';
+		 case '26' : return '云南';
+		 case '27' : return '西藏';
+		 case '28' : return '陕西';
+		 case '29' : return '甘肃';
+		 case '30' : return '青海';
+		 case '31' : return '宁夏';
+		 case '32' : return '新疆';
+		 default: return '';
+	}
+}
+
+function formatDestination(v,row){
+	var destination = getDestination(row.destinationId);
+	var subDes = row.subDestination;
+	if(subDes){
+		return destination + '-' + subDes;
+	}
+	
+	return destination;
+	
+}
+function formatPriority(v){
+	switch (v) {
+		case 1 : return '高' ;
+		case 0 : return '低' ;
+		default: return '无' ;
+	}
+}
+
+function reloadData(){
+	var rqtProduct = $('#rqtProduct').combobox('getValue');
+	var rqtStock  = $('#rqtStock').combobox('getValue');
+	var rqtDestinationId  = $('#rqtDestinationId').combobox('getValue');
+	$('#dg').datagrid('load',{
+		rqtProduct : rqtProduct ,
+		rqtStock  : rqtStock ,
+		rqtDestinationId : rqtDestinationId
+	});
+	
+}
+
+function updateAllocation(){
+	var id = $('#up_rowId').val();
+	var deliveryfee = $('#up_deliveryFee').numberbox('getValue');
+	var state = $('#up_state').combobox('getValue');
+	var priority = $('#up_priority').combobox('getValue');
+	$.post('DeliveryAllocationAction!update.zk',{id : id ,deliveryfee : deliveryfee ,state : state ,priority :priority},function(data){
+        if (data.STATUS){
+            $('#upaccountdlg').dialog('close');
+            $('#dg').datagrid('reload');
+            showTip('保存成功!');
+        } else {
+           showError(data.INFO);
+        }
+	},'json');
+}
+</script>
+</body>
+</html> 

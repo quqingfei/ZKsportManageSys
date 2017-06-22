@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">产品管理</li>
+			</ul>
+			<div>
+							<table id="dg" style="height:560px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'productAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th
+											data-options="field:'productName',align:'center',width:180">产品名称</th>
+										<th
+											data-options="field:'productDesc',align:'center',width:340">产品规格</th>
+										<th
+											data-options="field:'productPrice',align:'center',width:135">单价(元)</th>
+										<th
+											data-options="field:'inventory',align:'center',width:102">库存</th>
+										<th data-options="field:'state',formatter:formatState,align:'center',width:60">状态</th>											
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:135">创建时间</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter:formatDate,width:135">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input id="txt_keyword" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+									    <td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="smDialog()">分库管理</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="deliveryAllocation1.html"
+											class="easyui-linkbutton" iconCls="icon_delivery" plain="true">配送管理</a></td>											
+										<!-- <td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="deliveryAllocation1.html"
+											class="easyui-linkbutton" iconCls="icon_delivery" plain="true">配送管理</a></td> -->											
+									</tr>
+								</table>
+							</div>
+							
+								<div id="dlg" class="easyui-dialog"
+		style="width: 450px; height: 350px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">产品信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>产品名称:</label> <input name="productName"
+					id="productName" class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>产品规格:</label>
+				<input name="productDesc" id="productDesc"
+					data-options="multiline:true"
+					style="height:50px"  class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>单价(元):</label> <input name="productPrice"
+					id="productPrice" class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>库存:</label> <input name="inventory"
+					id="inventory" class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>状态:</label> 
+				<select id="state" name="state" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="1" selected>正常</option>
+							<option value="2">预售</option>
+							<option value="0">下架</option>
+				</select>
+			</div>			
+		</form>
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+	
+	<!-- 分库管理 -->
+	<div id="smdlg" class="easyui-dialog"
+		style="width: 804px; height: 400px; padding:0" closed="true"
+		buttons="#smdlg-buttons">
+		<table id="smdg" class="easyui-datagrid" style="width:790px;height:364px"
+				data-options="singleSelect:true,collapsible:true,pagination:true,method:'post',toolbar: '#smtoolbar'">
+			<thead>
+				<tr>
+					<th data-options="field:'regionName',width:100">分库名称</th>
+					<th data-options="field:'productName',width:150,align:'right'">商品名称</th>
+					<th data-options="field:'amount',width:150,align:'right'">库存数量</th>
+					<th data-options="field:'regionUserName',width:150">库管员姓名</th>
+					<th data-options="field:'regionUserId',width:100,align:'right'">联系方式</th>
+					<!-- <th data-options="field:'remark',width:250,editor:{type:'textbox',options:{multiline:true}}">备注</th> -->
+				</tr>
+			</thead>
+		</table>
+		<div id="smtoolbar" style="height:auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="addStock()">入库</a>
+			<!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">删除</a> -->
+			<!-- <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="regionManage()">库存点管理</a> -->
+			库存点:
+			<select id="tb-stock" style="width:150px;" class="easyui-combobox" data-options="url:'',method:'post',valueField:'id',textField:'text',editable:false">
+			</select>
+			商品:
+			<input class="easyui-combobox" id="tb-products"
+            			data-options="url:'',valueField:'id',textField:'productName',editable:false" />
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="reloadStock()">搜索</a>
+		</div>
+	</div>
+	
+	<!-- 入库对话框 -->
+	<div id="dlg-es" class="easyui-dialog"
+		style="width: 460px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#dlg-no-buttons">
+		<div class="ftitle">库存信息</div>
+		<form id="fm-es" method="post">
+			<div class="fitem">
+				<label>库存点:</label> 
+				<select id="es-stock" style="width:150px;" class="easyui-combobox" data-options="url:'',method:'post',valueField:'id',textField:'text',editable:false">
+				</select>
+			</div>
+			<div class="fitem">
+				<label>商品:</label>
+				<input class="easyui-combobox" id="es-products"
+            			data-options="url:'',valueField:'id',textField:'productName',editable:false" />
+			</div>
+			<div class="fitem">
+				<label>现有库存:</label> 
+				<input style="width:230px;" id="es-oldamount" class="easyui-numberbox" disabled="disabled"/>
+			</div>
+			<div class="fitem">
+				<label>入库数量:</label> 
+				<input style="width:230px;" id="es-number" class="easyui-numberbox"/>
+			</div>
+		</form>
+		<div id="dlg-no-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveStock()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#dlg-es').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/saveRequest.js"></script>
+<script>
+$(function(){
+	$('#dg').datagrid({
+		onLoadSuccess: function(data){
+			if (data.total == 0 && data.ERROR == 'No Login!') {
+				//relogin();
+				var user_id =  localStorage.getItem('user_id');
+				var user_pwd = localStorage.getItem('user_pwd');
+				if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();						
+				}
+				else{
+					$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+						if(data.STATUS){
+							$('#dg').datagrid('reload');
+						}
+					},'json').complete(function(){
+						$('#dg').datagrid('reload');
+					});
+				}
+					
+			}
+			
+		},
+		onLoadError : function() {
+			alert('出错啦');
+		}
+	});
+});
+
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		if(row){
+			if(confirm("确定删除该产品?")){
+				$.getJSON('productAction!del.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					}else {
+						showTip("删除失败!");
+					}
+				});
+			}
+		}else{
+       	 	$.messager.alert('警告','请先选择产品!');
+        }
+	}
+	//新增产品信息
+	function newProduct(){
+	   $('#fm').form('clear');
+       $('#dlg').dialog('open').dialog('setTitle','编辑产品信息');
+       url = 'productAction!createOrUpdate.zk';
+	}
+	//更新产品信息
+	function editProduct(){
+		 var row = $('#dg').datagrid('getSelected');
+         if (row){
+             $('#dlg').dialog('open').dialog('setTitle','编辑产品信息');
+             $('#fm').form('load',row);
+             url = 'productAction!createOrUpdate.zk?id='+row.id;
+         }else{
+        	 $.messager.alert('警告','请先选择要编辑的产品!');
+         }
+	}
+	//check form
+	function checkForm(){
+		var name = $.trim($("#productName").val());
+		if(name==''){
+			$.messager.alert('警告','产品名称不能为空!');
+			$("#productName").focus();
+			return false;
+		}
+		var price = $.trim($("#productPrice").val());
+		if(!$.isNumeric(price)){
+			$.messager.alert('警告','产品价格只能为数字!');
+			$("#productPrice").focus();
+			return false;
+		}
+		var inventory = $.trim($("#inventory").val());
+		if(inventory){
+			if(!$.isNumeric(inventory)){
+				$.messager.alert('警告','库存只能为数字!');
+				$("#inventory").focus();
+				return false;
+			}
+		}
+		return true;
+	}
+	function saveProduct(){
+        $('#fm').form('submit',{
+            url: url,
+            onSubmit: function(){
+                return checkForm();
+            },
+            success: function(result){
+                var result = eval('('+result+')');
+                if (result.STATUS){
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                } else {
+                    $.messager.show({
+                        title: '错误',
+                        msg: '系统繁忙！'
+                    });
+                }
+            }
+        });
+    }
+
+	function search(value){
+		$("#dg").datagrid('load',{key:value});
+	}
+	
+	//分库管理
+	function smDialog(){
+		$('#smdg').datagrid({url:'productAction!listRegion.zk'});
+		$('#tb-stock').combobox({
+			url:'productAction!getRootRegions.zk',
+			onChange:function(n,o){
+				//var productId = $('#es-products').combobox('getValue');
+				//getOldStock(n ,productId);
+			}	
+		});
+		$('#tb-products').combobox({
+			url:'productAction!getProducts.zk',
+			onChange:function(n,o){
+				//var regionId = $('#es-stock').combobox('getValue');
+				//getOldStock(regionId ,n);
+			}	
+		});
+		$('#smdlg').dialog('open').dialog('setTitle','分库管理');
+	}
+	//获取原库存
+	function getOldStock(rid,pid){
+		$.post('productAction!getRegionStock.zk',{regionId:rid,productId:pid},function(data){
+			if(data.STATUS&&data.amount){
+				$('#es-oldamount').numberbox('setValue',data.amount);
+			}else{
+				$('#es-oldamount').numberbox('setValue','');
+			}
+		},'json')
+	}
+	//入库对话框
+	function addStock(){
+		$('#fm-es').form('reset');
+		$('#es-stock').combobox({
+			url:'productAction!getRootRegions.zk',
+			onChange:function(n,o){
+				var productId = $('#es-products').combobox('getValue');
+				getOldStock(n ,productId);
+			}	
+		});
+		$('#es-products').combobox({
+			url:'productAction!getProducts.zk',
+			onChange:function(n,o){
+				var regionId = $('#es-stock').combobox('getValue');
+				getOldStock(regionId ,n);
+			}	
+		});
+		//$("#no-order-date").datebox("setValue",new Date().format("yyyy-MM-dd"));//赋值当前日期
+		//$("#product-wrap").empty();
+		
+		$('#dlg-es').dialog('open').dialog('setTitle','商品入库');
+	}
+	//保存库存信息
+	function saveStock(){
+		var regionId = $('#es-stock').combobox('getValue');
+		var productId = $('#es-products').combobox('getValue');
+		var regionName = $('#es-stock').combobox('getText');
+		var productName = $('#es-products').combobox('getText');
+		var number = $('#es-number').numberbox('getValue');
+		//alert('regionId:'+regionId+',productId:'+productId);
+		//return;
+		if(number){
+			$.post('productAction!enterWarehouse.zk',{regionId:regionId,regionName:regionName,productName:productName,productId:productId,number:number},function(data){
+				if(data.STATUS){
+					showTip('入库成功');
+					$('#smdg').datagrid('reload');
+					$('#dlg-es').dialog('close');
+				}else{
+					$.messager.alert('错误',data.INFO,'error');
+				}
+			},'json')
+		}else{
+			//alert('入库数量有误!');
+			$.messager.alert('错误','入库数量有误!','error');
+		}
+	}
+	
+	//库存点管理
+	/* function regionManage(){
+		$('#regionTree').tree({url:'productAction!getRegions.zk'});
+		$('#dlg-rm').dialog('open').dialog('setTitle','库存点管理');
+	} */
+	//保存库存点信息
+	function saveRegionInfo(){
+		var rootNodes= $('#regionTree').tree('getRoots');  
+       // $('#orgTree').tree('expand', rootNode.target); 
+        var treeDatas = [];
+        for(var i = 0 ;i<rootNodes.length;i++){
+        	var rootNode = rootNodes[i];
+			var data = $('#regionTree').tree('getData',rootNode.target);
+        	var treeData = {
+        				"id": data.id,
+        				"text": data.text,
+        				"children" : []
+        			};
+			//console.log(data.text +",id:"+data.id);
+			if(data.children){
+				for(var j = 0 ;j<data.children.length;j++){
+					//console.log("\t\t"+data.children[j].text +",id:"+data.children[j].id);
+		        	var child = {
+	        				"id": data.children[j].id,
+	        				"text": data.children[j].text
+	        			};
+		        	treeData.children.push(child);
+				}
+			}
+			treeDatas.push(treeData);
+        }
+        var regions = JSON.stringify(treeDatas);
+        console.log(JSON.stringify(treeDatas));
+        return ;
+        $.post('productAction!updateRegions.zk',{regions:regions},function(data){
+        	if(data.STATUS){
+        		$('#dlg-rm').dialog('close');
+        		showTip('保存成功!');
+        	}else{
+        		$.messager.alert('错误',data.INFO,'error');
+        	}
+        },'json');
+	}
+	//更新库存列表
+	function reloadStock(){
+		var regionId = $('#tb-stock').combobox('getValue');
+		var productId = $('#tb-products').combobox('getValue');
+		$('#smdg').datagrid({
+			queryParams: {
+				productId: productId,
+				regionId: regionId
+			}
+		});
+	}
+	
+	function formatState(v){
+		switch (v) {
+		case 1: return '正常';
+		case 2: return '预售';
+		case 0: return '下架';
+		default: return '未知';
+		}
+	}
+	
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

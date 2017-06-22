@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+        }
+        .fitem input{
+            width:160px;
+        }
+		.pugong{position: relative; width:60px; height:40px; display:block; float:right;margin-left:5px; margin-bottom:5px; margin-top:4px; border:1px solid #f1f1f1;}
+		.divX
+		{
+   			 z-index:100;
+    		border-style:solid;
+    		border-width:1px;
+    		border-color:#d8d8d8;
+    		background-color:#ffffff;
+    		line-height:12px;
+    		text-align:center;
+    		font-weight:bold;
+    		width:10px;
+    		cursor:pointer;
+    		font-size:5px;
+    		color:#666;
+    		display: none;
+		}
+		.putong_app{
+			width:60px; 
+			height:40px;
+		}
+
+        .certificateList{
+			width:218px;
+			height:45px;
+		}
+		.certificateName{
+			width:130px;
+			height:30px;
+			margin-top:7.5px;
+			margin-bottom:7.5px;
+			display:block;
+			
+			float:left;
+		}
+		.add{
+			position:relative;
+			width:47px;
+			height:40px;
+			border:1px solid #95b8e7;
+			margin-right:2px;
+			float:right;
+		}
+		.img{
+			max-width: 100%;
+			width: 100%;
+			max-height: 100%;
+			height: 100%;
+		}
+		a.popImage {
+			color:#666;
+		}
+		.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.btn {
+  display: inline-block;
+  padding: 3px 6px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+.btn-primary .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+}
+
+#detailDlg .datagrid-wrap{
+	border:0;
+}
+    </style>
+
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>	
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">健身房提现</li>
+			</ul>
+			<div>
+					<table id="dg"
+								style="height:560px; "
+								data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'GymWithdrawAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'id',checkbox:true"></th>
+										<th data-options="field:'gymName',align:'center'" width="14%">健身房</th>
+										<th data-options="field:'amount',align:'center'" width="7%">转账金额</th>
+										<th data-options="field:'totalAmount',align:'center'" width="7%">原始金额</th>
+										<th data-options="field:'transferFee',align:'center'" width="7%">转账手续费</th>
+										<th data-options="field:'state',align:'center',formatter:formatGWState" width="7%">状态</th>
+										<th data-options="field:'zfbSerialNo',align:'center'" width="14%">支付宝流水号</th>
+										<th data-options="field:'payState',align:'center',formatter:formatPayState" width="14%">转账结果</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="14%">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="14%">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-dollar" plain="true"
+											onclick="withdraw()">批量转账</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-view" plain="true"
+											onclick="viewDetail()">查看详情</a></td>
+									</tr>
+								</table>
+							</div>
+						<!-- detial  -->
+							<div id="detailDlg" class="easyui-dialog"
+								style="width: 80%; height: 450px;" closed="true" modal="true">
+								<table id="detaildg" class="easyui-datagrid" style="width:100%;height:400px;border:0;"
+										data-options="singleSelect:true,collapsible:true,pagination:true,method:'post'">
+									<thead>
+										<tr>
+											<th data-options="field:'projectName',align:'center'" width="14%">项目名</th>
+											<th data-options="field:'projectAmount',align:'center'" width="14%">项目金额</th>
+											<th data-options="field:'benefitRate',align:'center'" width="14%">分成率</th>
+											<th data-options="field:'benefitAmount',align:'center'" width="14%">分成金额</th>
+											<th data-options="field:'action',align:'center'" width="14%">类型</th>
+											<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="14%">创建时间</th>
+											<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="14%">修改时间</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						<!--   -->
+			
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-common.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/accordion.js"></script>	
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					//$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					showError('登录超时,请重新登录!');
+					relogin();
+				}
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+		
+		
+	});
+	
+	//提现
+	function withdraw(){
+		var rows = $('#dg').datagrid('getSelections');
+		if(!rows || rows.length == 0){
+			showError('还未选择转账对象!!!');
+			return ;
+		}
+		var ids = [];
+		for(var i = 0 ;i<rows.length;i++){
+			ids.push(rows[i].id);
+		}
+		var url = 'GymWithdrawAction!withdraw.zk?ids=' + ids.join(',') ;
+		window.open(url);
+		confirmDialog("已完成提现?", function(){
+			$('#dg').datagrid('reload');
+			//alert('ok');
+		},function(){
+			$('#dg').datagrid('reload');
+			//alert('fail');
+		});
+		//location.href  = 'GymWithdrawAction!withdraw.zk?ids='
+	}
+	
+	//查看收入明细
+	function viewDetail(){
+		var rows = $('#dg').datagrid('getSelections');
+		if(!rows.length){
+			showError('请先选择');
+			return ;
+		}
+		if(rows.length > 1){
+			showError('只能选择一项!');
+			$('#dg').datagrid('clearSelections');
+			return ;
+		}
+		var row = rows[0];
+		
+		$('#detaildg').datagrid({
+			url : 'GymAction!balanceDetail.zk' ,
+			queryParams : {
+				id : row.id
+			}
+		});
+		var title =  row.gymName + '提现详情' ;
+		$('#detailDlg').dialog('open').dialog('setTitle',title);
+	}
+	
+	//转账状态
+	function formatGWState(v){
+		switch (v) {
+			case 'wait' : return '待处理';
+			case 'processing' : return '处理中';
+			case 'finish' : return '已完成';
+			default: return '';
+		}
+	}
+	
+	//
+	function formatPayState(v , row){
+		switch (v) {
+			case 'S' : return '成功';
+			case 'F' : 
+				var mgs = "失败" ;
+				if(row.result){
+					mgs += ":" + row.result ;
+				}
+				return mgs;
+			default: return '';
+		}
+		
+	}
+</script>
+</body>
+</html>

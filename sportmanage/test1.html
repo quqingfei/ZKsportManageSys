@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style type="text/css">
+
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">版本管理</li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">产品管理</li>
+			</ul>
+			<div>
+				<table id="dg" style="max-height:560px; "
+					data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'productAction!list.zk',method:'post',toolbar:'#toolbar'">
+					<thead>
+						<tr>
+							<th data-options="field:'productName',align:'center',width:180">产品名称</th>
+							<th data-options="field:'productDesc',align:'center',width:340">产品规格</th>
+							<th data-options="field:'productPrice',align:'center',width:135">单价(元)</th>
+							<th data-options="field:'inventory',align:'center',width:102">库存</th>
+							<th data-options="field:'state',align:'center',width:60">状态</th>
+							<th data-options="field:'gmtCreate',align:'center',width:135">创建时间</th>
+							<th data-options="field:'gmtModify',align:'center',width:135">修改时间</th>
+						</tr>
+					</thead>
+				</table>
+				<div id="toolbar">
+					<table>
+						<tr>
+							<td><a href="javascript:void(0)" class="easyui-linkbutton"
+								iconCls="icon-add" plain="true" onclick="newProduct()">新增</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>
+							<td><a href="javascript:void(0)" class="easyui-linkbutton"
+								iconCls="icon-edit" plain="true" onclick="editProduct()">编辑</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>
+							<td><a href="javascript:void(0)" class="easyui-linkbutton"
+								iconCls="icon-remove" plain="true" onclick="del()">删除</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>
+							<td><a href="javascript:void(0)" class="easyui-linkbutton"
+								iconCls="icon-remove" plain="true" onclick="smDialog()">分库管理</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>
+							<td><a href="deliveryAllocation.html"
+								class="easyui-linkbutton" iconCls="icon_delivery" plain="true">配送管理</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

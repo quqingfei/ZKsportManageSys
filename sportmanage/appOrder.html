@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/msgbox/msgbox.css"></link>
+<link rel="stylesheet" href="css/appOrder.css"></link>
+<style type="text/css">
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+
+<style type="text/css">
+
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="#">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">app商店订单管理</li>
+			</ul>
+			<div class="showList">
+				<table id="dg"	style="height:560px;" data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'ShopOrderAction!list.zk',queryParams: {status:'1'},method:'post',toolbar:'#toolbar'">
+					<thead>
+						<tr>
+							<th data-options="field:'id',align:'center',width:$(this).width()*0.07">订单号</th>
+							<th data-options="field:'receiverName',align:'center',width:$(this).width()*0.05,formatter:formatReceiverName">收货人</th>
+							<th data-options="field:'receiverPhone',width:$(this).width()*0.07,align:'center'">手机号</th>
+							<th data-options="field:'receiverAddress',align:'center',width:$(this).width()*0.1,formatter:formatAddress">收货地址</th>
+							<th data-options="field:'detail',align:'center',width:$(this).width()*0.1,formatter:formatProducts">商品列表</th>
+							<th data-options="field:'gmtCreate',align:'center',width:$(this).width()*0.1,formatter:formatDate">下单时间</th>
+							<th data-options="field:'gmtModify',align:'center',width:$(this).width()*0.1,formatter:formatDate">处理时间</th>
+							<!-- 
+							<th style="white-space: nowrap" data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:$(this).width() * 0.09">物流公司</th>
+							 -->
+							<!-- 
+								<th data-options="field:'freightNumber',width:$(this).width()*0.07,align:'center',formatter:formatFreightNumber">运单号</th>
+							 	,formatter:formatTotal
+							 -->
+							<th data-options="field:'freightPrice',width:$(this).width()*0.03,align:'center'">运费</th>
+							<th data-options="field:'price',width:$(this).width()*0.05,align:'center'">订单金额</th>
+							<th data-options="field:'status',align:'center',width:$(this).width()*0.05,formatter:formatStatus">状态</th>
+							<th data-options="field:'returnStatus',align:'center',width:$(this).width()*0.05,formatter:formatReturnStatus">售后情况</th>
+						</tr>
+					</thead>
+				</table>
+				<div id="toolbar">
+					<table>
+						<tr>
+							<td>日期：
+								<select id="dateType" class="easyui-combobox" style="width: 100px;" data-options="editable:false">
+									<option value="gmt_create">下单日期</option>
+									<!-- <option value="delivery_time">发货日期</option>-->
+								</select>
+							</td>
+							<td>起始：<input id="startDate" class="easyui-datebox" style="width: 100px" /></td>
+							<td>结束：<input id="endDate" class="easyui-datebox" style="width: 100px" /></td>
+							<td><div class="datagrid-btn-separator"></div></td>
+							<td><input id="txt_word" class="easyui-searchbox" style="width: 280px" data-options="prompt:'订单号、姓名、手机号、运单号',menu:'#mm',searcher:search" /></td>
+						</tr>
+					</table>								
+					<table>
+						<tr>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-add" plain="true"onclick="newOrder()">录入</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-edit" plain="true"onclick="updateOrder()">修改</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-remove" plain="true"onclick="del()">删除</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>											
+							<td><a href="javascript:void(0)" id="deliveryBtn"class="easyui-linkbutton" iconCls="icon_delivery" plain="true" onclick="delivery()">发货</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon_rmb" plain="true"onclick="payment()">付款</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-goback" plain="true"onclick="refund()">退货</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon_change" plain="true"onclick="changeGoos()">换货</a></td>	
+						</tr>
+					</table>
+					<div id="mm" data-options="onClick:menuHandler"style="width: 120px">
+						<div data-options="name:'1',iconCls:'icon-ok'">待发货</div>
+						<div data-options="name:'全部'">全&nbsp;&nbsp;部</div>
+						<div data-options="name:'2'">已发货</div>
+						<div data-options="name:'0'">未付款</div>
+						<div data-options="name:'3'">已完成</div>
+						<div data-options="name:'4'">申请退货</div>
+						<div data-options="name:'5'">正在退货</div>
+						<div data-options="name:'6'">退货成功</div>
+						<div data-options="name:'7'">申请换货</div>
+						<div data-options="name:'8'">正在申请</div>
+						<div data-options="name:'9'">申请成功</div>
+					</div>
+				</div>
+				
+				<div id="dlgOrder" class="easyui-dialog" style="width: 550px; height: 601px; padding: 10px 20px" closed="true" modal="true" buttons="#dlg-no-buttons">
+					<div class="ftitle">订单信息</div>
+						<form id="fm" method="post">
+							<input id="id" name="id" type="hidden">
+							<input id="userId" name="userId" type="hidden">
+							<input id="returnReason" name="returnReason" type="hidden">
+							<div class="fitem">
+								<label>订单状态:</label> 
+								<select id="status" name="status" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+									<option value="0">未付款</option>
+									<option value="1">待发货</option>
+									<option value="2">已发货</option>
+									<option value="3">已完成</option>
+								</select>
+							</div>
+							<div class="fitem">
+								<label>售后情况:</label> 
+								<select id="returnStatus" name="returnStatus" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+									<option value="0">无退换货</option>
+									<option value="1">申请退货</option>
+									<option value="2">退货中</option>
+									<option value="3">退货成功</option>
+									<option value="4">申请换货</option>
+									<option value="5">换货中</option>
+									<option value="6">换货成功</option>
+								</select>
+							</div>		
+							<div class="fitem">
+								<label>收货人:</label> 
+								<input id="receiverName" name="receiverName" class="easyui-textbox" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>手机号码:</label>
+								<input id="receiverPhone" name="receiverPhone" class="easyui-textbox" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>收货地址:</label> 
+								<input id="receiverAddress" name="receiverAddress" data-options="multiline:true" style="width:230px;height:50px"  class="easyui-textbox"/>
+							</div>
+							<!-- 
+							<div class="fitem" style="position:relative; min-height:20px;">
+								<label style="line-height:20px; position:absolute; top:5px left:10px;">商品清单:</label>
+								<div class=""></div>
+							</div>
+							 -->
+							<!-- 
+							<div class="fitem">
+								<label>物流公司:</label>
+									<select id="no-deliveryLtd" class="easyui-combobox" data-options="editable:true,prompt:'可手动输入'" style="width: 150px;">
+										<option>国通快递</option>
+										<option>宅急送</option>
+										<option>申通快递</option>
+										<option>圆通快递</option>
+										<option>韵达快递</option>
+										<option>中通快递</option>
+										<option>天天快递</option>
+										<option>顺丰快递</option>
+										<option>汇通快递</option>
+									</select>
+									<a href="javascript:void(0)" title="若列表没有的物流公司,请在左侧输入框输入新的物流公司!" class="easyui-linkbutton easyui-tooltip" data-options="iconCls:'icon-help',plain:true"></a>
+							</div>
+							-->
+							<!-- 
+								<div class="fitem">
+									<label>运单号:</label>
+									<input id="freightNumber" name="freightNumber" class="easyui-textbox" style="width:230px;"/>
+								</div>
+							 -->
+							<div class="fitem">
+								<label>运费:</label> 
+								<input id="freightPrice" name="freightPrice" data-options="onChange:reloadAmount" class="easyui-numberbox" value="0" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>总金额:</label>
+								<input id="price" name="price" value="0" class="easyui-numberbox" style="width:230px;" data-options="editable:false"/>
+							</div>			
+							<div class="fitem">
+								<label>下单日期:</label> 
+								<input id="gmtCreate" name="gmtCreate" class="easyui-datetimebox" style="width:230px;"/>
+							</div>
+					</form>
+					<div id="dlg-no-buttons">
+						<a id="saveOrderBtn" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveOrder()" style="width: 90px">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#dlgOrder').dialog('close')"style="width: 90px">取消</a>
+					</div>
+			</div>
+			<!-- 产品列表 -->
+			<div id="dlgProduct" class="easyui-dialog" style="width: 500px; height:500px; padding: 10px 20px" closed="true" modal="true"></div>
+			<!-- 退货，换货列表 -->
+			<div id="dlgReason" class="easyui-dialog" style="width: 500px; height:500px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgReasonButtons">
+				<div class="ftitle">退换货信息</div>
+						<form id="fmReturn" method="post">
+							<input id="id" name="id" type="hidden">
+							<input id="userId" name="userId" type="hidden">
+							<div class="fitem">
+								<label>售后情况:</label> 
+								<select id="returnStatus" name="returnStatus" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+									<option value="0">无退换货</option>
+									<option value="1">申请退货</option>
+									<option value="2">退货中</option>
+									<option value="3">退货成功</option>
+									<option value="4">申请换货</option>
+									<option value="5">换货中</option>
+									<option value="6">换货成功</option>
+								</select>
+							</div>
+							<div class="fitem">
+								<label>收货人:</label> 
+								<input id="receiverName" name="receiverName" class="easyui-textbox" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>手机号码:</label>
+								<input id="receiverPhone" name="receiverPhone" class="easyui-textbox" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>收货地址:</label>
+								<input id="receiverAddress" name="receiverAddress" data-options="multiline:true" style="width:230px;height:50px"  class="easyui-textbox"/>
+							</div>
+							<div class="fitem">
+								<label>原因:</label>
+								<input id="returnReason" name="returnReason" data-options="multiline:true,editable:false" style="width:230px;height:50px"  class="easyui-textbox"/>
+							</div>
+					</form>
+				
+				<div id="dlgReasonButtons">
+					<a id="saveAction" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveAction()" style="width: 90px">保存</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#dlgReason').dialog('close')"style="width: 90px">取消</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+<script src="js/jquery.min.js"></script>
+<script src="js/accordion.js"></script>	
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/jquery.easyui.patch.js"></script>
+<script src="js/jquery.datagridtip.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/msgbox/msgbox.js"></script>
+<script src="js/saveRequest.js"></script>
+<script src="js/appOrder.js"></script>
+<script id="productTmpl" type="text/x-jquery-tmpl">
+	<div class="orderMessage">
+		<img class="productImage" alt="暂无图片" onerror="this.src='images/default.png';" src="../file/FileCenter!showImage2.zk?type=mdm&name=${image}"/>
+		<div class="productMessage">
+			<p id="productName" class="productName">${name}</p>
+			<p class="productNum">数量:<span id="productNum">${count}</span></p>
+			<p class="logisticsNum">物流编号:{{if logistics}}<span id="logisticsCompany">${logistics}</span>{{/if}}{{if logisticsNumber}}<span id="logisticsNumber">${logisticsNumber}</span>{{/if}}</p>
+		</div>
+		<p id="productPrice" class="productPrice">合计:<span class="productPrice_1">￥</span><span id="">${theTotal}</span></p>
+	</div>		
+</script>
+</body>
+</html>

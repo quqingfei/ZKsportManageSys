@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+<link rel="stylesheet" href="css/appProducts.css"></link>
+<style type="text/css">
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; text-align:right;} .fitem input { width: 160px; }
+</style>
+
+<style type="text/css">
+
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="#">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">app商店订单管理</li>
+			</ul>
+			<div class="showList">
+				<table id="dg"	style="height:560px;" data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'ShopGoodsAction!list.zk',queryParams:{},method:'post',toolbar:'#toolbar'">
+					<thead>
+						<tr>
+							<th data-options="field:'name',align:'center',width:$(this).width()*0.1">商品名称</th>
+							<th data-options="field:'type',align:'center',width:$(this).width()*0.1,formatter:formatType">商品型号</th>
+							<th data-options="field:'price',width:$(this).width()*0.05,align:'center'">单价</th>
+							<th data-options="field:'freight',align:'center',width:$(this).width()*0.05">运费</th>
+							<th data-options="field:'specialFreight',align:'center',width:$(this).width()*0.05,formatter:formatSpecialFreight">特殊运费</th>
+							<th data-options="field:'saleCount',align:'center',width:$(this).width()*0.05">销量</th>
+							<th data-options="field:'images',width:$(this).width()*0.1,align:'center',formatter:formatImg">产品图片</th>
+							<th data-options="field:'status',width:$(this).width()*0.05,align:'center',formatter:formatStatus">商品状态</th>
+							<th data-options="field:'gmtCreate',align:'center',width:$(this).width()*0.1,formatter:formatDate">创建时间</th>
+							<th data-options="field:'gmtModify',align:'center',width:$(this).width()*0.1,formatter:formatDate">处理时间</th>
+						</tr>
+					</thead>
+				</table>
+				<div id="toolbar">
+					<table>
+						<tr>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-add" plain="true"onclick="add()">增加商品</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-edit" plain="true"onclick="update()">编辑商品</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-remove" plain="true"onclick="del()">删除商品</a></td>
+							<td><div class="datagrid-btn-separator"></div></td>											
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-goback" plain="true"onclick="openCategory()">编辑商品种类</a></td>
+							<td><a href="javascript:void(0)" id="deliveryBtn"class="easyui-linkbutton" iconCls="icon_delivery" plain="true" onclick="openType()">编辑商品类别</a></td>
+							<td><a href="javascript:void(0)" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon_rmb" plain="true"onclick="openSpecialFreight()">编辑特殊运费</a></td>
+							<td><a href="sorcemall.html" id="updateLnkBtn"class="easyui-linkbutton" iconCls="icon-coin" plain="true">积分商城管理</a></td>
+						</tr>
+					</table>
+				</div>
+				<!-- 商品 -->
+				<div id="dlgProduct" class="easyui-dialog" style="width: 550px; height: 601px; padding: 10px 20px" closed="true" modal="true" buttons="#dlg-no-buttons">
+					<div class="ftitle">商品信息</div>
+						<form id="fm" method="post">
+							<input id="id" name="id" type="hidden">
+							<div class="fitem">
+								<label>商品名称:</label> 
+								<input id="name" name="name" class="easyui-textbox" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>所属类别:</label>
+								<!-- url:'ShopCategoryAction!list.zk',queryParams:{parentId:'0'},method:'post',valueField:'id',textField:'name', -->
+								<select id="categoryId" style="width:230px;" class="easyui-combobox" data-options="valueField:'id',textField:'text',editable:false">
+									
+								</select>
+								<input id="categoryIdHide" name="categoryId" type="hidden">
+							</div>		
+							<div class="fitem">
+								<label>单价:</label>
+								<input id="price" name="price" class="easyui-numberbox" value="0" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>运费:</label> 
+								<input id="freight" name="freight" class="easyui-numberbox" value="0" style="width:230px;"/>
+							</div>
+							<div class="fitem">
+								<label>商品状态:</label> 
+								<select id="status" name="status" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+									<option value="0">未开售</option>
+									<option value="1">售卖中</option>
+									<option value="2">售罄</option>
+								</select>
+							</div>
+							<div class="fitem">
+                				<label>商品show:</label>
+                    			<input name="images" id = "images"  type="hidden"> <!-- class="easyui-textbox" -->                     
+            				</div>
+					</form>
+					<form id="title_img_form" method="post"  enctype="multipart/form-data">
+						<input type="file" style="display: none;" id="file_title_img"name="name" onchange="uploadImage()" accept="image/*" />
+                	</form>
+                                        
+                   	<div style="width: 197px; height: 67px; margin-left:115px; margin-top: -30px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+						<img id="imghead" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                	</div> 
+					<div id="dlg-no-buttons">
+						<a id="saveOrderBtn" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#dlgProduct').dialog('close')"style="width: 90px">取消</a>
+					</div>
+			</div>
+			
+			<!-- 商品类别 -->
+			<div id="dlgCategory" class="easyui-dialog" style="width: 600px; height:600px; padding: 10px 20px" closed="true" modal="true">
+				<table id="dt" class="easyui-treegrid" style="width:550px;height:500px;" data-options="
+                url: 'ShopCategoryAction!list.zk',
+                method:'post',
+                rownumbers: true,
+                singleSelect:true,
+                pagination: true,
+                pageSize: 30,
+                pageList: [30],
+                idField: 'id',
+                treeField: 'name',
+                toolbar:'#toolbar1',
+                onBeforeLoad: function(row,param){
+                    if (!row) {    // load top level rows
+                        param.parentId = 0;    // set id=0, indicate to load new page rows
+                    }
+                }
+            ">
+				<thead>
+					<tr>
+						<th data-options="field:'name',align:'center',width:$(this).width()*0.1">类别名称</th>
+						<th data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:$(this).width()*0.1">创建时间</th>
+						<th data-options="field:'gmtModify',align:'center',formatter: formatDate,width:$(this).width()*0.1">修改时间</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="toolbar1">
+				<table>
+					<tr>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-add"plain="true" onclick="toAdd()">增加种类</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-edit"plain="true" onclick="toUpdate()">修改种类</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-remove"plain="true" onclick="toDel()">删除种类</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+					</tr>
+				</table>
+			</div>
+				
+			</div>
+			
+			<div id="categoryAction" class="easyui-dialog" style="width: 400px; height:300px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgCategoryButtons">
+				<form id="fmCategory" method="post">
+					<!-- 
+						<input id="categoryId" name="id" type="hidden">
+					 -->
+					<div class="fitem">
+						<label>父类别:</label>
+						<!-- url:'ShopCategoryAction!list.zk', idField:'id',treeField:'name', method:'get',-->
+						<input id="parentId" name="parentId" style="width:230px;" class="easyui-combotree" data-options="editable:false"/>
+					</div>
+					<div class="fitem">
+						<label>类别名称:</label>
+						<input id="name" name="name" data-options="" style="width:230px;"  class="easyui-textbox"/>
+					</div>
+				</form>
+				<div id="dlgCategoryButtons">
+					<a id="saveCategory" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveCategory()" style="width: 90px">保存</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#dlgCategory').dialog('close')"style="width: 90px">取消</a>
+				</div>
+			</div>
+			
+			
+			<!-- 商品型号 -->
+			<div id="dlgType" class="easyui-dialog" style="width: 600px; height:600px; padding: 10px 20px" closed="true" modal="true">
+				<table id="dp" class="easyui-datagrid" style="width:550px;height:500px;" data-options="method:'post',rownumbers: true,singleSelect:true,pagination: true,pageSize:30,toolbar:'#toolbar2'">
+				<thead>
+					<tr>
+						<th data-options="field:'name',align:'center',width:$(this).width()*0.06">型号名称</th>
+						<th data-options="field:'price',align:'center',width:$(this).width()*0.06">价格</th>
+						<th data-options="field:'images',align:'center',width:$(this).width()*0.06,formatter:formatImg">商品show</th>
+						<th data-options="field:'status',align:'center',width:$(this).width()*0.06">商品状态</th>
+						<th data-options="field:'detail',align:'center',width:$(this).width()*0.06,formatter:formatImg">详情</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="toolbar2">
+				<table>
+					<tr>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-add"plain="true" onclick="addType()">增加型号</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-edit"plain="true" onclick="updateType()">修改型号</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-remove"plain="true" onclick="delType()">删除型号</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+					</tr>
+				</table>
+			</div>
+				
+			</div>
+			
+			<div id="typeAction" class="easyui-dialog" style="width: 400px; height:300px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgTypeButtons">
+				<form id="fmType" method="post">
+					<input name="id" id ="productId" type="hidden">
+					<input name="typeId" id ="typeId" type="hidden">
+					<div class="fitem">
+						<label>型号名称:</label>
+						<input id="name" name="name" data-options="" style="width:230px;"  class="easyui-textbox"/>
+					</div>
+					<div class="fitem">
+						<label>价格:</label> 
+						<input id="price" name="price" class="easyui-numberbox" value="0" style="width:230px;"/>
+					</div>
+					<div class="fitem">
+						<label>商品状态:</label>
+						<select id="status" name="status" style="width:150px;" class="easyui-combobox" data-options="editable:false">
+							<option value="0">未开售</option>
+							<option value="1">售卖中</option>
+							<option value="2">售罄</option>
+						</select>
+					</div>
+					<div class="fitem">
+                		<label>商品show:</label>
+                    	<input name="images" id = "imagesType"  type="hidden"> <!-- class="easyui-textbox" -->                     
+            		</div>
+					<div style="width: 197px; height: 67px; margin-left:90px; margin-top: -20px;cursor: pointer;" onclick="chooseImageType('file_title_img')" title="点击选择图片">
+						<img id="imgheadType" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                	</div>
+					<div class="fitem">
+                		<label>详情:</label>
+                    	<input name="detail" id = "imagesDetail"  type="hidden"> <!-- class="easyui-textbox" -->                     
+            		</div>
+					<div style="width: 197px; height: 67px; margin-left:90px; margin-top: -20px;cursor: pointer;" onclick="chooseImageDetail('file_title_img')" title="点击选择图片">
+						<img id="imgheadDetail" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                	</div>
+				</form>
+				<div id="dlgTypeButtons">
+					<a id="saveType" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveType()" style="width: 90px">保存</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#dlgType').dialog('close')"style="width: 90px">取消</a>
+				</div>
+			</div>
+			
+			<!-- 特殊地方运费 -->
+			<div id="dlgSpecial" class="easyui-dialog" style="width: 600px; height:600px; padding: 10px 20px" closed="true" modal="true">
+				<table id="ds" class="easyui-datagrid" style="width:550px;height:500px;" data-options="method:'post',rownumbers: true,singleSelect:true,pagination: true,pageSize:30,toolbar:'#toolbar3'">
+				<thead>
+					<tr>
+						<th data-options="field:'name',align:'center',width:$(this).width()*0.2">地址</th>
+						<th data-options="field:'freight',align:'center',width:$(this).width()*0.06">运费</th>
+						<th data-options="field:'type',align:'center',width:$(this).width()*0.06,formatter:formatSpecialType">地区类型</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="toolbar3">
+				<table>
+					<tr>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-add"plain="true" onclick="addSpecial()">增加特殊运费</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-edit"plain="true" onclick="updateSpecial()">修改特殊运费</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+						<td><a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-remove"plain="true" onclick="delSpecial()">删除特殊运费</a></td>
+						<td><div class="datagrid-btn-separator"></div></td>
+					</tr>
+				</table>
+			</div>
+				
+			</div>
+			
+			<div id="specialAction" class="easyui-dialog" style="width: 600px; height:300px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgSpecialButtons">
+				<form id="fmSpecial" method="post">
+					<input name="id" id ="specialId" type="hidden">
+					<div id="address" class="fitem">
+						<label>地名:</label>
+						<div  class="address">
+						     <select  name="userAddress[province]" id="Provinces" class="addressMesage">
+								<option value="0">省份/自治区</option>
+								<option zipcode="0" value="2">北京市</option>
+								<option zipcode="0" value="3">天津市</option>
+								<option zipcode="0" value="4">河北省</option>
+								<option zipcode="0" value="5">山西省</option>
+								<option zipcode="0" value="6">内蒙古自治区</option>
+								<option zipcode="0" value="7">辽宁省</option>
+								<option zipcode="0" value="8">吉林省</option>
+								<option zipcode="0" value="9">黑龙江省</option>
+								<option zipcode="0" value="10">上海市</option>
+								<option zipcode="0" value="11">江苏省</option>
+								<option zipcode="0" value="12">浙江省</option>
+								<option zipcode="0" value="13">安徽省</option>
+								<option zipcode="0" value="14">福建省</option>
+								<option zipcode="0" value="15">江西省</option>
+								<option zipcode="0" value="16">山东省</option>
+								<option zipcode="0" value="17">河南省</option>
+								<option zipcode="0" value="18">湖北省</option>
+								<option zipcode="0" value="19">湖南省</option>
+								<option zipcode="0" value="20">广东省</option>
+								<option zipcode="0" value="21">广西自治区</option>
+								<option zipcode="0" value="22">海南省</option>
+								<option zipcode="0" value="23">重庆市</option>
+								<option zipcode="0" value="24">四川省</option>
+								<option zipcode="0" value="25">贵州省</option>
+								<option zipcode="0" value="26">云南省</option>
+								<option zipcode="0" value="27">西藏自治区</option>
+								<option zipcode="0" value="28">陕西省</option>
+								<option zipcode="0" value="29">甘肃省</option>
+								<option zipcode="0" value="30">青海省</option>
+								<option zipcode="0" value="31">宁夏自治区</option>
+								<option zipcode="0" value="32">新疆自治区</option>
+							</select>
+							<select   name="userAddress[city]" id="Citys" class="addressMesage">
+								<option value="0">城市/地区/自治州</option>
+							</select>
+							<select  name="userAddress[county]" id="Countys" class="addressMesage">
+								<option value="0">区/县</option>
+							</select>
+							<div style="clear:both;"></div>
+						</div>
+							<input id="name" name="name" style="width:350px;height:20px;margin-left:90px;margin-top:-10px;"/>
+						<!-- 
+							<input id="name" name="name" data-options="" style="width:230px;"  class="easyui-textbox"/>
+						 -->
+					</div>
+					<div class="fitem">
+						<label>运费:</label> 
+						<input id="freight" name="freight" class="easyui-numberbox" value="0" style="width:230px;"/>
+					</div>
+					<div class="fitem">
+						<label>地址属性:</label>
+						<select id="type" name="type" style="width:150px;" class="easyui-combobox" data-options="prompt:'直辖市请选-市',editable:false">
+							<option value="0">省</option>
+							<option value="1">市</option>
+							<option value="2">县</option>
+						</select>
+					</div>
+				</form>
+				<div id="dlgSpecialButtons">
+					<a id="saveSpecial" href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveSpecial()" style="width: 90px">保存</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton"iconCls="icon-cancel" onclick="javascript:$('#specialAction').dialog('close')"style="width: 90px">取消</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/flowplayer-3.2.6.min.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/saveRequest.js"></script>
+<script src="js/appProducts.js"></script>
+</body>
+</html>

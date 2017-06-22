@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>宅客管理系统</title>
+<link rel="stylesheet" type="text/css" href="css/index.css"></link>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		var redirect = $.getUrlVar('redirect');
+		if(redirect){
+			$("#redirect").val(redirect);
+		}
+	});
+
+	function changeCode(){
+		var url = '../ValidateCodeAction.zk?' + new Date().getTime();
+		$("#codeImg").attr('src',url);
+	}
+	
+ 	$(function() {
+		$("#user_id").focus();
+	}); 
+ 	
+ 	function checkForm(){
+		var user_id = $("#user_id").val();
+		if (user_id == '') {
+			alert('请填写账号！');
+			$("#user_id").focus();
+			return false;
+		}
+		var user_pwd = $("#user_pwd").val();
+		if (user_pwd == '') {
+			alert('请填写密码！');
+			$("#user_pwd").focus();
+			return false;
+		}
+		localStorage.setItem('user_id',user_id);
+		localStorage.setItem('user_pwd',user_pwd);
+		return true;
+ 	}
+</script>
+</head>
+<body>
+	<form method="post" action="loginAction!login1.zk" onsubmit="return checkForm()">
+		<input type="hidden" name="redirect" id="redirect" />
+		<div class="head"></div>
+		<div class="head_po">
+			<div class="head_fop">
+				<div class="head_sail">
+					<div class="head_ppy">账 号：</div>
+					<div class="head_max">
+						<input type="text" class="head_fly" id="user_id" name="user_id" />
+					</div>
+				</div>
+				<div class="head_sail">
+					<div class="head_ppy">密 码：</div>
+					<div class="head_max">
+						<input type="password" class="head_fly" id="user_pwd" name="user_pwd" />
+					</div>
+				</div>
+				<div class="head_xun">
+					<div class="head_yi">
+						<input type="submit" class="head_keyi" value="登 录" />
+					</div>
+					<div class="head_tian">
+						<input type="reset" class="head_keyi" value="重 置" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

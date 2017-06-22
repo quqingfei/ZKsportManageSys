@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/easyui2.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<style type="text/css">
+#fm { margin: 0;} .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/jquery.datagridtip.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/header.js"></script>
+<script src="js/biz/zk_feedback.js"></script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+<!-- 					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div> -->
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+					<div class="main_opt">后台管理 &gt; 用户反馈</div>
+					<div class="main_kpy"></div>
+					<div
+						style="width: 100%; height: 73%; min-width: 750px; margin-top: 5px;">
+						<div class="boyd">
+							<table id="dg"
+								style="height: 105%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="pagination:true,pageSize:'30',url:'feedbackAction!list.zk',queryParams: {isReply: 'n'},method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th field="id" checkbox="true"></th>
+										<th data-options="field:'user_name',width:90">反馈人</th>
+										<th data-options="field:'content',align:'center',width:425">反馈信息</th>
+										<th data-options="field:'reply_content',align:'center',width:325">回复信息</th>
+										<th
+											data-options="field:'gmt_create',align:'center',formatter: formatDate,width:125">创建日期</th>
+										<th
+											data-options="field:'gmt_modify',align:'center',formatter: formatDate,width:125">修改日期</th>
+										<th data-options="field:'is_reply',hidden:true"></th>
+										<th data-options="field:'user_id',hidden:true"></th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input type="hidden" id="isReplyHd" value="0" /></td>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',menu:'#mm',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-mailreply"
+											plain="true" id="replyLnk" onclick="reply()">回复</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-garbage" plain="true"
+											onclick="deleteAll()">删除</a></td>
+									</tr>
+								</table>
+								<div id="mm" data-options="onClick:menuHandler"
+									style="width: 120px">
+									<div data-options="name:'n',iconCls:'icon-ok'">未回复</div>
+									<div data-options="name:'y'">已回复</div>
+									<div data-options="name:'a'">全&nbsp;&nbsp;部</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dlg" class="easyui-dialog"
+		style="width: 500px; height: 390px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">用户反馈</div>
+		<form id="fm" method="post">
+			<div
+				style="width: 430px; height: 120px; text-indent: 2em; margin-top: 5px;">
+				<p id="p_suggetion_contion"></p>
+			</div>
+			<div style="width: 430px; height: 130px; color: #666;">
+				<input type="hidden" id="suggestion_id" /> <input type="hidden"
+					id="user_id" />
+				<textarea name="textfield" id="answer" rows="6" cols="20"
+					style="width: 430px; height: 100px; margin-top: 5px; color: #666; font-size: 12px;"></textarea>
+			</div>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6"
+			iconCls="icon-ok" onclick="save()" style="width: 90px">保存</a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+			style="width: 90px">取消</a>
+	</div>
+	
+</body>
+</html>

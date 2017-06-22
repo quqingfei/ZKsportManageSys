@@ -1,0 +1,77 @@
+.showList{
+	width:100%;
+	height:560px;
+	margin:0 auto;
+}
+.orderMessage{
+	position:relative;
+	width:100%;
+	height:60px;
+	padding:10px 0px;
+}
+.productImage{
+	width:60px;
+	height:100%;
+	float:left;
+}
+.productMessage{
+	width:70%;
+	height:54px;
+	margin-top:3px;
+	margin-left:10px;
+	float:left;
+}
+.productName{
+	width:100%;
+	height:16px;
+	line-height:16px;
+	font-size:15px;
+}
+.productNumDiv{
+}
+.productNum{
+	width:100%;
+	height:11px;
+	margin-top:8px;
+	line-height:11px;
+	font-size:11px;
+}
+.productNum span{
+	color:#646464;
+	margin-left:25px;
+}
+.logisticsDiv{
+	
+}
+.logisticsNum{
+	width:100%;
+	height:11px;
+	margin-top:8px;
+	line-height:11px;
+	font-size:11px;
+}
+.logisticsNum span{
+	color:#646464;
+	margin-left:8px;
+}
+.productPrice{
+	position:absolute;
+	width:100px;
+	height:16px;
+	line-height:16px;
+	font-size:12px;
+	top:13px;
+	left:-100px;
+	margin-left:100%;
+	float:right;
+	text-align:right;
+}
+.productPrice_1{
+	
+	margin-left:5px;
+}
+.productPrice span{
+	width:100%;
+	color:#FE0000;
+	font-size:14px;
+}

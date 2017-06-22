@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<style>
+#fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+
+.fitem input {
+	width: 160px;
+}
+
+.tip {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #337ab7;
+	border-radius: .25em;
+}
+</style>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+
+<script>
+	$(function() {
+		$('#dg').datagrid({
+			onLoadSuccess : function(data) {
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+	});
+	var imgbreakfast='';
+	var imglunch='';
+	var imgdinner='';
+	var imgsnack='';
+	var url;
+	function newTc() {
+		$("#imgbreakfast").attr("src", 'images/yun.png');
+		$("#imglunch").attr("src", 'images/yun.png');
+		$("#imgdinner").attr("src", 'images/yun.png');
+		$("#imgsnack").attr("src", 'images/yun.png');
+		//$('#fm').form('clear');
+		$("#breakfast_v").textbox('setValue', '');
+		$("#lunch_v").textbox('setValue', '');
+		$("#dinner_v").textbox('setValue', '');
+		$("#snack_v").textbox('setValue', '');
+		$("#type").textbox('setValue', '');
+		
+		imgbreakfast='';
+		imglunch='';
+		imgdinner='';
+		imgsnack='';
+		$('#dlg').dialog('open').dialog('setTitle', '编辑套餐信息');
+		url = 'HealthCookbookAction!createOrUpdate.zk';
+	}
+
+	function edit() {
+		//$("#imghead").attr("src", 'images/yun.png');
+		var row = $('#dg').datagrid('getSelected');
+		if (row) {
+			$("#id").val(row.id);
+			$('#dlg').dialog('open').dialog('setTitle', '编辑套餐信息');
+			$("#breakfast_v").textbox('setValue', row.breakfast);
+			$("#lunch_v").textbox('setValue', row.lunch);
+			$("#dinner_v").textbox('setValue', row.dinner);
+			$("#snack_v").textbox('setValue', row.snack);
+			$("#type").combobox('setValue', row.type );
+			imgbreakfast = "../file/FileCenter!showImage2.zk?name="
+					+ row.breakfastImage;
+			imglunch = "../file/FileCenter!showImage2.zk?name="
+					+ row.lunchImage;
+			imgdinner = "../file/FileCenter!showImage2.zk?name="
+					+ row.dinnerImage;
+			imgsnack = "../file/FileCenter!showImage2.zk?name="
+					+ row.snackImage;
+			$("#imgbreakfast").attr("src", imgbreakfast);
+			$("#imglunch").attr("src", imglunch);
+			$("#imgdinner").attr("src", imgdinner);
+			$("#imgsnack").attr("src", imgsnack);
+			imgbreakfast = row.breakfastImage;
+			imglunch = row.lunchImage;
+			imgdinner = row.dinnerImage;
+			imgsnack = row.snackImage;
+		} else {
+			$.messager.alert('错误', '请先选择要编辑的套餐!', 'error');
+		}
+
+	}
+
+	function chooseImage(id) {
+		document.getElementById(id).click();
+	}
+
+	//上传文章图片
+	function uploadImage(id) {
+		var viewFiles = document.getElementById(id);
+		//是否为图片类型            
+		if (/image\/\w+/.test(viewFiles.files[0].type)) {
+			//最大图片文件大小 500KB
+			var imgSizeLimit = 500 * 1024;
+			if (viewFiles.files[0].size <= imgSizeLimit) {
+				//上传图片
+				$("#" + (id + "_img_form"))
+						.ajaxSubmit(
+								{
+									type : 'post',
+									url : '../file/FileCenter!uploadImage2.zk',
+									success : function(data) {
+										data = $.parseJSON(data);
+										//alert("data.name:"+data.name);
+										if (data.name) {
+
+											var imgURL = "../file/FileCenter!showImage2.zk?name="
+													+ data.name;
+											$("#img" + id).attr("src", imgURL);
+											//$("#"+id).val(data.name);
+											if (id == "breakfast")
+												imgbreakfast = data.name;
+											if (id == "lunch")
+												imglunch = data.name;
+											if (id == "dinner")
+												imgdinner = data.name;
+											if (id == "snack")
+												imgsnack = data.name;
+										} else {
+											alert("上传图片出错！");
+										}
+										$("#" + id + "_img_form").resetForm();
+									},
+									error : function(XmlHttpRequest,
+											textStatus, errorThrown) {
+										alert("error");
+									}
+								});
+			} else {
+				alert("图片大小不能超过" + (imgSizeLimit / 1024) + "KB!");
+			}
+		} else {
+			alert('请选择图片类型的文件!');
+		}
+	}
+
+	//check form
+	function checkForm() {
+
+		var name = $.trim($("#breakfast_v").val());
+		if (name == '') {
+			$.messager.alert('警告', '早餐不能为空!');
+			$("#servicephone").focus();
+			return false;
+		}
+		var price = $.trim($("#lunch_v").val());
+		if (price == '') {
+			$.messager.alert('警告', '午餐不能为空!');
+			$("#servicename").focus();
+			return false;
+		}
+		var type = $.trim($("#dinner_v").val());
+
+		if (type == '') {
+			$.messager.alert('警告', '晚餐不能为空!');
+			$("#servicetype").focus();
+			return false;
+		}
+		var sex = $.trim($("#type").combobox('getValue'));
+
+		if (sex == '') {
+			$.messager.alert('警告', '类别不能为空!');
+			$("#servicesex").focus();
+			return false;
+		}
+		
+		if (imgbreakfast == '') {
+			$.messager.alert('警告', '早餐图片不能为空!');
+			return false;
+		}
+		if (imglunch == '') {
+			$.messager.alert('警告', '午餐图片不能为空!');
+			return false;
+		}
+		if (imgdinner == '') {
+			$.messager.alert('警告', '晚餐图片不能为空!');
+			return false;
+		}
+		if (imgsnack == '') {
+			$.messager.alert('警告', '零食不能为空!');
+			return false;
+		}
+		return true;
+	}
+	
+	function formatType(value) {
+		switch (value) {
+		case 0:
+			return '增重美体';
+		case 1:
+			return '美体塑形';
+		case 2:
+			return '轻量减脂';
+		case 3:
+			return '疯狂减脂';
+		default:
+			return '';
+		}
+	}
+	function save() {
+		//uploadImage();
+
+		if (checkForm()) {
+			var breakfast_v = $("#breakfast_v").textbox('getValue');
+			var lunch_v = $("#lunch_v").textbox('getValue');
+			var dinner_v = $("#dinner_v").textbox('getValue');
+			var snack_v = $("#snack_v").textbox('getValue');
+			var type = $("#type").combobox('getValue');
+			var id = $("#id").val();
+			//var breakfast = $("#breakfas").val();
+			//var lunch = $("#lunch").val();
+			//var dinner = $("#dinner").val();
+			//var snack = $("#snack").val();
+			//alert(id);
+			$.post('HealthCookbookAction!createOrUpdate.zk', {
+				id : id,
+				breakfast : breakfast_v,
+				lunch : lunch_v,
+				dinner : dinner_v,
+				snack : snack_v,
+				breakfastImage : imgbreakfast,
+				lunchImage : imglunch,
+				dinnerImage : imgdinner,
+				snackImage : imgsnack,
+				type : type
+			}, function(data) {
+				if (data.STATUS) {
+					$('#dlg').dialog('close');
+					$('#dg').datagrid('reload');
+				} else {
+					$.messager.alert('信息提示', '系统繁忙!', 'error');
+				}
+			}, 'json');
+		}
+	}
+
+	function destroy() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row) {
+			if (confirm("确定删除该信息?")) {
+				$.getJSON('HealthCookbookAction!delete.zk', {
+					id : row.id
+				}, function(data) {
+					if (data.STATUS) {
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					} else {
+						showTip("删除失败!");
+					}
+				});
+			}
+		} else {
+			$.messager.alert('警告', '请先选择套餐!');
+		}
+	}
+</script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+		<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+			<div class="main_go">
+				<div class="main_sty">宅客网络后台管理系统</div>
+				<div class="main_mov">
+					当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+						style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+						href="javascript:void(0)" onclick="logout()">退出</a>]
+				</div>
+			</div>
+		</div>
+		<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+			<div class="main_tabim" id="timenow"></div>
+		</div>
+		<div style="width: 100%; height: 100%; min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left; min-width: 210px;">
+				<div class="main_jian">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_poy"></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+					<div style="width: 100%; height: 68px;"></div>
+					<div class="main_opt">后台管理 &gt; 健康食谱</div>
+					<div class="main_kpy"></div>
+					<div style="width: 100%; height: 73%; min-width: 750px;">
+						<div class="boyd" style="width: 100%;">
+							<table id="dg"
+								style="height: 105%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'HealthCookbookAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th
+											data-options="field:'breakfast',align:'center',width:$(this).width() * 0.15">早餐</th>
+										<th
+											data-options="field:'lunch',align:'center',width:$(this).width() * 0.15">午餐</th>
+										<th
+											data-options="field:'dinner',align:'center',width:$(this).width() * 0.15">晚餐</th>
+										<th
+											data-options="field:'snack',align:'center',width:$(this).width() * 0.15">零食</th>
+										<th
+											data-options="field:'type',formatter:formatType,align:'center',width:$(this).width() * 0.05">类型</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:$(this).width() * 0.09">创建时间</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter:formatDate,width:$(this).width() * 0.09">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<!-- <td><input id="txt_keyword" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td> -->
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newTc()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="edit()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="destroy()">删除</a></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dlg" class="easyui-dialog"
+		style="width: 700px; height: 450px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">健康食谱</div>
+		<input id="id" type="hidden" />
+		<div class="fitem">
+			<label>早餐:</label> <input name="breakfast" id="breakfast_v"
+				data-options="multiline:true" style="height: 50px; width: 300px;"
+				class="easyui-textbox" />
+
+
+			<div
+				style="width: 150px; height: 50px; text-align: center; cursor: pointer; margin-top: 0px; float: right; margin-right: 100px;"
+				onclick="chooseImage('breakfast')" title="点击选择图片">
+				<form id="breakfast_img_form" method="post"
+					enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="breakfast"
+						name="name" onchange="uploadImage('breakfast')" accept="image/*" />
+				</form>
+				<img id="imgbreakfast" src="images/yun.png"
+					style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+			</div>
+
+		</div>
+		<div class="fitem">
+			<label>午餐:</label> <input name="lunch" id="lunch_v"
+				data-options="multiline:true" style="height: 50px; width: 300px;"
+				class="easyui-textbox" />
+			<div
+				style="width: 150px; height: 50px; text-align: center; cursor: pointer; margin-top: 0px; float: right; margin-right: 100px;"
+				onclick="chooseImage('lunch')" title="点击选择图片">
+				<form id="lunch_img_form" method="post"
+					enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="lunch" name="name"
+						onchange="uploadImage('lunch')" accept="image/*" />
+				</form>
+				<img id="imglunch" src="images/yun.png"
+					style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+			</div>
+		</div>
+		<div class="fitem">
+			<label>晚餐:</label> <input name="dinner" id="dinner_v"
+				data-options="multiline:true" style="height: 50px; width: 300px;"
+				class="easyui-textbox" />
+			<div
+				style="width: 150px; height: 50px; text-align: center; cursor: pointer; margin-top: 0px; float: right; margin-right: 100px;"
+				onclick="chooseImage('dinner')" title="点击选择图片">
+				<form id="dinner_img_form" method="post"
+					enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="dinner" name="name"
+						onchange="uploadImage('dinner')" accept="image/*" />
+				</form>
+				<img id="imgdinner" src="images/yun.png"
+					style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+			</div>
+		</div>
+		<div class="fitem">
+			<label>零食:</label> <input name="snack" id="snack_v"
+				data-options="multiline:true" style="height: 50px; width: 300px;"
+				class="easyui-textbox" />
+			<div
+				style="width: 150px; height: 50px; text-align: center; cursor: pointer; margin-top: 0px; float: right; margin-right: 100px;"
+				onclick="chooseImage('snack')" title="点击选择图片">
+				<form id="snack_img_form" method="post"
+					enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="snack" name="name"
+						onchange="uploadImage('snack')" accept="image/*" />
+				</form>
+				<img id="imgsnack" src="images/yun.png"
+					style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+			</div>
+		</div>
+		<div class="fitem">
+			<label>类型:</label> <select name="userType" id="type"
+				class="easyui-combobox" required="true"
+				data-options="editable:false" style="width: 150px;">
+				<option value="0" selected="selected">增重美体</option>
+				<option value="1">美体塑形</option>
+				<option value="2">轻量减脂</option>
+				<option value="3">疯狂减脂</option>
+			</select>
+		</div>
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="save()" style="width: 90px">保存</a> <a
+				href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+</body>
+</html>

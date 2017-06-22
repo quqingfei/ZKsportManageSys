@@ -1,0 +1,142 @@
+<div id="dlg" class="easyui-dialog" modal="true" style="width: 450px; height: 550px; padding: 10px 20px" closed="true"buttons="#dlg-buttons">
+    <!-- <div class="ftitle">比赛信息</div> -->
+    <form id="fm" method="post" novalidate>
+        <input id="id" type="hidden"/>
+        <div class="fitem">
+            <label>官方:</label> <select id="isOfficial" name="isOfficial" class="easyui-combobox"  style=" width: 150px; " data-options="editable:false">
+            <option value="y" selected>是</option>
+            <option value="n">否</option>
+        </select>
+        </div>
+        <div class="fitem">
+            <label>活动名称:</label> <input name="name"
+                                        id="name" class="easyui-textbox"/>
+        </div>
+        <div class="fitem">
+            <label>主办方名称:</label> <input name="organizersName"
+                                         id="organizersName" class="easyui-textbox"/>
+        </div>
+        <div class="fitem">
+            <label>运动类型:</label> <input name="gameSportType"
+                                        id="gameSportType" class="easyui-textbox"/>
+        </div>
+        <div class="fitem">
+            <label>参加人数:</label> <input name="joinTotle"
+                                        id="joinTotle" class="easyui-textbox"/>
+        </div>
+
+        <div class="fitem">
+            <label>开始时间:</label> <input name="gmtStart"
+                                        id="gmtStart" class="easyui-textbox"/>
+        </div>
+        <div class="fitem">
+            <label>结束时间:</label> <input name="gmtEnd"
+                                        id="gmtEnd" class="easyui-textbox"/>
+        </div>
+        <!--<div class="fitem">-->
+            <!--<label>gpsx:</label>-->
+            <!--<input name="gpsX" id="gpsx" class="easyui-textbox"/>-->
+        <!--</div>-->
+        <!--<div class="fitem">-->
+            <!--<label>gpsy:</label>-->
+            <!--<input name="gpsY" id="gpsy" class="easyui-textbox"/>-->
+        <!--</div>-->
+        <!--<div class="fitem">-->
+            <!--<label>基础分成:</label>-->
+            <!--<input name="benefitRate" id="benefitRate" class="easyui-numberbox" data-options="precision:2"/>-->
+        <!--</div>-->
+        <!--<div class="fitem">-->
+            <!--<label>简介:</label>-->
+            <!--<input name="description" id="description"-->
+                   <!--data-options="multiline:true"-->
+                   <!--style="height:50px"  class="easyui-textbox"/>-->
+        <!--</div>-->
+
+        <!--<div class="fitem">-->
+            <!--<label>地址:</label>-->
+            <!--<input name="address" id="address"-->
+                   <!--data-options="multiline:true"-->
+                   <!--style="height:50px"  class="easyui-textbox"/>-->
+        <!--</div>-->
+        <!--<div class="fitem">-->
+            <!--<label>证书:</label> <input name="certification"-->
+                                      <!--id="certification" class="" type="hidden"/>-->
+            <!--<div style="width:245px;height:104px;margin-left:85px; margin-top: 1px;">-->
+                <!--<div  id="image_container" style="float:left;width:225px;height:104px;border:1px solid #95b8e7;overflow-y:auto;overflow-x:hidden;" >-->
+                    <!--&lt;!&ndash; 放置上传的图片 &ndash;&gt;-->
+                <!--</div>-->
+                <!--<div style="float:right;width:16px;height:16px;cursor: pointer;background:url(images/edit_add.png) no-repeat;" onclick="chooseImage('image_file')">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="fitem">-->
+            <!--<label>封面:</label>-->
+            <!--<input name="cover" id="cover" type="hidden"/>-->
+
+        <!--</div>-->
+    <!--</form>-->
+
+    <!--<form id="title_img_form" method="post"  enctype="multipart/form-data">-->
+        <!--<input type="file" style="display: none;" id="file_title_img" name="name" onchange="uploadImage()" accept="image/*" />-->
+    <!--</form>-->
+    <!--<form id="image_form" method="post" enctype="multipart/form-data">-->
+        <!--<input type="file" style="display: none;" id="image_file" name="name" onchange="uploadCertificate()" accept="image/*" />-->
+    <!--</form>-->
+    <!--<div style="width: 197px; height: 67px; margin-left:115px; margin-top: -30px">-->
+        <!--&lt;!&ndash; <img id="imghead" src="http://192.168.1.250/20151231/20151231-161920437.jpg" style="max-width: 100%; width: auto; max-height: 100%; height: auto" /> &ndash;&gt;-->
+        <!--<img id="imghead" src="images/add.png" alt="" style="width:77px;height:77px;;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片" />-->
+
+    <!--</div>-->
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"style="width: 90px">取消</a>
+    </div>
+</div>
+<div id="gymCheckdlg" class="easyui-dialog" style="width: 950px; height: 600px; padding:5px; " closed="true" modal="true" buttons="#dlg-checkbtns">
+    <input type="hidden" id="checkGymId">
+    <dl>
+        <dt>活动名称:</dt>
+        <dd id="checkName"></dd>
+    </dl>
+    <dl>
+        <dt>主办方名称:</dt>
+        <dd id="checkOrganizersName"></dd>
+    </dl>
+
+    <dl>
+        <dt>运动类型:</dt>
+        <dd id="checkGameSportType"></dd>
+
+    </dl>
+
+    <dl>
+        <dt>参加人数:</dt>
+        <dd id="checkJoinTotle"></dd>
+    </dl>
+
+    <dl>
+        <dt>开始时间:</dt>
+        <dd id="checkGmtStart"></dd>
+    </dl>
+    <dl>
+        <dt>结束时间:</dt>
+        <dd id="checkGmtEnd"></dd>
+    </dl>
+    <div id="dlg-checkbtns">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveCheck(1)" style="width: 90px">通过审核</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="saveCheck(0)"style="width: 90px">不通过审核</a>
+    </div>
+</div>
+
+
+
+
+
+
+$('#checkGymId').val(row.id);
+$('#checkName').text(row.name ? row.name : '' );
+$('#checkOrganizersName').text(row.organizersName ? row.organizersName : '');
+$('#checkGameSportType').text(row.gameSportType ? row.gameSportType : '');
+$('#checkJoinTotle').text(row.joinTotle ? row.joinTotle : '');
+$('#checkGmtStart').text(row.gmtStart ? row.gmtStart : '');
+$('#checkGmtEnd').text(row.gmtEnd ? row.gmtEnd : '');

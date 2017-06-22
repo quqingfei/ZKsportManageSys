@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main.css"/>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script>
+	function onSubmit() {
+		var phone = $.trim($("#phone").val());
+		var regex = /^[1][3578]\d{9}$/; //验证手机号码
+	    if(!regex.test(phone)){
+            alert('请填写正确的手机号码!');
+            $("#phone").select();
+            return ;
+	    }
+		$.post('accountAction!bingdingPhone.zk', {phone:phone}, function(data) {
+			if (data.STATUS) {
+				if(data.ERROR&&data.ERROR=='No Login!'){
+                    alert('登陆超时，请重新登录!');
+                    location.replace('index.jsp');
+                }else{
+					alert('成功绑定社区账号!');
+					//location.replace("main.html");
+                }
+			} else {
+				alert("绑定社区账号失败!");
+			}
+		}, 'json');
+	}
+</script>
+</head>
+<body>
+<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='safety.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+				<div class="main_opt">后台管理 &gt; 安全管理 &gt; 绑定社区账号</div>
+				<div class="ttp">
+					<div class="jiankang">
+						<div class="jiankang_ai">
+							<div class="jiankang_ui">绑定社区账号：</div>
+							<div class="jiankang_ji">
+								<input type="text" name="phone" id="phone" class="jiankang_you"
+									maxlength="11" /> <span style="font-size: 12px; color: #999;">请输入要绑定的社区账号</span>
+							</div>
+						</div>
+						<div class="jiankang_sui">
+							<input type="submit" onclick="onSubmit()" value="确认绑定"
+								class="jiankang_mei" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+</body>
+</html>

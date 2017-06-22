@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/easyui2.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<!-- <script src="js/utils.js"></script> -->
+<script src="js/datagrid.common.js"></script>
+<script>
+    //刷新数据
+	function reload(){
+		$('#dg').datagrid('reload');
+	}
+    //修改文章
+	function modifyArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			location.href = "fabu.html?id=" + row.id ;
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+    //删除文章
+	function deleteArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			if (confirm('确定要删除该文章吗?')) {
+				$.post("articleAction!delete.zk", {
+					id : row.id
+				}, function(data) {
+					if (data.STATUS) {
+						if(data.ERROR&&data.ERROR=='No Login!'){
+		                    alert('登陆超时，请重新登录!');
+		                    location.replace('index.jsp');
+		                }else{
+						    reload();//刷新表格
+						    showTip("成功删除文章!");
+		                }
+					} else {
+						alert("删除文章失败");
+					}
+				}, 'json');
+			}
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+    //增加文章
+    function newArticle(){
+    	location.href = "fabu.html";
+    }
+    //查看文章
+    function viewArticle(){
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			ShowDiv('MyDiv','fade',row.id,'');
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+    }
+	//置顶文章
+	function topArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			var days = prompt('置顶该文章几天?') ;
+			if($.trim(days) == ''){
+				return ;//为空时不做任何操作
+			}
+			if (days > 0) {
+			   $.post("articleAction!topArticle.zk", {
+					id : row.id ,
+					days : parseInt(days)
+				}, function(data) {
+					if (data.STATUS) {
+						if(data.ERROR&&data.ERROR=='No Login!'){
+		                    alert('登陆超时，请重新登录!');
+		                    location.replace('index.jsp');
+		                }else{
+							reload();//刷新表格
+							showTip("文章置顶成功!");
+		                }
+					} else {
+						alert("文章置顶失败");
+					}
+				}, 'json'); 
+			}else{
+				alert('只能填写整数!');
+			}
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+	//格式化时间
+	function formatDate(value){
+	    var d = new Date(value);   
+	    return  d.format("yyyy-MM-dd hh:mm:ss");  
+	}
+
+	//搜索文章
+	function search(v){
+	    $("#dg").datagrid('load',{keyword:v});
+	}
+</script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+<!-- 					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div> -->
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+					<div class="main_opt">后台管理 &gt; 文章发布</div>
+					
+					<div class="main_kpy"></div>
+					<div
+						style="width: 100%; height: 73%; min-width: 750px; margin-top: 5px;">
+						<div class="boyd">
+							<table id="dg"
+								style="height: 105%; margin: 0; padding: 0; overflow: hidden;"
+								data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'articleAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'subject',width:535">标题</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:284">创建日期</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter: formatDate,width:284">修改日期</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input type="hidden" id="orderStatus" value="0" /></td>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-new" plain="true"
+											id="expCurLink" onclick="newArticle()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-view" plain="true"
+											id="expCurLink" onclick="viewArticle()">查看</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											id="expCurLink" onclick="modifyArticle()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-garbage" plain="true"
+											id="expCurLink" onclick="deleteArticle()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-top" plain="true"
+											id="expCurLink" onclick="topArticle()">置顶</a></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="fade" class="blck_overlay"></div>
+	<div id="MyDiv" class="whte_content">
+		<div class="kan">
+			<span>查看文章</span> <a class="kan_top"
+				onclick="CloseDiv('MyDiv','fade')"></a>
+		</div>
+		<div class="kan_mo">
+			<div class="kan_ko">
+				<div class="kan_po">
+					<iframe src="" width="260" height="390" frameborder="0"
+						id="frame_view"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function ShowDiv(show_div, bg_div,id,time) {
+		    var src = 'articleAction!show2.zk?id='+id;
+		    document.getElementById('frame_view').src  =  src;
+			document.getElementById(show_div).style.display = 'block';
+			document.getElementById(bg_div).style.display = 'block';
+			var bgdiv = document.getElementById(bg_div);
+			bgdiv.style.width = document.body.scrollWidth;
+			$("#" + bg_div).height($(document).height());
+		}
+
+		function CloseDiv(show_div, bg_div) {
+			document.getElementById(show_div).style.display = 'none';
+			document.getElementById(bg_div).style.display = 'none';
+		}
+	</script>
+</body>
+</html>

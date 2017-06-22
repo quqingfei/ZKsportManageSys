@@ -1,0 +1,17 @@
+.showList{
+	width:100%;
+	height:560px;
+	margin:0 auto;
+}
+.address{
+	position:relative;
+	left:90px;
+	top:-15px;
+	width:450px;
+	height:20px;
+}
+.addressMesage{
+	float:left;
+	height:18px;
+	margin-right:10px;
+}

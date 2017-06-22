@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style type="text/css">
+
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>		
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">资讯管理</li>
+			</ul>
+							<table id="dg"
+								style="height:560px; "
+								data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'articleAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'subject',width:535">标题</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:284">创建日期</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter: formatDate,width:284">修改日期</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input type="hidden" id="orderStatus" value="0" /></td>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-new" plain="true"
+											id="expCurLink" onclick="newArticle()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-view" plain="true"
+											id="expCurLink" onclick="viewArticle()">查看</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											id="expCurLink" onclick="modifyArticle()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-garbage" plain="true"
+											id="expCurLink" onclick="deleteArticle()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-top" plain="true"
+											id="expCurLink" onclick="topArticle()">置顶</a></td>
+									</tr>
+								</table>
+							</div>
+							
+							<!-- dgs -->
+							<div id="articleDlg" class="easyui-dialog"
+								style="width: 350px; height: 550px; padding: 5px;overflow:hidden;" closed="true">
+								<iframe src="" id="articleFrame" style="width: 100%;height: 100%;border: 0;"></iframe>
+							</div>
+							<!--  -->
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<!-- <script src="js/utils.js"></script> -->
+<script src="js/datagrid.common.js"></script>
+<script src="js/saveRequest.js"></script>
+<script>
+$(function(){
+	$('#dg').datagrid({
+		onLoadSuccess: function(data){
+			if (data.total == 0 && data.ERROR == 'No Login!') {
+				//relogin();
+				var user_id =  localStorage.getItem('user_id');
+				var user_pwd = localStorage.getItem('user_pwd');
+				if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();						
+				}
+				else{
+					$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+						if(data.STATUS){
+							$('#dg').datagrid('reload');
+						}
+					},'json').complete(function(){
+						$('#dg').datagrid('reload');
+					});
+				}
+					
+			}
+		},
+		onLoadError : function() {
+			alert('出错啦');
+		}
+	});
+});
+
+    //刷新数据
+	function reload(){
+		$('#dg').datagrid('reload');
+	}
+    //修改文章
+	function modifyArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			location.href = "fabu1.html?id=" + row.id ;
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+    //删除文章
+	function deleteArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			if (confirm('确定要删除该文章吗?')) {
+				$.post("articleAction!delete.zk", {
+					id : row.id
+				}, function(data) {
+					if (data.STATUS) {
+						if(data.ERROR&&data.ERROR=='No Login!'){
+		                    alert('登陆超时，请重新登录!');
+		                    location.replace('index.html');
+		                }else{
+						    reload();//刷新表格
+						    showTip("成功删除文章!");
+		                }
+					} else {
+						alert("删除文章失败");
+					}
+				}, 'json');
+			}
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+    //增加文章
+    function newArticle(){
+    	location.href = "fabu1.html";
+    }
+    //查看文章
+    function viewArticle(){
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			
+			var url = 'http://'+location.hostname+'/fatburn/fbarticles/'+row.id+'.html';
+			$('#articleFrame').attr('src',url);
+			//ShowDiv('MyDiv','fade',row.id,'');
+			$('#articleDlg').dialog('open').dialog('setTitle','查看文章');
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+    }
+	//置顶文章
+	function topArticle() {
+		var row = $('#dg').datagrid('getSelected');
+		if (row){
+			var days = prompt('置顶该文章几天?') ;
+			if($.trim(days) == ''){
+				return ;//为空时不做任何操作
+			}
+			if (days > 0) {
+			   $.post("articleAction!topArticle.zk", {
+					id : row.id ,
+					days : parseInt(days)
+				}, function(data) {
+					if (data.STATUS) {
+						if(data.ERROR&&data.ERROR=='No Login!'){
+		                    alert('登陆超时，请重新登录!');
+		                    location.replace('index.jsp');
+		                }else{
+							reload();//刷新表格
+							showTip("文章置顶成功!");
+		                }
+					} else {
+						alert("文章置顶失败");
+					}
+				}, 'json'); 
+			}else{
+				alert('只能填写整数!');
+			}
+		}else{
+			$.messager.alert('错误','请先选择文章!','error');
+		}
+	}
+	//格式化时间
+	function formatDate(value){
+	    var d = new Date(value);   
+	    return  d.format("yyyy-MM-dd hh:mm:ss");  
+	}
+
+	//搜索文章
+	function search(v){
+	    $("#dg").datagrid('load',{keyword:v});
+	}
+	
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

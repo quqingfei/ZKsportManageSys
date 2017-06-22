@@ -1,0 +1,1160 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>宅客运动后台管理系统</title>
+    <link rel="stylesheet" href="css/main3.css"/>
+    <link rel="stylesheet" href="css/easyui2.min.css"/>
+    <link rel="stylesheet" href="css/icon.css"/>
+    <link rel="stylesheet" href="css/theme-simple.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+    <link rel="stylesheet" href="css/face.css"/>
+    <style>
+        a{
+            cursor:pointer;
+        }
+        #main_llop{
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;   /*用overflow: hidden 到容器里的元素*/
+        }
+        #main_ffop{                /*设置左边通栏*/
+            width: 200px;
+            float: left;
+        }
+        #main_ttop{                /*设置左边通栏*/
+            width: 720px;
+            float: left;
+        }
+        #main_llop{
+            display: inline-block;
+        }
+        #main_llop{
+            display: block;
+        }
+        #main_ffop, #main_ttop{
+            padding-bottom: 10000px;  /*应用 padding-bottom（足够大的值）到列的块元素*/
+            margin-bottom: -10000px;  /*应用 margin-bottom（足够大的值）到列的块元素*/
+        }
+    </style>
+    <!--帖子模板-->
+    <script id="noteTmpl" type="text/x-jquery-tmpl">
+    <div class="hong_baowei">
+        <div class="hong">
+            <div class="hong_cai">
+                <div class="hong_bu">
+                    <img width="60" src="${userIcon}" />
+                </div>
+                <div class="hong_jian"></div>
+            </div>
+            <div class="hong_yao">
+                <div class="hong_di">
+                    <a class="hong_flow">${userName}</a> 
+                    <img width="36" src="images/vip${level}.png" />
+                     {{if isTop}}
+                        <a class="hong_flowly" style="color:red; margin-left:10px;">[置顶]</a>
+                     {{/if}}
+                    {{if isBoutique }}
+                      <a class="hong_flowly" id="jingpin${id}" style=" color:red; margin-left:10px;">[精品]</a>
+                      {{else}}
+                      <a class="hong_flowly" id="jingpin${id}" style="display:none; color:red; margin-left:10px;">[精品]</a>
+                    {{/if}}
+                </div>
+                <div class="hong_jieshou">{{html noteContent}}</div>
+                <!--  显示帖子图片 -->
+                <div class="hong_wu">
+                    {{each noteImages}} 
+                    <div style=" width:150px; height:160px; float:left; margin-left:4px; margin-top:4px; overflow:hidden;"> 
+                        <a class="popImage" href="../file/FileCenter!showImage2.zk?name=${name}">
+                            <img alt="popImage" style="border: 0px; height:160px;" src="../file/FileCenter!showImage2.zk?type=sml&name=${name}"/>
+                        </a>                        
+                    </div>{{/each}}
+                 </div>
+                <div class="hong_diao">
+                    <div class="hong_si">
+                       <!-- 发帖时间 -->
+                         ${gmtCreate}
+                    </div>
+					 <div class="hong_kanf">
+                        <a onclick="addAction('${id}','${userId}')">加入合集</a>
+                    </div>
+                    <div class="hong_kanf">
+                        <a id="reply${id}" onclick="viewReply('${id}',1,0)">评论(<span id="replySize${id}">${replySize}</span>)</a>
+                    </div>
+                    <div class="hong_kanf">
+                        <a onclick="topNote('${id}')">置顶</a>
+                    </div>
+                    <div class="hong_kanf">
+                        <a onclick="del('${id}')">删除</a>
+                    </div>
+                      {{if isBoutique }}
+                    <div id="jiajing${id}"class="hong_kanf" style="display:none">
+                        <a onclick="addDigest('${id}','y')">加精</a>
+                    </div>
+                     <div id="canclejiajing${id}" class="hong_kanf">
+                        <a onclick="cancleDigest('${id}','n')">取消加精</a>
+                    </div>
+                    {{else}}
+                     <div id="jiajing${id}"class="hong_kanf" >
+                        <a onclick="addDigest('${id}','y')">加精</a>
+                    </div>
+                     <div id="canclejiajing${id}" class="hong_kanf" style="display:none">
+                        <a onclick="cancleDigest('${id}','n')">取消加精</a>
+                    </div>
+                     {{/if}}
+                   {{if complaint}}
+                    <span style=" color:red; display:inline-block; margin-top:5px;"> 该帖被举报: ${complaint}</span>
+                    <div class="hong_kanf">
+                        <a onclick="passNote('${id},)">通过审核</a>
+                    </div>
+                   {{/if}}
+                </div>
+                <!-- 弹出 -->
+                <div class="tan" id="${id}">
+                    <div class="tan_ti"></div>
+                    <div class="tan_jian">
+                        <div class="tan_gu" id="replys${id}">
+                            <!-- 放置回帖 -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 弹出关闭 -->
+            </div>
+        </div>
+        <div class="tan_gehe"></div>
+    </div>
+</script>
+    <!--回帖模板-->
+    <script  id="replyTmpl" type="text/x-jquery-tmpl">
+<div class="tan_zhuan">
+    <div class="tan_qie">
+        <div class="tan_rang" style="word-wrap: break-word;word-break: break-all;white-space: normal;">
+            <span style="color: #0A8CD2;">
+                ${userName} 
+                {{if toUserName}}
+                   回复  ${toUserName}
+                 {{/if}}
+               ：</span>{{html replyContent}}
+        </div>
+        <div class="tan_shenl">
+            <div class="tan_jing" style="float:right;padding:0;">
+                <div class="tan_kanf">
+                    <a id="jox" onclick="reply2('${id}','${noteId}','${userId}')">评论</a>
+                </div>
+                <div class="tan_kanf">
+                    <a onclick="delReply('${id}','${noteId}')">删除</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="tan_zilong" id="jox${id}">
+        <div class="tan_maimai"></div>
+        <div class="tan_wuwu">
+            <textarea class="tan_tangt" id="joxreply${id}"  onkeydown="limitText(this,'limitSize${id}',200);" onkeyup="limitText(this,'limitSize${id}',200);"></textarea>
+            <div class="tan_dingd">
+                <div class="tan_kunt">
+                    <div>
+						<div id="joxface${id}" class="faceBtn">添加表情</div>
+                        <div class="tan_xiexieni">还可以输入<span id="limitSize${id}">200</span>字</div>
+                        <input value="" onclick="reply('${id}','${noteId}','${userId}','${userName}')" type="submit" class="tan_wa" style="display:block;float: right;margin-top: -20px" />
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</script>
+</head>
+<body>
+<!--大标题栏-->
+<div class="group wrap header"
+     style="height: 66px; font-size: 100%">
+    <div class="content">
+        <div class="logo">
+            <div>
+                <img src="images/logo.png" alt="宅客运动">
+            </div>
+        </div>
+        <div class="head-right">
+            <div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+            <div style="margin: 8px auto;">
+                <a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--侧边导航栏-->
+<div class="left-region">
+    <ul id="accordion" class="accordion">
+        <li>
+            <div class="link">
+                <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+            </div>
+        </li>
+        <li class="open">
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-bullhorn"></i><a href="action1.html">版本管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="app1.html">版本管理</a></li>
+                <li><a href="feedback1.html">反馈管理</a></li>
+                <li><a href="video1.html">视频管理</a></li>
+                <li><a href="medal1.html">勋章管理</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="account1.html">系统用户</a></li>
+                <li><a href="resources1.html">资源管理</a></li>
+                <li><a href="role1.html">角色管理</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="center-region" style="height: 599px; overflow-y: auto;">
+    <div>
+        <ul class="breadcrumb">
+            <li>当前位置：</li>
+            <li class="active">后台管理 <span class="divider">/</span></li>
+            <li class="active">社区管理</li>
+        </ul>
+        <div>
+            <!-- dgs -->
+            <div>
+                    <div style="width: 623px; height: 30px; margin-top: 10px; color: #999; line-height: 30px;">
+                    <div style="float: left; width: 300px; height: 30px; padding-left: 20px; font-weight: bold; color: #333; font-size: 14px;">宅客社区</div>
+                    <div style="width: 300px; height: 30px; float: right; text-align: right;">
+                        文明上网，拒绝色情，还可以输入<span id="limitSize">200</span>字
+                    </div>
+                </div>
+                <div class="zhong_qing" style="margin-left: 20px;"
+                     id="Smohan_FaceBox">
+                    <div class="zhong_keng"></div>
+                    <textarea class="zhong_gu" id="Smohan_text" onkeydown="limitText(Smohan_text,'limitSize',200);" onkeyup="limitText(Smohan_text,'limitSize',200);"></textarea>
+                    <div class="pugong_tou" id="image_container">
+                        <!-- 放置上传的图片 -->
+                    </div>
+                </div>
+                <div class="zhong_mo" style="margin-left: 20px;">
+                    <div class="wudang">
+                        <a class="popbox-link" onclick="chooseImage()">
+                            <div class="wudang_dao"></div>
+                            <div class="wudang_qie">图片</div>
+                        </a>
+                        <div class="popbox">
+                            <div class="mainlist">
+                                <form id="image_form" method="post"
+                                      enctype="multipart/form-data">
+                                    <input type="file" style="display: none;" id="image_file"
+                                           name="name" onchange="uploadImage()" accept="image/*" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:65px;float:left;margin-top: -3px; ">
+                        <div id="face1" class="faceBtn">添加表情</div>
+                    </div>
+                    <div class="zhong_zhang">
+                        <input value="" type="submit" class="zhong_zguo"
+                               onclick="newNote()" />
+                    </div>
+                </div>
+
+                <div class="masi_sat" style="margin-left: 20px;">
+                    <div style="float: left; width: 606px; font-size: 12px;">
+                        <div style="float: left; margin-left: -6px;">
+                            帖子搜索： <input type="text" value="请输入关键词"
+                                         onfocus="if(value=='请输入关键词') {value=''}"
+                                         onblur="if (value=='') {value='请输入关键词'}" name="keyword"
+                                         id="txt_keyword" size="30" style="color: #999; width: 140px;" />
+                            <input type="submit" value="搜索" style="color: #666"
+                                   onclick="searchNote()" />
+                        </div>
+                        <div style="width: 110px; height: 30px; position: relative; float: right; margin-left: 20px;">
+                            <input type="checkbox" id="complaint" onclick="searchNote()" style="position: absolute; top: 11px; left: 0px;" />
+                            <a style="position: absolute; top: 5px; left: 25px;">查看被投诉的</a>
+                            <input type="checkbox" id="jiajingtie" onclick="searchNote()" style="position: absolute; top: 11px; left: -82px;" />
+                            <a style="position: absolute; top: 5px; left: -60px;">查看精品</a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                        style="width: 703px; margin-left: 20px; min-height: 356px; margin-top: 5px; margin-bottom: 10px;"
+                        id="notes">
+                    <!-- 放置帖子 -->
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+</div>
+<!-- 选择活动 -->
+<div id="actionDialog" class="easyui-dialog" style="width: 600px; height: 420px; padding: 10px 20px" closed="true" modal="true"
+     buttons="#chooseButtons">
+    <input type="hidden" id="ids">
+    <table id="actionDg" style="margin: 0; padding: 0;height:320px;"
+           data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'ActionlistAction!list.zk',method:'post'">
+        <thead>
+        <tr>
+            <th data-options="field:'id',checkbox:true"></th>
+            <th data-options="field:'name',align:'center',width:150">活动名称</th>
+            <th data-options="field:'introduction',align:'center',width:150">活动描述</th>
+            <th data-options="field:'cover',formatter:formatCover,align:'center',width:150">活动封面</th>
+        </tr>
+        </thead>
+    </table>
+    <div id="chooseButtons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6"
+           iconCls="icon-ok" onclick="selectAction()" style="width: 90px">确定</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton"
+           iconCls="icon-cancel" onclick="javascript:$('#actionDialog').dialog('close')"
+           style="width: 90px">取消</a>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/json2.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/jquery.face.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/easyui-common.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/biz/zk_community.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/saveRequest.js"></script>
+<script>
+    //删除回帖
+    function delReply(id,noteId) {
+        if (confirm('确定删除吗?')) {
+            $.getJSON("noteAction!delete.zk", {
+                id : id,
+                isReply : 'true'
+            }, function(data) {
+                if (data.STATUS) {
+                    if(data.ERROR&&data.ERROR=='No Login!'){
+                        alert('登陆超时，请重新登录!');
+                        location.replace('index.jsp');
+                    }else{
+                        viewReply(noteId,1,1);
+                        var size = $("#replySize"+noteId).text();
+                        $("#replySize"+noteId).text(parseInt(size)-1);
+                    }
+                } else {
+                    alert('删除帖子失败');
+                }
+            });
+        }
+    }
+    //删除帖子
+    function del(id) {
+        if (confirm('确定删除吗?')) {
+            $.getJSON("noteAction!delete.zk", {
+                id : id,
+                isReply : ''
+            }, function(data) {
+                if (data.STATUS) {
+                    if(data.ERROR&&data.ERROR=='No Login!'){
+                        alert('登陆超时，请重新登录!');
+                        location.replace('index.jsp');
+                    }else{
+                        pageIndex = 1 ;
+                        getNotes(pageIndex ,'','');
+                    }
+                } else {
+                    alert('删除帖子失败');
+                }
+            });
+        }
+    }
+
+    //置顶帖子
+    function topNote(id) {
+        var days = prompt('置顶该文章几天?') ;
+        if($.trim(days) == ''){
+            return ;
+        }
+        if (days > 0) {
+            $.post("noteAction!topNote.zk", {
+                id : id ,
+                days : parseInt(days)
+            }, function(data) {
+                if (data.STATUS) {
+                    if(data.ERROR&&data.ERROR=='No Login!'){
+                        alert('登陆超时，请重新登录!');
+                        location.replace('index.jsp');
+                    }else{
+                        pageIndex = 1 ;
+                        getNotes(pageIndex ,'','');
+                    }
+                } else {
+                    alert("帖子置顶失败");
+                }
+            }, 'json');
+        }else{
+            alert('只能填写整数!');
+        }
+    }
+    //帖子加精
+    function addDigest(id,s){
+        $.post("noteAction!boutiqueNote.zk",{
+                    id :id,
+                    isBoutique:s
+                },function(data) {
+            if (data.STATUS) {
+                if(data.ERROR&&data.ERROR=='No Login!'){
+                    alert('登陆超时，请重新登录!');
+                    location.replace('index.jsp');
+                }else{
+//                    pageIndex = 1 ;
+//                    getNotes(pageIndex,'','');
+                    $("#jiajing"+id).hide();
+                    $("#jingpin"+id).show();
+                    $("#canclejiajing"+id).show();
+                }
+            } else {
+                alert("帖子加精失败");
+            }
+        }, 'json');
+    }
+    //取消加精
+    function cancleDigest(id,s){
+        $.post("noteAction!boutiqueNote.zk",{
+            id :id,
+            isBoutique:s
+        },function(data) {
+            if (data.STATUS) {
+                if(data.ERROR&&data.ERROR=='No Login!'){
+                    alert('登陆超时，请重新登录!');
+                    location.replace('index.jsp');
+                }else{
+                    $("#jiajing"+id).show();
+                    $("#jingpin"+id).hide();
+                    $("#canclejiajing"+id).hide();
+                }
+            } else {
+                alert("帖子加精失败");
+            }
+        }, 'json');
+    }
+    //通过审核
+    function passNote(id) {
+        $.post("noteAction!passNote.zk", {
+            id : id
+        }, function(data) {
+            if (data.STATUS) {
+                if(data.ERROR&&data.ERROR=='No Login!'){
+                    alert('登陆超时，请重新登录!');
+                    location.replace('index.jsp');
+                }else{
+                    pageIndex = 1 ;
+                    getNotes(pageIndex,'','');
+                }
+            } else {
+                alert("帖子审核失败");
+            }
+        }, 'json');
+    }
+
+    //选择图片
+    function chooseImage(){
+        document.getElementById("image_file").click();
+    }
+
+    //评论帖子
+    function replyNote(id){
+        var replyContent = $.trim($("#replyContent"+id).val());
+        if(replyContent==''){
+            alert('评论内容不能为空');
+            return ;
+        }
+        if(replyContent.length > 200){
+            alert('评论内容不能超过200字');
+            return ;
+        }
+        replyContent = escapeLink(replyContent);
+        $.post('noteAction!newNoteReply.zk',{noteId:id,replyContent:replyContent},function(data){
+            //回帖成功,刷新评论
+            if(data.STATUS){
+                if(data.ERROR == "No Login!"){
+                    alert('登录超时，请登录');
+                    relogin();
+                    return ;
+                }
+                viewReply(id,1,1);
+                var size = $("#replySize"+id).text();
+                $("#replySize"+id).text(parseInt(size)+1);
+            }else{
+                alert(data.INFO);
+            }
+        },'json');
+    }
+    /**
+     *  查看贴子评论
+     *  id   :帖子ID
+     *  page :当前页
+     *  flag :是否隐藏
+     */
+    function viewReply(id,page,flag){
+        $.post('../noteAction!moreReply.zk',{noteId:id ,pageIndex:page,pageSize:5},function(data){
+            //清空
+            $("#replys"+id).empty();
+            var notes = data.notes;
+            var inputHtml = " <div class=\"tan_wo\">"+
+                    "<textarea class=\"tan_hu\" id=\"replyContent"+id+"\"  onkeydown=\"limitText(this,'replylimitSize"+id+"',200);\" onkeyup=\"limitText(this,'replylimitSize"+id+"',200);\"></textarea>"+
+                    "<div class=\"tan_qian\"><div id=\"face"+id+"\" class=\"faceBtn\">添加表情</div><div class=\"tan_xiexieni\">还可以输入<span id=\"replylimitSize"+id+"\">200</span>字</div>"+
+                    "<div class=\"tan_lov\" style=\"margin-top: -25px;\">"+
+                    "<input value=\"\" type=\"submit\" onclick=\"replyNote('"+id+"')\" class=\"tan_wa\">"+
+                    "</div></div></div>";
+            //显示输入表单
+            $("#replys"+id).append(inputHtml);
+            //解析帖子内容
+            var replys = data.replys ;
+            for(var i = 0 ;i<replys.length;i++){
+                var reply = replys[i];
+                reply.replyContent = parseNoteContent(reply.replyContent);
+            }
+            //显示帖子列表
+            $.tmpl($("#replyTmpl").html(), data.replys).appendTo("#replys"+id);
+            //分页列表
+            $("#replys"+id).append("<div class='tan_lanzhou' id='replyPages"+id+"'></div>");
+            $("#replyPages"+id).append(data.html);
+            $("#replys"+id).append("<div style='clear: both;'></div>");
+        },'json').complete(function() {
+            //console.log('id:'+id);
+            //表情控件
+            $('#face'+id).qqFace({
+                id : 'facebox'+id,
+                assign:'replyContent'+id,
+                path:'images/face/'
+            });
+        });
+        if(flag == 0){
+            var obj = $("#"+id);
+            obj.toggleClass("Show");
+            if(obj.hasClass("Show")){
+                obj.fadeIn("slow");
+            }else{
+                obj.fadeOut("slow");
+            }
+        }
+    }
+
+    /**
+     * 显示评论某人表单
+     * id:评论ID ,noteID:帖子ID,userId:用户ID
+     */
+    function reply2(id,noteId,userId){
+        //console.log('id:'+id+",noteId:"+noteId+",userId:"+userId);
+        var obj = $("#jox"+id);
+        obj.toggleClass("Show");
+        if(obj.hasClass("Show")){
+            obj.fadeIn("slow");
+            $('#joxface'+id).qqFace({
+                id : 'facebox'+id,
+                assign: 'joxreply'+id,
+                path:'images/face/'
+            });
+        }else{
+            obj.fadeOut("slow");
+        }
+    }
+
+    /**
+     * 评论某人
+     * id:评论ID ,noteID:帖子ID,userId:用户ID
+     */
+    function reply(id,noteId,userId,userName){
+        var replyContent = $.trim($("#joxreply"+id).val());
+        if(replyContent==''){
+            alert('评论内容不能为空');
+            return ;
+        }
+        if(replyContent.length > 200 ){
+            alert('评论内容不能超过200字');
+            return ;
+        }
+        replyContent = escapeLink(replyContent);
+        $.post('noteAction!newNoteReply.zk',{
+                    noteId:noteId,
+                    toUserId:userId,
+                    toUserName:userName,
+                    replyContent:replyContent
+                },
+                function(data){
+                    //回帖成功,刷新评论
+                    if(data.STATUS){
+                        if(data.ERROR == "No Login!"){
+                            alert('登录超时，请登录');
+                            relogin();
+                            return ;
+                        }
+                        viewReply(noteId,1,1);
+                        var size = $("#replySize"+noteId).text();
+                        $("#replySize"+noteId).text(parseInt(size)+1);
+                    }else{
+                        alert(data.INFO);
+                    }
+                },'json');
+    }
+
+    var pageIndex = 1;
+    var pageSize = 6;
+    var pageCount = 1;//总页数
+    var paganationSize = 5;
+    //获取帖子
+    //page  , complaint , keyword
+    function getNotes(page,complaint,keyword){
+        pageIndex = page ;
+        $.post('noteAction!list2.zk',{pageIndex:pageIndex,pageSize:pageSize,complaint:complaint,keyword:keyword},function(data){
+            if(data.STATUS){
+                if (data.ERROR != 'No Login!') {
+                    //清空
+                    $("#notes").empty();
+                    var notes = data.notes;
+                    var noteSize = notes.length ;
+                    if(noteSize > 0 ){
+                        for(var i = 0 ;i< noteSize;i++){
+                            var note = notes[i];
+                            note.userIcon = "../file/FileCenter!showImage2.zk?type=mdm&name=" + note.userIcon;
+                            if(note.noteImages){
+                                note.noteImages = eval("("+note.noteImages +")");
+                            }
+                            if(note.complaint){
+                                note.complaint = formatComplaint(note.complaint);
+                            }else{
+                                note.complaint = null ;
+                            }
+                            if(note.gmtModify > note.gmtCreate){
+                                var now = new Date().getTime();
+                                if(note.gmtModify > now){
+                                    note.isTop = 'y';
+                                }
+                            }
+                            note.gmtCreate = getTimeAgo(note.gmtCreate);
+                            /*  var nct = note.noteContent;
+                             note.noteContent = nct.replace(/∞网页链接/g,"网页链接"); */
+                            //var noteContent = ubb2html(note.noteContent);
+                            //noteContent = noteContent.replace(/∞网页链接/g,"网页链接");
+
+                            //var noteContent = unescapeHTML(note.noteContent);
+                            note.noteContent = parseNoteContent(note.noteContent);
+                            if(note.isBoutique){
+                                note.isBoutique = note.isBoutique;
+                            }
+
+//                            note.isBoutique = "y";
+                        }
+                        $.tmpl($("#noteTmpl").html(), data.notes).appendTo("#notes");
+                        //分页
+                        //总页数
+                        pageCount = data.total;
+                        var startPaganation = 1 ;//起始页码行
+                        //处理小于paganationSize的情况
+                        if(pageIndex <= paganationSize){
+                            startPaganation = 1;
+                        }else{
+                            if( (pageIndex % paganationSize) == 0 ){
+                                startPaganation = ( parseInt( pageIndex / paganationSize ) - 1) * paganationSize + 1 ;
+                            }else{
+                                startPaganation =  parseInt( pageIndex / paganationSize )  * paganationSize + 1 ;
+                            }
+                        }
+
+                        //页码下一行
+                        var endPaganation = startPaganation + ( paganationSize - 1 ) ;//结束页码行
+                        if(startPaganation == 1){
+                            endPaganation =  paganationSize ;
+                        }
+                        //结束行超过总页数，结束行设置为总页数
+                        if(endPaganation >= pageCount){
+                            endPaganation = pageCount;
+                        }
+                        //上一页页码
+                        var prePage = pageIndex - 1;
+                        //已到了第一页
+                        if(pageIndex == 1){
+                            prePage  = 1;
+                        }
+                        //下一页页码
+                        var nextPage = pageIndex + 1;
+                        //已到最后一页
+                        if(pageIndex == pageCount){
+                            nextPage = endPaganation ;
+                        }
+                        //详细页码
+                        $("#notes").append("<div class='hong_jiazai' id='note_pages'></div>")
+                        $("#note_pages").append("<input style='float: left' type='button' id='noteprePage' value='上一页' onclick='getNotes("+prePage+",\""+complaint+"\",\""+keyword+"\")' />");
+                        for (var i = startPaganation; i <= endPaganation; i++) {
+                            if(i == pageIndex){
+                                $("#note_pages").append(
+                                        "<a style='text-decoration: none; color: #000;' href='javascript:void(0)' >" + i + "</a>");
+                            }else{
+                                $("#note_pages").append(
+                                        "<a href='javascript:void(0)' onclick='getNotes("+i+",\""+complaint+"\",\""+keyword+"\")'>" + i + "</a>");
+                            }
+
+                        }
+                        $("#note_pages").append("<input style='float: left' type='button' id='notenextPage' value='下一页' onclick='getNotes("+nextPage+",\""+complaint+"\",\""+keyword+"\")' />");
+                        if(pageIndex == 1){
+                            $("#noteprePage").attr("disabled",true);
+                        }
+                        if(pageIndex == pageCount){
+                            $("#notenextPage").attr("disabled",true);
+                        }
+                    }else{
+                        $("#notes").html('很抱歉，没有找到动态');
+                    }
+                }else{
+                    //alert("登录超时,请重新登录");
+                    //relogin();
+                    var user_id =  localStorage.getItem('user_id');
+                    var user_pwd = localStorage.getItem('user_pwd');
+                    if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+                        $.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+                        relogin();
+                    }
+                    else{
+                        $.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+                        },'json').complete(function(){
+                            getNotes(pageIndex ,'','');
+                        });
+                    }
+
+                }
+            }else{
+                var user_id =  localStorage.getItem('user_id');
+                var user_pwd = localStorage.getItem('user_pwd');
+                if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+                    $.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+                    relogin();
+                }
+                else{
+                    $.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+                    },'json').complete(function(){
+                        getNotes(pageIndex ,'','');
+                    });
+                }
+            }
+        },'json').complete(function() {
+            $("a.popImage").fancybox({
+                openEffect  : 'elastic',
+                closeEffect: 'elastic'
+            });
+            $(".hong_jieshou").find('a').each(function(){
+                $(this).attr('target','_blank');
+            });
+        });
+        $(".center-region").animate({scrollTop:$("body").offset().top},800);
+    }
+
+    //格式化举报内容
+    function formatComplaint(c){
+        var s = c.replace("e", "色情").replace("f", "欺诈").replace("h", "骚扰").replace("t", "侵权").replace("o", "其他");
+        var arr = eval("("+s+")");
+        return arr.join("、").toString();
+    }
+
+    //格式化时间显示
+    function getTimeAgo(time){
+        var date = new Date();
+        var today = date.setHours(0, 0, 0, 0);
+        var yesterday =  date.setDate(date.getDate()-1);
+        var beforeYesterday = date.setDate(date.getDate()-1);
+        var i = time ;
+        if(i <= beforeYesterday){
+            return new Date(time).format("MM月dd日 hh:mm");
+        }else if(i <= yesterday){
+            return "前天  "+new Date(time).format("hh:mm");
+        }else if(i <= today){
+            return "昨天 "+new Date(time).format("hh:mm");
+        }else {
+            var now = new Date().getTime();
+            var deltaSeconds = (now - i ) / 1000 ;
+            if(deltaSeconds < 60){//不超过一分钟
+                return '刚刚';
+            }else{//不超过一天
+                return "今天 " + new Date(time).format("hh:mm");
+            }
+        }
+    }
+    //最多输入个数
+    function limitText(limitField, limitCount, limitNum) {
+        if (limitField.value.length > limitNum) {
+            limitField.value = limitField.value.substring(0, limitNum);
+        } else {
+            $("#"+limitCount).text(limitNum - limitField.value.length);
+        }
+    }
+</script>
+<script>
+    //搜索帖子
+    function searchNote(){
+        var key = $.trim($("#txt_keyword").val());
+        if(key == '请输入关键词'){
+            key = '';
+        }
+        var isComplaint = document.getElementById("complaint").checked;
+        var complaint = '';
+        if(isComplaint){
+            complaint = "c";
+        }
+        var isBoutique = document.getElementById("jiajingtie").checked;
+        var boutique = "";
+        if(isBoutique){
+            boutique =""
+        }
+        getNotes(1,complaint,key,boutique);
+    }
+//页面主函数
+    $(function(){
+        getNotes(pageIndex ,'','');
+        //注册回车事件
+        $("#txt_keyword").keydown(function(event) {
+            if (event.keyCode == "13") {
+                searchNote();
+            }
+        });
+
+        $('#face1').qqFace({
+            id : 'facebox1', //表情盒子的ID
+            assign:'Smohan_text', //给那个控件赋值
+            path:'images/face/'	//表情存放的路径
+        });
+    });
+
+
+    //显示删除图标
+    function showDeleteDiv(id){
+        $("#"+id+"DIV").css("display","block");
+    }
+
+    function hideDeleteDiv(resourceCode){
+        $("#"+resourceCode+"DIV").css("display","none");
+    }
+
+    var uploadImages = [];
+    //上传文章图片
+    function uploadImage(){
+        if(uploadImages.length > 5 ){
+            alert('最多只能上传6张图片!');
+            $("#image_form").resetForm();
+            return ;
+        }
+        var viewFiles = document.getElementById("image_file");
+        //是否为图片类型
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 500 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                var spanId = "zk"+ new Date().getTime();
+                var display = $("#image_container").css("display");
+                if(display != 'block'){
+                    $("#image_container").css("display","block")
+                }
+                $("#image_form").ajaxSubmit({
+                    type : 'post',
+                    url : '../file/FileCenter!uploadImage2.zk?type=note',
+                    success : function(data) {
+                        data = eval("(" + data + ")");
+                        if (data.name) {
+                            var imgURL = "../file/FileCenter!showImage2.zk?type=sml&name=" + data.name;
+                            var id = data.name.split(".")[0];
+                            uploadImages.push(data.name);
+                            $("#image_container span#"+spanId).empty();//清除上传提示
+                            var html = "<img id=\""+id+"IMG\" alt=\""+id+"\""+
+                                    "src=\""+imgURL+"\"  class=\"putong_app\""+
+                                    " onmouseover=\"showDeleteDiv('"+id+"')\""+
+                                    " onmouseout=\"hideDeleteDiv('"+id+"')\"/>";
+                            $("#image_container span#"+spanId).append(html);
+                            var $image = $("#"+id+"IMG");
+                            var divObj=$("<div onclick=removeImage('"+$image.attr('alt')+"')  onmouseover=\"showDeleteDiv('"+id+"')\""+" onmouseout=\"hideDeleteDiv('"+id+"')\">×</div>");
+                            divObj.addClass("divX");
+                            divObj.attr("id",$image.attr("alt")+"DIV");
+                            divObj.attr("title","删除图片"+$image.attr('alt'));
+                            divObj.css({position:"absolute",cursor:"pointer", border:"1px solid #c1c1c1", width:"12px", height:"12px",  left: $image.position().left+78, top:$image.position().top+0});
+                            $image.parent().append(divObj);
+                        } else {
+                            alert("上传图片出错！");
+                        }
+                        $("#image_form").resetForm();
+                    },
+                    error : function(XmlHttpRequest, textStatus, errorThrown) {
+                        alert("error");
+                    },
+                    beforeSubmit : function(){
+                        var html = "<span class=\"pugong\" id=\""+spanId+"\">图片上传中...</span>";
+                        $("#image_container").append(html);
+                    }
+                });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        }
+    }
+    //移除图片
+    function removeImage(id) {
+        $("#"+id+"IMG").parent().detach();
+        var temp = [];
+        for(var i = 0 ;i < uploadImages.length ; i++){
+            var s = uploadImages[i] ;
+            if(s.indexOf(id) != 0){
+                temp.push(uploadImages[i]);
+            }
+        }
+        uploadImages = temp ;
+    }
+
+
+    //发帖
+    function newNote(){
+        var noteContent = $.trim($("#Smohan_text").val());
+        if(noteContent == ''){
+            alert('内容不能为空!');
+            return ;
+        }
+        /* if(noteContent.length >200){
+         alert('字数不能超过200字');
+         return;
+         } */
+        //var reg = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/ig;
+        noteContent = escapeLink(noteContent);
+        //console.log(noteContent);
+        // return ;
+        //图片
+        var formImages = "";
+        var imgObjArr = [];
+        if(uploadImages.length  > 0 ){
+            for(var i = 0 ; i < uploadImages.length ;i++){
+                //uploadImages[i] = "\"" + uploadImages[i] +　"\"";
+                var imgObj = {"name":uploadImages[i]};
+                imgObjArr.push(imgObj);
+            }
+            //formImages ="[" + uploadImages + "]";//帖子图片
+            formImages = JSON.stringify(imgObjArr);
+        }
+        $.post('noteAction!newNote.zk',{noteContent:noteContent,noteImages:formImages},function(data){
+            if(data.STATUS){
+                //刷新贴子
+                getNotes(1,'','');
+                //清空表单数据
+                $("#Smohan_text").val('');
+                $("#limitSize").text("200");
+                $("#image_container").empty();
+                uploadImages = [];
+                var display = $("#image_container").css("display");
+                if(display == 'block'){
+                    $("#image_container").css("display","none")
+                }
+            }else{
+                alert(data.INFO);
+            }
+        },'json');
+    }
+
+    //当前操作帖子的id
+    var curNoteId;
+    var curUserId;
+    function addAction(noteId,userId){
+        curNoteId = noteId;
+        curUserId = userId;
+        addedAction(noteId);
+    }
+    //封面转换
+    function formatCover(value){
+        if(value==''||!value)
+            return '暂无图片';
+        else{
+            return "<a class=\"popImage\" href='../file/FileCenter!showImage2.zk?name="+value+"'>"
+                    +"<img title='图片' style='width:30px;height:20px;margin-top:0px;cursor:pointer;' src='../file/FileCenter!showImage2.zk?name="+value+"'/>"+"</a>";
+        }
+    }
+    //通过帖子id获取添加的活动
+    function addedAction(noteId){
+        $.post('ActionlistAction!getActionlistsByNoteId.zk',{noteId:noteId},function(data){
+            if(data.STATUS){
+                var ids = [];
+                for(var i=0;i<data.Actionlists.length;i++)
+                    ids[i] = data.Actionlists[i].id;
+                $('#ids').val(JSON.stringify(ids));
+                $('#actionDg').datagrid({
+                    onLoadSuccess: function (data){
+                        if (data){
+                            $.each(data.rows, function (index, item){
+                                for(var i=0;i<ids.length;i++){
+                                    if (item.id==ids[i]){
+                                        $('#actionDg').datagrid('checkRow',index);
+                                        break;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }else{
+                $('#actionDg').datagrid();
+            }
+            $('#actionDialog').dialog('open').dialog('setTitle','选择活动');
+        },'json').complete(function(){
+            //getChooseNotes();
+        });
+    }
+    function chooseNote(noteId,userId,actionIds){
+        if(actionIds.length>0){
+            $.post('ActionlistAction!addNote.zk',{noteId:noteId, noteUserId:userId,actionlistId:JSON.stringify(actionIds)},function(data){
+                if(data.STATUS){
+                    if(deleteActionId.length>0)
+                        deleteNote(curNoteId,JSON.stringify(deleteActionId));
+                    else{
+                        //$.messager.alert('信息提示', '操作成功!');
+                        $.messager.show({
+                            title : "消息",
+                            timeout:2000,
+                            msg :"操作成功!"
+                        });
+                        $('#actionDialog').dialog('close');
+                    }
+                }else{
+                    //$.messager.alert('信息提示', '操作失败!');
+                    $.messager.show({
+                        title : "消息",
+                        timeout:2000,
+                        msg :"操作失败!"
+                    });
+                }
+            },'json').complete(function(){
+                //getChooseNotes();
+            });
+        }else{
+            if(deleteActionId.length>0)
+                deleteNote(curNoteId,JSON.stringify(deleteActionId));
+            else
+                $('#actionDialog').dialog('close');
+        }
+    }
+    function deleteNote(noteId,actionIds){
+        $.post('ActionlistAction!deleteNote.zk',{noteId:noteId,actionlistId:actionIds},function(data){
+            if(data.STATUS){
+                //$.messager.alert('信息提示', '操作成功!');
+                $.messager.show({
+                    title : "消息",
+                    timeout:2000,
+                    msg :"操作成功!"
+                });
+                $('#actionDialog').dialog('close');
+            }else{
+                //$.messager.alert('信息提示', '操作失败!');
+                $.messager.show({
+                    title : "消息",
+                    timeout:2000,
+                    msg :"操作失败!"
+                });
+            }
+        },'json').complete(function(){
+            //getChooseNotes();
+        });
+    }
+    var deleteActionId = [];
+    //保存选中的活动
+    function selectAction(){
+        var rows = $('#actionDg').datagrid('getSelections');
+        var actionIds = [];
+        var oldIds = eval('('+$('#ids').val()+')');
+        for(var i = 0 ;i<rows.length;i++){
+            var row = rows[i];
+            var isPush = 1;
+            var j = 0;
+            for(j=0;j<oldIds.length;j++){
+                if(row.id==oldIds[j]){
+                    oldIds.splice(j,1);
+                    isPush=0;
+                    break;
+                }
+            }
+            if(isPush==1)
+                actionIds.push(row.id);
+            //chooseNote(curNoteId,curUserId,row.id);
+        }
+        deleteActionId = oldIds;
+        if(actionIds.length>0||deleteActionId.length>0)
+            chooseNote(curNoteId,curUserId,actionIds);
+        else
+            $.messager.alert('信息提示', '请选择要加入的活动!');
+    }
+</script>
+</body>
+</html>

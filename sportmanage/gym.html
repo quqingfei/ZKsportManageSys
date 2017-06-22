@@ -1,0 +1,1653 @@
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css">
+<link rel="stylesheet" href="css/icon.css">
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/msgbox/msgbox.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+</style>
+<style type="text/css">
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+            text-align:right;
+        }
+        .fitem input{
+            width:160px;
+        }
+		.pugong{position: relative; width:60px; height:40px; display:block; float:right;margin-left:5px; margin-bottom:5px; margin-top:4px; border:1px solid #f1f1f1;}
+		.divX
+		{
+   			 z-index:100;
+    		border-style:solid;
+    		border-width:1px;
+    		border-color:#d8d8d8;
+    		background-color:#ffffff;
+    		line-height:12px;
+    		text-align:center;
+    		font-weight:bold;
+    		width:10px;
+    		cursor:pointer;
+    		font-size:5px;
+    		color:#666;
+    		display: none;
+		}
+		.putong_app{
+			width:60px; 
+			height:40px;
+		}
+
+        .certificateList{
+			width:218px;
+			height:45px;
+		}
+		.certificateName{
+			width:130px;
+			height:30px;
+			margin-top:7.5px;
+			margin-bottom:7.5px;
+			display:block;
+			
+			float:left;
+		}
+		.add{
+			position:relative;
+			width:47px;
+			height:40px;
+			border:1px solid #95b8e7;
+			margin-right:2px;
+			float:right;
+		}
+		.img{
+			max-width: 100%;
+			width: 100%;
+			max-height: 100%;
+			height: 100%;
+		}
+		a.popImage {
+			color:#666;
+		}
+		.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.btn {
+  display: inline-block;
+  padding: 3px 6px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+.btn-primary .badge {
+  color: #337ab7;
+  background-color: #fff;
+}
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: #777;
+  border-radius: 10px;
+}
+dl{
+	margin: 15px 10px;
+	font-size: 14px;
+	border-bottom: 1px #ccc dashed;
+}
+dt{
+	text-align: left;
+	width: 100px;
+}
+dt , dd{
+	display: inline-block;
+	margin-left:20px;
+}
+dd div{
+	float: left;
+	margin : 5px;
+}
+dd div span{
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}
+#cardDlg .datagrid-wrap{
+	border:0;
+}
+#userDlg .datagrid-wrap{
+	border:0;
+}
+    </style>
+
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>	
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">健身房管理</li>
+			</ul>
+			<div>
+					<table id="dg" style="height:560px; " data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'GymAction!list.zk',method:'post',toolbar:'#toolbar',queryParams:{state:'review'}">
+								<thead>
+									<tr>
+										<th data-options="field:'gymName',align:'center'" width="10%">名称</th>
+										<th data-options="field:'admin',align:'center'"  width="7%">法人</th>
+										<th data-options="field:'adminPhone',align:'center'" width="7%">电话</th>
+										<th data-options="field:'description',align:'center'" width="10%">简介</th>
+										<th data-options="field:'address',align:'center'" width="9%">地址</th>
+										<th data-options="field:'certification',formatter:formatCertificate,align:'center'" width="10%">证书</th>
+										<!-- <th data-options="field:'cover',formatter:formatCover,align:'center'" width="7%">封面</th> -->
+										<th data-options="field:'state',formatter:formatGymState,align:'center'" width="7%">状态</th>
+										<th data-options="field:'totalUser',align:'center',formatter:formatUser" width="5%">总用户</th>
+										<th data-options="field:'totalCoach',align:'center'" width="5%">总教练</th>
+										<th data-options="field:'score',align:'center'" width="5%">评分</th>
+										<th data-options="field:'benefitRate',align:'center'" width="5%">分成</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="11%">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="11%">修改时间</th>
+									</tr>
+								</thead>
+					</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td>状态:<select id="searchState"  style="width: 100px;" data-options="editable:false">
+												   <option value="review">待审核</option>
+												   <option value="normal">已通过</option>
+												   <option value="fail">未通过</option>
+												<option value="">全部</option>
+											    </select>
+										</td>
+										<td><input id="searchKey" class="easyui-textbox"
+											style="width: 280px"
+											data-options="prompt:'名称、法人、手机号'," />
+										</td>
+										<td>
+									        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchUser()">搜索</a>
+										</td>
+										<td><div class="datagrid-btn-separator"></div></td>									
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="toBenefitDig()">分成管理</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_checklist" plain="true"
+											onclick="toCheckGym()">审核</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_card" plain="true"
+											onclick="toListCards()">会员卡</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_lock" plain="true"
+											onclick="toGymPwd()">重置密码</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_card" plain="true"
+											onclick="toSpeasCard()">平台卡管理</a></td>										
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td align="right">
+											<button class="btn btn-primary" type="button" onclick="towithdraw()">
+	  											提现申请 <span class="badge" id="withdrawBtn" style="display:none;">0</span>
+											</button>
+										</td>										
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+							<div id="dlg" class="easyui-dialog" modal="true" style="width: 450px; height: 550px; padding: 10px 20px" closed="true"buttons="#dlg-buttons">
+								<!-- <div class="ftitle">健身房信息</div> -->
+								 <form id="fm" method="post" novalidate>
+									<input id="id" type="hidden"/>
+									<div class="fitem">
+										<label>官方:</label> <select id="isOfficial" name="isOfficial" class="easyui-combobox"  style=" width: 150px; " data-options="editable:false">
+												<option value="y" selected>是</option>
+												<option value="n">否</option>
+											</select>
+									</div>
+									<div class="fitem">
+										<label>名称:</label> <input name="gymName"
+											id="gymName" class="easyui-textbox"/>
+									</div>
+									<div class="fitem">
+										<label>法人:</label> <input name="admin"
+											id="admin" class="easyui-textbox"/>
+									</div>
+									<div class="fitem">
+										<label>手机号:</label> <input name="adminPhone"
+											id="adminPhone" class="easyui-textbox"/>
+									</div>
+									<div class="fitem">
+										<label>支付宝账号:</label> <input name="zfbAccount"
+											id="zfbAccount" class="easyui-textbox"/>
+									</div>
+									<div class="fitem">
+										<label>支付宝账户名:</label> <input name="zfbName"
+											id="zfbName" class="easyui-textbox"/>
+									</div>
+									<div class="fitem">
+										<label>gpsx:</label>
+										<input name="gpsX" id="gpsx" class="easyui-textbox"/>
+									</div>			
+									<div class="fitem">
+										<label>gpsy:</label>
+										<input name="gpsY" id="gpsy" class="easyui-textbox"/>
+									</div>			
+									<div class="fitem">
+										<label>基础分成:</label>
+										<input name="benefitRate" id="benefitRate" class="easyui-numberbox" data-options="precision:2"/>
+									</div>	
+									<div class="fitem">
+										<label>简介:</label>
+										<input name="description" id="description"
+											data-options="multiline:true"
+											style="height:50px"  class="easyui-textbox"/>
+									</div>			
+		
+									<div class="fitem">
+										<label>地址:</label>
+										<input name="address" id="address"
+											data-options="multiline:true"
+											style="height:50px"  class="easyui-textbox"/>
+									</div>										
+									<div class="fitem">
+										<label>证书:</label> <input name="certification"
+											id="certification" class="" type="hidden"/>
+										 <div style="width:245px;height:104px;margin-left:85px; margin-top: 1px;">
+						                	<div  id="image_container" style="float:left;width:225px;height:104px;border:1px solid #95b8e7;overflow-y:auto;overflow-x:hidden;" >
+												<!-- 放置上传的图片 -->		
+											</div>
+											<div style="float:right;width:16px;height:16px;cursor: pointer;background:url(images/edit_add.png) no-repeat;" onclick="chooseImage('image_file')">
+											</div>
+										</div>
+									</div>
+									<div class="fitem">
+										<label>封面:</label> 
+										<input name="cover" id="cover" type="hidden"/> 
+										
+									</div>
+								</form>
+								
+								<form id="title_img_form" method="post"  enctype="multipart/form-data">
+									<input type="file" style="display: none;" id="file_title_img" name="name" onchange="uploadImage()" accept="image/*" />
+						        </form>
+						        <form id="image_form" method="post" enctype="multipart/form-data">
+										<input type="file" style="display: none;" id="image_file" name="name" onchange="uploadCertificate()" accept="image/*" />
+								</form>
+						        <div style="width: 197px; height: 67px; margin-left:115px; margin-top: -30px">
+									<!-- <img id="imghead" src="http://192.168.1.250/20151231/20151231-161920437.jpg" style="max-width: 100%; width: auto; max-height: 100%; height: auto" /> -->
+									<img id="imghead" src="images/add.png" alt="" style="width:77px;height:77px;;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片" />
+						        	
+						        </div>
+								<div id="dlg-buttons">
+									<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"style="width: 90px">取消</a>
+								</div>
+							</div>
+										<!-- 分成管理dig -->
+				<div id="benefitdlg" class="easyui-dialog" style="width: 950px; height: 600px; padding:5px; " closed="true">
+				<table id="benefitdg"
+								style="height:550px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'',method:'post',toolbar:'#benefitbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'scope',align:'center',formatter:formaterScope,width:$(this).width() * 0.15">类型</th>
+										<th data-options="field:'targetName',align:'center',width:$(this).width() * 0.15">范围</th>
+										<th data-options="field:'benefitRate',align:'center',width:$(this).width() * 0.15">分成</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:$(this).width() * 0.1">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="benefitbar">
+								<table>
+									<tr>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newBenefit()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editBenefit()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="delBenefit()">删除</a></td>										
+									</tr>
+								</table>
+							</div>
+							<div id="newBenefitdlg" class="easyui-dialog" style="width: 450px; height: 550px; padding: 10px 20px" closed="true"buttons="#dlg-benefitbtns">
+								<div class="ftitle">健身房分成信息</div>
+								 <form id="benefitfm" method="post" novalidate>
+									<input id="gymId" type="hidden"/>
+									<input id="gymBenefitId" type="hidden"/>
+									<div class="fitem">
+										<label>类型:</label> 
+										<select id="scope" style="width:200px;">
+										    <option value="order">订单</option>
+										    <option value="product">产品</option>
+										    <option value="course">课程</option>
+										</select>
+									</div>
+									<div class="fitem" id="productDiv" style="display:none;">
+										<label>范围:</label> 
+										<select id="products" style="width:200px;">
+										</select>
+									</div>
+									<div class="fitem" id="courseDiv" style="display:none;">
+										<label>范围:</label> 
+										<select id="courses" style="width:200px;">
+										</select>
+									</div>
+									<div class="fitem">
+										<label>分成:</label> <input name="adminPhone"
+											id="detailBenefitRate" class="easyui-numberbox" style="width:200px;" data-options="precision:2"/>
+									</div>
+								</form>
+								<div id="dlg-benefitbtns">
+									<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveBenefit()" style="width: 90px">保存</a>
+									<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#newBenefitdlg').dialog('close')"style="width: 90px">取消</a>
+								</div>
+							</div>
+				</div>
+				<!-- -->
+				
+				<!-- 审核管理 -->
+				<div id="gymCheckdlg" class="easyui-dialog" style="width: 950px; height: 600px; padding:5px; " closed="true" modal="true" buttons="#dlg-checkbtns">
+					<input type="hidden" id="checkGymId">
+					<dl>
+					   <dt>名称:</dt>
+					   <dd id="checkGymName"></dd>
+					</dl>   
+				<!-- 	<dl>
+					   <dt>法人:</dt>
+					   <dd id="checkAdmin"></dd>
+					</dl>   -->
+					  
+					<dl> 
+					   <dt>手机号:</dt>
+					   <dd id="checkAdminPhone"></dd>
+					   
+					</dl>
+					
+					<dl>
+						<dt>营业执照:</dt>
+						<dd id="checkBizNo"></dd>
+					</dl>
+					
+					<!-- <dl>
+					   <dt>支付宝账号:</dt>
+					   <dd id="checkzfbAccount"></dd>
+					</dl>
+					<dl>  
+					   <dt>支付宝账户名:</dt>
+					   <dd id="checkzfbName"></dd>
+					</dl>
+					
+					<dl>
+					   <dt>地址:</dt>
+					   <dd id="checkaddress"></dd>
+					</dl>
+					<dl>
+					   <dt>简介:</dt>
+					   <dd id="checkdescription"></dd>
+					</dl> -->
+					<dl>
+					   <dt style="vertical-align: top;">证书:</dt>
+					   <dd style="width: 666px;" id="checkCes">
+					   </dd>
+					</dl>
+					<!-- <dl>
+					   <dt style="vertical-align: top;">封面:</dt>
+					   <dd id="checkcovers" style="width: 666px;">
+					   </dd>
+					</dl>
+					<dl>
+					   <dt>审核结果:</dt>
+					   <dd id="checkresult"></dd>
+					</dl> -->
+					<div id="dlg-checkbtns">
+						<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveCheck(1)" style="width: 90px">通过审核</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="saveCheck(0)"style="width: 90px">不通过审核</a>
+					</div>
+				</div>
+				<!-- -->
+				<!-- 会员卡 -->
+				<div id="cardDlg" class="easyui-dialog"
+						style="width:60%; height: 550px; padding: 0" closed="true" modal="true">
+					<table id="cardDg"
+												style="height: 500px;"
+												data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'',method:'post'">
+												<thead>
+													<tr>
+														<th data-options="field:'name',align:'center'" width="18%">名称</th>
+														<th data-options="field:'price',align:'center'" width="18%">价格</th>
+														<th data-options="field:'type',align:'center',formatter:formatCard" width="18%">类型</th>
+														<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="18%">创建时间</th>
+														<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="18%">修改时间</th>
+														
+													</tr>
+												</thead>
+						</table>
+					</div>
+				<!-- 用户列表 -->
+				<div id="userDlg" class="easyui-dialog"
+						style="width:60%; height: 550px; padding: 0" closed="true" modal="true">
+					<table id="userDg"
+												style="height: 500px;"
+												data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'',method:'post'">
+												<thead>
+													<tr>
+														<th data-options="field:'userName',align:'center'" width="20%">昵称</th>
+														<th data-options="field:'sex',align:'center',formatter:formatSex" width="10%">性别</th>
+														<th data-options="field:'age',align:'center'" width="15%">年龄</th>
+														<th data-options="field:'height',align:'center'" width="15%">身高</th>
+														<th data-options="field:'weight',align:'center'" width="15%">体重</th>
+														<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="19%">注册时间</th>
+														
+													</tr>
+												</thead>
+						</table>
+					</div>
+				<!-- 健身房管理密码 -->
+				<div id="gymPwdDlg" class="easyui-dialog"
+						style="width:40%; height: 350px; padding: 20px 5px" closed="true" modal="true" buttons="#gymPwdbtns">
+					<div class="fitem" style="margin:10px;">
+						<label>登录名:</label> <input id="gymLoginName" class="easyui-textbox"/>
+						<input type="hidden" id="gymAccountId" />
+					</div>
+					<div class="fitem" style="margin:10px;">
+						<label>密&nbsp;码:</label> <input id="gymLoginPwd" class="easyui-textbox" type="password"/>
+					</div>
+					<div id="gymPwdbtns">
+						<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveGymPwd()" style="width: 90px">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#gymPwdDlg').dialog('close')"style="width: 90px">取消</a>
+					</div>
+				</div>
+				<!-- 健身房审核 -->
+				<div id="checkReasonDlg" class="easyui-dialog"
+						style="width:40%; height: 300px; padding: 20px 5px" closed="true" modal="true" buttons="#gymCheckbtns">
+					<div class="fitem" style="padding:10px 20px;width: 100%;margin:10px auto;">
+						<input id="gymCheckReason" data-options="multiline:true" style="width:100%;height:130px"  class="easyui-textbox"/>
+					</div>
+					<div id="gymCheckbtns">
+						<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveNoPass()" style="width: 90px">保存</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#checkReasonDlg').dialog('close')"style="width: 90px">取消</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-common.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+
+<script src="js/flowplayer-3.2.6.min.js"></script>
+
+
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/saveRequest.js"></script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					//$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					//showError('登录超时,请重新登录!');
+					//relogin();
+					var user_id =  localStorage.getItem('user_id');
+					var user_pwd = localStorage.getItem('user_pwd');
+					if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+						$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+						relogin();						
+					}
+					else{
+						$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+							if(data.STATUS){
+								$('#dg').datagrid('reload');
+							}
+						},'json').complete(function(){
+							$('#dg').datagrid('reload');
+						});
+					}
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+		
+		
+		$('#searchState').combobox({
+			//data : [] ,
+			onChange: function (n,o) {
+				searchUser();
+			}
+			
+		});
+		
+		//withdrawBtn
+		$.post('GymWithdrawAction!getWait.zk',{},function(data){
+			var $wdb = $('#withdrawBtn');
+			if(data.STATUS && data.total){
+				$wdb.text(data.total);
+				$wdb.show();
+			}else{
+				$wdb.hide();
+			}
+		},'json');
+	});
+	
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+/* 	function note(){
+		var row = $('#dg').datagrid('getSelected');
+		
+		if(!row){
+       	 	$.messager.alert('错误','请先选择!');
+       	 	return;
+		}
+		location.href = 'courseNote.html?courseId='+row.id;
+	} */
+	
+	
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		if(!row){
+       	 	//$.messager.alert('错误','请先选择!');
+       	 	showError('请先选择健身房!');
+       	 	return;
+		}
+		if(confirm("确定删除?")){
+			$.getJSON('GymAction!delete.zk',{id:row.id},function(data){
+				if(data.STATUS){
+					$('#dg').datagrid('reload');
+					showTip("删除成功!");
+				}else {
+					showTip("删除失败!");
+				}
+			});
+		}
+	}
+	
+	
+	var uploadImages = [];
+	var certificate;//证书字符串
+    var url;
+    var gymID=null;//标记客服是否存在
+   	var certificateName=[];
+    var update=0;//标记是否为修改证书照片
+	
+	//新增
+	function newProduct(){
+       	gymID = null;
+   	 	var div = document.getElementById("image_container");
+		while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+		{
+    		div.removeChild(div.firstChild);
+		}
+   	 	$("#imghead").attr("src", 'images/add.png');
+   	 	//$("#coachCertificate").show();
+   	 	$('#fm').form('clear');
+   	 	$('#isOfficial').combobox('setValue','y');
+   	 	$("#image_container").empty();
+   	 	$("#imghead").siblings().remove();	
+        openDialog('dlg', '编辑健身房信息');
+        url = 'GymAction!save.zk';
+       
+	}
+	//
+	function toSpeasCard(){
+		window.location.href = 'speascard.html';
+	}
+	//更新产品信息
+	function editProduct(){
+		uploadImages = [];
+		certificateName = [];
+		 var div = document.getElementById("image_container");
+		 while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+		 {
+    		div.removeChild(div.firstChild);
+		 }
+		 
+    	 var row = $('#dg').datagrid('getSelected');
+         if (!row){
+        	 showError('请先选择要编辑的健身房!');
+        	 return;
+         }
+       	 gymID = row.id;
+         openDialog('dlg', '编辑健身房信息');
+         $('#fm').form('load',row);
+         $("#certification").val("");
+         url = 'GymAction!update.zk?id='+row.id;
+         //加载证书
+         certificate = eval('('+row.certification+')');
+         for (var i=0;i<certificate.length;i++){
+      	   uploadImages[i] = certificate[i].image;
+      	   certificateName[i] = certificate[i].name;//获取证书名称
+         }
+  	   	 for(var i = 0 ; i < uploadImages.length ;i++){
+  	   	 	var imgURL = "../file/FileCenter!showImage2.zk?name=" + uploadImages[i];
+         	var id = uploadImages[i].split(".")[0];
+         	add(id);
+         	$("#"+id).attr("src", imgURL);
+           	$("#"+id).attr("alt", uploadImages[i]);
+           	$("#"+id+"name").val(certificateName[i]);
+  		 } 
+  	   	 
+  	   	 //编辑封面
+  	   	 $("#imghead").siblings().remove();
+  	   	 var imgs = [];
+		gymcover = [];
+  	   	 var covers = $.parseJSON(row.cover);
+  	   	 for(var i =  0 ;i<covers.length;i++){
+  	   		var coverId = 'edit' + i ;
+			var imgURL = "../file/FileCenter!showImage2.zk?name=" + covers[i] ;
+        	var img = '<div style="position: relative;float: left;"><img id="'+coverId+'" src="'+imgURL+'" onmouseover="showCoverDel(\''+coverId+'\')" onmouseout="hideCoverDel(\''+coverId+'\')" onclick="chooseImage(\'file_title_img\',\''+coverId+'\')" style="width: 77px; height: 77px;margin:2px;cursor:pointer;" /><div id="del_'+coverId+'" onmouseover="showCoverDel(\''+coverId+'\')" onmouseout="hideCoverDel(\''+coverId+'\')"  onclick="delCover(\''+coverId+'\')" style="position: absolute; top: 5px; left: 70px;  color: #f00;cursor:pointer ;display:none;  border: 1px #ccc solid;">X</div></div>';
+  	   	 	//console.log('img html:'+img);
+        	imgs.push(img);
+  	   	  	var coverJSON = {
+              	"id" : coverId , 
+              	"img" : covers[i] 
+              };
+              gymcover.push(coverJSON);
+  	   	 }
+
+  	   	// console.log(imghtml);
+  	   	 
+         $("#imghead").before(imgs.join(''));
+	}
+	//check form
+	function checkForm(){
+		var name = $.trim($("#gymName").val());
+		if(name==''){
+			$.messager.alert('警告','健身房名称不能为空!');
+			$("#gymName").focus();
+			return false;
+		}
+		var admin = $.trim($("#admin").val());
+		if(admin==''){
+			$.messager.alert('警告','教练法人不能为空!');
+			$("#admin").focus();
+			return false;
+		}
+		var list = document.getElementById("image_container").getElementsByTagName("input");
+        if(list.length>0){
+        	//alert(list.length);
+        	var i=0;
+        	while(i<list.length){
+        		var id = list.item(i).id;
+        		if($.trim($("#"+id).val())==''){
+        			$.messager.alert('警告','证书名称为空！!');
+                    $("#"+id).focus();
+                    return ;
+        		}
+        		i=i+1;
+        	}
+        	
+        }
+		return true;
+	}
+	function saveProduct(){
+		if(checkForm()){
+    		var name = $.trim($("#gymName").val());
+			//将证书名称保存到数据库
+			  var formImages = "";
+		      var imgObjArr = [];
+		      var listInput = document.getElementById("image_container").getElementsByTagName("input");
+		      var listImg = document.getElementById("image_container").getElementsByTagName("img");
+		      //alert(listImg.length+"--"+listInput.length);
+		      if(listInput.length  > 0 ){
+		           for(var i = 0 ; i < listInput.length ;i++){
+		               var imgObj = {"name":$.trim($("#"+listInput.item(i).id).val()), "image":listImg.item(i).alt};//$.trim($("#"+listInput.item(i).id).val)
+		               imgObjArr.push(imgObj);
+		           }
+		           formImages = JSON.stringify(imgObjArr);
+		       }
+		     
+		     $("#certification").attr("value","");
+		     $("#certification").val(formImages);
+		     //alert($("#certification").val()+"--"+formImages);
+			 $('#fm').form('submit',{
+	                url: url,
+	                onSubmit: function(){
+	                    return checkForm();
+	                },
+	                success: function(result){
+	                    var result = $.parseJSON( result );
+	                    if (result.STATUS){
+	                        $('#dlg').dialog('close');
+	                        $('#dg').datagrid('reload');
+	                        
+						 	$("#image_container").empty();
+			        	 	$("#imghead").attr("src", 'images/add.png');
+	                    } else {
+	                        showError(result.INFO);
+	                    }
+	                }
+	            });
+/*     		$.getJSON('GymAction!checkGymName.zk',{name:name},function(data){
+				if(data.STATUS && data.id!=gymID){
+					showError('健身房已经存在!');
+				}else {
+					 
+				}
+        		
+			}); */
+    		
+    		
+    	}
+		
+    }
+
+	function search(value){
+		$("#dg").datagrid('load',{title:value});
+	}
+	
+	 //显示删除图标
+    function showDeleteDiv(id){
+        $("#"+id+"DIV").css("display","block");
+    }
+
+    function hideDeleteDiv(resourceCode){
+        $("#"+resourceCode+"DIV").css("display","none");
+    }
+
+    //移除图片
+    function removeImage(id) {
+        $("#"+id).parent().parent().detach();
+        event.stopPropagation();
+    }
+    
+    
+    function add(id){
+    	var fatherDiv = document.getElementById("image_container");
+    	var div = document.createElement("div");
+		$(div).attr({
+			'id' :id+'div',
+			'class' : 'certificateList'	
+		});
+		fatherDiv.appendChild(div);
+		var input = document.createElement("input");
+		$(input).attr({
+			'id' :id+'name',
+			'class' : 'certificateName'	
+		});
+		div.appendChild(input);
+		var imgDiv = document.createElement("div");
+		$(imgDiv).attr({
+			'id' :id+'imgDiv',
+			'class' : 'add'	,
+			'onclick':'chooseImage1("'+id+'")',
+			'onmouseover':'showDeleteDiv("'+id+'")',
+			'onmouseout':'hideDeleteDiv("'+id+'")'
+		});
+		
+		div.appendChild(imgDiv);
+		var img = document.createElement("img");
+		$(img).attr({
+			'id' :id,
+			'class':"img",
+			'src':"images/add.png"
+		});
+		imgDiv.appendChild(img);
+		//增加删除图标
+		var $image = $("#"+id);
+		var divObj=$("<div onclick=removeImage('"+id+"')  onmouseover=\"showDeleteDiv('"+id+"')\""+" onmouseout=\"hideDeleteDiv('"+id+"')\">×</div>");
+        divObj.addClass("divX");
+        divObj.attr("id",id+"DIV");
+        divObj.attr("title","删除图片"+id);
+        divObj.css({position:"absolute",cursor:"pointer", color:"red",border:"1px solid #c1c1c1", width:"12px", height:"12px",  left:33, top:0});
+        $image.parent().append(divObj);
+    }
+    
+    function up(oldId,newId){
+    	$('#'+oldId+'div').attr({
+			'id' :newId+'div',	
+		});
+    	$('#'+oldId+'name').attr({
+			'id' :newId+'name',	
+		});
+    	$('#'+oldId+'imgDiv').attr({
+			'id' :newId+'imgDiv',
+			'class' : 'add'	,
+			'onclick':'chooseImage1("'+newId+'")',
+			'onmouseover':'showDeleteDiv("'+newId+'")',
+			'onmouseout':'hideDeleteDiv("'+newId+'")'
+		});
+    	$('#'+oldId).attr({
+			'id' :newId
+		});
+    	var deleteDiv = $('#'+oldId+'DIV');
+		$(deleteDiv).attr({
+			'id':newId+"DIV",
+			'onclick':'removeImage("'+newId+'")',
+			'onmouseover':'showDeleteDiv("'+newId+'")',
+			'onmouseout':'hideDeleteDiv("'+newId+'")'
+		});
+    }
+    function chooseImage1(id) {
+        update=id;
+        document.getElementById("image_file").click();
+   }
+    
+    var curcoverId = null;
+    function chooseImage(id,coverId) {
+    	//alert('choose image...');
+       /*  alert(e); */
+       if(gymcover && gymcover.length >= 6){
+    	   showError('最多上传6张图片');
+    	   return ;
+       }
+       
+    	update=0;
+    	curcoverId = coverId;
+        document.getElementById(id).click();
+        
+        var e=event || window.event;
+        if (e && e.stopPropagation){
+            e.stopPropagation();    
+        }else{
+            e.cancelBubble = true;
+        }
+   }
+	
+	
+	
+  //上传证书
+    function uploadCertificate(){
+  	//alert('upload');
+      var viewFiles = document.getElementById("image_file");
+      //是否为图片类型            
+      if(/image\/\w+/.test(viewFiles.files[0].type)){
+          //最大图片文件大小 500KB
+          var imgSizeLimit = 500 * 1024;
+          if(viewFiles.files[0].size<=imgSizeLimit){
+              //上传图片
+               $("#image_form").ajaxSubmit({
+                   type : 'post',
+                   url : '../file/FileCenter!uploadImage2.zk',
+                   success : function(data) {
+                       //data = $.parseJSON(data);
+                       data = eval("(" + data + ")");
+                       if (data.name){
+                          //alert(data.name);
+                       	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                       	var id = data.name.split(".")[0];
+                       	if(update==0){
+                       		add(id);
+                       	}else{
+                       		//alert(id+"-------"+update);
+                       		/*
+                       		var imgDiv =  $('#'+update+'imgDiv');
+                       		$(imgDiv).attr({
+                    			'onclick':'chooseImage1("'+id+'")',
+               				});
+                       		var deleteDiv = $('#'+update+'DIV');
+                        		$(deleteDiv).attr({
+                        			'onclick':'removeImage("'+id+'")',
+                   			});
+                       		$('#'+update).attr("id",id);*/
+                       		up(update,id);
+                       	}
+                          	$("#"+id).attr("src", imgURL);
+                          	$("#"+id).attr("alt", data.name);
+                          
+                       } else {
+                           alert("上传图片出错！");
+                       }
+                       //$("#title_img_form").resetForm();
+                       $("#image_form").resetForm();
+                   },
+                   error : function(XmlHttpRequest, textStatus, errorThrown) {
+                       alert("error");
+                   }
+               });
+          }else{
+              alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+          }
+      }else{
+          alert('请选择图片类型的文件!');
+      } 
+  }
+  
+  
+  function showCoverDel(id){
+      //alert(e);
+/*       var e=event || window.event;
+      if (e && e.stopPropagation){
+          e.stopPropagation();    
+      }else{
+          e.cancelBubble = true;
+      } */
+	  $('#del_'+id).toggle();
+      //console.log('show del div>');
+  }
+  function hideCoverDel(id){
+/*       var e=event || window.event;
+      if (e && e.stopPropagation){
+          e.stopPropagation();    
+      }else{
+          e.cancelBubble = true;
+      } */
+	  $('#del_'+id).toggle();
+  }
+  function delCover(id){
+	  //alert('del:'+id);
+	  //console.log('before del:'+gymcover);
+	  $("#"+id).parent().remove();
+	  var tmp = [];
+      for(var i = 0 ;i<gymcover.length;i++){
+      	var cv = gymcover[i];
+      	if(cv.id != id){
+      		tmp.push(cv);
+      	}
+      }
+      gymcover = tmp ;
+      
+	  //console.log('del:'+gymcover);
+	  resetCover(gymcover);
+  }
+  
+  /**
+  	*	重设cover值
+  **/
+  function resetCover(gymcover){
+      var coverimgs = [];
+      for(var i = 0 ;i<gymcover.length;i++){
+      	var cv = gymcover[i];
+      	coverimgs.push(cv.img);
+      }
+      $('#cover').val(JSON.stringify(coverimgs));
+  }
+   
+  var gymcover = [];
+  //上传文章图片
+  function uploadImage(){
+  	//alert('upload');
+      var viewFiles = document.getElementById("file_title_img");
+      //是否为图片类型            
+      if(/image\/\w+/.test(viewFiles.files[0].type)){
+          //最大图片文件大小 500KB
+          var imgSizeLimit = 500 * 1024;
+          if(viewFiles.files[0].size<=imgSizeLimit){
+              //上传图片
+               $("#title_img_form").ajaxSubmit({
+                   type : 'post',
+                   url : '../file/FileCenter!uploadImage2.zk',
+                   success : function(data) {
+                       data = $.parseJSON(data);
+                       if (data.name) {
+                          // alert(data.name);
+                        
+                        var coverId = 'cover' + $.now() ;
+                        if(curcoverId){
+                        	coverId = curcoverId ;
+                        }
+                        
+                       	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                       	var img = '<div style="position: relative;float: left;"><img id="'+coverId+'" src="'+imgURL+'" onmouseover="showCoverDel(\''+coverId+'\')" onmouseout="hideCoverDel(\''+coverId+'\')" onclick="chooseImage(\'file_title_img\',\''+coverId+'\')" style="width: 77px; height: 77px;margin:2px;cursor:pointer;" /><div id="del_'+coverId+'" onmouseover="showCoverDel(\''+coverId+'\')" onmouseout="hideCoverDel(\''+coverId+'\')"  onclick="delCover(\''+coverId+'\')" style="position: absolute; top: 5px; left: 70px;  color: #f00;cursor:pointer ;display:none;  border: 1px #ccc solid;">X</div></div>';
+                        if(curcoverId){
+                        	
+	                       	$("#"+curcoverId).attr('src',imgURL);
+	                        for(var i = 0 ;i<gymcover.length;i++){
+	                        	var cv = gymcover[i];
+	                        	if(cv.id == coverId){
+	                        		cv.img = data.name ;
+	                        	}
+	                        }
+                        }else{
+	                       	$("#imghead").before(img);
+	                        var coverJSON = {
+	                        	"id" : coverId , 
+	                        	"img" : data.name 
+	                        };
+	                        gymcover.push(coverJSON);
+                        	
+                        }
+                        //console.log('封面：'+JSON.stringify(gymcover));
+                        
+                        resetCover(gymcover);
+                       /*  var coveimgheadrimgs = [];
+                        for(var i = 0 ;i<gymcover.length;i++){
+                        	var cv = gymcover[i];
+                        	coverimgs.push(cv.img);
+                        	
+                        }
+                        $('#cover').val(JSON.stringify(coverimgs)); */
+                          //$("#imghead").attr("src", imgURL);
+                          //$("#cover").val(data.name);
+                          
+                       } else {
+                           alert("上传图片出错！");
+                       }
+                       $("#title_img_form").resetForm();
+                   },
+                   error : function(XmlHttpRequest, textStatus, errorThrown) {
+                       alert("error");
+                   }
+               });
+          }else{
+              alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+          }
+      }else{
+          alert('请选择图片类型的文件!');
+      } 
+  }
+  
+    
+  	function formatCertificate(certificate1){
+		if(!certificate1){
+	  		return '';
+	  	}
+	   	certificate1 = $.parseJSON(certificate1);
+	   	var result="";
+	   	for(var i = 0 ; i < certificate1.length ;i++){
+	   	   var prex = "";
+	   	   if(i > 0){
+	   			prex = " | ";
+	   	   }
+		   result = result + prex + "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+certificate1[i].image+"\">"+"查看</a>";
+     	} 
+	   	return result;
+ 	}
+  
+    //格式化封面
+    function formatCover(cs){
+    	var covers = $.parseJSON(cs);
+    	var results = [];
+    	for(var i = 0 ;i<covers.length;i++){
+    		var cover = covers[i];
+	        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">查看</a>";
+    		if(i < covers.length - 1){
+    			result += ' | ';
+    		}
+	        results.push(result);
+    	}
+    	return results.join('');
+    }
+    //格式化URL
+    function formatVideoURL(url){
+        var result = "<a href=\"javascript:void(0)\" onClick=\"playVideo('"+url+"')\" >点击播放</a>";
+    	return result;
+    }
+    
+    //打开分成管理对话框
+   	function toBenefitDig(){
+   		var row = $('#dg').datagrid('getSelected');
+   		if(!row){
+   			showError('请先选择健身房');
+   			return ;
+   		}
+   		$('#benefitdg').datagrid({
+   			url : 'GymBenefitAction!list.zk',
+   			queryParams : { gymId : row.id  }
+   		});
+   		$('#gymId').val(row.id);
+   	 	$('#benefitdlg').dialog('open').dialog('setTitle','分成管理');
+   	}
+    
+    
+	//新增分成
+	function newBenefit(){
+	   	 $('#scope').combobox({
+	   	   valueField:'id',
+	   	   textField:'text',
+	   	   onSelect: function(rec){
+	             var type = rec.id ;
+	             if(type == 'product'){
+	            	 $('#courseDiv').hide();
+	            	 $('#productDiv').show();
+	            	 $('#products').combobox({
+	          	   	 	valueField : 'id' ,
+	        	   	 	textField : 'text',
+	        	   	 	multiple:true,
+	        	   	 	url : 'productAction!getPrductNames.zk'
+	            	 });
+	             }
+	             if(type == 'course'){
+	            	 $('#productDiv').hide();
+	            	 $('#courseDiv').show();
+	            	 $('#courses').combobox({
+	          	   	 	valueField : 'id' ,
+	        	   	 	textField : 'text',
+	        	   	 	multiple:true,
+	        	   	 	url : 'CourseAction!getCourseNames.zk'
+	            	 });
+	             }
+	             if(type == 'order'){
+	            	 $('#productDiv').hide();
+	            	 $('#courseDiv').hide();
+	             }
+	       }
+	   	});
+        $('#newBenefitdlg').dialog('open').dialog('setTitle','编辑');
+	}
+	
+	//保存分成
+	function saveBenefit(){
+		var  gymId = $('#gymId').val();
+		var scope = $('#scope').combobox('getValue');
+		var targetName = '' ;
+		if(scope == 'course'){
+			var courses  = $('#courses').combobox('getText');
+			targetName = courses ;
+		}
+		if(scope == 'product'){
+			var products  = $('#products').combobox('getText');
+			targetName = products ;
+		}
+		var benefitRate = $('#detailBenefitRate').numberbox('getValue');
+		var gymBenefitId = $('#gymBenefitId').val();
+		//alert('rate:'+benefitRate); return;
+		var postData = {
+				gymId : gymId ,
+				scope : scope ,
+				targetName : targetName ,
+				benefitRate : benefitRate ,
+				gymBenefitId : gymBenefitId
+		};
+		$.post('GymBenefitAction!saveOrUpdate.zk',postData,function(data){
+			if(data.STATUS){
+				$('#newBenefitdlg').dialog('close');
+		   		$('#benefitdg').datagrid('reload');
+			}else{
+				showError(data.INFO);
+			}
+		},'json');
+	}
+	
+	//删除分成
+	function delBenefit(){
+		var $benefitdg = $('#benefitdg');
+		var row = $benefitdg.datagrid('getSelected');
+		if(!row){
+			showError('请先选择分成项!');
+			return ;
+		}
+		confirmDialog('确定删除吗', function(){
+			$.post('GymBenefitAction!delete.zk',{id:row.id},function(data){
+				if(data.STATUS){
+					//$('#newBenefitdlg').dialog('close');
+			   		$benefitdg.datagrid('reload');
+				}else{
+					showError(data.INFO);
+				}
+			},'json');
+		});
+	}
+	
+	//编辑分成
+	function editBenefit(){
+		var $benefitdg = $('#benefitdg');
+		var row = $benefitdg.datagrid('getSelected');
+		if(!row){
+			showError('请先选择分成项!');
+			return ;
+		}
+/* 	   	$('#scope').combobox({
+		   	   valueField:'id',
+		   	   textField:'text',
+		   	   onSelect: function(rec){
+		             var type = rec.id ;
+		             if(type == 'product'){
+		            	 $('#courseDiv').hide();
+		            	 $('#productDiv').show();
+		            	 $('#products').combobox({
+		          	   	 	valueField : 'id' ,
+		        	   	 	textField : 'text',
+		        	   	 	multiple:true,
+		        	   	 	url : 'productAction!getPrductNames.zk'
+		            	 });
+		             }
+		             if(type == 'course'){
+		            	 $('#productDiv').hide();
+		            	 $('#courseDiv').show();
+		            	 $('#courses').combobox({
+		          	   	 	valueField : 'id' ,
+		        	   	 	textField : 'text',
+		        	   	 	multiple:true,
+		        	   	 	url : 'CourseAction!getCourseNames.zk'
+		            	 });
+		             }
+		             if(type == 'order'){
+		            	 $('#productDiv').hide();
+		            	 $('#courseDiv').hide();
+		             }
+		       }
+		}); */
+ 	   	$('#scope').combobox({
+		   	   valueField:'id',
+		   	   textField:'text',
+		}).combobox('disable');
+		var scope = row.scope ;
+		$('#scope').combobox('setValue',scope);
+		if(scope == 'course'){
+			$('#productDiv').hide();
+			$('#courseDiv').show();
+			$('#courses').combobox({
+      	   	 	valueField : 'id' ,
+    	   	 	textField : 'text',
+    	   	 	multiple:true,
+    	   	 	url : 'CourseAction!getCourseNames.zk'
+        	 }).combobox('setText',row.targetName);
+		}
+		if(scope == 'product'){
+			$('#courseDiv').hide();
+			$('#productDiv').show();
+			$('#products').combobox({
+      	   	 	valueField : 'id' ,
+    	   	 	textField : 'text',
+    	   	 	multiple:true,
+    	   	 	url : 'productAction!getPrductNames.zk'
+        	 }).combobox('setText',row.targetName);
+		}
+		$('#detailBenefitRate').numberbox('setValue',row.benefitRate);
+		$('#gymBenefitId').val(row.id);
+		$('#newBenefitdlg').dialog('open').dialog('setTitle','编辑');
+		
+	}
+	
+	function formaterScope(v){
+		switch (v) {
+			case 'course': return '课程';
+			case 'product': return '产品';
+			case 'order': return '订单';
+			default: return '';
+		}
+	}
+	
+	//提现对话框
+	function towithdraw(){
+		location.href = 'gymWithdraw.html';
+	}
+	
+    function searchUser(){
+    	var searchKey = $('#searchKey').textbox('getValue');
+    	var searchState = $('#searchState').combobox('getValue');
+    	$("#dg").datagrid('load',{keyword:searchKey,state:searchState});
+    }
+    
+    //审核健身房信息
+    function toCheckGym(){
+    	//alert('check');
+    	var row = $('#dg').datagrid('getSelected');
+    	if(!row){
+    		showError('先选择健身房');
+    		return ;
+    	}
+    	$('#checkGymId').val(row.id);
+    	$('#checkGymName').text(row.gymName ? row.gymName : '' );
+    	$('#checkAdmin').text(row.admin ? row.admin : '');
+    	$('#checkAdminPhone').text(row.adminPhone ? row.adminPhone : '');
+    	$('#checkzfbAccount').text(row.zfbAccount ? row.zfbAccount : '');
+    	$('#checkzfbName').text(row.zfbName ? row.zfbName : '');
+    	$('#checkaddress').text(row.address ? row.address : '');
+    	$('#checkdescription').text(row.description ? row.description : '');
+    	$('#checkBizNo').text(row.businessLicense ? row.businessLicense : '');
+    	if(row.state == 'fail'){
+	    	$('#checkresult').text('未通过审核,理由:' + (row.reason ? row.reason : '') );
+    	}else if(row.state == 'normal'){
+	    	$('#checkresult').text('已通过审核!');
+    	}else{
+	    	$('#checkresult').text('');
+    	}
+    	
+    	var ceHTMLs = [];
+    	var ces = $.parseJSON(row.certification);
+    	for(var i = 0;i<ces.length;i++){
+    		var ce = ces[i];
+    		var img = '../file/FileCenter!showImage2.zk?name=' + ce.image;
+	    	var ceHtml = '<div><a href="'+img+'" class="popImage" title="点击查看大图"><img src="'+img+'" style="width:208px;height:208px;"></a><span>'+ce.name+'</span></div>';
+	    	ceHTMLs.push(ceHtml);
+    	}
+    	$('#checkCes').html(ceHTMLs.join(''));
+    	
+    	var csHtmls = [];
+    	if(row.cover){
+	    	var covers = $.parseJSON(row.cover);
+	    	for(var i = 0 ;i<covers.length;i++){
+	    		var img = '../file/FileCenter!showImage2.zk?name=' + covers[i];
+	    		var csHtml = '<div><a href="'+img+'" class="popImage" title="点击查看大图"><img src="'+img+'" style="width:208px;height:208px;"></a></div>';
+	    		csHtmls.push(csHtml);
+	    		$('#checkcovers').html(csHtmls.join(''));
+	    	}
+    	}
+    	
+    	
+		$("a.popImage").fancybox({
+	            openEffect  : 'elastic',
+	            closeEffect: 'elastic'    
+	    });
+    	openDialog('gymCheckdlg', '审核健身房信息');
+    }
+    
+    function postCheckInfo(gymId,f,r){
+    	$.post('GymAction!check.zk',{gymId:gymId,flag:f,reason:r},function(data){
+    		if(data.STATUS){
+    			closeDialog('gymCheckdlg');
+    			$('#dg').datagrid('reload');
+    		}else{
+    			showError(data.INFO);
+    		}
+    	},'json');
+    }
+    
+    function saveNoPass(){
+    	var gymId = $('#checkGymId').val();
+    	var r = $('#gymCheckReason').textbox('getValue');
+    	
+    	$.post('GymAction!check.zk',{gymId:gymId,flag:0,reason:r},function(data){
+    		if(data.STATUS){
+    			closeDialog('checkReasonDlg');
+    			closeDialog('gymCheckdlg');
+    			$('#dg').datagrid('reload');
+    		}else{
+    			showError(data.INFO);
+    		}
+    	},'json');
+    }
+    
+    //保存审核信息
+    function saveCheck(f){
+    	var gymId = $('#checkGymId').val();
+    	if(f){
+    		postCheckInfo(gymId , f , '');
+    	}else{
+    		openDialog('checkReasonDlg', '填写审核不通过理由');
+    	}
+    }
+    
+    function toListCards(){
+    	var row = $('#dg').datagrid('getSelected');
+    	if(!row){
+    		showError('先选择健身房');
+    		return ;
+    	}
+    	var gymId = row.id ;
+    	$('#cardDg').datagrid({
+    		url : 'GymAction!listCards.zk',
+    		queryParams : {
+    			gymId : gymId
+    		}
+    	});
+    	$('#cardDlg').dialog('open').dialog('setTitle','会员卡列表');
+    }
+    
+    function formatUser(v,row){
+    	return '<a href="javascript:void(0)" onclick="showUsers(\''+row.id+'\')">'+v+'</a>';
+    }
+    
+    function showUsers(gymId){
+    	//var gymId = row.id ;
+    	$('#userDg').datagrid({
+    		url : 'GymAction!listUsers.zk',
+    		queryParams : {
+    			gymId : gymId
+    		}
+    	});
+    	$('#userDlg').dialog('open').dialog('setTitle','用户列表');
+    }
+    
+    function toGymPwd(){
+    	var row = $('#dg').datagrid('getSelected');
+    	if(!row){
+    		showError('先选择健身房');
+    		return ;
+    	}
+    	$('#gymAccountId').val('');
+     	$('#gymLoginName').textbox('setValue','');
+    	$('#gymLoginPwd').textbox('setValue','');
+    	
+    	var gymId = row.id ;
+    	$.post('GymAction!getGymAdmin.zk',{gymId:gymId},function(data){
+    		if(data.STATUS){
+   				var admin = data.admin;
+    			if(admin){
+    				$('#gymAccountId').val(admin.id);
+    				$('#gymLoginName').textbox('setValue',admin.loginName);
+    			}
+    		}
+    	},'json');
+    	$('#gymPwdDlg').dialog('open').dialog('setTitle','重置密码');
+    }
+    
+    function saveGymPwd(){
+    	var loginName = $('#gymLoginName').textbox('getValue');
+    	var loginPwd = $('#gymLoginPwd').textbox('getValue');
+    	if(!loginName){
+    		showError('用户名不能为空');
+    		return ;
+    	}
+    	if(!loginPwd){
+    		showError('密码不能为空');
+    		return ;
+    	}
+    	var gaId = $('#gymAccountId').val();
+    	$.post('GymAction!resetPwd.zk',{gaId:gaId,loginName:loginName,loginPwd:loginPwd},function(data){
+    		if(data.STATUS){
+    			$('#gymPwdDlg').dialog('close');
+    		}else{
+    			showError(data.INFO);
+    		}
+    	},'json');
+    }
+</script>
+</body>
+</html>

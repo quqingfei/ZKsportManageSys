@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style type="text/css">
+#fm {
+	margin: 0;
+	padding: 10px 30px;
+}
+
+.ftitle {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
+
+.fitem label {
+	display: inline-block;
+	width: 80px;
+}
+
+.fitem input {
+	width: 160px;
+}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-bullhorn"></i><a href="action1.html">活动管理</a>
+                </div>
+            </li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">订单管理 <span class="divider">/</span></li>
+				<li class="active">销售汇总</li>
+			</ul>
+			<div>
+							<table id="dg" style="height:560px; " data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'',method:'post',showFooter: true,toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'productDesc',align:'center',width:$(this).width() * 0.2">产品规格</th>
+										<th data-options="field:'saleNumber',align:'center',width:$(this).width() * 0.2">销量</th>
+										<th data-options="field:'refundNumber',align:'center',width:$(this).width() * 0.2">退货量</th>
+										<th data-options="field:'changeNumber',align:'center',width:$(this).width() * 0.2">换货量</th>
+
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td>产品:
+				<select id="queryProduct" style="width:150px;" data-options="url:'',method:'post',valueField:'id',textField:'text',editable:false">
+				</select></td>
+										<td>日期从：<input id="startDate" class="easyui-datebox"
+											style="width: 100px" /> 到：<input id="endDate"
+											class="easyui-datebox" style="width: 100px" />
+										</td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td>
+											<a href="javascript:void(0)"
+												class="easyui-linkbutton" iconCls="icon-search"
+												onclick="searchSale()">搜索</a>
+										</td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td>
+											<a href="javascript:void(0)"
+												class="easyui-linkbutton" iconCls="icon-analytics"
+												onclick="toSaleDetail()">销售份额</a>
+										</td>										
+									</tr>
+								</table>
+							</div>
+							<!-- dialogs -->
+							
+								<div id="detailDlg" class="easyui-dialog"
+		data-options="iconCls:'icon-save'"
+		style="width: 60%; height: 500px; padding: 10px 10px" closed="true" modal="true">
+		<div id="saleDetailChart"
+			style="height: 350px; padding: 40px 10px;">正在拼命加载中...</div>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.form.js"></script>
+	<script src="js/header.js"></script>
+	<script src="js/jquery.easyui.min1.js"></script>
+	<script src="js/easyui-lang-zh_CN.js"></script>
+	<script src="js/jquery.easyui.patch.js"></script>
+	<script src="js/datagrid.common.js"></script>
+	<script src="js/echarts-plain.js"></script>
+
+	<script>
+		function searchSale(){
+			var startDate = $("#startDate").datebox("getValue");
+    		var endDate =   $("#endDate").datebox("getValue"); 
+    		var productName = $("#queryProduct").combobox('getText');
+    		$("#dg").datagrid({
+    				'url' : 'orderAction!saleInfo.zk',
+    				'queryParams':{startDate:startDate,endDate:endDate,productName:productName}
+    		});
+		}
+		
+		function toSaleDetail(){
+			
+			var startDate = $("#startDate").datebox("getValue");
+    		var endDate =   $("#endDate").datebox("getValue"); 
+    		var productName = $("#queryProduct").combobox('getText');
+    		
+    		var title =  productName ;
+    		if(startDate){
+    			title += ( startDate + "起") ;
+    		}
+    		
+    		if(endDate){
+    			title += ( endDate + "至" );
+    		}   
+    		title += '销售份额';
+    		
+			$('#detailDlg').dialog('open').dialog('setTitle',title);
+    		
+			$.post('orderAction!saleInfoDetail.zk',{startDate:startDate,endDate:endDate,productName:productName},function(data){
+				if(data.STATUS){
+		        	if(data.datas.length>0){
+		        		var rspData  = data.datas;
+		        		var labels = [];
+		        		var datas =[];
+		        		for(var i = 0 ;i<rspData.length;i++){
+		        			labels.push(rspData[i].platform);
+		        			var item = {value:rspData[i].sales, name:rspData[i].platform};
+		        			datas.push(item);
+		        		}
+		        		var myChart = echarts.init(document.getElementById('saleDetailChart'));
+		        	    myChart.setOption({
+		        	        title : {
+		        	            text: '销售份额',
+		        	            x:'center'
+		        	        },
+		        	        tooltip : {
+		        	            trigger: 'item',
+		        	            formatter: "{a} <br/>{b} : {c} ({d}%)"
+		        	        },
+		        	        legend: {
+		        	            orient : 'vertical',
+		        	            x : 'left',
+		        	            data:labels
+		        	        },
+		        	        toolbox: {
+		        	            show : true,
+		        	            feature : {
+		        	                mark : {show: false},
+		        	                dataView : {show: false, readOnly: false},
+		        	                restore : {show: true},
+		        	                saveAsImage : {show: true}
+		        	            }
+		        	        },
+		        	        calculable : true,
+		        	        series : [
+		        	            {
+		        	                name:'销售份额',
+		        	                type:'pie',
+		        	                radius : '55%',
+		        	                center: ['50%', '60%'],
+		        	                data : datas
+		        	            }
+		        	        ]
+		        	    });
+		        	}else{
+		        		$("#main").text('没有数据');
+		        	}				
+				}else{
+					if(!data.total && data.ERROR == 'No Login!'){
+						$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+						relogin();
+					}else{
+						$.messager.alert('信息提示', data.ERROR, 'error');
+					}
+				}
+				
+			},'json');
+
+		}
+		
+		$(function(){
+			$('#queryProduct').combobox({
+				url : 'productAction!getPrductNames.zk',
+				onLoadSuccess : function(data){
+					if(!data.total && data.ERROR == 'No Login!'){
+						$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+						relogin();
+					}
+				}
+			});
+		});
+	</script>
+	<script src="js/format.utils.js"></script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

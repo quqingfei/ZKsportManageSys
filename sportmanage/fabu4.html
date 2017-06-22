@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>宅客运动后台管理系统</title>
+    <link href="css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/easyui2.min.css">
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/theme-simple.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href="css/calendar.css" rel="stylesheet" />
+    <link href="css/default.css" rel="stylesheet" />
+    <script  src="../kindeditor/kindeditor-all.js"></script>
+    <script  src="../kindeditor/lang/zh-CN.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('#editor_id');
+        });
+
+    </script>
+    <style>
+        form {
+            margin: 0;
+        }
+        textarea {
+            display: block;
+        }
+        .editdiv {
+            width: 60%;
+            height: auto;
+            display: inline-block;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="group wrap header"
+     style="height: 66px; font-size: 100%">
+    <div class="content">
+        <div class="logo">
+            <div>
+                <img src="images/logo.png" alt="宅客运动">
+            </div>
+        </div>
+        <div class="head-right">
+            <div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+            <div style="margin: 8px auto;">
+                <a href="#" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="left-region">
+    <ul id="accordion" class="accordion">
+        <li>
+            <div class="link">
+                <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+            </div>
+        </li>
+
+        <li>
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+            </div>
+        </li>
+        <li class="open">
+            <div class="link">
+                <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-bullhorn"></i><a href="action1.html">活动管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="app1.html">版本管理</a></li>
+                <li><a href="feedback1.html">反馈管理</a></li>
+                <li><a href="video1.html">视频管理</a></li>
+                <li><a href="medal1.html">勋章管理</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="account1.html">系统用户</a></li>
+                <li><a href="resources1.html">资源管理</a></li>
+                <li><a href="role1.html">角色管理</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="center-region" style="border: none;padding-left:10px;">
+    <div>
+        <ul class="breadcrumb">
+            <li>当前位置：</li>
+            <li class="active">后台管理 <span class="divider">/</span></li>
+            <li class="active">健康资讯</li>
+        </ul>
+        <div>
+            <div class="play" style="display: inline-block;width: 25%;">
+                <div class="play_tg" >
+                    <div class="play_lkp">
+                        <div class="play_left">年龄区段：</div>
+                        <div class="play_right">
+                            <input name="input1" type="text" class="play_jiao" id="startAge" />
+                            - <input type="text" class="play_jiao" id="endAge" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">星座：</div>
+                        <div class="play_right">
+                            <select class="play_jiao" id="constellation">
+                                <option>选择星座</option>
+                                <option value="白羊座">白羊座</option>
+                                <option>金牛座</option>
+                                <option>双子座</option>
+                                <option>巨蟹座</option>
+                                <option>狮子座</option>
+                                <option>处女座</option>
+                                <option>天秤座</option>
+                                <option>天蝎座</option>
+                                <option>射手座</option>
+                                <option>摩羯座</option>
+                                <option>水瓶座</option>
+                                <option>双鱼座</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">性别：</div>
+                        <div class="play_right">
+                            <select class="play_jiao" id="sex">
+                                <option>选择</option>
+                                <option value="M">男</option>
+                                <option value="F">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">投放地点：</div>
+                        <div class="play_right">
+                            <select style="width: 190px;" class="play_jiao" id="region">
+                                <option>区域选择</option>
+                                <option>黑龙江,辽宁,吉林,山东,河北</option>
+                                <option>河南,山西,陕西,甘肃,宁夏</option>
+                                <option>内蒙古</option>
+                                <option>新疆</option>
+                                <option>西藏,青海</option>
+                                <option>四川,重庆,贵州,云南,广西</option>
+                                <option>湖北,湖南,安徽,江西</option>
+                                <option>江苏,浙江,上海</option>
+                                <option>福建,广东,海南</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">BMI：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="startBmi" /> - <input
+                                type="text" style="width: 80px;" id="endBmi" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">日期：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="EntTime" name="EntTime"
+                                   onclick="return showCalendar('EntTime', 'y-mm-dd');" /> - <input
+                                type="text" class="play_jiao" id="zhtTime" name="zhtTime"
+                                onclick="return showCalendar('zhtTime', 'y-mm-dd');" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">天气状况：</div>
+                        <div class="play_right">
+                            <select class="play_jiao" id="weather">
+                                <option>选择天气</option>
+                                <option>大雨</option>
+                                <option>大雪</option>
+                                <option>雾霾</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">湿度：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="startHumidity" /> - <input
+                                type="text" class="play_jiao" id="endHumidity" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">时间段：</div>
+                        <div class="play_right">
+                            <select class="play_jiao" id="startTime">
+                                <option>1:00</option>
+                                <option>2:00</option>
+                                <option>3:00</option>
+                                <option>4:00</option>
+                                <option>5:00</option>
+                                <option>6:00</option>
+                                <option>7:00</option>
+                                <option>8:00</option>
+                                <option>9:00</option>
+                                <option>10:00</option>
+                                <option>11:00</option>
+                                <option>12:00</option>
+                                <option>13:00</option>
+                                <option>14:00</option>
+                                <option>15:00</option>
+                                <option>16:00</option>
+                                <option>17:00</option>
+                                <option>18:00</option>
+                                <option>19:00</option>
+                                <option>20:00</option>
+                                <option>21:00</option>
+                                <option>22:00</option>
+                                <option>23:00</option>
+                                <option>00:00</option>
+                            </select> - <select class="play_jiao" id="endTime">
+                            <option>1:00</option>
+                            <option>2:00</option>
+                            <option>3:00</option>
+                            <option>4:00</option>
+                            <option>5:00</option>
+                            <option>6:00</option>
+                            <option>7:00</option>
+                            <option>8:00</option>
+                            <option>9:00</option>
+                            <option>10:00</option>
+                            <option>11:00</option>
+                            <option>12:00</option>
+                            <option>13:00</option>
+                            <option>14:00</option>
+                            <option>15:00</option>
+                            <option>16:00</option>
+                            <option>17:00</option>
+                            <option>18:00</option>
+                            <option>19:00</option>
+                            <option>20:00</option>
+                            <option>21:00</option>
+                            <option>22:00</option>
+                            <option>23:00</option>
+                            <option>00:00</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">踏步数：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="startSteps" /> - <input
+                                type="text" class="play_jiao" id="endSteps" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">温差：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="startTemperChange" /> -
+                            <input type="text" class="play_jiao" id="endTemperChange" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">温度段：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="startTemper" /> - <input
+                                type="text" class="play_jiao" id="endTemper" />
+                        </div>
+                    </div>
+                    <div class="play_lkj">
+                        <div class="play_left">创建时间：</div>
+                        <div class="play_right">
+                            <input type="text" class="play_jiao" id="gmtCreat" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="editdiv">
+            <div  style="margin-left:0" class="play_lkj">
+                <div class="play_left" style="margin-left: -10px">网页标题：</div>
+                <div class="play_right">
+                    <input style="width: 640px" type="text" class="play_jiao" value="请输入标题..."
+                           onfocus="if(value=='请输入标题...') {value=''}"
+                           onblur="if (value=='') {value='请输入标题...'}"  id="search" />
+                </div>
+            </div>
+            <input type="hidden" id="articleId" />
+            <input type="hidden" id="title_img_url" />
+            <h3>编辑区</h3>
+            <textarea id="editor_id" name="content" style="width:700px;height:300px;">
+                            &lt;strong&gt;HTML内容&lt;/strong&gt;
+            </textarea>
+            <div class="fitem">
+                <input name="cover" id = "cover"  type="hidden">
+            </div>
+            <form id="title_img_form" method="post"  enctype="multipart/form-data">
+                <input type="file" style="display: none;" id="file_title_img" name="name" onchange="uploadImage()" accept="image/*" />
+            </form>
+            <div style="margin-top: 5px;position: relative">
+                <div style="position:absolute;display: inline-block; background-color:greenyellow ;width:20px; height: 20px; margin-left:0px; margin-top: 5px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+                    <img id="imghead" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                </div>
+                <div style="position:absolute;display: inline-block; background-color:greenyellow ;width:60px; height: 20px; margin-left:30px; margin-top: 5px;cursor: pointer;" >
+                    <a type="button" id="savebutton" onclick="save(event)" style="position: absolute;margin-top: 3px;margin-left: 4px" >保存网页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/accordion.js"></script>
+<script>
+    var id = "";
+    $(function() {
+        init();
+    });
+    function init() {
+        var id = $.getUrlVar("id");
+        if (id != null && id != '') {
+            $.post('articleAction!get.zk',
+                    { id : id},
+                    function(data) {
+                        if (data.STATUS && data.article) {
+                            //发布时间
+                            if (data.article.gmtCreate) {
+                                $("#gmtCreate").val(new Date(data.article.gmtCreate).format("yyyy-MM-dd"));
+                            }
+                            //id赋值
+                            $("#articleId").val(id);
+                            //标题
+                            if (data.article.subject) {
+                                $("#search").val(data.article.subject);
+                            }
+                            if (data.article.startAge) {
+                                $('#startAge').val(data.article.startAge);
+                            }
+                            if (data.article.endAge) {
+                                $('#endAge').val( data.article.endAge);
+                            }
+                            //星座
+                            if (data.article.constellation) {
+                                $('#constellation').val(data.article.constellation);
+                            }
+                            //性别
+                            if (data.article.sex) {
+                                $('#sex').val(data.article.sex);
+                            }
+                            //区域
+                            if (data.article.region) {
+                                $('#region').val(data.article.region);
+                            }
+                            //BMI
+                            if (data.article.startBmi) {
+                                $('#startBmi').val(data.article.startBmi);
+                            }
+                            if (data.article.endBmi) {
+                                $('#endBmi').val(data.article.endBmi);
+                            }
+                            //日期
+                            if (data.article.startDate) {
+                                $('#EntTime').val(new Date(data.article.startDate).format("yyyy-MM-dd"));
+                            }
+                            if (data.article.endDate) {
+                                $('#zhtTime').val(new Date(data.article.endDate).format("yyyy-MM-dd"));
+                            }
+                            //天气
+                            if (data.article.weather) {
+                                $('#weather').val(data.article.weather);
+                            }
+                            //湿度
+                            if (data.article.startHumidity) {
+                                $('#startHumidity').val(data.article.startHumidity);
+                            }
+                            if (data.article.endHumidity) {
+                                $('#endHumidity').val(data.article.endHumidity);
+                            }
+                            //时间段
+                            if (data.article.startTime) {
+                                $('#startTime').val(new Date(data.article.startTime).format("h:mm"));
+                            }
+                            if (data.article.endTime) {
+                                $('#endTime').val(new Date(data.article.endTime).format("h:mm"));
+                            }
+                            //踏步数
+                            if (data.article.startSteps) {
+                                $('#startSteps').val(data.article.startSteps);
+                            }
+                            if (data.article.endSteps) {
+                                $('#endSteps').val(data.article.endSteps);
+                            }
+                            //温差
+                            if (data.article.startTemperChange) {
+                                $('#startTemperChange').val(data.article.startTemperChange);
+                            }
+                            if (data.article.endTemperChange) {
+                                $('#endTemperChange').val(data.article.endTemperChange);
+                            }
+                            //温度段
+                            if (data.article.startTemper) {
+                                $('#startTemper').val(data.article.startTemper);
+                            }
+                            if (data.article.endTemperChange) {
+                                $('#endTemper').val(data.article.endTemper);
+                            }
+
+                        } else {
+                            alert('该文章不存在或已删除!');
+                            location.replace("release1.html");
+                        }
+                    }, 'json');
+        } else {
+            $("#gmtCreate").val(new Date().format("yyyy-MM-dd"));
+        }
+    }
+    //图片选择对话框
+    function chooseImage(id) {
+        document.getElementById(id).click();
+    }
+    //上传文章图片
+    function uploadImage(){
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 500 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                //上传图片
+                showTip();
+                $("#title_img_form").ajaxSubmit({
+                    type : 'post',
+                    url : '../file/FileCenter!uploadImage2.zk',
+                    success : function(data) {
+                        data = $.parseJSON(data);
+                        if (data.name) {
+                            var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                            editor.insertHtml('<img class="img" src="' + imgURL + '" />');
+                            $("#cover").val(data.name);
+                        } else {
+                            alert("上传图片出错！");
+                        }
+                        $("#title_img_form").resetForm();
+                    },
+                    error : function(XmlHttpRequest, textStatus, errorThrown) {
+                        alert("error");
+                    }
+                });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        }
+    }
+    //校验是否数字
+    function isNumber(n) {
+        if (n != '') {
+            return !isNaN(n);
+        } else {
+            return true;
+        }
+    }
+    //范围校验(start,end),针对日期
+    function between(start, end) {
+        if (start != '' && end != '') {
+            strDate1 = start.replace(/-/g, "/");
+            strDate2 = end.replace(/-/g, "/");
+            var date1 = new Date(strDate1);
+            var date2 = new Date(strDate2);
+            if ((date2 - date1) < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return true;
+    }
+    function betweenTime(start, end) {
+        var s = start.substring(0, start.length - 3);
+        var e = end.substring(0, end.length - 3);
+        if ((e - s) < 0) {
+            return false;
+        }
+        return true;
+    }
+    function getValueAndCheck(){
+
+        //可选参数
+        var startAge = $.trim($('#startAge').val());
+        if (!isNumber(startAge)) {
+            alert('年龄只能为整数!');
+            $('#startAge').focus();
+            return;
+        }
+        var endAge = $.trim($('#endAge').val());
+        if (!isNumber(endAge)) {
+            alert('年龄只能为整数!');
+            $('#endAge').focus();
+            return;
+        }
+        if (startAge != '' && endAge != '') {
+            if (parseInt(startAge) > parseInt(endAge)) {
+                alert("起始年龄不能大于终止年龄!");
+                $("#startAge").focus();
+                return;
+            }
+        }
+        var constellation = $.trim($('#constellation').val());
+        var sex = $.trim($('#sex').val());
+        var region = $.trim($('#region').val());
+        var startBmi = $.trim($('#startBmi').val());
+        if (!isNumber(startBmi)) {
+            alert('BMI只能为整数!');
+            $('#startBmi').focus();
+            return;
+        }
+        var endBmi = $.trim($('#endBmi').val());
+        if (!isNumber(endBmi)) {
+            alert('BMI只能为整数!');
+            $('#endBmi').focus();
+            return;
+        }
+        if (startBmi != '' && endBmi != '') {
+            if (parseInt(startBmi) > parseInt(endBmi)) {
+                alert("起始BMI不能大于终止BMI!");
+                $("#startBmi").focus();
+                return;
+            }
+        }
+        var startDate = $.trim($('#EntTime').val());
+        var endDate = $.trim($('#zhtTime').val());
+        if (!between(startDate, endDate)) {
+            alert("起始日期不能大于结束日期!");
+            $("#EntTime").select();
+            return;
+        }
+        var weather = $.trim($('#weather').val());
+        var startHumidity = $.trim($('#startHumidity').val());
+        if (!isNumber(startHumidity)) {
+            alert('湿度只能为整数!');
+            $('#startHumidity').focus();
+            return;
+        }
+        var endHumidity = $.trim($('#endHumidity').val());
+        if (!isNumber(endHumidity)) {
+            alert('湿度只能为整数!');
+            $('#endHumidity').focus();
+            return;
+        }
+        if (startHumidity != '' && endHumidity != '') {
+            if (parseInt(startHumidity) > parseInt(endHumidity)) {
+                alert('起始湿度不能大于终止湿度!');
+                $('#startHumidity').focus();
+                return;
+            }
+        }
+        var startTime = $.trim($('#startTime').val());
+        var endTime = $.trim($('#endTime').val());
+        if (!betweenTime(startTime, endTime)) {
+            alert("起始时间不能大于终止时间!");
+            $("#startTime").focus();
+            return;
+        }
+        var startSteps = $.trim($('#startSteps').val());
+        if (!isNumber(startSteps)) {
+            alert('踏步数只能为整数!');
+            $('#startSteps').focus();
+            return;
+        }
+        var endSteps = $.trim($('#endSteps').val());
+        if (!isNumber(endSteps)) {
+            alert('踏步数只能为整数!');
+            $('#endSteps').focus();
+            return;
+        }
+        if (startSteps != '' && endSteps != '') {
+            if (parseInt(startSteps) > parseInt(endSteps)) {
+                alert('起始踏步数不能大于终止踏步数!');
+                $('#startSteps').focus();
+                return;
+            }
+        }
+        var startTemperChange = $.trim($('#startTemperChange').val());
+        if (!isNumber(startTemperChange)) {
+            alert('温差只能为整数!');
+            $('#startTemperChange').focus();
+            return;
+        }
+        var endTemperChange = $.trim($('#endTemperChange').val());
+        if (!isNumber(endTemperChange)) {
+            alert('温差只能为整数!');
+            $('#endTemperChange').focus();
+            return;
+        }
+        if (startTemperChange != '' && endTemperChange != '') {
+            if (parseInt(startTemperChange) > parseInt(endTemperChange)) {
+                alert('起始温差不能大于终止温差!');
+                $('#startTemperChange').focus();
+                return;
+            }
+        }
+        var startTemper = $.trim($('#startTemper').val());
+        if (!isNumber(startTemper)) {
+            alert('温度只能为整数!');
+            $('#startTemper').focus();
+            return;
+        }
+        var endTemper = $.trim($('#endTemper').val());
+        if (!isNumber(endTemper)) {
+            alert('温度只能为整数!');
+            $('#endTemper').focus();
+            return;
+        }
+        if (startTemper != '' && endTemper != '') {
+            if (parseInt(startTemper) > parseInt(endTemper)) {
+                alert('起始温度不能大于终止温度!');
+                $('#startTemper').focus();
+                return;
+            }
+        }
+        //数据校验
+        var subject = $.trim($("#search").val());
+        var id= $.trim($("#articleId").val());
+        var content = editor.fullHtml();
+        console.log(content);
+        if(content==''){
+            alert('网页内容不能为空!');
+            return ;
+        }
+        var imageName = $.trim($("#cover").val());
+        var articleId = $("#articleId").val();
+        if(articleId==null||articleId==''){
+            if(imageName == ''){
+                alert('请上传文章图片!');
+                return ;
+            }
+        }
+        var postData = {
+            id : id,
+            subject :  subject,
+            content : content,
+            imageName : imageName,
+            startAge : startAge,
+            endAge : endAge,
+            constellation : constellation,
+            sex : sex,
+            region : region,
+            startBmi : startBmi,
+            endBmi : endBmi,
+            startDate : startDate,
+            endDate : endDate,
+            weather : weather,
+            startHumidity : startHumidity,
+            endHumidity : endHumidity,
+            startTime : startTime,
+            endTime : endTime,
+            startSteps : startSteps,
+            endSteps : endSteps,
+            startTemperChange : startTemperChange,
+            endTemperChange : endTemperChange,
+            startTemper : startTemper,
+            endTemper : endTemper
+        };
+        return postData;
+    }
+    function save(event) {
+        event.preventDefault();
+        var  postData =getValueAndCheck();
+        $.post('articleAction!newArticleOrUpdate.zk', postData, function(data) {
+            if (data.STATUS) {
+                if(data.ERROR&&data.ERROR=='No Login!'){
+                    alert('登陆超时，请重新登录!');
+                    location.replace('index.jsp');
+                }else{
+                    alert('保存成功!');
+                    location.replace("release1.html");
+                }
+            } else {
+                alert(data.INFO);
+            }
+        }, 'json');
+    }
+    function showTip(msg) {
+        $.messager.show({
+            title : "开始上传请稍候",
+            timeout:1000,
+            msg : msg
+        });
+    }
+</script>
+</body>
+</html>

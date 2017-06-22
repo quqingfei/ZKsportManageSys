@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<style>
+#fm { margin: 0; padding: 10px} .ftitle { font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+</head>
+<body>
+	
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+<!-- 					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div> -->
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='medal.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+					<div class="main_opt">后台管理 &gt; 用户管理</div>
+					<div class="main_opk">
+							当前用户人数：<span class="main_color" id="total">0</span> 人 
+							男性用户： <span class="main_color" id="male">0</span> 人 
+							女性用户： <span	class="main_color" id="female">0</span> 人 
+							平均年龄：<span class="main_color" id="age">0</span>岁 
+							日活跃用户：<span class="main_color" id="dayUsers">0</span>人 
+							月活跃用户：<span class="main_color" id="monthUsers">0</span>人
+							日增长用户：<span class="main_color" id="dayNewUsers">0</span>人 
+							月增长用户：<span class="main_color" id="monthNewUsers">0</span>人
+					</div>
+					<div style="width: 100%; height: 10px;"></div>
+					<div style="width: 100%; height: 73%;  min-width: 750px;">
+
+						<div class="boyd">
+							<table id="dg"
+								style="height: 105%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="rownumbers:true,sortName:'gmtModify',sortOrder:'desc',singleSelect:true,pagination:true,pageSize:'30',url:'userAction!getUsers.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'userName',width:$(this).width() * 0.07">用户名</th>
+										<th data-options="field:'phone',width:$(this).width() * 0.06">手机号</th>
+										<th
+											data-options="field:'sex',align:'center',formatter: formatSex,width:$(this).width() * 0.03">性别</th>
+										<th data-options="field:'age',align:'center',sortable:true,width:$(this).width() * 0.03">年龄</th>
+										<th data-options="field:'height',align:'center',sortable:true,width:$(this).width() * 0.04">身高(cm)</th>
+										<th data-options="field:'initWeight',align:'center',width:$(this).width() * 0.05">原体重(kg)</th>
+										<th data-options="field:'weight',align:'center',sortable:true,width:$(this).width() * 0.05">现体重(kg)</th>
+										<!-- <th data-options="field:'bmi',walign:'center',sortable:true">BMI</th> -->
+										<th data-options="field:'level',align:'center',sortable:true,width:$(this).width() * 0.03">等级</th>
+										<th
+											data-options="field:'totalSteps',align:'center',sortable:true,width:$(this).width() * 0.04">踏步数</th>
+										<!-- <th
+											data-options="field:'totalCalorie',align:'center',sortable:true">卡路里</th> -->
+										<th
+											data-options="field:'totalUsedTime',align:'center',sortable:true,width:$(this).width() * 0.07">使用时长(分钟)</th>
+										<th data-options="field:'address',align:'center',width:$(this).width() * 0.07">地址</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter: formatDate,sortable:true,width:$(this).width() * 0.09">注册时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter: formatDate,sortable:true,width:$(this).width() * 0.09">修改时间</th>
+										<th data-options="field:'appversion',align:'center',width:$(this).width() * 0.07">App版本</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'用户名、手机号',searcher:searchUser" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-piechart"
+											plain="true" onclick="appSummary()">App份额统计</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-barchart"
+											plain="true" onclick="show()">用户数据分析</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_broadcast"
+											plain="true" onclick="initBroadcast()">系统通知</a></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="appdlg" class="easyui-dialog"
+		style="width: 650px; height: 550px; padding: 10px 20px" closed="true"
+		data-options="iconCls:'icon-stat'">
+		<div id="appChart"
+			style="height: 450px; border: 1px solid #ccc; padding: 10px;"></div>
+	</div>
+	<div id="usrdlg" class="easyui-dialog"
+		style="width: 700px; height: 500px; padding: 10px 20px" closed="true"
+		data-options="iconCls:'icon-stat'">
+		<div id="main"
+			style="height: 350px; border: 1px solid #ccc; padding: 10px;"></div>
+		<div style="width: 600px; height: 35px; margin: 25px auto 0;">
+			<a href="javascript:void(0)" class="button" style="float: left;"
+				onclick="prevWeek()">上一周</a> <a href="javascript:void(0)"
+				class="button" style="float: right;" onclick="nextWeek()">下一周</a>
+		</div>
+	</div>
+	<div id="bcmsgDlg" class="easyui-dialog"
+		data-options="iconCls:'icon-save'"
+		style="width: 400px; height: 280px; padding: 10px 10px" closed="true" modal="true"
+		buttons="#bcdlg-buttons">
+		<div class="ftitle">通知内容</div>
+		<form id="fm" method="post">
+			<textarea name="textfield" id="bcimMsg" rows="6" cols="20"
+					style="width: 350px; height: 100px; margin-top: 5px; color: #666; font-size: 12px;"></textarea>
+		</form>
+		<div id="bcdlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="broadcast()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#bcmsgDlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+	
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/biz/zk_main.js"></script>
+	<script src="js/echarts-plain.js"></script>
+	<script src="js/format.utils.js"></script>
+	<script>
+	function initBroadcast(){
+		$('#bcimMsg').val('');
+	    $('#bcmsgDlg').dialog('open').dialog('setTitle','系统通知');
+	}
+	function broadcast(){
+		var $msgInput = $('#bcimMsg');
+		var msg = $msgInput.val();
+		if(msg == ''){
+			alert('消息不能为空!');
+			$msgInput.focus();
+		}
+		$.post('userAction!broadcast.zk',{msg:msg},function(data){
+			if(data.STATUS){
+				$('#bcmsgDlg').dialog('close');
+				showTip('成功发送广播！');
+			}else{
+				alert(data.INFO);
+			}
+		},'json');
+
+	}
+	</script>
+</body>
+</html> 

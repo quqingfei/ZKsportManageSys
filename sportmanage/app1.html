@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style> 
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">版本管理</li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">APP管理</li>
+			</ul>
+			<div>
+							<table id="dg" style="max-height:560px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'versionAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th
+											data-options="field:'a',formatter: formatVersion,width:155">版本号</th>
+										<th data-options="field:'downloadUrl',width:325">下载链接</th>
+										<th data-options="field:'releaseNote',width:325">更新说明</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:155">创建日期</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter: formatDate,width:155">修改日期</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input type="hidden" id="orderStatus" value="0" /></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-new" plain="true"
+											id="expCurLink" onclick="newAppVersion()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											id="expCurLink" onclick="initUpdate()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-garbage" plain="true"
+											id="expCurLink" onclick="del()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="appBoot1.html"
+											class="easyui-linkbutton" iconCls="icon-image" plain="true"
+											>App启动图片</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="healthCookbook1.html"
+											class="easyui-linkbutton" iconCls="icon-book" plain="true"
+											>健康食谱</a></td>											
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="activity.html"
+											class="easyui-linkbutton" iconCls="icon-book" plain="true"
+											>活动管理</a></td>											
+									</tr>
+								</table>
+							</div>
+							
+							<!-- dialogs -->
+							<div id="dlg" class="easyui-dialog"
+		style="width: 460px; height: 400px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">版本信息</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="productName">版本号:</label> <input
+				style="width: 50px; height: 20px;" type="text" id="txt_a" /> <input
+				style="width: 50px; height: 20px;" type="text" id="txt_b" /> <input
+				style="width: 50px; height: 20px;" type="text" id="txt_c" /> <input
+				type="hidden" id="txt_oa" /> <input type="hidden" id="txt_ob" /> <input
+				type="hidden" id="txt_oc" /> <input type="hidden" id="oplatform" />
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">选择平台:</label> <select id="sl_platform"
+				style="margin: 0; height: 24px;">
+				<option>选择平台</option>
+				<option value="a">安卓Android</option>
+				<option value="i">苹果IOS</option>
+			</select>
+		</div>
+		<div class="fitem" style="height: 30px;">
+			<label for="sl_platform">下载链接:</label> <input type="text"
+				style="height: 20px;" id="txt_url" />
+		</div>
+		<div class="fitem" style="">
+			<div style="float: left; width: 86px;">版本说明:</div>
+			<textarea name="textfield" rows="6" cols="18"
+				style="float: left; width: 290px; height: 120px;" id="tf_note"></textarea>
+		</div>
+	</div>
+	<div id="dlg-buttons">
+		<a href="javascript:void(0)" class="easyui-linkbutton c6"
+			iconCls="icon-ok" onclick="newVersion()" style="width: 90px">保存</a> <a
+			href="javascript:void(0)" class="easyui-linkbutton"
+			iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+			style="width: 90px">取消</a>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+	
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/biz/zk_app.js"></script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

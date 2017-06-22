@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<style>
+#win{font-size:14px ;line-height: 20px;word-wrap: break-word;overflow: hidden;}
+</style>
+<script>
+	$(function() {
+	    $('#dg').datagrid({
+	    	onClickCell: function(index,field,value){
+	    		if(field=='errorContent'){
+		    		$('#win').html(value);
+		    		$('#win').window({
+		    			title:'查看详情',
+		    		    width:600,
+		    		    height:400,
+		    		    collapsible:false,
+		    		    minimizable:false,
+		    		    modal:true
+		    		});
+	    		}
+	    	}
+	    });
+	});
+	
+	//格式化时间
+    function formatDate(value){
+        var d = new Date(value);   
+        return  d.format("yyyy-MM-dd hh:mm:ss");  
+    }
+	function errorStyle(){
+		return 'background-color:#ffee00;color:red;cursor:pointer;';
+	}
+</script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='safety.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='applog.html'">日志管理<em
+							class="main_xuan_10"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+					<div class="main_opt">后台管理 &gt; 日志管理</div>
+					<div class="main_kpy"></div>
+					<div style="width: 100%; height: 73%; min-width: 750px;">
+						<div class="boyd">
+							<table id="dg"
+								style="height:105%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'AppLogAction!list.zk',method:'post'">
+								<thead>
+									<tr>
+										<th data-options="field:'deviceType',align:'center',width:180">手机型号</th>
+										<th
+											data-options="field:'errorContent',align:'center',width:700,styler:errorStyle">异常信息</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:240">创建时间</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="win"></div>
+	<div class="fold" style="position: absolute; bottom: 0; left: 0;">宅客网络后台管理系统</div>
+</body>
+</html> 

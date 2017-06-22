@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/main_2.css"></link>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<style>
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+</style>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+	});
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		if(row){
+			$.messager.confirm('确认','确定删除?',function(r){    
+			    if (r){    
+					$.getJSON('MedalAction!delete.zk',{id:row.id},function(data){
+						if(data.STATUS){
+							$('#dg').datagrid('reload');
+							showTip("删除成功!");
+						}else {
+							showTip("删除失败!");
+						}
+					});
+			    }    
+			}); 
+		}else{
+       	 	$.messager.alert('警告','请先选择产品!');
+        }
+	}
+	function clearForm(){
+		$("#title").textbox('setValue','');
+		$("#description").textbox('setValue','');
+		//$("#videoUrl").textbox('setValue','');
+		$("#cover").val('');
+		$("#id").val('');
+        $("#imghead").attr("src", 'images/yun.png');
+	}
+	//新增产品信息
+	function newProduct(){
+	   clearForm();
+       $('#dlg').dialog('open').dialog('setTitle','编辑勋章信息');
+	}
+	//更新产品信息
+	function editProduct(){
+		 var row = $('#dg').datagrid('getSelected');
+         if (row){
+        	$("#id").val(row.id);
+    		$("#cover").val(row.medalIcon);
+            $('#dlg').dialog('open').dialog('setTitle','编辑勋章信息');
+         	$("#title").textbox('setValue',row.medalName);
+    		$("#description").textbox('setValue',row.medalDesc);
+    		//$("#videoUrl").textbox('setValue',row.videoUrl);
+    		var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.medalIcon;
+            $("#imghead").attr("src", imgURL);
+         }else{
+        	 $.messager.alert('错误','请先选择要编辑的勋章!','error');
+         }
+	}
+	//check form
+	function checkForm(){
+		var name = $.trim($("#title").val());
+		if(name==''){
+			$.messager.alert('警告','勋章标题不能为空!');
+			$("#title").focus();
+			return false;
+		}
+		var cover = $("#cover").val();
+		if(!cover){
+			$.messager.alert('警告','请上传勋章封面!');
+			return false;
+		}
+		
+		return true;
+	}
+	function saveProduct(){
+		if(checkForm()){
+			var title = $("#title").textbox('getValue');
+			var description = $("#description").textbox('getValue');
+			var cover = $("#cover").val();
+			var id = $("#id").val();
+			var type = $("#medalType").combobox('getValue');
+			
+			$.post('MedalAction!newOrUpdate.zk',{id:id,title:title,description:description,icon:cover,type:type},function(data){
+				 if (data.STATUS){
+	                    $('#dlg').dialog('close');
+	                    $('#dg').datagrid('reload');
+	             } else {
+	                    $.messager.alert('信息提示', data.INFO, 'error');
+	             }
+			},'json');
+		}
+		
+    }
+
+	function search(value){
+		$("#dg").datagrid('load',{title:value});
+	}
+	
+	function chooseImage(id) {
+         document.getElementById(id).click();
+    }
+	
+    //上传文章图片
+    function uploadImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 500 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                //上传图片
+                 $("#title_img_form").ajaxSubmit({
+                     type : 'post',
+                     url : '../file/FileCenter!uploadImage2.zk',
+                     success : function(data) {
+                         data = $.parseJSON(data);
+                         if (data.name) {
+                            // alert(data.name);
+                         	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                            $("#imghead").attr("src", imgURL);
+                            $("#cover").val(data.name);
+                         } else {
+                             alert("上传图片出错！");
+                         }
+                         $("#title_img_form").resetForm();
+                     },
+                     error : function(XmlHttpRequest, textStatus, errorThrown) {
+                         alert("error");
+                     }
+                 });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    
+    //格式化封面
+    function formatCover(value){
+    	//console.log('cover:'+value);
+        var result = "<img style=\"width:20px;height:20px;\" src=\"../file/FileCenter!showImage2.zk?name="+value+"\" />";
+    	return result;
+    }
+    //格式化等级
+    function formatType(value){
+    	switch (value) {
+		case '1': return '金' ;
+		case '2': return '银' ;
+		case '3': return '铜' ;
+		default:return '';
+		}
+    }
+</script>
+</head>
+<body>
+	<div style="width: 100%; height: 100%;">
+	<div class="main_pp" style="position: absolute; top: 0; left: 0;">
+		<div class="main_go">
+			<div class="main_sty">宅客网络后台管理系统</div>
+			<div class="main_mov">
+				当前用户：<span id="user_id" style="color: yellow;"></span> , <span
+					style="margin-right: 10px;">欢迎使用宅客管理系统</span> [<a
+					href="javascript:void(0)" onclick="logout()">退出</a>]
+			</div>
+		</div>
+	</div>
+	<div class="main_guge" style="position: absolute; top: 38px; left: 0;">
+		<div class="main_tabim" id="timenow" ></div>
+	</div>
+		<div
+			style="width: 100%; height: 100%;   min-height: 450px;">
+			<div style="width: 15%; height: 100%; float: left;  min-width: 210px;">
+				<div class="main_jian" >
+				 <div style="width:100%; height:68px;"></div>
+					<div class="main_poy" ></div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='main.html'">用户管理 <em
+							class="main_xuan_1"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='data.html'">用户健康数据分析 <em
+							class="main_xuan_2"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='order.html'">订单管理<em
+							class="main_xuan_8"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='product.html'">产品管理<em
+							class="main_xuan_9"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='release.html'">文章发布<em
+							class="main_xuan_3"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='feedback.html'">用户反馈<em
+							class="main_xuan_4"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='app.html'">app版本管理<em
+							class="main_xuan_5"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='community.html'">社区管理<em
+							class="main_xuan_7"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='account.html'">安全管理<em
+							class="main_xuan_6"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='userMap.html'">销售分布<em
+							class="main_xuan_15"></em></a>
+					</div>
+					<div class="main_pie">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">视频管理<em
+							class="main_xuan_16"></em></a>
+					</div>
+					<div class="main_pie" style="background: #d8d8d8;">
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='video.html'">勋章管理<em
+							class="main_xuan_17"></em></a>
+					</div>
+					<div class="main_pie" >
+						<a href="javascript:void(0)"
+							onclick="window.parent.location='service.html'">客服管理<em
+							class="main_xuan_19"></em></a>
+					</div>
+				</div>
+			</div>
+			<div style="height: 100%; margin-left: 200px;">
+				<div style="width: 98%; height: 100%; min-height: 360px;">
+				<div style=" width:100%; height:68px;"></div>
+						<div class="main_opt">后台管理 &gt; 勋章管理</div>
+					<div style="height: 15px;"></div>
+					<div style="width: 100%; height: 80%; min-width: 750px;">
+						<div class="boyd">
+							<table id="dg"
+								style="height: 100%; margin: 0; padding: 0; display: block; overflow: hidden;"
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'MedalAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th
+											data-options="field:'medalName',align:'center',width:$(this).width()*0.16">勋章名称</th>
+										<th
+											data-options="field:'medalType',align:'center',formatter:formatType,width:$(this).width()*0.1">勋章等级</th>
+										<th
+											data-options="field:'medalDesc',align:'center',width:$(this).width() * 0.2">勋章描述</th>
+										<th
+											data-options="field:'medalIcon',formatter:formatCover,align:'center',width:$(this).width() * 0.1">勋章图标</th>
+										<th
+											data-options="field:'gmtCreate',align:'center',formatter:formatDate,width:$(this).width() * 0.1">创建时间</th>
+										<th
+											data-options="field:'gmtModify',align:'center',formatter:formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input id="txt_keyword" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'请输入关键字',searcher:search" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增勋章</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑勋章</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除勋章</a></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dlg" class="easyui-dialog"
+		style="width: 400px; height: 450px; padding: 10px 20px" closed="true"
+		buttons="#dlg-buttons">
+		<div class="ftitle">勋章信息</div>
+		<!-- <form id="fm" method="post"> -->
+			<input id="id" type="hidden"/>
+			<div class="fitem">
+				<label>勋章名称:</label> <input name="title"
+					id="title" class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>勋章类型:</label>				
+				<select id="medalType" class="easyui-combobox" data-options="editable:false"
+						style="width: 150px;">
+							<option value="1">金</option>
+							<option value="2">银</option>
+							<option value="3">铜</option>
+				</select>
+			</div>
+			<div class="fitem">
+				<label>勋章描述:</label>
+				<input name="description" id="description"
+					data-options="multiline:true"
+					style="height:50px"  class="easyui-textbox"/>
+			</div>
+			<div class="fitem">
+				<label>勋章图标:</label> 
+				<input name="cover" id="cover" type="hidden"/> 
+				<!-- --> 
+				<form id="title_img_form" method="post"  enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="file_title_img"
+                                        name="name" onchange="uploadImage()" accept="image/*" />
+                </form>
+                <div style="width: 197px; height: 67px; margin-left:88px; margin-top: -12px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+					<img id="imghead" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                </div>
+			</div>
+		<!-- </form> -->
+		<div id="dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveProduct()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+</body>
+</html> 

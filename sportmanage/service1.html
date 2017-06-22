@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+ <style type="text/css">
+        #fm{
+            margin:0;
+            padding:10px 30px;
+        }
+        .ftitle{
+            font-size:14px;
+            font-weight:bold;
+            padding:5px 0;
+            margin-bottom:10px;
+            border-bottom:1px solid #ccc;
+        }
+        .fitem{
+            margin-bottom:5px;
+        }
+        .fitem label{
+            display:inline-block;
+            width:80px;
+        }
+        .fitem input{
+            width:160px;
+        }
+    </style>
+<script>
+
+</script>
+</head>
+<body>
+	<div region="north" border="false" class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-comment"></i>客服管理
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+            <li>
+                <div class="link dropdown">
+                    <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+                </div>
+                <ul class="submenu">
+                    <li><a href="societyGame.html">协会比赛</a></li>
+                    <li><a href="societyCultivate.html">协会培训</a></li>
+                    <li><a href="societyNews.html">协会资讯</a></li>
+                </ul>
+            </li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>	
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">客服管理</li>
+			</ul>
+			<div>
+				
+    <table id="dg" class="easyui-datagrid" style="height:560px; "
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true" pageSize='30' data-options="url:'ServicerAction!list.zk',method:'post'">
+        <thead>
+            <tr>
+                <th data-options="field:'userPhone',align:'center',width:180">客服电话</th>
+                <th data-options="field:'userName',align:'center',width:180">客服名称</th>
+                <th data-options="field:'userType',formatter:formatUserType,align:'center',width:180">客服类别</th>
+                <th data-options="field:'userSex',formatter:formatUserSex,align:'center',width:180">客服性别</th>
+                <th data-options="field:'userAddress',align:'center',width:440">客服住址</th>
+                 <!-- <th data-options="field:'headIcon',align:'center',width:200">客服头像</th> -->
+                <th data-options="field:'headIcon',formatter:formatHeadIcon,align:'center',width:200">客服头像</th>
+            </tr>
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加客服</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑信息</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除客服</a>
+    </div>
+    
+    <div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px"
+            closed="true" buttons="#dlg-buttons">
+        <div class="ftitle">客服信息</div>
+        <form id="fm" method="post" novalidate>
+        	<div class="fitem">
+                <label>客服电话</label>
+                <input name="userPhone" id = "servicephone" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>客服名称:</label>
+                <input name="userName" id = "servicename" class="easyui-textbox" required="true">
+            </div>
+            <div class="fitem">
+                <label>客服类别:</label>
+               <!--   <input name="userType" id = "servicetype" class="easyui-textbox" required="true">-->
+               <select name="userType" id="servicetype" class="easyui-combobox" required="true" data-options="editable:false"
+						style="width: 150px;">
+							<option value="zk" selected="selected">宅客</option>
+							<option value="sc" >双超</option>
+				</select>
+            </div>
+            <div class="fitem">
+                <label>客服性别:</label>
+                <!-- <input name="userSex" id = "servicesex" class="easyui-textbox"> -->
+                <select name="userSex" id="servicesex" class="easyui-combobox" required="true" data-options="editable:false"
+						style="width: 150px;">
+							<option value="M">男</option>
+							<option value="F" selected="selected">女</option>
+				</select>
+            </div>
+            <div class="fitem">
+                <label>客服地址:</label>
+                <input name="userAddress" id = "serviceaddress" class="easyui-textbox">
+            </div>
+            <div class="fitem">
+                <label>客服头像:</label>
+                    <input name="headIcon" id = "serviceheadicon"  type="hidden"> <!-- class="easyui-textbox" -->
+               <!-- -->                     
+            </div>
+        </form>
+        	<form id="title_img_form" method="post"  enctype="multipart/form-data">
+					<input type="file" style="display: none;" id="file_title_img"
+                                        name="name" onchange="uploadImage()" accept="image/*" />
+                </form>
+                                        
+                   <div style="width: 197px; height: 67px; margin-left:115px; margin-top: -30px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+					<img id="imghead" src="images/yun.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+                </div>  
+    </div>
+    <div id="dlg-buttons">
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+    </div>
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/flowplayer-3.2.6.min.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/saveRequest.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('#dg').datagrid({
+		onLoadSuccess: function(data){
+			if (data.total == 0 && data.ERROR == 'No Login!') {
+				//$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+				//relogin();
+				var user_id =  localStorage.getItem('user_id');
+				var user_pwd = localStorage.getItem('user_pwd');
+				if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+					$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+					relogin();						
+				}
+				else{
+					$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+						if(data.STATUS){
+							$('#dg').datagrid('reload');
+						}
+					},'json').complete(function(){
+						$('#dg').datagrid('reload');
+					});
+				}
+			}
+			//图片弹出层
+			 $("a.popImage").fancybox({
+		            openEffect  : 'elastic',
+		            closeEffect: 'elastic'    
+		     });
+		},
+		onLoadError : function() {
+			alert('出错啦');
+		}
+	});
+});
+
+        var url;
+        var id=null;//标记客服是否存在
+        function checkPhone(phone){
+        	var userPhone = phone;
+        	$.getJSON('ServicerAction!checkUser.zk',{userPhone:userPhone},function(data){
+        		//alert(data.STATUS);
+        		
+				if(data.STATUS){
+					$.messager.alert('警告','客服已经存在!');
+					$("#servicephone").focus();
+    				return false;
+				}else {
+					
+				}
+        		
+			});
+        	//var isDeleted = deleted;
+        	
+        	
+        }
+        function newUser(){
+        	 id = null;
+        	 $("#imghead").attr("src", 'images/yun.png');
+        	 $('#fm').form('clear');
+             $('#dlg').dialog('open').dialog('setTitle','编辑客服信息');
+             url = 'ServicerAction!createOrUpdate.zk';
+        }
+        
+        function editUser(){
+        	//$("#imghead").attr("src", 'images/yun.png');
+        	 var row = $('#dg').datagrid('getSelected');
+             if (row){
+            	 id = row.id;
+                 $('#dlg').dialog('open').dialog('setTitle','编辑客服信息');
+                 $('#fm').form('load',row);
+                 url = 'ServicerAction!createOrUpdate.zk?id='+row.id;
+                 var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.headIcon;
+                 $("#imghead").attr("src", imgURL);
+             }else{
+            	 $.messager.alert('警告','请先选择要编辑的客服!');
+             }
+        }
+        
+        
+        function chooseImage(id) {
+            document.getElementById(id).click();
+       }
+   	
+       //上传文章图片
+       function uploadImage(){
+       	//alert('upload');
+           var viewFiles = document.getElementById("file_title_img");
+           //是否为图片类型            
+           if(/image\/\w+/.test(viewFiles.files[0].type)){
+               //最大图片文件大小 500KB
+               var imgSizeLimit = 500 * 1024;
+               if(viewFiles.files[0].size<=imgSizeLimit){
+                   //上传图片
+                    $("#title_img_form").ajaxSubmit({
+                        type : 'post',
+                        url : '../file/FileCenter!uploadImage2.zk',
+                        success : function(data) {
+                            data = $.parseJSON(data);
+                            if (data.name) {
+                               // alert(data.name);
+                            	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                               $("#imghead").attr("src", imgURL);
+                               $("#serviceheadicon").val(data.name);
+                               
+                            } else {
+                                alert("上传图片出错！");
+                            }
+                            $("#title_img_form").resetForm();
+                        },
+                        error : function(XmlHttpRequest, textStatus, errorThrown) {
+                            alert("error");
+                        }
+                    });
+               }else{
+                   alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+               }
+           }else{
+               alert('请选择图片类型的文件!');
+           } 
+       }
+        //头像转换
+       function formatHeadIcon(headIcon){
+           var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+headIcon+"\">点击查看</a>";
+       	return result;
+       }
+       
+     //性别转换
+       function formatUserSex(value){
+       	switch (value) {
+   		case 'M': return '男' ;
+   		case 'F': return '女' ;
+   		default:return '';
+   		}
+       }
+       //性别转换
+       function formatUserType(value){
+       	switch (value) {
+   		case 'zk': return '宅客' ;
+   		case 'sc': return '双超' ;
+   		default:return '';
+   		}
+       }
+      //check form
+    	function checkForm(){
+    		var name = $.trim($("#servicephone").val());
+    		if(name==''){
+    			$.messager.alert('警告','客服手机不能为空!');
+    			$("#servicephone").focus();
+    			return false;
+    		}
+    		var price = $.trim($("#servicename").val());
+    		if(price==''){
+    			$.messager.alert('警告','客服名称不能为空!');
+    			$("#servicename").focus();
+    			return false;
+    		}
+    		var type = $.trim($("#servicetype").combobox('getValue'));
+    		
+    			if(type==''){
+    				$.messager.alert('警告','客服类别不能为空!');
+    				$("#servicetype").focus();
+    				return false;
+    			}
+    			var sex = $.trim($("#servicesex").combobox('getValue'));
+        		
+    			if(sex==''){
+    				$.messager.alert('警告','客服性别不能为空!');
+    				$("#servicesex").focus();
+    				return false;
+    			}
+    			
+    		return true;
+    	}
+        
+        function saveUser(){
+        	//uploadImage();
+        	if(checkForm()){
+        		var userPhone = $.trim($("#servicephone").val());
+        		$.getJSON('ServicerAction!checkUser.zk',{userPhone:userPhone},function(data){
+            		//alert(data.id+"id="+id);
+            		
+    				if(data.STATUS && data.id!=id){
+    					$.messager.alert('警告','客服已经存在!');
+    					
+    				}else {
+    					 $('#fm').form('submit',{
+    		                 url: url,
+    		                 onSubmit: function(){
+    		                     return checkForm();
+    		                 },
+    		                 success: function(result){
+    		                     var result = eval('('+result+')');
+    		                     if (result.STATUS){
+    		                         $('#dlg').dialog('close');        // close the dialog
+    		                         $('#dg').datagrid('reload');    // reload the user data
+    		                     } else {
+    		                         $.messager.show({
+    		                             title: '错误',
+    		                             msg: '系统繁忙！'
+    		                         });
+    		                     }
+    		                 }
+    		             });
+    		        	 $("#imghead").attr("src", 'images/yun.png');
+    				}
+            		
+    			});
+        		
+        	}
+
+        }
+        
+        function destroyUser(){
+        	var row = $('#dg').datagrid('getSelected');
+    		if(row){
+    			if(confirm("确定删除该客服信息?")){
+    				$.getJSON('ServicerAction!delete.zk',{id:row.id},function(data){
+    					if(data.STATUS){
+    						$('#dg').datagrid('reload');
+    						showTip("删除成功!");
+    					}else {
+    						showTip("删除失败!");
+    					}
+    				});
+    			}
+    		}else{
+           	 	$.messager.alert('警告','请先选择客服!');
+            }
+        }
+    </script>
+</body>
+</html>

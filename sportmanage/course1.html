@@ -1,0 +1,1700 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+
+<style>
+#fm { margin: 0; padding: 10px 30px; } 
+.ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } 
+.fitem { margin-bottom: 5px; } 
+.fitem label { display: inline-block; width: 85px; } .fitem input { width: 160px; }
+.citem{
+	float:left;
+	margin:8px 10px;
+}
+.citem label{
+	text-align:right;
+}
+.tip{display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: 700;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #337ab7;
+border-radius: .25em;}
+#userDlg .datagrid-wrap{
+	border:0;
+}
+
+.delMusic{
+  display: inline-block;
+  margin: -10px 0 10px 10px;
+  vertical-align: middle;
+}
+#mainadd input{width: 120px;}
+#jieduan input{width:50px;text-align: center;}
+#jieduan table{width: 100%;}
+#jieduan table th{text-align: center;width: 25%;}
+#jieduan table td{text-align: center;width: 25%;}
+#jieduan .edsave{display: none;}
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li class="open">
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>	
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">课程管理</li>
+			</ul>
+			<div>
+					<table id="dg"
+								style="height:560px; "
+								data-options="rownumbers:false,singleSelect:true,pagination:true,pageSize:'30',url:'CourseAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'name',align:'center'" width="9%">名称</th>
+										<th data-options="field:'description',align:'center'" width="9%">简介</th>
+										<!-- <th data-options="field:'description',align:'center',width:$(this).width() * 0.02">图片</th> -->
+										<th data-options="field:'type',formatter:formatType,align:'center'" width="7%">类型</th>
+										<th data-options="field:'coachNames',align:'center',formatter:formatCoachs" width="7%">教练</th>
+										<th data-options="field:'tools',align:'center'" width="7%">器械</th>
+										<th data-options="field:'effect',align:'center'"  width="7%">功效</th>
+										<th data-options="field:'effectPlace',align:'center'" width="7%">锻炼部位</th>
+										<th data-options="field:'calorie',align:'center'" width="4%">卡路里</th>
+										<th data-options="field:'cycle',align:'center'" width="4%">周期</th>
+										<th data-options="field:'price',align:'center'" width="4%">价格</th>
+										<th data-options="field:'totalUser',align:'center'" width="4%">总用户</th>
+										<th data-options="field:'state',align:'center'" width="4%">状态</th>
+										<th data-options="field:'gymName',align:'center'" width="5%">健身房</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="11%">创建时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="11%">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td>健身房：
+											<select id="searchGym" class="easyui-combobox" data-options="url:'GymAction!listAll.zk',method:'post',valueField:'id',textField:'gymName',editable:false"
+												style="width: 100px;">
+										</select></td>
+										<!-- <td><div class="datagrid-btn-separator"></div></td> -->
+										<td><input id="searchKey" class="easyui-textbox"
+											style="width: 280px"
+											data-options="prompt:'课程名称'" />
+										</td>
+										<td>
+									        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchUser()">搜索</a>
+										</td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add" plain="true"
+											onclick="newProduct()">新增</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+											onclick="editProduct()">编辑</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="del()">删除</a></td>
+										<!-- <td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+											onclick="note()">评论</a></td> -->											
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon_person" plain="true"
+											onclick="listUser()">查看用户</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-stat" plain="true"
+											onclick="editradiusline()">曲线编辑</a></td>														
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+	<div id="dlg" class="easyui-dialog"
+		style="width: 65%; height: 600px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#dlg-course-btn">
+		<!-- <form id="fm" method="post"> -->
+			<div id="courseStep1" style="/* display:none; */">
+				<div class="ftitle">健身课程信息</div>
+				<input id="id" type="hidden"/>
+				<div class="fitem citem">
+					<label>类型:</label> <select id="type" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option value="1">线上</option>
+													<option value="2">线下</option>
+							</select>
+				</div>
+				<div class="fitem citem">
+					<label>器械:</label> <select id="tools" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>无器械</option>
+													<option>小器械</option>
+													<option>健身房器械</option>
+							</select>
+				</div>				
+				<div class="fitem citem">
+					<label>功效:</label> <select id="effect" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>增肌</option>
+													<option>减脂</option>
+													<option>塑形</option>
+													<option>拉伸</option>
+					</select>
+				</div>				
+				<div class="fitem citem">
+					<label>锻炼部位:</label> 
+					<select id="effectPlace" class="easyui-combobox" style=" width: 160px; " data-options="editable:false">
+													<option>全身</option>
+													<option>胸部</option>
+													<option>肩部</option>
+													<option>背部</option>
+													<option>手臂</option>
+													<option>颈部</option>
+													<option>腿部</option>
+													<option>臀部</option>
+													<option>腹部</option>
+													<option>腰部</option>
+					</select>
+				</div>	
+				<div class="fitem citem">
+					<label>名称:</label> <input name="name"
+						id="name" class="easyui-textbox"/>
+				</div>
+				<div class="fitem citem" id="cycleDiv">
+					<label>周期:</label>
+					<input name="cycle" id="cycle" class="easyui-numberbox"/>
+				</div>			
+				<div class="fitem citem">
+					<label>价格:</label>
+					<input name="price" id="price" class="easyui-numberbox" data-options="precision:2"/>
+				</div>
+				<div class="fitem citem">
+					<label>适用人群:</label>
+					<input name="targetUser" id="targetUser" class="easyui-textbox" />
+				</div>	
+				<div class="fitem citem">
+					<label>卡路里:</label>
+					<input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/>
+				</div>
+				<div class="fitem citem">
+					<label>健身房:</label>
+					<!-- <input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/> -->
+					<select id="gymId" name="gymId" data-options="valueField:'id',textField:'gymName',url:''" style="">
+					</select>
+				</div>
+				<div class="fitem citem">
+					<label>挑战指数:</label>
+					<select id="challenge" name="challenge" data-options="valueField:'id',textField:'gymName',url:''" style="  border: 1px solid #95b8e7;  border-radius: 3px;">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</div>
+				<div style="clear:both;"></div>	
+				<div class="fitem citem">
+					<label>有氧消耗(cal):</label>
+					<input name="calorie" id="havecalorie" class="easyui-numberbox" data-options="precision:2"/>
+				</div>
+				<div class="fitem citem">
+					<label>无氧消耗(cal):</label>
+					<input name="calorie" id="nocalorie" class="easyui-numberbox" data-options="precision:2"/>
+				</div>	
+				<div class="fitem citem">
+					<label>体能耐力提升:</label>
+					<input name="calorie" id="powercalorie" class="easyui-numberbox" data-options="precision:2"/>(cal)
+				</div>		
+				<div style="clear:both;"></div>		
+				<div class="fitem citem" id="coachURLDiv">
+					<label>教练:</label>
+					<a id="coachBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">选择</a>
+					<ul id="products" style="margin-left: 100px;"></ul>
+				</div>	
+				<div style="clear:both;"></div>					
+				<div class="fitem citem">
+					<label>简介:</label>
+					<input name="description" id="description"
+						data-options="multiline:true"
+						style="height:80px;width:450px;"  class="easyui-textbox"/>
+				</div>	
+				<div style="clear:both;"></div>			
+				<div class="fitem citem">
+					<label>封面:</label> 
+					<input name="cover" id="cover" type="hidden"/> 
+					<form id="title_img_form" method="post"  enctype="multipart/form-data">
+						<input type="file" style="display: none;" id="file_title_img"
+	                                        name="name" onchange="uploadImage()" accept="image/*" />
+	                </form>
+	                <div style="width: 197px; height: 67px; margin-left:88px; margin-top: -12px;cursor: pointer;" onclick="chooseImage('file_title_img')" title="点击选择图片">
+						<img id="imghead" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+	                </div>
+				</div>
+				
+				<div style="clear:both;"></div>			
+				<div class="fitem citem">
+					<label>背景音乐:</label>
+					<div style="  margin-left: 88px;  margin-top: -15px;">
+	          <!--      	 	<div>
+							<audio src="http://zkimages.oss-cn-hangzhou.aliyuncs.com/1450925295973353001/x1.mp3" controls="controls"></audio>
+							<a href="#">删除</a>
+	               	 	</div>
+	               	 	<div>
+							<audio src="http://zkimages.oss-cn-hangzhou.aliyuncs.com/1450925295973353001/x1.mp3" controls="controls"></audio>
+							<a href="#">删除</a>
+	               	 	</div> -->
+	               	 	<div id="musicPriew">
+	               	 	</div>
+						<div style="width: 197px; height: 67px; margin-top: -12px;cursor: pointer;" title="点击选择音乐">
+							<img id="upmusicbtn" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+	               	 	</div>
+	               	 	<div id="upmusicstatus"></div>
+	               	 	<div style="display: none;" id="upmusiccontainer"></div>
+					</div>
+					<!-- <input name="calorie" id="calorie" class="easyui-numberbox" data-options="precision:2"/> -->
+				</div>
+			</div>
+			<!-- 课程详情 -->
+			<div id="courseStep2" style="display:none;">
+				<div class="ftitle">健身课程信息</div>
+
+                <div id="sectionWrap">
+                </div>
+				<!--<div id="sectionWrap"></div>-->
+			</div>
+			<div id="dlg-course-btn">
+				<a id="coursePrev" href="javascript:void(0)" onclick="couseDetailUI()" class="easyui-linkbutton" data-options="iconCls:'icon-next',plain:true">下一步</a>
+				<a id="courseNext" href="javascript:void(0)" onclick="couseUI()" class="easyui-linkbutton" data-options="iconCls:'icon-prev',plain:true">上一步</a>
+				<a id="courseSave" href="javascript:void(0)" onclick="saveCourse(this)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">保存</a>
+			</div>
+	</div>
+	<div id="dlg-video" class="easyui-dialog"
+		style="width: 550px; height: 400px; padding:10px" closed="true" modal="true">
+		<div id="player2" style="width:520px; height:330px"></div>
+	</div>
+	
+	<!-- Coach list -->
+	<div id="productlstDlg" class="easyui-dialog"
+		style="width: 650px; height: 500px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#select-product-buttons">
+							<table id="productDg"
+								style="margin: 0; padding: 0;height: 400px;"
+								data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'CoachAction!list.zk',method:'post'">
+								<thead>
+									<tr>
+										<th data-options="field:'id',checkbox:true"></th>
+										<th data-options="field:'coachName',align:'center',width:150">姓名</th>
+										<th data-options="field:'coachSpecialty',align:'center',width:150">专长</th>
+										<th data-options="field:'coachSchool',align:'center',width:150">毕业院校</th>
+										
+									</tr>
+								</thead>
+							</table>
+							<div id="select-product-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="selectProducts()" style="width: 90px">选好了</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#productlstDlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+							<!--  -->
+
+		<div id="dlgline" class="easyui-dialog"
+						style="width:930px; height: 550px; padding: 0" closed="true" modal="true"
+						buttons="#user-buttons">
+					<div id="main" style="width: 600px;height:266px;padding-left:12px;float:left;"></div>
+				<div id="mainadd" style="width: 304px;height:266px;padding-left:12px;float:left;padding-top: 53px;">
+					<!-- <div><label>起始速度：</label><input id="speedstart" type="text">&nbsp;km/h</div> -->
+					<div><label>结束速度：</label><input id="speedend" type="text">&nbsp;km/h</div>
+					<div><label>结束时间：</label><input id="speedtime" type="text">&nbsp;秒</div>
+					<button style="float:right;margin-right: 112px;padding:0 4px;margin-bottom:10px;" onclick="addedsave()">添加</button>
+					<div id="jieduan" style="width: 100%;background:#eee;padding:10px 0;clear:both;">
+						<table>
+							<tr>
+								<th>阶段</th>
+								<!-- <th>起速</th> -->
+								<th>尾速</th>
+								<th>时长</th>
+								<th>操作</th>
+							</tr>
+							<tbody class="tbody">
+							<!--<tr>
+								<td>1.</td>
+								 <td><input type="text" disabled="disabled" style="width:50px;" value="80.6"></td> 
+								<td><input type="text" disabled="disabled" style="width:50px;" value="40"></td>
+								<td><input type="text" disabled="disabled" style="width:50px;" value="80"></td>
+								<td><a class="edser" href="javascript:;" onclick="edser($(this))">编辑</a><a class="edsave" onclick="edsave($(this))" href="javascript:;">保存</a></td>
+							</tr>-->
+							</tbody>
+						</table>
+					</div>
+					<div>总时长：<span id="totaltime">0</span>秒</div>
+					<button style="float:right;padding:0 4px;margin-bottom:10px;" onclick="addsaveline()">保存曲线</button>
+				</div>
+		</div>					
+		<!-- user list -->
+		<input id="upsteps" type="hidden"/>
+					<div id="userDlg" class="easyui-dialog"
+						style="width:60%; height: 550px; padding: 0" closed="true" modal="true"
+						buttons="#user-buttons">
+											<table id="userDg"
+												style="height: 500px;"
+												data-options="rownumbers:false,singleSelect:false,pagination:true,pageSize:'30',url:'',method:'post'">
+												<thead>
+													<tr>
+														<th data-options="field:'userName',align:'center'" width="14%">昵称</th>
+														<th data-options="field:'sex',align:'center',formatter:formatSex" width="14%">性别</th>
+														<th data-options="field:'age',align:'center'" width="14%">年龄</th>
+														<th data-options="field:'height',align:'center'" width="14%">身高</th>
+														<th data-options="field:'weight',align:'center'" width="14%">体重</th>
+														<th data-options="field:'bmi',align:'center'" width="14%">BMI</th>
+														<th data-options="field:'address',align:'center'" width="14%">地址</th>
+														
+													</tr>
+												</thead>
+											</table>
+					</div>
+							<!--  -->
+							<!-- upload dlg -->
+								<div id="uploaddlg" class="easyui-dialog"
+									style="width: 40%; height: 500px; padding: 10px 20px" closed="true" modal="true"
+									buttons="#upvideo-buttons">
+									<form id="fmCourse" method="post">
+										<div style="/* display:none; */">
+											<div class="fitem">
+												<label>类型:</label> 
+												<select class="easyui-combobox" id="uptype" style=" width: 160px; " data-options="editable:false,onChange: function (n,o) {
+	if(n == 1){
+		updlgVideoUI();
+	}else {
+		updlgImageUI();
+	}
+}">
+																				<option value="1">健身视频</option>
+																				<option value="2">间歇图片</option>
+												</select>
+											</div>
+											<div class="fitem" id="updlg_filename">
+												<label>名称:</label> <input id="upname" class="easyui-textbox"/>
+											</div>
+											<div class="fitem" id="updlg_calorie">
+												<label>卡路里:</label> <input id="upcalorie" class="easyui-numberbox"/>
+											</div>
+											<div class="fitem">
+												<label>文件:</label>
+												<!-- <a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a> -->
+												<!-- <button id="selectfiles">选择文件</button> -->
+												<!-- <button id="postfiles">开始上传</button> -->
+												<div id="poststatus" style="margin:5px 5px 5px 80px;"></div>
+												<div id="upcontainer" style="display: none;">
+												</div>
+												<div id="uppriew" style="cursor: pointer;margin-left:80px;" title="点击上传文件">
+													<img id="" src="images/add.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto" />
+												</div>
+											</div>
+											<div class="fitem" id="cycleDiv">
+												<label>时长:</label>
+												<input id="uptime" class="easyui-numberbox"/>
+												<input id="upfile" type="hidden"/>
+												<input id="upfilesize" type="hidden"/>
+												<input id="upsection" type="hidden"/>
+											</div>
+											<div class="fitem" id="repeatTimesDiv">
+												<label>重复次数:</label>
+												<input id="repeatCount" class="easyui-numberbox"/>
+											</div>	
+										</div>
+										</form>
+										<div id="upvideo-buttons">
+											<a href="javascript:void(0)" class="easyui-linkbutton c6"
+												iconCls="icon-ok" onclick="saveUpinfo()" style="width: 90px">保存</a>
+											<a href="javascript:void(0)" class="easyui-linkbutton"
+												iconCls="icon-cancel" onclick="javascript:$('#uploaddlg').dialog('close')"
+												style="width: 90px">取消</a>
+										</div>
+								</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/move.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/format.utils.js"></script>
+<script src="js/jquery.tmpl.min.js"></script>
+<script src="js/easyui-common.js"></script>
+<script src="js/echarts.common.min.js"></script>
+<script src="js/saveRequest.js"></script>
+
+
+<script src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script src="js/oss.uploader.js"></script>
+<script src="js/accordion.js"></script>	
+
+<script id="courseStep2Tmpl" type="text/x-jquery-tmpl">
+
+				<div style="padding:10px 0;margin:5px auto" id="section_${sectionId}">
+					<div class="fitem">
+						<label>阶段:</label> 
+						 <input id="ipt_section_0" class="easyui-textbox"/>
+							 <button onclick="addSetion()">添加</button>
+							  <button onclick="delSetion(${sectionId})">删除</button>
+					</div>
+					<div class="fitem">
+						<label style="float:left;">步骤:</label>
+						
+ 
+						<div style="margin-left: 65px; display: inline-block;width:760px;">
+
+                            {{each(i,step) steps}}
+
+                                {{if step.type == 1}}
+                                    <div id="${step.stepId}" style="float:left;text-align: center;margin-left: 20px;width:320px;height:260px;" onclick="editCourse('${step.stepId}')">
+                                        <video width=320 height=240 preload="none" controls="controls">
+                                            <source src="${step.file}" type="video/mp4">
+                                        </video>
+                                        <div>${step.stepName}  ${time}秒    {{if step.repeatCount}}${step.repeatCount}次   {{/if}} <a onclick="delStep('${step.stepId}')">删除</a> </div>
+                                    </div>
+                                {{/if}}
+
+                                {{if step.type == 2}}
+                                    <div id="${step.stepId}" style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;">
+                                        <img style=" height:240px; width: 320px;" src="${step.file}">
+                                        <div>${time}秒 <a onclick="delStep('${step.stepId}')">删除</a></div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+
+                             <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(${sectionId})" id="addVideoBtn${sectionId}">
+                                <img style=" height:240px;width:320px;" src="images/add_rec.png">
+                             </div>
+                             <div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+</script>
+<script id="sectionTmpl" type="text/x-jquery-tmpl">
+				<div style="padding:10px 0;margin:5px auto" id="section_${section}">
+					<div class="fitem">
+						<label>阶段:</label> 
+						 <input id="ipt_section_0" class="easyui-textbox"/>
+							 <button onclick="addSetion()">添加</button>
+							 <button onclick="delSetion(${section})">删除</button>
+					</div>
+					<div class="fitem">
+						<label>步骤:</label> 
+						<div style="margin-left: 65px;">
+							 <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(${section})" id="addVideoBtn${section}">
+							 	<img style=" height:240px;width:320px;" src="images/add_rec.png">
+							 </div>
+							 <div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+</script>
+ <script id="musicTmpl" type="text/x-jquery-tmpl">
+    <div id="upmusicwrap_${stepId}" style="margin: 0 0 10px 0;">
+            <audio id="upmusic_${stepId}" src="${file}" controls="controls"></audio>
+            <a class="delMusic" href="javascript:void(0)" onclick="delMusic('${stepId}')">删除</a>
+    </div>
+</script>
+
+<!-- 新增课程模板 -->
+<script id="courseDetailTmpl" type="text/x-jquery-tmpl">
+    <div style="padding:10px 0;margin:5px auto" id="section_1">
+            <div class="fitem">
+            <label>阶段:</label>
+    <input id="ipt_section_0" class="easyui-textbox"/>
+            <button onclick="addSetion()">添加</button>
+    <button onclick="delSetion(1)">删除</button>
+    </div>
+    <div class="fitem" id="step_0_0">
+            <label>步骤:</label>
+    <div style="margin-left: 65px;">
+            <div style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;"  onclick="addStep(1)" id="addVideoBtn1">
+            <img style=" height:240px;width:320px;" src="images/add_rec.png">
+            </div>
+    <div style="clear: both;"></div>
+    </div>
+    </div>
+    </div>
+</script>
+<script>
+	$(function(){
+		$('#dg').datagrid({
+			onLoadSuccess: function(data){
+				if (data.total == 0 && data.ERROR == 'No Login!') {
+					//relogin();
+					var user_id =  localStorage.getItem('user_id');
+					var user_pwd = localStorage.getItem('user_pwd');
+					if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+						$.messager.alert('信息提示', '登录超时,请重新登录!', 'error');
+						relogin();						
+					}
+					else{
+						$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+							if(data.STATUS){
+								$('#dg').datagrid('reload');
+							}
+						},'json').complete(function(){
+							$('#dg').datagrid('reload');
+						});
+					}
+						
+				}
+				//图片弹出层
+				 $("a.popImage").fancybox({
+			            openEffect  : 'elastic',
+			            closeEffect: 'elastic'    
+			     });
+			},
+			onLoadError : function() {
+				alert('出错啦');
+			}
+		});
+		
+		//choose coach
+		$('#coachBtn').click(function(){
+			$('#productDg').datagrid();
+			openDlg('productlstDlg', '选择教练');
+		});
+	});
+	
+	function openDlg(id,title){
+		var docHeight = $(document).height();
+		$('#'+id).dialog('open').dialog('setTitle',title);
+	    $(".window-mask").css({ height: docHeight});//patch dialog bug
+	}
+	
+	var default_left;
+	var default_top;
+	
+	
+	
+	/**
+	 *显示消息提示
+	 */
+	function showTip(msg) {
+		$.messager.show({
+			title : "消息",
+			timeout:2000,
+			msg : msg
+		});
+	}
+
+	function note(){
+		var row = $('#dg').datagrid('getSelected');
+		
+		if(!row){
+       	 	$.messager.alert('错误','请先选择!');
+       	 	return;
+		}
+		location.href = 'courseNote.html?courseId='+row.id;
+	}
+	
+	function del(){
+		var row = $('#dg').datagrid('getSelected');
+		
+		if(!row){
+       	 	$.messager.alert('错误','请先选择!');
+       	 	return;
+		}
+		if(row.totalUser > 0){
+       	 	$.messager.alert('错误','正在进行的课程无法删除!');
+       	 	return;
+        }
+		if(confirm("确定删除该产品?")){
+			$.getJSON('CourseAction!delete.zk',{id:row.id},function(data){
+				if(data.STATUS){
+					$('#dg').datagrid('reload');
+					showTip("删除成功!");
+				}else {
+					showTip("删除失败!");
+				}
+			});
+		}
+	}
+	function clearForm(){
+		$("#title").textbox('setValue','');
+		$("#description").textbox('setValue','');
+		//$("#videoUrl").textbox('setValue','');
+		$("#cover").val('');
+		$("#id").val('');
+        $("#imghead").attr("src", 'images/add.png');
+	}
+	//新增
+	function newProduct(){
+	   //clearForm();
+        couseUI();
+/* 	   $('#type').combobox({
+		   disabled:false ,
+		   onChange: function (n,o) {
+				//真人
+				if(n == 2){
+					//$('#coachURLDiv').show();
+					//$('#cycleDiv').show();
+				}else if(n ==1){
+					//$('#videoURLDiv').show();
+					//$('#coachURLDiv').hide();
+					//$('#cycleDiv').hide();
+				}
+			}
+		}); */
+        $('#musicPriew').empty();//清空容器
+        //$('#editDetailWrap').empty();
+	    $('#type').combobox('setValue',1).combobox('enable');
+	    $('#gymId').combobox({
+	    	url : 'GymAction!getOfficalGym.zk'
+	    });
+		selectCoachIds = [];
+		$("#id").val('');
+	  	$('#coachBtn').linkbutton('enable');
+	    $("#name").textbox('setValue','');
+	    $("#targetUser").textbox('setValue','');
+		$("#price").numberbox('setValue','');
+		$("#havecalorie").numberbox('setValue','');
+		$("#nocalorie").numberbox('setValue','');
+		$("#powercalorie").numberbox('setValue','');
+		$("#cycle").numberbox('setValue','');
+		$('#products').html('');
+		$("#cover").val('');
+		//$("#title").textbox('setValue','');
+		$("#description").textbox('setValue','');
+		//$("#videoUrl").textbox('setValue','');
+        $("#imghead").attr("src", 'images/add.png'); 
+/*    	$('#coursePrev').linkbutton('enable');
+    	$('#courseNext').linkbutton('disable');
+    	$('#courseSave').linkbutton('disable');
+    	$('#courseStep2').hide();
+    	$('#courseStep1').show();*/
+       	//$('#dlg').dialog('open').dialog('setTitle','编辑');//
+    	upsteps = [];
+        upmusics = [];
+        steps = [];
+        newSection = [];
+        $('#sectionWrap').empty();
+        steps.push([1,0]);
+        newSection.push(1);
+       	$.tmpl($("#courseDetailTmpl").html(), steps ).appendTo("#sectionWrap");
+		$.parser.parse('#sectionWrap');
+       	openDialog('dlg', '编辑');
+	}
+	var onlyid='';
+	function editradiusline(){
+		//曲线编辑
+		var row = $('#dg').datagrid('getSelected');
+         if (!row){
+        	 $.messager.alert('错误','请先选择要编辑的健身课程!','error');
+        	 return false;
+         }
+         onlyid = row.id;
+         time = ['0'];speed = ['0'];totaltime = 0;$('#totaltime').text(0);
+         $('#jieduan .tbody').html('');
+         linechart(time,speed);
+		$('#dlgline').dialog('open').dialog('setTitle','标准曲线编辑');
+	}
+	function linechart(time,speed){
+		var wChart = echarts.init(document.getElementById('main'));
+		    var aliveOption = {
+		        title: {
+		            text: '',
+		            left: 'center',
+		            textStyle: {
+		                fontSize: '12'
+		            }
+		        },
+		        tooltip: {
+		//            formatter: function(params) {
+		//                return $('#monthSel').val() + '月' + 'params[0].name' + '日<br/>' + 'params[0].seriesName' + ' : ' + 'params[0].value';
+		//            },
+		            trigger: 'axis',
+		            axisPointer: {
+		                type: 'none'
+		            }
+		        },
+		        grid: {
+		            left: '1%',
+		            right: '5%',
+		            bottom: '1%',
+		            top: '20%',
+		            containLabel: true
+		        },
+		        xAxis: {
+		            type: 'category',
+		            boundaryGap: false,
+		            splitLine: {
+		                show: true,
+		                lineStyle:{
+		                    color: '#eee'
+		                }
+		            },
+		            data: time
+		        },
+		        yAxis: {
+		            type: 'value',
+		            boundaryGap: false,
+		            splitLine: {
+		                show: true,
+		                lineStyle:{
+		                    color: '#eee'
+		                }
+		            }
+		        },
+		        series: [{
+		            name: '速度',
+		            type: 'line',
+		            smooth: true,
+		            symbolSize:'4',
+		            stack: '总数',
+		            data: speed,
+		            areaStyle: {
+			            normal: {
+		                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+		                        offset: 0,
+		                        color: 'rgb(27, 110, 162)'
+		                    }, {
+		                        offset: 1,
+		                        color: 'rgb(226, 237, 255)'
+		                    }])
+		                }
+		        	},
+		        }],
+		        color:['#0e2d5f']
+		    }
+		    wChart.setOption(aliveOption);
+	}
+	//更新产品信息
+	function editProduct(){
+		upsteps = [];
+        upmusics = [];
+        steps = [];
+        newSection = [];
+        
+        couseUI();
+        $('#coachBtn').linkbutton('disable');
+        var row = $('#dg').datagrid('getSelected');
+         if (!row){
+        	 $.messager.alert('错误','请先选择要编辑的健身课程!','error');
+        	 return;
+         }
+
+        //TODO set value
+        $('#gymId').combobox({
+            url : 'GymAction!getOfficalGym.zk' ,
+            onLoadSuccess : function(){
+                $("#gymId").combobox('setValue',row.gymId);
+            }
+        });
+	   	$('#type').combobox({disabled:false});
+		$("#type").combobox('setValue',row.type);
+	    $("#name").textbox('setValue',row.name);
+	    $("#targetUser").textbox('setValue',row.targetUser);
+		$("#price").numberbox('setValue',row.price);
+		$("#havecalorie").numberbox('setValue',row.aerobicSportWeight);
+		$("#nocalorie").numberbox('setValue',row.anaerobicSportWeight);
+		$("#powercalorie").numberbox('setValue',row.suitableSportWeight);
+		$("#cycle").numberbox('setValue',row.cycle);
+		$("#calorie").numberbox('setValue',row.calorie);
+		$("#tools").combobox('setValue',row.tools);
+		$("#effect").combobox('setValue',row.effect);
+		$("#effectPlace").combobox('setValue',row.effectPlace);
+		$('#challenge').val(row.challenge);
+
+		var lis = [];
+		selectCoachIds = [];
+		$.post('CourseAction!getCourseCoachByCourseId.zk',{courseId:row.id},function(data){
+			var ccs = data.courseCoachs;
+	    	for(var i = 0 ;i<ccs.length;i++){
+	    		var row = ccs[i];
+	    		var ptName = row.coachName ;
+	    		var ptId = row.coachId;
+	    		var li = '<li>' + ptName + '</li>';
+	    		lis.push(li);
+	    		//console.log(li);
+	    		selectCoachIds.push(ptId);
+	    	}
+		},'json').complete(function(){
+			console.log(selectCoachIds);
+	    	$('#products').html(lis);
+		});
+		
+		//获取课程安排
+		$.post('CourseAction!getCourseDetails.zk',{courseId:row.id},function(data){
+			//var ccs = data.courseCoachs;
+			if(data.STATUS){
+			var upsteps = [];
+			var details = data.details ;
+			for(var i = 0; i<details.length;i++){
+				var steps = details[i].steps;
+				for(var j = 0 ;j<steps.length;j++){
+					var step = steps[j];
+					step.stepId = 'v' + step.stepId ;
+					step.name = step.stepName ;
+					upsteps.push(step);
+				}
+			}
+			$('#upsteps').val(JSON.stringify(upsteps));
+			console.log('details:'+data.details);
+			//var details = $.parseJSON(data.details);
+			/* for(var i = 0 ;i<details.length;i++ ){
+				var detail = details[i];
+				var sectionId = detail.sectionId;
+			} */
+			//courseStep2
+			$('#sectionWrap').empty();
+			$.tmpl($("#courseStep2Tmpl").html(), details ).appendTo("#sectionWrap");
+            $.parser.parse('#sectionWrap');
+
+            var musics =  data.musics ;
+            upmusics = musics ;
+            $('#musicPriew').empty();//清空容器
+            $.tmpl($("#musicTmpl").html(), musics ).appendTo("#musicPriew");
+			}else if('No Login!' == data.ERROR){
+                return;
+            }
+		},'json').complete(function(){
+			//console.log(selectCoachIds);
+	    	//$('#products').html(lis);
+			upsteps = eval('('+$('#upsteps').val()+')');
+			console.log($('#upsteps').val());
+			//alert($('#upsteps').val());
+		});
+     	$("#id").val(row.id);
+ 		$("#cover").val(row.cover);
+        //$('#dlg').dialog('open').dialog('setTitle','编辑');
+        openDialog('dlg', '编辑');
+      	$("#title").textbox('setValue',row.title);
+ 		$("#description").textbox('setValue',row.description);
+ 		//$("#videoUrl").textbox('setValue',row.videoUrl);
+ 		var imgURL = "../file/FileCenter!showImage2.zk?name=" + row.cover;
+         $("#imghead").attr("src", imgURL);
+	}
+	//check form
+	function checkForm(){
+		var name = $.trim($("#title").val());
+		if(name==''){
+			$.messager.alert('警告','标题不能为空!');
+			$("#title").focus();
+			return false;
+		}
+		var cover = $("#cover").val();
+		if(!cover){
+			$.messager.alert('警告','请上传封面!');
+			return false;
+		}
+		
+		return true;
+	}
+/*	function saveProduct(){
+		//if(checkForm()){
+			var name = $("#name").textbox('getValue');
+			var type = $("#type").combobox('getValue');
+			var description = $("#description").textbox('getValue');
+			var price = $("#price").numberbox('getValue');
+			var cycle = $("#cycle").numberbox('getValue');
+			//var videoUrl = $("#videoUrl").textbox('getValue');
+			var cover = $("#cover").val();
+			var coachIds = selectCoachIds.join(',');
+			var id = $("#id").val();
+			
+			var postData = {
+								id:id,
+								type:type,
+								name:name,
+								description:description,
+								cover:cover ,
+								price : price ,
+								cycle : cycle ,
+								coachIds : coachIds
+							};
+			console.log(postData);
+			//return ;
+			$.post('CourseAction!createOrUpdate.zk',postData,function(data){
+				 if (data.STATUS){
+	                    $('#dlg').dialog('close');
+	                    $('#dg').datagrid('reload');
+	             } else {
+	                    $.messager.alert('信息提示', '系统繁忙!', 'error');
+	             }
+			},'json');
+		//}
+		
+    }*/
+    var time = ['0'],speed = ['0'],totaltime = 0;
+    function addedsave(){
+    	// var ss = $('#speedstart').val().trim();
+    	var se = $('#speedend').val().trim();
+    	var st = $('#speedtime').val().trim();
+    	var reg = /^[1-9]\d*([.][1-9])?$/;
+    	var numreg = /^[0-9]*[1-9][0-9]*$/;
+    	if(se==""){
+    		$.messager.alert('&nbsp;注意','速度不能为空！');
+    		return false;
+    	}
+    	if(st==""){
+    		$.messager.alert('&nbsp;注意','时间不能为空！');
+    		return false;
+    	}
+    	if(!reg.test(se) && se>80){
+    		$.messager.alert('&nbsp;注意','速度为正整数或者带一位小数且小于80！');
+    		return false;
+    	}
+    	if(!numreg.test(st)){
+    		$.messager.alert('&nbsp;注意','时间为正整数！');
+    		return false;
+    	}    	
+    	time.push(st);
+    	speed.push(se);
+    	$('#jieduan .tbody').append('<tr><td class="index">'+(speed.length-1)+'.</td><td><input type="text" class="endspeed" disabled="disabled" style="width:50px;" value='+se+'></td><td><input type="text" class="endtime" disabled="disabled" style="width:50px;" value='+st+'></td><td><a class="edser" href="javascript:;" onclick="edser($(this))">编辑</a><a class="edsave" onclick="edsave($(this))" href="javascript:;">保存</a></td></tr>');
+    	linechart(time,speed);
+    	$('#speedend').val('');
+    	$('#speedtime').val('');
+    	totaltime = 0;
+    	$.each(time,function(index,item){
+    		totaltime+=parseInt(item);
+    	})
+    	$('#totaltime').text(totaltime);
+    }
+    function edser(e){
+    	e.parents('tr').find('input').attr('disabled',false);
+    	e.hide();
+    	e.next().show();
+    }
+    function edsave(e){
+    	var ele = e.parents('tr');    	
+    	var itemindex = ele.find('.index').html().replace('.','');
+    	var itemspeed = ele.find('.endspeed').val().trim();
+    	var itemtimes = ele.find('.endtime').val().trim();
+    	var reg = /^[1-9]\d*([.][1-9])?$/;
+    	var numreg = /^[0-9]*[1-9][0-9]*$/;
+    	if(itemspeed==""){
+    		$.messager.alert('&nbsp;注意','速度不能为空！');
+    		return false;
+    	}
+    	if(itemtimes==""){
+    		$.messager.alert('&nbsp;注意','时间不能为空！');
+    		return false;
+    	}
+    	if(!reg.test(itemspeed) && itemspeed>80){
+    		$.messager.alert('&nbsp;注意','速度为正整数或者带一位小数且小于80！');
+    		return false;
+    	}
+    	if(!numreg.test(itemtimes)){
+    		$.messager.alert('&nbsp;注意','时间为正整数！');
+    		return false;
+    	} 
+    	totaltime = 0;
+    	ele.find('input').attr('disabled',true);
+    	$.each(time,function(index,item){
+    		if(index==itemindex){
+    			time[index] = itemtimes;
+    		}
+    	})
+    	$.each(time,function(index,item){
+    		totaltime+=parseInt(item);
+    	})
+    	$('#totaltime').text(totaltime);
+    	$.each(speed,function(index,item){
+    		if(index==itemindex){
+    			speed[index] = itemspeed;
+    		}	
+    	});
+    	$('#totaltime').text(totaltime);
+    	linechart(time,speed);
+    	e.hide();
+    	e.prev().show();
+    }
+    function addsaveline(){
+    	var allline = [];
+    	var num = 0;
+    	var i = 0;
+    		for(var s=0;s<totaltime;s++){
+    			if(i<time.length){
+    				i++; 
+    				for(var n=0;n<time[i];n++){
+    					var pind = (speed[i]-speed[i-1])/Number(time[i])*n;
+		    			var onlyspeed = (Number(speed[i-1])+Number(pind)).toFixed(1);
+		    			allline.push({time:num++,data:onlyspeed}); 
+
+    				}
+    			}
+
+    		}
+    		console.log(JSON.stringify(allline))
+    	 if(allline==""){
+    	 	$.messager.alert('&nbsp;注意','请输入值！');
+    	 	return false;
+    	 } 
+    	// $.ajax({
+    	// 	type:'post',
+    	// 	url:'../manage/CourseAction!updateSportLine.zk',
+    	// 	data:{id:onlyid,sportLine:JSON.stringify(allline)},
+    	// 	dataType:'json',
+    	// 	success:function(res){
+    	// 		if (!res.STATUS) {
+    	// 			alert(res.INFO);
+    	// 		}else{
+    	// 			$('#dlgline').dialog('close');
+    	// 			$("#dg").datagrid('load');
+    	// 			onlyid='';
+    	// 		}
+    	// 	}
+    	// })
+    	
+    }
+	function search(value){
+		$("#dg").datagrid('load',{title:value});
+	}
+	
+	function chooseImage(id) {
+         document.getElementById(id).click();
+    }
+	
+    //上传文章图片
+    function uploadImage(){
+    	//alert('upload');
+        var viewFiles = document.getElementById("file_title_img");
+        //是否为图片类型            
+        if(/image\/\w+/.test(viewFiles.files[0].type)){
+            //最大图片文件大小 500KB
+            var imgSizeLimit = 500 * 1024;
+            if(viewFiles.files[0].size<=imgSizeLimit){
+                //上传图片
+                 $("#title_img_form").ajaxSubmit({
+                     type : 'post',
+                     url : '../file/FileCenter!uploadImage2.zk',
+                     success : function(data) {
+                         data = $.parseJSON(data);
+                         if (data.name) {
+                            // alert(data.name);
+                         	var imgURL = "../file/FileCenter!showImage2.zk?name=" + data.name;
+                            $("#imghead").attr("src", imgURL);
+                            $("#cover").val(data.name);
+                         } else {
+                             alert("上传图片出错！");
+                         }
+                         $("#title_img_form").resetForm();
+                     },
+                     error : function(XmlHttpRequest, textStatus, errorThrown) {
+                         alert("error");
+                     }
+                 });
+            }else{
+                alert("图片大小不能超过"+(imgSizeLimit/1024)+"KB!");
+            }
+        }else{
+            alert('请选择图片类型的文件!');
+        } 
+    }
+    
+    //格式化封面
+/*    function formatCover(cover){
+        var result = "<a class=\"popImage\" href=\"../file/FileCenter!showImage2.zk?name="+cover+"\">点击查看</a>";
+    	return result;
+    }*/
+    //格式化URL
+ /*   function formatVideoURL(url){
+        var result = "<a href=\"javascript:void(0)\" onClick=\"playVideo('"+url+"')\" >点击播放</a>";
+    	return result;
+    }*/
+    
+/*    function playVideo(url){
+    	$('#dlg-video').dialog('open').dialog('setTitle','播放视频');
+    	flowplayer("player2", 
+    			"js/flowplayer-3.2.7.swf",{
+    				clip: {
+    				 url: url,
+    			     autoPlay: true, 
+    			     autoBuffering: true 
+    		       }
+    			}
+    			
+    	);
+    }*/
+    
+    
+    function formatType(v){
+    	switch (v) {
+			case 1:return '线上';
+			case 2:return '线下';
+			default: return '';
+		}
+    }
+    
+    var selectCoachIds = [];
+    function selectProducts(){
+    	var rows = $('#productDg').datagrid('getSelections');
+    	var lis = [];
+    	for(var i = 0 ;i<rows.length;i++){
+    		var row = rows[i];
+    		var ptName = row.coachName ;
+    		var ptId = row.id;
+    		var li = '<li>' + ptName + '</li>';
+    		lis.push(li);
+    		selectCoachIds.push(ptId);
+    	}
+    	$('#products').html(lis);
+    	$('#productlstDlg').dialog('close');
+    }
+    
+    function listUser(){
+    	var row = $('#dg').datagrid('getSelected');
+    	if(!row){
+    		showError('先选择课程');
+    		return ;
+    	}
+    	var courseId = row.id ;
+    	$('#userDg').datagrid({
+    		url : 'CourseAction!listUser.zk',
+    		queryParams : {
+    			courseId : courseId
+    		}
+    	});
+    	$('#userDlg').dialog('open').dialog('setTitle','购买课程的用户');
+    }
+    
+    var sectionData = [];
+    
+    var section = 1 ;
+    var newSection = [1];
+    //增加阶段
+    function addSetion(){
+    	section ++ ;
+    	var data = [{"section":section,"step":0}];
+    	$.tmpl($("#sectionTmpl").html(), data ).appendTo("#sectionWrap");
+		$.parser.parse('#sectionWrap');
+		newSection.push(section);
+		steps.push([section,0]);
+		console.log('add section:'+newSection)
+    }
+    
+    function delSetion(section){
+    	//console.log('len:'+newSection.length);
+    	var tmp = [];
+    	for(var i = 0 ;i<upsteps.length;i++){
+    		var step = upsteps[i];
+    		if(step.sectionId != section){
+    			tmp.push(step);
+    		}
+    	}
+    	upsteps = tmp ;
+    	
+    	if(newSection.length > 1){
+	    	$('#section_'+section).remove();
+	    	var tmpSetions = [];
+	    	for(var i = 0 ;i<newSection.length;i++){
+	    		if(section != newSection[i]){
+	    			tmpSetions.push(newSection[i]);
+	    		}
+	    	}
+	    	newSection = tmpSetions ;
+    	}
+
+    	//console.log('del section:'+newSection)
+    	//console.log('移除Section:'+newSection);
+    }
+    
+    var steps = [[1,0]];
+    var step = 0 ;
+    
+    function updlgVideoUI(){
+        $('#updlg_filename').show();
+        $('#updlg_calorie').show();
+        $('#repeatTimesDiv').show();
+    }
+
+    function updlgImageUI(){
+        $('#updlg_filename').hide();
+        $('#updlg_calorie').hide();
+        $('#repeatTimesDiv').hide();
+    }
+
+    //增加阶段
+    function addStep(section){
+/*        $('#uptype').combobox({
+            onChange: function (n,o) {
+                //alert('n:'+n);
+                if(n == 1){
+                    updlgVideoUI();
+                }else {
+                    updlgImageUI();
+                }
+            }
+        });*/
+        //console.log(section);
+        isEdit = 0;//新增
+        curFile = "";
+    	$('#upsection').val(section);
+    	$('#uptype').combobox('setValue',1); updlgVideoUI();
+    	$('#upname').textbox('setValue','');
+    	$('#upcalorie').numberbox('setValue','');
+    	$('#uptime').textbox('setValue','');
+    	$('#repeatCount').textbox('setValue','');
+    	$('#upfile').val('');
+    	$('#upfilesize').val('');
+    	$('#poststatus').html('');
+    	$('#uppriew').html('<img id="" src="images/add_rec.png" alt="" style="max-width: 100%; width: auto; max-height: 100%; height: auto">');
+    	
+    	$('#uploaddlg').dialog('open').dialog('setTitle','上传素材');
+    	step ++ ;
+    	var data = [{"section":section,"step":step}];
+    	//var stepWrap = '#stepWrap_' + section ;
+    	//$.tmpl($("#stepTmpl").html(), data ).appendTo(stepWrap);
+		//$.parser.parse(stepWrap);
+		steps.push([section,step]);
+		console.log('添加Step:'+steps);
+    }
+    
+    //保存课程信息
+    function saveCourse(){
+    	//console.log(JSON.stringify(upmusics)); return;
+		var name = $("#name").textbox('getValue');
+		var targetUser = $("#targetUser").textbox('getValue');
+		var type = $("#type").combobox('getValue');
+		var description = $("#description").textbox('getValue');
+		var price = $("#price").numberbox('getValue');
+		var cycle = $("#cycle").numberbox('getValue');
+		var cover = $("#cover").val();
+		var coachIds = selectCoachIds.join(',');
+		var id = $("#id").val();
+		var tools = $("#tools").combobox('getValue');
+		var effect = $("#effect").combobox('getValue');
+		var effectPlace = $("#effectPlace").combobox('getValue');
+		var calorie = $("#calorie").numberbox('getValue');
+		var gymId = $("#gymId").combobox('getValue');
+		var gymName = $("#gymId").combobox('getText');
+		var challenge = $('#challenge').val();
+		var havecalorie = $("#havecalorie").numberbox('getValue');
+		var nocalorie = $("#nocalorie").numberbox('getValue');
+		var powercalorie = $("#powercalorie").numberbox('getValue');
+		var postData = {
+							id : id,
+							type : type,
+							name : name,
+                            targetUser : targetUser ,
+							description : description,
+							cover : cover ,
+							price : price ,
+							cycle : cycle ,
+							coachIds : coachIds ,
+							tools : tools,
+							effect : effect ,
+							effectPlace : effectPlace,
+							calorie : calorie ,
+							data : JSON.stringify(upsteps),
+							gymId : gymId ,
+							gymName : gymName ,
+							musicData : JSON.stringify(upmusics),
+							challenge: challenge,
+							aerobicSportWeight:	havecalorie,
+							anaerobicSportWeight: nocalorie,
+							suitableSportWeight: powercalorie
+
+						};
+		console.log(postData);
+    	//return ;
+    	//console.log(JSON.stringify(sps));return;
+     	$.post('CourseAction!createOrUpdate.zk',postData,function(data){
+    		if(data.STATUS){
+    			//alert('ok');
+    			$('#dlg').dialog('close');
+    			$('#dg').datagrid('reload');
+    		}else{
+    			if('No Login!' == data.ERROR){
+    				var user_id =  localStorage.getItem('user_id');
+					var user_pwd = localStorage.getItem('user_pwd');
+					if(user_id==''||!user_id||user_pwd==''||!user_pwd){
+										
+					}else{
+						$.post('loginAction!login1.zk',{user_id:user_id,user_pwd:user_pwd},function(data){
+							if(data.STATUS){
+								
+								
+							}
+						},'json').complete(function(){
+							$.post('CourseAction!createOrUpdate.zk',postData,function(data){
+			    				if(data.STATUS){
+			    					$('#dlg').dialog('close');
+			    					$('#dg').datagrid('reload');
+			    				}
+			    			},'json');
+						});
+					}
+    			}
+    		}
+    	},'json').complete(function(){
+    		//alert('保存完成,初始化界面');
+    		
+    	});
+    }
+
+    /**
+     *显示课程编辑
+     */
+    function couseUI(){
+    	$('#courseNext').linkbutton('disable');
+    	$('#courseSave').linkbutton('disable');
+    	$('#coursePrev').linkbutton('enable');
+    	$('#courseStep2').hide();
+    	$('#courseStep1').show();
+    }
+
+    /**
+     * 显示课程编排
+     */
+    function couseDetailUI(){
+    	$('#coursePrev').linkbutton('disable');
+    	$('#courseNext').linkbutton('enable');
+    	$('#courseSave').linkbutton('enable');
+    	$('#courseStep1').hide();
+    	$('#courseStep2').show();
+    }
+    
+    var upfilesize = 1 ;
+    var upsteps = [];
+    function checkUpInfo(){
+    	var type = $('#uptype').combobox('getValue');
+    	if(type==''||!type){
+    		$.messager.alert('&nbsp;警告','课程类型不能为空！');
+    		$('#uptype').focus();
+    		return false;
+    	}
+    	if(type==1){
+    	var name =  $('#upname').textbox('getValue');
+    	if(name==''||!name){
+    		$.messager.alert('&nbsp;警告','课程名称不能为空！');
+    		$('#upname').focus();
+    		return false;
+    	}
+    	var calorie =  $('#upcalorie').numberbox('getValue');
+    	if(calorie==''||!calorie){
+    		$.messager.alert('&nbsp;警告','消耗卡路里不能为空！');
+    		$('#upcalorie').focus();
+    		return false;
+    	}
+    	var time = $('#uptime').textbox('getValue');
+    	if(time==''||!time){
+    		$.messager.alert('&nbsp;警告','时长不能为空！');
+    		$('#uptime').focus();
+    		return false;
+    	}
+    	var repeatCount = $('#repeatCount').textbox('getValue');
+    	if(repeatCount==''||!repeatCount){
+    		$.messager.alert('&nbsp;警告','重复次数不能为空！');
+    		$('#repeatCount').focus();
+    		return false;
+    	}
+    	}else if(type==2){
+    		var time = $('#uptime').textbox('getValue');
+        	if(time==''||!time){
+        		$.messager.alert('&nbsp;警告','时长不能为空！');
+        		$('#uptime').focus();
+        		return false;
+        	}
+    	}
+    	var file = $('#upfile').val();
+    	if(file==''||!file){
+    		$.messager.alert('&nbsp;警告','文件还未上传完成，请等待！');
+    		//$('#upcalorie').focus();
+    		return false;
+    	}
+    	return true;
+    	
+    }
+    var curStepId;
+    var isEdit = 0;
+    var curFile="";
+    function editCourse(stepId){
+    	
+    	$('#uptype').combobox('setValue',1); 
+    	updlgVideoUI();
+    	$('#upname').textbox('setValue','');
+    	$('#upcalorie').numberbox('setValue','');
+    	$('#uptime').textbox('setValue','');
+    	$('#repeatCount').textbox('setValue','');
+    	$('#upfile').val('');
+    	$('#upfilesize').val('');
+    	$('#poststatus').html('');
+    	var curStep;
+    	for(var i=0;i<upsteps.length;i++){
+    		if(upsteps[i].stepId==stepId){
+    			curStep = upsteps[i];
+    			break;
+    		}
+    	}
+    	isEdit = 1;//编辑
+    	$('#uptype').combobox('setValue',curStep.type);
+    	$('#upname').textbox('setValue',curStep.name);
+    	$('#upcalorie').numberbox('setValue',curStep.calorie);
+    	$('#uptime').textbox('setValue',curStep.time);
+    	if(curStep.repeatCount)
+    		$('#repeatCount').textbox('setValue',curStep.repeatCount);
+    	$('#upfile').val(curStep.file);
+    	$('#upfilesize').val(curStep.fileSize);
+    	$('#upsection').val(curStep.sectionId);
+    	
+    	var type = curStep.type;
+    	var name =  curStep.name;
+    	var calorie =  curStep.calorie;
+    	var time = curStep.time;
+    	if(curStep.repeatCount)
+    		var repeatCount = curStep.repeatCount
+    	var file = curStep.file;
+    	var filesize = curStep.fileSize;
+    	var sectionId = curStep.sectionId;
+    	$('#poststatus').html('<div>'+name+ ' (' + (filesize/1000000).toFixed(2) + 'M)</div>');
+    	curFile = file;
+    	curStepId =  stepId;
+    	var tpl="";
+    	//视频
+    	if(parseInt(curStep.type) == 1){
+    		var videoId = $.now();
+    		tpl = '<video id="'+stepId+'" width="320" height="240" preload="none" controls="controls"><source src="'+file+'" type="video/mp4"></video>';
+    		$('#uppriew').html(tpl);
+    	//图片
+    	}else if(parseInt(curStep.type) == 2){
+    		tpl = '<img src="'+file+'" style="width: 320px;height: 240px;" />';
+    		$('#uppriew').html(tpl);
+    	}
+    	$('#uploaddlg').dialog('open').dialog('setTitle','编辑素材');
+    }
+    //保存上传素材信息
+    function saveUpinfo(){
+    	if(!checkUpInfo())return;
+    	var type = $('#uptype').combobox('getValue');
+    	var name =  $('#upname').textbox('getValue');
+    	var calorie =  $('#upcalorie').numberbox('getValue');
+    	var time = $('#uptime').textbox('getValue');
+    	var repeatCount = $('#repeatCount').textbox('getValue');
+    	var file = $('#upfile').val();
+    	var filesize = $('#upfilesize').val();
+    	var sectionId = $('#upsection').val();
+    	//console.log(type+','+name+','+time+','+file);
+    	//
+    	if(isEdit==0){
+	    	var tpl = '';
+	    	var stepId = 'v' + $.now();
+	    	//视频
+	    	if(type == 1){
+	    		tpl = '<div id="'+ stepId +'" style="float:left;text-align: center;margin-left: 20px;width:320px;height:260px;" onclick="editCourse(\''+stepId +'\')"><video width=320 height=240 preload="none" controls="controls"><source src="'+file+'" type="video/mp4"></video><div>'+name+'  '+time+'  秒    '+repeatCount+'次    <a onclick="delStep(\''+ stepId +'\')">删除</a></div></div>';
+	    	//图片
+	    	}else if(type == 2){
+	    		tpl = '<div id="'+ stepId +'" style="float:left;margin-left: 20px;text-align: center;width:320px;height:260px;" onclick="editCourse(\''+stepId +'\')"><img style="width:320px; height:240px;" src="'+file+'"><div>'+time+'秒 <a onclick="delStep(\''+ stepId +'\')">删除</a></div></div>';
+	    		name = '间歇';
+	    		calorie = 0 ;
+	    	}
+	    	var upstep = {
+	    			"stepId" : stepId ,
+	    			"sectionId" : sectionId ,
+	    			"name" : name ,
+	    			"time" : time ,
+	    			"repeatCount":repeatCount,
+	    			"file" : file ,
+	    			"fileSize" : filesize ,
+	    			"calorie" : calorie ,
+	    			"type" : type 
+	    	};
+	    	upsteps.push(upstep);
+	    	$('#addVideoBtn' + sectionId).before(tpl);
+	    	upfilesize ++ ;
+	    	
+    	}else if(isEdit==1){
+    		//if(curFile!=""&&curFile!=file)
+    		if(type == 1){
+	    		tpl = '<video width=320 height=240 preload="none" controls="controls"><source src="'+file+'" type="video/mp4"></video><div>'+name+'  '+time+'  秒    '+repeatCount+'次    <a onclick="delStep(\''+ curStepId +'\')">删除</a></div>';
+	    	//图片
+	    	}else if(type == 2){
+	    		tpl = '<img style="width:320px; height:240px;" src="'+file+'"><div>'+time+'秒 <a onclick="delStep(\''+ curStepId +'\')">删除</a></div>';
+	    		name = '间歇';
+	    		calorie = 0 ;
+	    	}
+    		var upstep = {
+	    			"stepId" : curStepId ,
+	    			"sectionId" : sectionId ,
+	    			"name" : name ,
+	    			"time" : time ,
+	    			"repeatCount":repeatCount,
+	    			"file" : file ,
+	    			"fileSize" : filesize ,
+	    			"calorie" : calorie ,
+	    			"type" : type 
+	    	};
+    		for(var i=0;i<upsteps.length;i++){
+        		if(upsteps[i].stepId==curStepId){
+        			//curStep = upsteps[i];
+        			break;
+        		}
+        	}
+    		upsteps[i] = upstep;
+	    	$('#'+curStepId).html(tpl);
+    	}
+    	//console.log('upstep:'+upstep);
+    	
+    	$('#uploaddlg').dialog('close');
+    }
+    
+    function delStep(id){
+    	//alert(id);
+    	//console.log('remove step id:'+id);
+    	var tmp = [];
+    	for(var i = 0 ;i<upsteps.length;i++){
+    		var step = upsteps[i];
+    		if(id != step.stepId){
+    			tmp.push(step);
+    		}
+    	}
+    	upsteps = tmp ;
+    	$('#'+id).remove();
+    }
+    
+    function searchUser(){
+    	//alert('search');
+    	var searchKey = $('#searchKey').textbox('getValue');
+    	var searchGym = $('#searchGym').combobox('getValue');
+    	$("#dg").datagrid('load',{keyword:searchKey,searchGym:searchGym});
+    }
+</script>
+</body>
+</html>

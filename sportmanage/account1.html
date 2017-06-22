@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+#fm { margin: 0; padding: 10px} .ftitle { font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+                <div class="link">
+                    <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+                </div>
+            </li>
+            <li>
+                <div class="link">
+                    <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+                </div>
+            </li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li class="open">系统用户</li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li><a href="role1.html">角色管理</a></li>
+			    </ul>
+			</li>			
+		</ul>
+	</div>
+	<div class="center-region" style="border: none;padding-left:10px;">
+		<div>
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">安全管理</li>
+			</ul>
+			<div>
+							<table id="dg"
+								style="height:560px; "
+								data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'accountAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'userId',width:$(this).width() * 0.15">登录名</th>
+										<th data-options="field:'userName',width:$(this).width() * 0.15">姓名</th>
+										<th data-options="field:'bingdingPhone',width:$(this).width() * 0.1">手机号</th>
+										<th data-options="field:'roleName',width:$(this).width() * 0.2">所属角色</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:$(this).width() * 0.1">注册时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter: formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'姓名',searcher:searchUser" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add"
+											plain="true" onclick="toAddRole()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit"
+											plain="true" onclick="toUpdateRole()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove"
+											plain="true" onclick="deleteAccount()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-lock"
+											plain="true" onclick="resetPwd()">重置密码</a></td>	
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="role1.html"
+											class="easyui-linkbutton" iconCls="icon-groupkey"
+											plain="true">角色管理</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="resources1.html"
+											class="easyui-linkbutton" iconCls="icon-access"
+											plain="true">资源管理</a></td>			
+									</tr>
+								</table>
+							</div>
+							<!-- dgs -->
+							<!-- New Account -->
+	<div id="accountdlg" class="easyui-dialog"
+		style="width: 500px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#add-account-dlg-buttons">
+		<div class="ftitle">用户信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>用户角色:</label> 
+				    <input class="easyui-combobox" style="width:230px;"
+            id="roleOptions"
+            data-options="
+                    url:'',
+                    method:'post',
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    editable:false
+            " />
+			</div>		
+			<div class="fitem">
+				<label>姓名:</label> <input style="width:230px;"  name="userName" id="usrName"
+					class="easyui-textbox"  />
+			</div>		
+			<div class="fitem">
+				<label>登陆名:</label> <input style="width:230px;"  name="userId" id="userId"
+					class="easyui-textbox"  />
+			</div>
+			<div class="fitem">
+				<label>手机号:</label> <input style="width:230px;"  name="phone" id="phone"
+					class="easyui-textbox"  />
+			</div>			
+			<div class="fitem">
+				<label>密码:</label> <input style="width:230px;"  name="userPwd" id="userPwd"
+					class="easyui-textbox"  />
+			</div>			
+
+		</form>
+		<div id="add-account-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveAccount()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#accountdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>	
+	<!-- Update Account -->
+	<div id="upaccountdlg" class="easyui-dialog"
+		style="width: 500px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#up-role-dlg-buttons">
+		<div class="ftitle">用户信息</div>
+		<form id="upfm" method="post">
+			<div class="fitem">
+				<label>用户角色:</label> 
+				    <input class="easyui-combobox" style="width:230px;"
+            id="uproleOptions"
+            data-options="
+                    url:'',
+                    method:'post',
+                    valueField:'id',
+                    textField:'text',
+                    panelHeight:'auto',
+                    editable:false
+            " />
+            <input type="hidden" id="upid"/>
+			</div>		
+			<div class="fitem">
+				<label>姓名:</label> <input style="width:230px;" id="upuserName"
+					class="easyui-textbox"  />
+			</div>		
+			<div class="fitem">
+				<label>登陆名:</label> <input style="width:230px;" id="upuserId"
+					class="easyui-textbox"  />
+			</div>
+			<div class="fitem">
+				<label>手机号:</label> <input style="width:230px;" id="upphone"
+					class="easyui-textbox"  />
+			</div>			
+<!-- 			<div class="fitem">
+				<label>密码:</label> <input style="width:230px;" id="upuserPwd"
+					class="easyui-textbox"  />
+			</div> -->			
+
+		</form>
+		<div id="up-role-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="updateAccount()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#upaccountdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+							<!--  -->
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script type="text/javascript">
+//搜索
+function searchUser(v){
+	$("#dg").datagrid('load',{keyword:v});
+}
+function openDlg(id,title){
+	var docHeight = $(document).height();
+	$('#'+id).dialog('open').dialog('setTitle',title);
+    $(".window-mask").css({ height: docHeight});//patch dialog bug
+}
+//显示错误信息
+function showError(msg){
+	$.messager.alert('错误',msg,'error');
+}
+//显示消息提示
+function showTip(msg) {
+	$.messager.show({title : "消息",timeout:2000,msg : msg});
+}
+//获取Easyui表单组件值
+function getFormVal(id){
+	return $("#"+id).textbox("getValue"); 
+}
+//设置Easyui表单组件值
+function setFormVal(id ,value){
+	$("#"+id).textbox("setValue",value); 
+}
+//保存授权信息
+function saveRS(){
+    var nodes = $('#tt').tree('getChecked');
+    var resources = [];
+    for(var i=0; i< nodes.length; i++){
+        resources.push(nodes[i].id);
+    }
+    var resourceIds = resources.join(',');
+    var roleId = $('#gt_roleId').val();
+    $.post('ResourcesAction!grant.zk',{roleId:roleId,resourceIds : resourceIds},function(data){
+    	if(data.STATUS){
+    		$('#grantdlg').dialog('close');
+    		showTip("保存成功!");
+    	}else{
+    		showError(data.INFO);
+    	}
+    },'json');
+}
+
+function toAddRole(){
+	$('#fm').form('clear');
+	openDlg('accountdlg','新增用户');
+	$('#roleOptions').combobox({url:'RoleAction!comboboxData.zk'});
+}
+
+//
+function toUpdateRole(){
+	 var row = $('#dg').datagrid('getSelected');
+     if (row){
+    	 openDlg('upaccountdlg','更新用户');
+         //$('#fm').form('load',row);
+         //url = 'productAction!createOrUpdate.zk?id='+row.id;
+    	setFormVal('upuserName',row.userName);
+    	setFormVal('upuserId',row.userId);
+    	setFormVal('upphone',row.bingdingPhone);
+    	$('#upid').val(row.id);
+    	$('#uproleOptions').combobox({url:'RoleAction!comboboxData1.zk?roleId='+row.roleId});
+     }else{
+    	 showError('请先选择要编辑的用户!');
+     }
+}
+
+function saveAccount(){
+	var $role = $('#roleOptions');
+	var roleId = $role.combobox('getValue');
+	var roleName = $role.combobox('getText');
+	var userName = getFormVal('usrName');
+	//alert('userName:'+userName);return ;
+	var userId = getFormVal('userId');
+	var userPwd = getFormVal('userPwd');
+	var phone = getFormVal('phone');
+	
+	//TODO check
+	$.post('accountAction!save.zk',{phone:phone,roleId:roleId,roleName:roleName,userName:userName,userId:userId,userPwd:userPwd},function(data){
+        if (data.STATUS){
+            $('#accountdlg').dialog('close');
+            $('#dg').datagrid('reload');
+            showTip('保存成功!');
+        } else {
+           showError(data.INFO);
+        }
+	},'json');
+	
+}
+
+function updateAccount(){
+	var $role = $('#uproleOptions');
+	var roleId = $role.combobox('getValue');
+	var roleName = $role.combobox('getText');
+	var userName = getFormVal('upuserName');
+	var userId = getFormVal('upuserId');
+	//var userPwd = getFormVal('userPwd');
+	var phone = getFormVal('upphone');
+	var id = $('#upid').val();
+	//alert('roleId:'+roleId+'\nroleName:'+roleName);
+	//TODO check
+	$.post('accountAction!update.zk',{id:id,phone:phone,roleId:roleId,roleName:roleName,userName:userName,userId:userId},function(data){
+        if (data.STATUS){
+            $('#upaccountdlg').dialog('close');
+            $('#dg').datagrid('reload');
+            showTip('更新成功!');
+        } else {
+           showError(data.INFO);
+        }
+	},'json');
+	
+}
+
+function deleteAccount(){
+	var row = $('#dg').datagrid('getSelected');
+	if(row){
+		$.messager.confirm('删除用户', '确定删除吗?', function(r){
+            if (r){
+				$.getJSON('accountAction!delete.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					}else {
+						showError(data.INFO);
+					}
+				});
+            }
+		});
+	}else{
+		showError('请先选择用户!');
+    }
+}
+function resetPwd(){
+	var row = $('#dg').datagrid('getSelected');
+	if(row){
+		$.messager.confirm('重置用户密码', '确定重置吗?', function(r){
+            if (r){
+				$.getJSON('accountAction!resetPwd.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("成功重置密码!");
+					}else {
+						showError(data.INFO);
+					}
+				});
+            }
+		});
+	}else{
+		showError('请先选择用户!');
+    }
+}
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

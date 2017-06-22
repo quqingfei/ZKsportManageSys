@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宅客运动后台管理系统</title>
+<link rel="stylesheet" href="css/easyui2.min.css"></link>
+<link rel="stylesheet" href="css/icon.css"></link>
+<link rel="stylesheet" href="css/theme-simple.css" />
+<link rel="stylesheet" href="css/font-awesome.min.css">
+
+<style>
+#fm { margin: 0; padding: 10px} .ftitle { font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+</style>
+<script>
+
+</script>
+</head>
+<body>
+	<div class="group wrap header"
+		style="height: 66px; font-size: 100%">
+		<div class="content">
+			<div class="logo">
+				<div>
+					<img src="images/logo.png" alt="宅客运动">
+				</div>
+			</div>
+			<div class="head-right">
+				<div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+				<div style="margin: 8px auto;">
+					<a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<div class="left-region">
+		<ul id="accordion" class="accordion">
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+			    </div>
+			</li>			
+			<li>
+			    <div class="link">
+			        <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+			    </div>
+			</li>
+			<li>
+			    <div class="link">
+			        <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+			    </div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="action1.html">版块管理</a>
+				</div>
+			</li>
+			<li>
+				<div class="link">
+					<i class="fa fa-bullhorn"></i><a href="game1.html">比赛管理</a>
+				</div>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-server" aria-hidden="true"></i>协会管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="societyGame.html">协会比赛</a></li>
+			        <li><a href="societyCultivate.html">协会培训</a></li>
+			        <li><a href="societyNews.html">协会资讯</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="app1.html">版本管理</a></li>
+			        <li><a href="feedback1.html">反馈管理</a></li>
+			        <li><a href="video1.html">视频管理</a></li>
+			        <li><a href="medal1.html">勋章管理</a></li>
+			    </ul>
+			</li>
+			<li>
+			    <div class="link dropdown">
+			        <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+			    </div>
+			    <ul class="submenu">
+			        <li><a href="account1.html">系统用户</a></li>
+			        <li><a href="resources1.html">资源管理</a></li>
+			        <li class="open">角色管理</li>
+			    </ul>
+			</li>			
+		</ul>
+	</div>
+	<div class="center-region">
+		<div>
+			<ul class="breadcrumb">
+				<li>当前位置：</li>
+				<!--  <li><a href="#">后台管理</a> <span class="divider">/</span></li> -->
+				<li class="active">后台管理 <span class="divider">/</span></li>
+				<li class="active">角色管理</li>
+			</ul>
+			<div>
+							<table id="dg" style="height:560px; "
+								data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'RoleAction!list.zk',method:'post',toolbar:'#toolbar'">
+								<thead>
+									<tr>
+										<th data-options="field:'name',width:$(this).width() * 0.3">角色名称</th>
+										<th data-options="field:'descrition',width:$(this).width() * 0.3">角色描述</th>
+										<th data-options="field:'gmtCreate',align:'center',formatter: formatDate,width:$(this).width() * 0.1">注册时间</th>
+										<th data-options="field:'gmtModify',align:'center',formatter: formatDate,width:$(this).width() * 0.1">修改时间</th>
+									</tr>
+								</thead>
+							</table>
+							<div id="toolbar">
+								<table>
+									<tr>
+										<td><input id="txt_word" class="easyui-searchbox"
+											style="width: 250px"
+											data-options="prompt:'角色名称',searcher:searchUser" /></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-add"
+											plain="true" onclick="toAddRole()">增加</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-edit"
+											plain="true" onclick="toUpdateRole()">修改</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-remove"
+											plain="true" onclick="deleteRole()">删除</a></td>
+										<td><div class="datagrid-btn-separator"></div></td>
+										<td><a href="javascript:void(0)"
+											class="easyui-linkbutton" iconCls="icon-identity"
+											plain="true" onclick="toGrant()">授权</a></td>											
+									</tr>
+								</table>
+							</div>
+							<!-- dialogs -->
+								<!-- Grant -->
+	<div id="grantdlg" class="easyui-dialog"
+		style="width: 500px; height: 500px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#grant-dlg-buttons">
+		<div class="ftitle">权限信息</div>
+		<input type="hidden" id="gt_roleId"/>
+		<div class="panel-loading" id="tt_loading">加载中...</div>
+ 		<ul id="tt" class="easyui-tree" data-options="url:'',method:'post',animate:true,checkbox:true"></ul>
+		<div id="grant-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveRS()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#grantdlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>
+	<!-- New Role -->
+	<div id="roledlg" class="easyui-dialog"
+		style="width: 500px; height: 350px; padding: 10px 20px" closed="true" modal="true"
+		buttons="#add-role-dlg-buttons">
+		<div class="ftitle">角色信息</div>
+		<form id="fm" method="post">
+			<div class="fitem">
+				<label>角色名称:</label> <input style="width:230px;"  name="name" id="name"
+					class="easyui-textbox"  />
+					 <input name="id" type="hidden"/>
+			</div>
+			<div class="fitem">
+				<label>角色描述:</label> <input name="descrition" id="descrition"
+					data-options="multiline:true" style="width:230px;height:50px" class="easyui-textbox"/>
+			</div>
+		</form>
+		<div id="add-role-dlg-buttons">
+			<a href="javascript:void(0)" class="easyui-linkbutton c6"
+				iconCls="icon-ok" onclick="saveRole()" style="width: 90px">保存</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-cancel" onclick="javascript:$('#roledlg').dialog('close')"
+				style="width: 90px">取消</a>
+		</div>
+	</div>	
+							<!--  -->
+
+
+			</div>
+		</div>
+	</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/header.js"></script>
+<script src="js/jquery.easyui.min1.js"></script>
+<script src="js/easyui-lang-zh_CN.js"></script>
+<script src="js/datagrid.common.js"></script>
+<script src="js/format.utils.js"></script>
+<script type="text/javascript">
+//搜索
+function searchUser(v){
+	$("#dg").datagrid('load',{keyword:v});
+}
+function openDlg(id,title){
+	var docHeight = $(document).height();
+	$('#'+id).dialog('open').dialog('setTitle',title);
+    $(".window-mask").css({ height: docHeight});//patch dialog bug
+}
+//显示错误信息
+function showError(msg){
+	$.messager.alert('错误',msg,'error');
+}
+//显示消息提示
+function showTip(msg) {
+	$.messager.show({title : "消息",timeout:2000,msg : msg});
+}
+//授权
+function toGrant(){
+	var row = $('#dg').datagrid('getSelected');
+	if (row){
+		openDlg('grantdlg','角色授权');
+		$('#tt').tree({
+			url:'ResourcesAction!treeByRole.zk?roleId='+row.id ,
+			onBeforeLoad: function(node){
+				//alert(node.text);  // alert node text property when clicked
+				$('#tt_loading').show();
+				$(this).hide();
+			} ,
+			onLoadSuccess: function(node,data){
+				if(data.ERROR == 'No Login!'){
+					showError('登录超时,请重新登录!');
+					relogin();
+				}
+				$('#tt_loading').hide();
+				$(this).show();
+			}
+		});
+		$('#gt_roleId').val(row.id);
+	}else{
+		showError('请先选择需要授权的角色');
+	}
+}
+//保存授权信息
+function saveRS(){
+    var nodes = $('#tt').tree('getChecked');
+    var resources = [];
+    for(var i=0; i< nodes.length; i++){
+        resources.push(nodes[i].id);
+    }
+    var resourceIds = resources.join(',');
+    var roleId = $('#gt_roleId').val();
+    $.post('ResourcesAction!grant.zk',{roleId:roleId,resourceIds : resourceIds},function(data){
+    	if(data.STATUS){
+    		$('#grantdlg').dialog('close');
+    		showTip("保存成功!");
+    	}else{
+    		showError(data.INFO);
+    	}
+    },'json');
+}
+
+function toAddRole(){
+	$('#fm').form('clear');
+	openDlg('roledlg','新增角色');
+}
+
+//
+function toUpdateRole(){
+	 var row = $('#dg').datagrid('getSelected');
+     if (row){
+    	 openDlg('roledlg','更新角色');
+         $('#fm').form('load',row);
+         //url = 'productAction!createOrUpdate.zk?id='+row.id;
+     }else{
+    	 showError('请先选择要编辑的角色!');
+     }
+}
+
+function saveRole(){
+    $('#fm').form('submit',{
+        url: 'RoleAction!saveOrUpdate.zk',
+        onSubmit: function(){
+            return true;// check form 
+        },
+        success: function(data){
+            var data = $.parseJSON(data);
+            if (data.STATUS){
+                $('#roledlg').dialog('close');
+                $('#dg').datagrid('reload');
+                showTip('保存成功!');
+            } else {
+               showError(data.INFO);
+            }
+        }
+    });
+	
+}
+
+function deleteRole(){
+	var row = $('#dg').datagrid('getSelected');
+	if(row){
+		$.messager.confirm('删除角色', '确定删除该角色吗?', function(r){
+            if (r){
+				$.getJSON('RoleAction!delete.zk',{id:row.id},function(data){
+					if(data.STATUS){
+						$('#dg').datagrid('reload');
+						showTip("删除成功!");
+					}else {
+						showError(data.INFO);
+					}
+				});
+            }
+		});
+	}else{
+		showError('请先选择角色!');
+    }
+}
+</script>
+<script src="js/accordion.js"></script>	
+</body>
+</html>

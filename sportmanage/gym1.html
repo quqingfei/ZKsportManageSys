@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>宅客运动后台管理系统</title>
+    <link rel="stylesheet" href="css/easyui2.min.css">
+    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="css/theme-simple.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="js/msgbox/msgbox.css">
+    <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css"/>
+    <link rel="stylesheet" href="css/gym1.css">
+</head>
+<body>
+<div class="group wrap header"
+     style="height: 66px; font-size: 100%">
+    <div class="content">
+        <div class="logo">
+            <div>
+                <img src="images/logo.png" alt="宅客运动">
+            </div>
+        </div>
+        <div class="head-right">
+            <div style="margin: 5px auto;">当前用户：<span id="userName"></span></div>
+            <div style="margin: 8px auto;">
+                <a href="javascript:void(0)" id="logout" class="off"><i class="fa fa-power-off"></i>退出系统</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="left-region">
+    <ul id="accordion" class="accordion">
+        <li>
+            <div class="link">
+                <i class="fa fa-user"></i><a href="main1.html">用户管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-cart-plus"></i><a href="order1.html">订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-suitcase"></i><a href="product1.html">产品管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="community1.html">社区管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-newspaper-o"></i><a href="release1.html">资讯管理</a>
+            </div>
+        </li>
+        <li class="open">
+            <div class="link">
+                <i class="fa fa-university"></i><a href="gym.html">健身房管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-user-plus"></i><a href="coach1.html">教练管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-globe"></i><a href="course1.html">课程管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-comment"></i><a href="service1.html">客服管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-archive"></i><a href="appProducts.html">app商品管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-calendar-o"></i><a href="appOrder.html">app订单管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link">
+                <i class="fa fa-bullhorn"></i><a href="action1.html">活动管理</a>
+            </div>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-mobile"></i>APP管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="app1.html">版本管理</a></li>
+                <li><a href="feedback1.html">反馈管理</a></li>
+                <li><a href="video1.html">视频管理</a></li>
+                <li><a href="medal1.html">勋章管理</a></li>
+            </ul>
+        </li>
+        <li>
+            <div class="link dropdown">
+                <i class="fa fa-unlock-alt"></i>安全管理<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li><a href="account1.html">系统用户</a></li>
+                <li><a href="resources1.html">资源管理</a></li>
+                <li><a href="role1.html">角色管理</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div>
+    <div>
+        <ul class="breadcrumb">
+            <li>当前位置：</li>
+            <li class="active">后台管理 <span class="divider">/</span></li>
+            <li class="active">活动管理<span class="divider">/</span></li>
+            <li class="active">CRM比赛管理</li>
+        </ul>
+    </div>
+    <div id="toolbar">
+        <table>
+            <tr>
+                <td>状态:<select id="searchState"  style="width: 100px;" data-options="editable:false">
+                    <option value="">全部</option>
+                    <option value="0">待审核</option>
+                    <option value="1">已通过</option>
+                </select>
+                </td>
+                <td><input id="searchKey" class="easyui-textbox"
+                           style="width: 280px"
+                           data-options="prompt:'活动名称、主办方名称',searcher:searchUser" />
+                </td>
+                <td>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="searchUser()">搜索</a>
+                </td>
+                <td><div class="datagrid-btn-separator"></div></td>
+                <td><a href="javascript:void(0)"
+                       class="easyui-linkbutton" iconCls="icon-add" plain="true"
+                       onclick="newGame()">新增</a></td>
+                <td><div class="datagrid-btn-separator"></div></td>
+                <td><a href="javascript:void(0)"
+                       class="easyui-linkbutton" iconCls="icon-edit" plain="true"
+                       onclick="editGame()">编辑</a></td>
+                <td><div class="datagrid-btn-separator"></div></td>
+                <td><a href="javascript:void(0)"
+                       class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+                       onclick="del()">删除</a></td>
+                <td><div class="datagrid-btn-separator"></div></td>
+                <td><a href="javascript:void(0)"
+                       class="easyui-linkbutton" iconCls="icon_checklist" plain="true"
+                       onclick="vet()">审核</a></td>
+                <td><div class="datagrid-btn-separator"></div></td>
+                <td><a href="javascript:void(0)"
+                       class="easyui-linkbutton" iconCls="icon_checklist" plain="true"
+                       onclick="toViewD()">查看详细信息</a></td>
+                <td><div class="datagrid-btn-separator"></div></td>
+            </tr>
+        </table>
+    </div>
+    <div id="dlg" class="easyui-dialog" modal="true" style="width: 450px; height:350px; padding: 10px 20px" closed="true"buttons="#dlg-buttons">
+        <form id="fm" method="post"novalidate="novalidate">
+            <input id="id" type="hidden"/>
+            <div class="fitem">
+                <label>比赛代号:</label><input name="code" id="code" class="easyui-combobox" value="" style="height: 23px;line-height: 23px;width: 150px;" data-options="editable:false,prompt:'请选择'">
+            </div>
+            <div class="fitem">
+                <label>设备名称:</label><input name="gameEquip" id="gameEquip" class="easyui-combobox" value="" style="height: 23px;line-height: 23px;width: 150px;" data-options="editable:false,prompt:'请选择'">
+            </div>
+            <div class="fitem">
+                <label>比赛秒数:</label> <input name="seconds"
+                                            id="seconds" class="easyui-textbox"/>
+            </div>
+            <div class="fitem">
+                <label>开始时间:</label>
+                <input name="gmtStart"
+                       id="gmtStart" class="easyui-datetimebox"
+                       data-options="required:true,showSeconds:true" value="3/4/2010 2:3" style="width:150px"/>
+            </div>
+            <div class="fitem">
+                <label>结束时间:</label> <input name="gmtEnd"
+                                            id="gmtEnd"class="easyui-datetimebox"
+                                            data-options="required:true,showSeconds:true" value="3/4/2010 2:3" style="width:150px"/>
+            </div>
+        </form>
+            <div id="dlg-buttons">
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveGame()" style="width: 90px">保存</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"style="width: 90px">取消</a>
+            </div>
+    </div>
+    <!--审核管理-->
+    <div id="gymCheckdlg" class="easyui-dialog" style="width: 950px; height: 600px; padding:5px; " closed="true" modal="true" buttons="#dlg-checkbtns">
+        <input type="hidden" id="checkGymId">
+        <dl>
+            <dt>活动名称:</dt>
+            <dd id="checkName"></dd>
+        </dl>
+        <dl>
+            <dt>主办方名称:</dt>
+            <dd id="checkOrganizersName"></dd>
+        </dl>
+        <dl>
+            <dt>主办方类型:</dt>
+            <dd id="checkOrganizersType"></dd>
+        </dl>
+        <dl>
+            <dt>开始时间:</dt>
+            <dd id="checkGmtStart"></dd>
+        </dl>
+        <dl>
+            <dt>结束时间:</dt>
+            <dd id="checkGmtEnd"></dd>
+        </dl>
+        <dl>
+            <dt>规则及奖品:</dt>
+            <dd id="checkInfo"></dd>
+        </dl>
+        <dl>
+            <dt>比赛类型:</dt>
+            <dd id="checkGameType"></dd>
+        </dl>
+        <dl>
+            <dt>最大参加次数:</dt>
+            <dd id="checkJoinTimes"></dd>
+        </dl>
+        <dl>
+            <dt>最多人数限制:</dt>
+            <dd id="checkJoinMax"></dd>
+        </dl>
+        <dl>
+            <dt>参加人数:</dt>
+            <dd id="checkJoinTotle"></dd>
+        </dl>
+        <dl>
+            <dt>围观人数:</dt>
+            <dd id="checkLookTotle"></dd>
+        </dl>
+        <dl>
+            <dt>审核结果:</dt>
+            <dd id="checkresult"></dd>
+        </dl>
+        <div id="dlg-checkbtns">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveCheck(1)" style="width: 90px">通过审核</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="saveCheck(0)"style="width: 90px">不通过审核</a>
+        </div>
+    </div>
+    <div>
+        <table id="dg" style="height:560px; " data-options="rownumbers:true,singleSelect:true,pagination:true,pageSize:'30',url:'FatburnGameAction!list.zk',method:'post',toolbar:'#toolbar',queryParams:{state:''}">
+            <thead>
+            <tr>
+                <th data-options="field:'id',align:'center'" width="10%">id</th>
+                <th data-options="field:'name',align:'center'" width="8%">活动名称</th>
+                <th data-options="field:'organizersId',align:'center'" width="10%">主办方ID</th>
+                <th data-options="field:'organizersName',align:'center'"  width="8%">主办方名称</th>
+                <th data-options="field:'gameSportType',align:'center'" width="5%">运动类型</th>
+                <th data-options="field:'joinTotle',align:'center'" width="5%">参加人数</th>
+                <th data-options="field:'gmtStart',formatter:formatDate,align:'center'" width="10%">开始时间</th>
+                <th data-options="field:'gmtEnd',formatter:formatDate,align:'center'" width="10%">结束时间</th>
+                <th data-options="field:'isAudited',formatter:formatState1,align:'center'" width="5%">审核状态</th>
+                <th data-options="field:'gmtCreate',align:'center',formatter:formatDate" width="10%">创建时间</th>
+                <th data-options="field:'gmtModify',align:'center',formatter:formatDate" width="10%">修改时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/jquery.easyui.min1.js"></script>
+    <script src="js/easyui-common.js"></script>
+    <script src="js/easyui-lang-zh_CN.js"></script>
+    <script src="js/format.utils.js"></script>
+    <script src="js/accordion.js"></script>
+    <script src="js/fancybox/jquery.fancybox.pack.js"></script>
+    <script src="js/saveRequest.js"></script>
+    <script src="js/datagrid.common.js"></script>
+    <script src="js/test.js"></script>
+</body>
+</html>

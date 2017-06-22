@@ -1,0 +1,148 @@
+#fm { margin: 0; padding: 10px 30px; } .ftitle { font-size: 14px; font-weight: bold; padding: 5px 0; margin-bottom: 10px; border-bottom: 1px solid #ccc; } .fitem { margin-bottom: 5px; } .fitem label { display: inline-block; width: 80px; } .fitem input { width: 160px; }
+.tip{display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #337ab7;
+    border-radius: .25em;}
+ul.breadcrumb{
+    font-size: 12px;
+}
+#fm{
+    margin:0;
+    padding:10px 30px;
+}
+.pugong{position: relative; width:60px; height:40px; display:block; float:right;margin-left:5px; margin-bottom:5px; margin-top:4px; border:1px solid #f1f1f1;}
+.divX
+{
+    z-index:100;
+    border-style:solid;
+    border-width:1px;
+    border-color:#d8d8d8;
+    background-color:#ffffff;
+    line-height:12px;
+    text-align:center;
+    font-weight:bold;
+    width:10px;
+    cursor:pointer;
+    font-size:5px;
+    color:#666;
+    display: none;
+}
+.putong_app{
+    width:60px;
+    height:40px;
+}
+
+.certificateList{
+    width:218px;
+    height:45px;
+}
+.certificateName{
+    width:130px;
+    height:30px;
+    margin-top:7.5px;
+    margin-bottom:7.5px;
+    display:block;
+
+    float:left;
+}
+.add{
+    position:relative;
+    width:47px;
+    height:40px;
+    border:1px solid #95b8e7;
+    margin-right:2px;
+    float:right;
+}
+.img{
+    max-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+}
+a.popImage {
+    color:#666;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn {
+    display: inline-block;
+    padding: 3px 6px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn .badge {
+    position: relative;
+    top: -1px;
+}
+.btn-primary .badge {
+    color: #337ab7;
+    background-color: #fff;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
+dl{
+    margin: 15px 10px;
+    font-size: 14px;
+    border-bottom: 1px #ccc dashed;
+}
+dt{
+    text-align: left;
+    width: 100px;
+}
+dt , dd{
+    display: inline-block;
+    margin-left:20px;
+}
+dd div{
+    float: left;
+    margin : 5px;
+}
+dd div span{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+#cardDlg .datagrid-wrap{
+    border:0;
+}
+#userDlg .datagrid-wrap{
+    border:0;
+}
